@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Meme Lab — blind reference experiments</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/experiment.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="/" aria-label="Meme Lab home">
+        <span>meme</span><strong>lab</strong>
+      </a>
+
+      <nav class="tabs" aria-label="Workspace">
+        <button class="tab active" data-tab="play" aria-controls="play">
+          <span class="nav-icon" aria-hidden="true">＋</span>
+          New experiment
+        </button>
+        <button class="tab" data-tab="catalogue" aria-controls="catalogue">
+          <span class="nav-icon" aria-hidden="true">□</span>
+          Catalogue <span class="nav-count">60</span>
+        </button>
+        <button class="tab" data-tab="research" aria-controls="research">
+          <span class="nav-icon" aria-hidden="true">↗</span>
+          Sources
+        </button>
+        <button class="tab" data-tab="history" aria-controls="history">
+          <span class="nav-icon" aria-hidden="true">◷</span>
+          Run history
+        </button>
+      </nav>
+
+      <div class="local-card">
+        <span class="local-heading"><i aria-hidden="true"></i> Local workspace</span>
+        <strong>Private by default</strong>
+        <p>Runs and feedback stay in <code>./runs</code>.</p>
+      </div>
+
+      <div class="sidebar-links">
+        <a href="/PRD.md" target="_blank" rel="noopener">Product brief ↗</a>
+        <a href="/original/meme_references_v1/preview.html" target="_blank" rel="noopener">Original catalogue ↗</a>
+      </div>
+    </aside>
+
+    <div class="workspace">
+      <header class="workspace-head">
+        <div>
+          <p id="workspace-kicker" class="eyebrow">NEW EXPERIMENT</p>
+          <h1 id="workspace-title">Blind comparison</h1>
+          <p id="workspace-description" class="workspace-description">Test the same situation twice. Judge the references before seeing how they were selected.</p>
+        </div>
+        <span class="workspace-chip">Local only</span>
+      </header>
+
+      <main>
+        <div id="global-status" role="status" class="visually-hidden"></div>
+
+        <section id="play" class="panel active">
+          <section id="review-queue" class="queue-card" hidden>
+            <div>
+              <span class="step-label">PERSISTED BLIND QUEUE</span>
+              <strong id="review-queue-title">A saved comparison is ready</strong>
+              <p id="review-queue-copy">Resume without rerunning either model condition.</p>
+            </div>
+            <div class="queue-actions">
+              <a class="secondary" href="/review">Label relevance</a>
+              <button id="resume-experiment" class="secondary">Resume next pair</button>
+            </div>
+          </section>
+
+          <section class="composer surface">
+            <div class="section-top">
+              <div>
+                <span class="step-label">01 · SITUATION</span>
+                <h2>What happened?</h2>
+              </div>
+              <span class="hint">Perspective and exact wording matter.</span>
+            </div>
+
+            <label class="visually-hidden" for="context">Conversation or situation</label>
+            <textarea id="context" maxlength="6000" placeholder="A client wants an entire streaming platform by Friday. Their budget is $20. They said it should be easy because Netflix already exists."></textarea>
+            <div class="input-foot">
+              <span>Include who said what.</span>
+              <span id="char-count">0 / 6000</span>
+            </div>
+
+            <div class="setup-grid">
+              <div class="examples">
+                <label for="examples">Example situation</label>
+                <select id="examples">
+                  <option value="">Choose a smoke test…</option>
+                </select>
+                <small>Synthetic fixtures, not a validated benchmark.</small>
+              </div>
+
+              <div class="controls">
+                <label>Reply style
+                  <select id="style">
+                    <option value="playful">Playful</option>
+                    <option value="gentle">Gentle</option>
+                    <option value="dry">Dry</option>
+                  </select>
+                </label>
+                <label>Catalogue context
+                  <select id="representation">
+                    <option value="enriched">Meaning + relationships</option>
+                    <option value="minimal">Names only — ablation</option>
+                  </select>
+                </label>
+              </div>
+
+              <label class="intent-label">Should humour belong here?
+                <select id="intent-label">
+                  <option value="humour">Yes — a reaction is appropriate</option>
+                  <option value="no_meme">No — reply sincerely</option>
+                </select>
+              </label>
+            </div>
+
+            <details class="advanced">
+              <summary>Experiment controls</summary>
+              <div class="advanced-grid">
+                <label>Selection pool
+                  <select id="scope">
+                    <option value="reactions">30 reaction candidates</option>
+                    <option value="all">All 60 — includes unfinished templates</option>
+                  </select>
+                </label>
+                <label class="checkbox">
+                  <input id="avoid-recent" type="checkbox">
+                  Avoid recent selections in this tab
+                </label>
+              </div>
+              <p>All 60 is a reference-selection test, not a ready-to-send image test. The keyword baseline ignores style and repetition preferences.</p>
+            </details>
+
+            <div class="run-row">
+              <div class="actions">
+                <button id="run-paired" class="primary" disabled>Run blind A/B</button>
+                <button id="select-model" class="secondary" disabled>Single model run</button>
+                <button id="select-baseline" class="secondary">Keyword control</button>
+              </div>
+              <div>
+                <div id="model-status" class="model-status">Checking local configuration…</div>
+                <button id="copy-prompt" class="text-button">Copy selector prompt ↗</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="results-area">
+            <div class="section-top compare-heading">
+              <div>
+                <span class="step-label">02 · BLIND REVIEW</span>
+                <h2>Review the references first</h2>
+              </div>
+              <span class="hint">Conditions and rationales stay hidden.</span>
+            </div>
+            <div id="results">
+              <div class="empty-state">
+                <span class="empty-symbol" aria-hidden="true">—</span>
+                <h3>Ready when the situation is.</h3>
+                <p>Run a paired experiment to compare two anonymous conditions, or use a diagnostic control.</p>
+              </div>
+            </div>
+          </section>
+
+          <p class="privacy">Images contact their providers only when you explicitly load them. No analytics or automatic scraping.</p>
+        </section>
+
+        <section id="catalogue" class="panel">
+          <div class="section-top">
+            <div>
+              <span class="step-label">REFERENCE LIBRARY</span>
+              <h2>Your reference shelf</h2>
+              <p class="muted">Draft meanings, exact source URLs, and the caveats that matter.</p>
+            </div>
+            <span id="catalogue-count" class="pill">30 / 60</span>
+          </div>
+          <div class="filterbar">
+            <input id="search" type="search" aria-label="Search catalogue" placeholder="Search references or situations…">
+            <select id="filter-kind" aria-label="Filter by kind">
+              <option value="reactions">Reaction candidates</option>
+              <option value="all">All references</option>
+              <option value="templates">Caption-dependent templates</option>
+              <option value="inspected">Assistant spot-checked</option>
+            </select>
+            <select id="filter-source" aria-label="Filter by source">
+              <option value="all">All providers</option>
+              <option>Imgflip</option>
+              <option>Memegen</option>
+            </select>
+          </div>
+          <p class="notice">Image loading is opt-in. “Spot-checked” is not human taste validation or media clearance.</p>
+          <div id="catalogue-grid" class="catalogue-grid"></div>
+        </section>
+
+        <section id="research" class="panel">
+          <div class="section-top">
+            <div>
+              <span class="step-label">PROVENANCE</span>
+              <h2>The evidence shelf</h2>
+              <p class="muted">All 12 original source assessments, preserved without stronger claims.</p>
+            </div>
+          </div>
+          <div class="doclinks">
+            <a href="/original/meme_references_v1/source_audit.md" target="_blank" rel="noopener">Original source audit ↗</a>
+            <a href="/docs/audit_addendum.md" target="_blank" rel="noopener">Handoff audit ↗</a>
+            <a href="/docs/research_index.md" target="_blank" rel="noopener">Research links ↗</a>
+            <a href="/docs/experiment_protocol.md" target="_blank" rel="noopener">Experiment protocol ↗</a>
+            <a href="/docs/test_report.md" target="_blank" rel="noopener">Build test report ↗</a>
+          </div>
+          <div id="source-grid" class="source-grid"></div>
+        </section>
+
+        <section id="history" class="panel">
+          <div class="section-top">
+            <div>
+              <span class="step-label">LOCAL RECORD</span>
+              <h2>What actually landed?</h2>
+              <p class="muted">Paired trials stay grouped. Exports retain every event and revision.</p>
+            </div>
+            <a class="secondary" href="/api/export" download>Export JSONL</a>
+          </div>
+          <p class="notice">Exploratory, self-rated runs are not benchmark results. Do not mix keyword and model runs into one quality score.</p>
+          <div id="experiment-summary"></div>
+          <div id="history-grid"></div>
+        </section>
+      </main>
+
+      <footer>
+        <span>Meme Lab · v0.3</span>
+        <span>Small experiments, honest abstentions.</span>
+        <a href="/README.md" target="_blank" rel="noopener">Setup & limitations ↗</a>
+      </footer>
+    </div>
+  </div>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "meme-lab-local",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "A local reference-selection experiment. No runtime dependencies.",
+  "engines": {"node": ">=22"},
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "check": "node scripts/check-package.mjs",
+    "experiment:holdout": "node scripts/run-holdout.mjs",
+    "experiment:review": "node scripts/review-holdout.mjs",
+    "experiment:summarize": "node scripts/summarize-holdout.mjs"
+  }
+}

@@ -1,0 +1,7 @@
+.env
+runs/*
+!runs/.gitkeep
+private/
+results/
+node_modules/
+.DS_Store

@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Meme reference record v1.0",
+  "type": "object",
+  "required": [
+    "id",
+    "family_id",
+    "name",
+    "schema_version",
+    "annotation_language",
+    "source",
+    "asset",
+    "delivery",
+    "interpretation",
+    "annotation_provenance",
+    "rights",
+    "retrieval_text"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "family_id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "schema_version": {
+      "const": "1.0"
+    },
+    "annotation_language": {
+      "const": "en"
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "provider",
+        "provider_id",
+        "catalogue_url",
+        "observed_on"
+      ],
+      "properties": {
+        "provider": {
+          "enum": [
+            "Imgflip",
+            "Memegen"
+          ]
+        },
+        "provider_id": {
+          "type": "string"
+        },
+        "catalogue_url": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "asset": {
+      "type": "object",
+      "required": [
+        "url",
+        "local_file",
+        "visual_inspection",
+        "link_check"
+      ],
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "local_file": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "visual_inspection": {
+          "enum": [
+            "not_performed",
+            "assistant_visual_spot_check"
+          ]
+        }
+      }
+    },
+    "delivery": {
+      "type": "object",
+      "required": [
+        "suggested_mode",
+        "production_ready"
+      ],
+      "properties": {
+        "suggested_mode": {
+          "enum": [
+            "visual_reaction_candidate",
+            "fixed_caption_reaction_candidate",
+            "caption_template"
+          ]
+        },
+        "production_ready": {
+          "type": "boolean"
+        }
+      }
+    },
+    "interpretation": {
+      "type": "object",
+      "required": [
+        "message",
+        "relational_pattern",
+        "example_context",
+        "near_miss_context",
+        "tags"
+      ],
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "relational_pattern": {
+          "type": "string"
+        },
+        "example_context": {
+          "type": "string"
+        },
+        "near_miss_context": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "annotation_provenance": {
+      "type": "object",
+      "required": [
+        "human_validated",
+        "audience_tested"
+      ],
+      "properties": {
+        "human_validated": {
+          "type": "boolean"
+        },
+        "audience_tested": {
+          "type": "boolean"
+        }
+      }
+    },
+    "rights": {
+      "type": "object",
+      "required": [
+        "media_license"
+      ]
+    },
+    "retrieval_text": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

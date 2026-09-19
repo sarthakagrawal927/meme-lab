@@ -1,0 +1,183 @@
+
+> meme-lab-local@0.1.0 test
+> node --test tests/*.test.mjs
+
+TAP version 13
+# Subtest: canonical catalogue has unique 60 records and a 30/30 split
+ok 1 - canonical catalogue has unique 60 records and a 30/30 split
+  ---
+  duration_ms: 1.031508
+  type: 'test'
+  ...
+# Subtest: request defaults are explicit
+ok 2 - request defaults are explicit
+  ---
+  duration_ms: 0.182274
+  type: 'test'
+  ...
+# Subtest: empty and oversized input rejected
+ok 3 - empty and oversized input rejected
+  ---
+  duration_ms: 0.263045
+  type: 'test'
+  ...
+# Subtest: unknown scope, method, style and representation rejected
+ok 4 - unknown scope, method, style and representation rejected
+  ---
+  duration_ms: 0.230045
+  type: 'test'
+  ...
+# Subtest: unknown recent references rejected
+ok 5 - unknown recent references rejected
+  ---
+  duration_ms: 0.141753
+  type: 'test'
+  ...
+# Subtest: enriched prompt includes all 30 allowed IDs and no caption templates
+ok 6 - enriched prompt includes all 30 allowed IDs and no caption templates
+  ---
+  duration_ms: 0.684698
+  type: 'test'
+  ...
+# Subtest: names-only ablation excludes meanings and examples
+ok 7 - names-only ablation excludes meanings and examples
+  ---
+  duration_ms: 0.254262
+  type: 'test'
+  ...
+# Subtest: lexical baseline is deterministic, returns <=3 valid IDs
+ok 8 - lexical baseline is deterministic, returns <=3 valid IDs
+  ---
+  duration_ms: 2.625742
+  type: 'test'
+  ...
+# Subtest: lexical zero-overlap abstains without inventing a reference
+ok 9 - lexical zero-overlap abstains without inventing a reference
+  ---
+  duration_ms: 1.25204
+  type: 'test'
+  ...
+# Subtest: valid model response is accepted
+ok 10 - valid model response is accepted
+  ---
+  duration_ms: 0.764507
+  type: 'test'
+  ...
+# Subtest: valid NONE accepted
+ok 11 - valid NONE accepted
+  ---
+  duration_ms: 0.15998
+  type: 'test'
+  ...
+# Subtest: unknown and duplicate candidates rejected
+ok 12 - unknown and duplicate candidates rejected
+  ---
+  duration_ms: 0.146791
+  type: 'test'
+  ...
+# Subtest: invalid NONE and empty meme selection rejected
+ok 13 - invalid NONE and empty meme selection rejected
+  ---
+  duration_ms: 0.448304
+  type: 'test'
+  ...
+# Subtest: model extra fields and malformed JSON rejected
+ok 14 - model extra fields and malformed JSON rejected
+  ---
+  duration_ms: 0.242093
+  type: 'test'
+  ...
+# Subtest: code fence wrapper tolerated but content still validated
+ok 15 - code fence wrapper tolerated but content still validated
+  ---
+  duration_ms: 0.102504
+  type: 'test'
+  ...
+# Subtest: remote model endpoint requires explicit opt-in and HTTPS
+ok 16 - remote model endpoint requires explicit opt-in and HTTPS
+  ---
+  duration_ms: 0.293902
+  type: 'test'
+  ...
+# Subtest: model endpoint credentials and arbitrary URL schemes rejected
+ok 17 - model endpoint credentials and arbitrary URL schemes rejected
+  ---
+  duration_ms: 0.145699
+  type: 'test'
+  ...
+# Subtest: native Ollama adapter sends schema and accepts mocked response
+ok 18 - native Ollama adapter sends schema and accepts mocked response
+  ---
+  duration_ms: 35.234665
+  type: 'test'
+  ...
+# Subtest: compatible adapter uses chat completions and validates mocked content
+ok 19 - compatible adapter uses chat completions and validates mocked content
+  ---
+  duration_ms: 5.83355
+  type: 'test'
+  ...
+# Subtest: upstream failure does not silently become a lexical result
+ok 20 - upstream failure does not silently become a lexical result
+  ---
+  duration_ms: 3.269779
+  type: 'test'
+  ...
+# Subtest: upstream timeout surfaces clearly
+ok 21 - upstream timeout surfaces clearly
+  ---
+  duration_ms: 101.997529
+  type: 'test'
+  ...
+# Subtest: local HTTP routes, feedback persistence, export, and access protections
+    # Subtest: health and catalogue accessible without any model
+    ok 1 - health and catalogue accessible without any model
+      ---
+      duration_ms: 9.126404
+      type: 'test'
+      ...
+    # Subtest: private files, unknown routes and cross-origin writes blocked
+    ok 2 - private files, unknown routes and cross-origin writes blocked
+      ---
+      duration_ms: 7.262725
+      type: 'test'
+      ...
+    # Subtest: baseline run saved, feedback validated, export includes events
+    ok 3 - baseline run saved, feedback validated, export includes events
+      ---
+      duration_ms: 25.398075
+      type: 'test'
+      ...
+    # Subtest: missing model yields error run, never a baseline result
+    ok 4 - missing model yields error run, never a baseline result
+      ---
+      duration_ms: 2.824762
+      type: 'test'
+      ...
+    # Subtest: prompt export and original HTML accessible
+    ok 5 - prompt export and original HTML accessible
+      ---
+      duration_ms: 3.868769
+      type: 'test'
+      ...
+    # Subtest: runs survive server restart
+    ok 6 - runs survive server restart
+      ---
+      duration_ms: 4.067598
+      type: 'test'
+      ...
+    1..6
+ok 22 - local HTTP routes, feedback persistence, export, and access protections
+  ---
+  duration_ms: 56.954408
+  type: 'test'
+  ...
+1..22
+# tests 28
+# suites 0
+# pass 28
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 292.572075

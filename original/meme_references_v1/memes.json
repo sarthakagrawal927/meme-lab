@@ -1,0 +1,4163 @@
+[
+  {
+    "id": "absolute-cinema",
+    "name": "Absolute Cinema",
+    "family_id": "absolute-cinema",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "505705955",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/8d317n.png",
+      "local_file": null,
+      "availability": "Rendered by the web tool on 2026-09-19; not downloaded into this archive",
+      "visual_inspection": "assistant_visual_spot_check",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "rendered_in_web_tool",
+      "inspection_notes": "Rendered as a grayscale portrait with both hands raised. The words Absolute Cinema are not present in this asset. Recognizability without the words has not been audience-tested.",
+      "observed_render_dimensions": {
+        "width": 936,
+        "height": 725
+      },
+      "inspection_date": "2026-09-19"
+    },
+    "delivery": {
+      "suggested_mode": "visual_reaction_candidate",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Rendered as a grayscale portrait with both hands raised. The words Absolute Cinema are not present in this asset. Recognizability without the words has not been audience-tested. Usage fit and media permissions still need validation.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Treat an event as an outstanding piece of entertainment, sincerely or with playful exaggeration.",
+      "relational_pattern": "Ordinary events are elevated into a grand spectacle.",
+      "example_context": "The underdog won after three improbable reversals in the final minute.",
+      "near_miss_context": "Someone needs practical help during an upsetting event; treating it as entertainment would be insensitive.",
+      "tags": [
+        "admiration",
+        "spectacle",
+        "dramatic-payoff"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [
+        "https://knowyourmeme.com/memes/absolute-cinema"
+      ],
+      "context_source_checks": [
+        {
+          "url": "https://knowyourmeme.com/memes/absolute-cinema",
+          "status": "page_read"
+        }
+      ],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Absolute Cinema\nTreat an event as an outstanding piece of entertainment, sincerely or with playful exaggeration.\nOrdinary events are elevated into a grand spectacle.\nThe underdog won after three improbable reversals in the final minute.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "this-is-fine",
+    "name": "This Is Fine",
+    "family_id": "this-is-fine",
+    "annotation_language": "en",
+    "asset_language_status": "Visible English caption confirmed in assistant visual spot check",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "55311130",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/wxica.jpg",
+      "local_file": null,
+      "availability": "Rendered by the web tool on 2026-09-19; not downloaded into this archive",
+      "visual_inspection": "assistant_visual_spot_check",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "rendered_in_web_tool",
+      "inspection_notes": "Two-panel illustrated dog amid flames. The right panel visibly contains the English words THIS IS FINE. This is a finished fixed-caption reaction rather than a blank template.",
+      "observed_render_dimensions": {
+        "width": 580,
+        "height": 282
+      },
+      "inspection_date": "2026-09-19"
+    },
+    "delivery": {
+      "suggested_mode": "fixed_caption_reaction_candidate",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Two-panel illustrated dog amid flames. The right panel visibly contains the English words THIS IS FINE. This is a finished fixed-caption reaction rather than a blank template. Usage fit and media permissions still need validation.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": true
+    },
+    "interpretation": {
+      "message": "Maintain a facade of calm while circumstances are visibly falling apart.",
+      "relational_pattern": "Claimed wellbeing contradicts obvious surrounding trouble.",
+      "example_context": "Three deadlines moved to today. I have decided everything is perfectly under control.",
+      "near_miss_context": "Things really are going well and the speaker is sincerely relieved.",
+      "tags": [
+        "denial",
+        "chaos",
+        "irony"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [
+        "https://knowyourmeme.com/memes/this-is-fine"
+      ],
+      "context_source_checks": [
+        {
+          "url": "https://knowyourmeme.com/memes/this-is-fine",
+          "status": "page_read"
+        }
+      ],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "This Is Fine\nMaintain a facade of calm while circumstances are visibly falling apart.\nClaimed wellbeing contradicts obvious surrounding trouble.\nThree deadlines moved to today. I have decided everything is perfectly under control.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "monkey-puppet",
+    "name": "Monkey Puppet",
+    "family_id": "monkey-puppet",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "148909805",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/2gnnjh.jpg",
+      "local_file": null,
+      "availability": "Rendered by the web tool on 2026-09-19; not downloaded into this archive",
+      "visual_inspection": "assistant_visual_spot_check",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "rendered_in_web_tool",
+      "inspection_notes": "Two-panel puppet looking sideways. A large empty white caption area occupies the top part of the asset; crop or choose a tighter approved variant before using it as a compact reaction.",
+      "observed_render_dimensions": {
+        "width": 923,
+        "height": 768
+      },
+      "inspection_date": "2026-09-19"
+    },
+    "delivery": {
+      "suggested_mode": "visual_reaction_candidate",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Two-panel puppet looking sideways. A large empty white caption area occupies the top part of the asset; crop or choose a tighter approved variant before using it as a compact reaction. Usage fit and media permissions still need validation.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false,
+      "crop_review_required": true
+    },
+    "interpretation": {
+      "message": "React awkwardly while trying not to reveal knowledge or involvement.",
+      "relational_pattern": "The observer has a reason to avoid attention.",
+      "example_context": "Everyone is asking who finished the dessert, and I am quietly washing my spoon.",
+      "near_miss_context": "The speaker has nothing to hide and wants a straightforward explanation.",
+      "tags": [
+        "awkwardness",
+        "guilt",
+        "side-eye"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [
+        "https://knowyourmeme.com/memes/monkey-puppet"
+      ],
+      "context_source_checks": [
+        {
+          "url": "https://knowyourmeme.com/memes/monkey-puppet",
+          "status": "page_read"
+        }
+      ],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Monkey Puppet\nReact awkwardly while trying not to reveal knowledge or involvement.\nThe observer has a reason to avoid attention.\nEveryone is asking who finished the dessert, and I am quietly washing my spoon.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "sad-pablo",
+    "name": "Sad Pablo Escobar",
+    "family_id": "sad-pablo",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "80707627",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/1c1uej.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "visual_reaction_candidate",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Show lonely waiting, boredom, or an anticlimactic absence of activity.",
+      "relational_pattern": "Expected company or stimulation is missing.",
+      "example_context": "I cleared the whole evening for the game and everyone cancelled.",
+      "near_miss_context": "The speaker deliberately chose solitude and is enjoying it.",
+      "tags": [
+        "waiting",
+        "boredom",
+        "loneliness"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Sad Pablo Escobar\nShow lonely waiting, boredom, or an anticlimactic absence of activity.\nExpected company or stimulation is missing.\nI cleared the whole evening for the game and everyone cancelled.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "hide-pain-harold",
+    "name": "Hide the Pain Harold",
+    "family_id": "hide-pain-harold",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "27813981",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/gk5el.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "visual_reaction_candidate",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Keep a strained pleasant expression despite internal discomfort.",
+      "relational_pattern": "Public politeness conceals private suffering.",
+      "example_context": "My boss asked whether I enjoyed the four-hour meeting. I smiled and said absolutely.",
+      "near_miss_context": "The person is genuinely happy rather than putting on a brave face.",
+      "tags": [
+        "forced-smile",
+        "discomfort",
+        "politeness"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Hide the Pain Harold\nKeep a strained pleasant expression despite internal discomfort.\nPublic politeness conceals private suffering.\nMy boss asked whether I enjoyed the four-hour meeting. I smiled and said absolutely.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "laughing-leo",
+    "name": "Laughing Leo",
+    "family_id": "laughing-leo",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "259237855",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/4acd7j.png",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "visual_reaction_candidate",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Offer amused, smug disbelief at a statement or outcome.",
+      "relational_pattern": "An observer finds a claim or irony particularly entertaining.",
+      "example_context": "He said the software cannot have bugs because it compiled.",
+      "near_miss_context": "Someone shares a painful personal failure and is not inviting a roast.",
+      "tags": [
+        "amusement",
+        "smugness",
+        "disbelief"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Laughing Leo\nOffer amused, smug disbelief at a statement or outcome.\nAn observer finds a claim or irony particularly entertaining.\nHe said the software cannot have bugs because it compiled.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "gatsby-toast",
+    "name": "Leonardo DiCaprio Cheers",
+    "family_id": "gatsby-toast",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "5496396",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/39t1o.jpg",
+      "local_file": null,
+      "availability": "The catalogue listed this URL, but this research tool could not render it; global availability is unknown.",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "unavailable_via_web_tool_global_status_unknown",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "visual_reaction_candidate",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Acknowledge a win or a clever remark with a composed celebratory toast.",
+      "relational_pattern": "An observer gives stylish recognition without a long speech.",
+      "example_context": "After months of work, the first customer finally paid.",
+      "near_miss_context": "The person is requesting urgent instructions rather than celebration.",
+      "tags": [
+        "celebration",
+        "recognition",
+        "approval"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [
+        "https://www.reactiongifs.com/leonardo-dicaprio-gatsby-cheers/"
+      ],
+      "context_source_checks": [
+        {
+          "url": "https://www.reactiongifs.com/leonardo-dicaprio-gatsby-cheers/",
+          "status": "page_read"
+        }
+      ],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Leonardo DiCaprio Cheers\nAcknowledge a win or a clever remark with a composed celebratory toast.\nAn observer gives stylish recognition without a long speech.\nAfter months of work, the first customer finally paid.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "waiting-skeleton",
+    "name": "Waiting Skeleton",
+    "family_id": "waiting-skeleton",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "4087833",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/2fm6x.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "visual_reaction_candidate",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Exaggerate how long an anticipated response or event is taking.",
+      "relational_pattern": "A supposedly brief delay stretches beyond patience.",
+      "example_context": "They said they would send the invite in five minutes. That was last week.",
+      "near_miss_context": "The wait is normal, short, and explicitly expected.",
+      "tags": [
+        "delay",
+        "impatience",
+        "exaggeration"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Waiting Skeleton\nExaggerate how long an anticipated response or event is taking.\nA supposedly brief delay stretches beyond patience.\nThey said they would send the invite in five minutes. That was last week.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "surprised-pikachu",
+    "name": "Surprised Pikachu",
+    "family_id": "surprised-pikachu",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "155067746",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/2kbn1e.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "caption_template",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Express ironic surprise at a predictable result, especially after ignoring a warning.",
+      "relational_pattern": "A chosen action produces its foreseeable consequence.",
+      "example_context": "I ignored every low-battery warning and now the laptop shut down. How could this happen?",
+      "near_miss_context": "The outcome was genuinely unforeseeable; mocking surprise would miss the point.",
+      "tags": [
+        "predictable-consequence",
+        "irony",
+        "surprise"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Surprised Pikachu\nExpress ironic surprise at a predictable result, especially after ignoring a warning.\nA chosen action produces its foreseeable consequence.\nI ignored every low-battery warning and now the laptop shut down. How could this happen?",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "you-guys-getting-paid",
+    "name": "You Guys Are Getting Paid?",
+    "family_id": "you-guys-getting-paid",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "177682295",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/2xscjb.png",
+      "local_file": null,
+      "availability": "Rendered by the web tool on 2026-09-19; not downloaded into this archive",
+      "visual_inspection": "assistant_visual_spot_check",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "rendered_in_web_tool",
+      "inspection_notes": "A single live-action frame of a person with a questioning expression. The familiar dialogue is NOT printed on this template. A verified caption or different approved asset is needed to express the dialogue explicitly.",
+      "observed_render_dimensions": {
+        "width": 520,
+        "height": 358
+      },
+      "inspection_date": "2026-09-19"
+    },
+    "delivery": {
+      "suggested_mode": "caption_template",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "A single live-action frame of a person with a questioning expression. The familiar dialogue is NOT printed on this template. A verified caption or different approved asset is needed to express the dialogue explicitly. Usage fit and media permissions still need validation.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Reveal that one person lacks even the basic benefit others are comparing.",
+      "relational_pattern": "A comparison exposes a more fundamental disparity.",
+      "example_context": "Everyone is debating how big their bonuses were. I did the same work unpaid.",
+      "near_miss_context": "The speaker already has the same benefit and is merely comparing amounts.",
+      "tags": [
+        "disparity",
+        "missing-benefit",
+        "revelation"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [
+        "https://knowyourmeme.com/memes/you-guys-are-getting-paid"
+      ],
+      "context_source_checks": [
+        {
+          "url": "https://knowyourmeme.com/memes/you-guys-are-getting-paid",
+          "status": "page_read"
+        }
+      ],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "You Guys Are Getting Paid?\nReveal that one person lacks even the basic benefit others are comparing.\nA comparison exposes a more fundamental disparity.\nEveryone is debating how big their bonuses were. I did the same work unpaid.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "same-picture",
+    "name": "They're The Same Picture",
+    "family_id": "same-picture",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "180190441",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/2za3u1.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "caption_template",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Dismiss a supposedly meaningful distinction between two things.",
+      "relational_pattern": "Two presented alternatives are equivalent in the relevant respect.",
+      "example_context": "They replaced the mandatory meeting with a mandatory alignment session.",
+      "near_miss_context": "The alternatives differ materially in the way the conversation cares about.",
+      "tags": [
+        "equivalence",
+        "rebranding",
+        "false-distinction"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "They're The Same Picture\nDismiss a supposedly meaningful distinction between two things.\nTwo presented alternatives are equivalent in the relevant respect.\nThey replaced the mandatory meeting with a mandatory alignment session.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "drake-preference",
+    "name": "Drake Hotline Bling",
+    "family_id": "drake-preference",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "181913649",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/30b1gx.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "caption_template",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Reject one option and enthusiastically prefer another, often for an ironic reason.",
+      "relational_pattern": "A paired contrast makes the preference clear.",
+      "example_context": "Reading a two-page guide? No. Spending an hour searching for a video? Yes.",
+      "near_miss_context": "There is no pair of options or meaningful preference to contrast.",
+      "tags": [
+        "preference",
+        "contrast",
+        "irony"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Drake Hotline Bling\nReject one option and enthusiastically prefer another, often for an ironic reason.\nA paired contrast makes the preference clear.\nReading a two-page guide? No. Spending an hour searching for a video? Yes.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "two-buttons",
+    "name": "Two Buttons",
+    "family_id": "two-buttons",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "87743020",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/1g8my4.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "caption_template",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Show an uncomfortable choice between conflicting goals or commitments.",
+      "relational_pattern": "Two desired positions cannot both be maintained.",
+      "example_context": "I want fewer notifications, but I also want to know every update immediately.",
+      "near_miss_context": "Both choices can easily be taken without any conflict.",
+      "tags": [
+        "dilemma",
+        "contradiction",
+        "indecision"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Two Buttons\nShow an uncomfortable choice between conflicting goals or commitments.\nTwo desired positions cannot both be maintained.\nI want fewer notifications, but I also want to know every update immediately.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "distracted-boyfriend",
+    "name": "Distracted Boyfriend",
+    "family_id": "distracted-boyfriend",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "112126428",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/1ur9b0.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "caption_template",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Show attention drifting from an existing commitment to a tempting alternative.",
+      "relational_pattern": "A committed actor is distracted by a newer attraction.",
+      "example_context": "I opened the editor to finish one project and immediately started a new one.",
+      "near_miss_context": "The person has no existing commitment or competing attraction.",
+      "tags": [
+        "distraction",
+        "novelty",
+        "neglected-commitment"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Distracted Boyfriend\nShow attention drifting from an existing commitment to a tempting alternative.\nA committed actor is distracted by a newer attraction.\nI opened the editor to finish one project and immediately started a new one.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "grus-plan",
+    "name": "Gru's Plan",
+    "family_id": "grus-plan",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "131940431",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/26jxvz.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "caption_template",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Present a confident plan that contains the seed of its own failure.",
+      "relational_pattern": "The planner discovers a self-defeating step in their own plan.",
+      "example_context": "I disabled all reminders to improve focus, then forgot the appointment I was focusing on.",
+      "near_miss_context": "A sound plan failed because of a completely unrelated external event.",
+      "tags": [
+        "backfire",
+        "self-defeat",
+        "planning"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Gru's Plan\nPresent a confident plan that contains the seed of its own failure.\nThe planner discovers a self-defeating step in their own plan.\nI disabled all reminders to improve focus, then forgot the appointment I was focusing on.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "anakin-padme",
+    "name": "Anakin Padme 4 Panel",
+    "family_id": "anakin-padme",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "322841258",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/5c7lwq.png",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "caption_template",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Begin with a benign interpretation, then become worried when reassurance does not arrive.",
+      "relational_pattern": "A statement admits an alarming interpretation that remains uncorrected.",
+      "example_context": "We removed the login requirement. Only on the demo environment, right? Right?",
+      "near_miss_context": "The speaker immediately confirms a harmless explanation.",
+      "tags": [
+        "ominous-silence",
+        "assumption",
+        "realization"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Anakin Padme 4 Panel\nBegin with a benign interpretation, then become worried when reassurance does not arrive.\nA statement admits an alarming interpretation that remains uncorrected.\nWe removed the login requirement. Only on the demo environment, right? Right?",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "trade-offer",
+    "name": "Trade Offer",
+    "family_id": "trade-offer",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "309868304",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/54hjww.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "caption_template",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Expose the imbalance or absurdity of an exchange.",
+      "relational_pattern": "What one party gives and receives makes the bargain questionable.",
+      "example_context": "They want a full weekend of work in exchange for exposure.",
+      "near_miss_context": "The exchange is balanced and nobody is questioning its terms.",
+      "tags": [
+        "unequal-trade",
+        "bargain",
+        "unreasonable-demand"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Trade Offer\nExpose the imbalance or absurdity of an exchange.\nWhat one party gives and receives makes the bargain questionable.\nThey want a full weekend of work in exchange for exposure.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "best-i-can-do",
+    "name": "Pawn Stars Best I Can Do",
+    "family_id": "best-i-can-do",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "77045868",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/19vcz0.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "caption_template",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Counter an ambitious request with a dramatically smaller offer.",
+      "relational_pattern": "Expectation and available offer are far apart.",
+      "example_context": "Can you give me the full product by tonight? I can give you the login screen.",
+      "near_miss_context": "The speaker can and intends to fully meet the request.",
+      "tags": [
+        "lowball",
+        "scope-mismatch",
+        "negotiation"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Pawn Stars Best I Can Do\nCounter an ambitious request with a dramatically smaller offer.\nExpectation and available offer are far apart.\nCan you give me the full product by tonight? I can give you the login screen.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "bike-fall",
+    "name": "Bike Fall",
+    "family_id": "bike-fall",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "79132341",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/1b42wl.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "caption_template",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Show someone causing their own problem and then complaining or blaming elsewhere.",
+      "relational_pattern": "The actor creates the obstacle that hurts them.",
+      "example_context": "I muted the group chat and now I am annoyed nobody told me the plan.",
+      "near_miss_context": "The person had no role in causing the problem.",
+      "tags": [
+        "self-sabotage",
+        "misplaced-blame",
+        "consequence"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Bike Fall\nShow someone causing their own problem and then complaining or blaming elsewhere.\nThe actor creates the obstacle that hurts them.\nI muted the group chat and now I am annoyed nobody told me the plan.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "evil-kermit",
+    "name": "Evil Kermit",
+    "family_id": "evil-kermit",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "84341851",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/1e7ql7.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "caption_template",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Contrast a sensible intention with a tempting, worse inner suggestion.",
+      "relational_pattern": "Internal temptation argues against the original sensible plan.",
+      "example_context": "I should go to bed. Or I could start a three-hour movie.",
+      "near_miss_context": "Both voices are giving equally sensible advice.",
+      "tags": [
+        "temptation",
+        "inner-dialogue",
+        "impulse"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Evil Kermit\nContrast a sensible intention with a tempting, worse inner suggestion.\nInternal temptation argues against the original sensible plan.\nI should go to bed. Or I could start a three-hour movie.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "roll-safe",
+    "name": "Roll Safe Think About It",
+    "family_id": "roll-safe",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "89370399",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/1h7in3.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "caption_template",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Present a superficially clever workaround that dodges the real objective.",
+      "relational_pattern": "Avoiding a problem technically also forfeits the desired benefit.",
+      "example_context": "You cannot fail an exam if you never register for it.",
+      "near_miss_context": "The workaround actually solves the problem without sacrificing the goal.",
+      "tags": [
+        "false-cleverness",
+        "loophole",
+        "self-defeat"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Roll Safe Think About It\nPresent a superficially clever workaround that dodges the real objective.\nAvoiding a problem technically also forfeits the desired benefit.\nYou cannot fail an exam if you never register for it.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "clown-makeup",
+    "name": "Clown Applying Makeup",
+    "family_id": "clown-makeup",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "195515965",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/38el31.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "caption_template",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Show increasingly implausible rationalizations or misplaced confidence.",
+      "relational_pattern": "Each added justification makes the position harder to defend.",
+      "example_context": "They missed every deadline, but this time their announcement says definitely.",
+      "near_miss_context": "New evidence genuinely strengthens a reasonable position.",
+      "tags": [
+        "rationalization",
+        "escalation",
+        "overconfidence"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Clown Applying Makeup\nShow increasingly implausible rationalizations or misplaced confidence.\nEach added justification makes the position harder to defend.\nThey missed every deadline, but this time their announcement says definitely.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "squidward-window",
+    "name": "Squidward Window",
+    "family_id": "squidward-window",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "67452763",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/145qvv.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "visual_reaction_candidate",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Look on wistfully while others enjoy something you are excluded from.",
+      "relational_pattern": "An observer watches other people have the desired experience.",
+      "example_context": "Everyone is out playing while I wait at home for the delivery.",
+      "near_miss_context": "The speaker dislikes the activity and is glad not to participate.",
+      "tags": [
+        "exclusion",
+        "envy",
+        "longing"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Squidward Window\nLook on wistfully while others enjoy something you are excluded from.\nAn observer watches other people have the desired experience.\nEveryone is out playing while I wait at home for the delivery.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "charlie-conspiracy",
+    "name": "Charlie Conspiracy",
+    "family_id": "charlie-conspiracy",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "92084495",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/1itoun.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "visual_reaction_candidate",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Dramatize an elaborate explanation built from many connected details.",
+      "relational_pattern": "A sprawling theory is offered with intense conviction.",
+      "example_context": "I have six spreadsheets explaining why the cafeteria changed its menu.",
+      "near_miss_context": "A short, ordinary explanation with straightforward evidence.",
+      "tags": [
+        "overanalysis",
+        "theory",
+        "complexity"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Charlie Conspiracy\nDramatize an elaborate explanation built from many connected details.\nA sprawling theory is offered with intense conviction.\nI have six spreadsheets explaining why the cafeteria changed its menu.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "x-everywhere",
+    "name": "X, X Everywhere",
+    "family_id": "x-everywhere",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "91538330",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/1ihzfe.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "caption_template",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Point out that the same thing appears to be everywhere.",
+      "relational_pattern": "A repeated pattern dominates the observer's surroundings.",
+      "example_context": "Every new app I opened today has added the same chatbot button.",
+      "near_miss_context": "The conversation concerns a single isolated occurrence.",
+      "tags": [
+        "ubiquity",
+        "repetition",
+        "observation"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "X, X Everywhere\nPoint out that the same thing appears to be everywhere.\nA repeated pattern dominates the observer's surroundings.\nEvery new app I opened today has added the same chatbot button.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "is-this-a-pigeon",
+    "name": "Is This A Pigeon",
+    "family_id": "is-this-a-pigeon",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "100777631",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/1o00in.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "caption_template",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Highlight a confident or naive misidentification.",
+      "relational_pattern": "An observed thing is assigned a clearly mismatched label.",
+      "example_context": "They renamed unpaid overtime as a personal growth opportunity.",
+      "near_miss_context": "The label accurately captures the thing being described.",
+      "tags": [
+        "mislabeling",
+        "misunderstanding",
+        "irony"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Is This A Pigeon\nHighlight a confident or naive misidentification.\nAn observed thing is assigned a clearly mismatched label.\nThey renamed unpaid overtime as a personal growth opportunity.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "woman-yelling-cat",
+    "name": "Woman Yelling At Cat",
+    "family_id": "woman-yelling-cat",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "188390779",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/345v97.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "caption_template",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Contrast an intense complaint with an unmoved or confused recipient.",
+      "relational_pattern": "Two sides react to the same dispute with very different intensity.",
+      "example_context": "I am furious about the budget. The cat is wondering when dinner is.",
+      "near_miss_context": "Both participants are calmly working through the same explanation.",
+      "tags": [
+        "mismatched-reactions",
+        "argument",
+        "unbothered"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Woman Yelling At Cat\nContrast an intense complaint with an unmoved or confused recipient.\nTwo sides react to the same dispute with very different intensity.\nI am furious about the budget. The cat is wondering when dinner is.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "expanding-brain",
+    "name": "Expanding Brain",
+    "family_id": "expanding-brain",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "93895088",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/1jwhww.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "caption_template",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Escalate an idea through increasingly grand or absurd levels.",
+      "relational_pattern": "A ranked sequence exaggerates intellectual sophistication.",
+      "example_context": "First we wrote a list, then an app, then a platform just to remember groceries.",
+      "near_miss_context": "Only one idea is offered and there is no escalation.",
+      "tags": [
+        "escalation",
+        "overengineering",
+        "ironic-ranking"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Expanding Brain\nEscalate an idea through increasingly grand or absurd levels.\nA ranked sequence exaggerates intellectual sophistication.\nFirst we wrote a list, then an app, then a platform just to remember groceries.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "tuxedo-pooh",
+    "name": "Tuxedo Winnie The Pooh",
+    "family_id": "tuxedo-pooh",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "178591752",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/2ybua0.png",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "caption_template",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Contrast ordinary wording or taste with an unnecessarily refined version.",
+      "relational_pattern": "The same basic thing is presented as suddenly sophisticated.",
+      "example_context": "Leftovers became an artisanal next-day tasting menu.",
+      "near_miss_context": "The expensive version has a genuinely different function.",
+      "tags": [
+        "pretension",
+        "rebranding",
+        "fancy-language"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Tuxedo Winnie The Pooh\nContrast ordinary wording or taste with an unnecessarily refined version.\nThe same basic thing is presented as suddenly sophisticated.\nLeftovers became an artisanal next-day tasting menu.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "buff-doge-cheems",
+    "name": "Buff Doge vs Cheems",
+    "family_id": "buff-doge-cheems",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "247375501",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/43a45p.png",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "caption_template",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Exaggerate the contrast between confidence or capability in two settings.",
+      "relational_pattern": "A strong self-image in one setting shrinks in another.",
+      "example_context": "Me explaining the design in my head versus answering the first question aloud.",
+      "near_miss_context": "There is no meaningful contrast in confidence or capability.",
+      "tags": [
+        "expectation-reality",
+        "contrast",
+        "confidence"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Buff Doge vs Cheems\nExaggerate the contrast between confidence or capability in two settings.\nA strong self-image in one setting shrinks in another.\nMe explaining the design in my head versus answering the first question aloud.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "exit-ramp",
+    "name": "Left Exit 12 Off Ramp",
+    "family_id": "exit-ramp",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "124822590",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/22bdq6.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "caption_template",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Show a sudden diversion away from the sensible route toward temptation.",
+      "relational_pattern": "An actor abruptly abandons the expected direction.",
+      "example_context": "I was on my way to buy vegetables and saw the bakery sign.",
+      "near_miss_context": "The changed plan follows a calm decision based on new information.",
+      "tags": [
+        "diversion",
+        "temptation",
+        "impulse"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Left Exit 12 Off Ramp\nShow a sudden diversion away from the sensible route toward temptation.\nAn actor abruptly abandons the expected direction.\nI was on my way to buy vegetables and saw the bakery sign.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "uno-draw-25",
+    "name": "UNO Draw 25 Cards",
+    "family_id": "uno-draw-25",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "217743513",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/3lmzyx.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "caption_template",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Show someone accepting a large penalty rather than doing a simple unwanted action.",
+      "relational_pattern": "Avoidance is so strong that a worse alternative is chosen.",
+      "example_context": "I would rather rewrite the whole module than ask where the config file is.",
+      "near_miss_context": "The supposedly simple action is genuinely dangerous or unreasonable.",
+      "tags": [
+        "avoidance",
+        "stubbornness",
+        "disproportionate-cost"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "UNO Draw 25 Cards\nShow someone accepting a large penalty rather than doing a simple unwanted action.\nAvoidance is so strong that a worse alternative is chosen.\nI would rather rewrite the whole module than ask where the config file is.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "flex-tape",
+    "name": "Flex Tape",
+    "family_id": "flex-tape",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "166969924",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/2reqtg.png",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "caption_template",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Apply a visibly small patch to a disproportionately large underlying problem.",
+      "relational_pattern": "A superficial fix is presented as adequate for a major issue.",
+      "example_context": "The app crashes daily, so the update adds a friendlier error message.",
+      "near_miss_context": "A small patch genuinely resolves a small localized defect.",
+      "tags": [
+        "band-aid",
+        "root-cause",
+        "scope-mismatch"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Flex Tape\nApply a visibly small patch to a disproportionately large underlying problem.\nA superficial fix is presented as adequate for a major issue.\nThe app crashes daily, so the update adds a friendlier error message.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "domino-effect",
+    "name": "Domino Effect",
+    "family_id": "domino-effect",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "162372564",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/2oo7h0.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "caption_template",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Trace an outsized final result back to a tiny initial trigger.",
+      "relational_pattern": "A chain of consequences amplifies a small starting event.",
+      "example_context": "One innocent question led to a new project, a new team, and a new office.",
+      "near_miss_context": "The events are unrelated rather than causally connected.",
+      "tags": [
+        "causal-chain",
+        "escalation",
+        "unintended-consequences"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Domino Effect\nTrace an outsized final result back to a tiny initial trigger.\nA chain of consequences amplifies a small starting event.\nOne innocent question led to a new project, a new team, and a new office.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "boardroom-suggestion",
+    "name": "Boardroom Meeting Suggestion",
+    "family_id": "boardroom-suggestion",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "1035805",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/m78d.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "caption_template",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Expose a group rewarding acceptable nonsense and rejecting the useful obvious answer.",
+      "relational_pattern": "A sensible proposal threatens the group's preferred assumptions.",
+      "example_context": "They requested ideas to reduce meetings and rejected the suggestion to cancel one.",
+      "near_miss_context": "The rejected suggestion has a clear practical flaw.",
+      "tags": [
+        "groupthink",
+        "bureaucracy",
+        "punished-common-sense"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Boardroom Meeting Suggestion\nExpose a group rewarding acceptable nonsense and rejecting the useful obvious answer.\nA sensible proposal threatens the group's preferred assumptions.\nThey requested ideas to reduce meetings and rejected the suggestion to cancel one.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "scroll-of-truth",
+    "name": "The Scroll Of Truth",
+    "family_id": "scroll-of-truth",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "123999232",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/21tqf4.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "caption_template",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Reject a truth precisely because it is unwelcome.",
+      "relational_pattern": "An actor seeks an answer and discards it when it contradicts their wishes.",
+      "example_context": "I asked what would improve my mornings. They said go to bed earlier. I demand another answer.",
+      "near_miss_context": "The answer is false or unsupported and deserves rejection.",
+      "tags": [
+        "denial",
+        "unwelcome-truth",
+        "selective-belief"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "The Scroll Of Truth\nReject a truth precisely because it is unwelcome.\nAn actor seeks an answer and discards it when it contradicts their wishes.\nI asked what would improve my mornings. They said go to bed earlier. I demand another answer.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "panik-kalm-panik",
+    "name": "Panik Kalm Panik",
+    "family_id": "panik-kalm-panik",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "226297822",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/3qqcim.png",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "caption_template",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Move from alarm to relief and back to alarm as more information arrives.",
+      "relational_pattern": "A reassuring interpretation is overturned by a second revelation.",
+      "example_context": "The file is missing. There is a backup. The backup is the missing file.",
+      "near_miss_context": "The reassuring information actually resolves the concern permanently.",
+      "tags": [
+        "reversal",
+        "temporary-relief",
+        "realization"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Panik Kalm Panik\nMove from alarm to relief and back to alarm as more information arrives.\nA reassuring interpretation is overturned by a second revelation.\nThe file is missing. There is a backup. The backup is the missing file.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "undertaker-behind",
+    "name": "AJ Styles and Undertaker",
+    "family_id": "undertaker-behind",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "234202281",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/3vfrmx.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "caption_template",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Show someone feeling secure while an unnoticed threat or consequence approaches.",
+      "relational_pattern": "The audience sees what the confident actor has not noticed.",
+      "example_context": "I finished my tasks early, unaware that three meeting invites had just arrived.",
+      "near_miss_context": "The actor is already fully aware of the approaching problem.",
+      "tags": [
+        "dramatic-irony",
+        "unseen-threat",
+        "false-security"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "AJ Styles and Undertaker\nShow someone feeling secure while an unnoticed threat or consequence approaches.\nThe audience sees what the confident actor has not noticed.\nI finished my tasks early, unaware that three meeting invites had just arrived.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "spiderman-pointing",
+    "name": "Spider-Man Pointing",
+    "family_id": "spiderman-pointing",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "110133729",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/1tkjq9.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "visual_reaction_candidate",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Recognize matching identities, behaviour, or mutual accusations.",
+      "relational_pattern": "Two parties mirror the same relevant property.",
+      "example_context": "Two services each claim the other one is responsible for authentication.",
+      "near_miss_context": "One party has a clearly different role and there is no symmetry.",
+      "tags": [
+        "symmetry",
+        "same-behavior",
+        "mutual-blame"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Spider-Man Pointing\nRecognize matching identities, behaviour, or mutual accusations.\nTwo parties mirror the same relevant property.\nTwo services each claim the other one is responsible for authentication.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "missing-trophy",
+    "name": "This Is Where I'd Put My Trophy If I Had One",
+    "family_id": "missing-trophy",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Imgflip",
+      "provider_id": "3218037",
+      "catalogue_url": "https://api.imgflip.com/get_memes",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_template"
+    },
+    "asset": {
+      "url": "https://i.imgflip.com/1wz1x.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "caption_template",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Dramatically point out the absence of something expected or desired.",
+      "relational_pattern": "A prepared place emphasizes a missing achievement or resource.",
+      "example_context": "Here is the dashboard for our paying users. There are none yet.",
+      "near_miss_context": "The desired thing is present; only its quality is in question.",
+      "tags": [
+        "absence",
+        "anticlimax",
+        "unmet-expectation"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [],
+      "context_source_checks": [],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "This Is Where I'd Put My Trophy If I Had One\nDramatically point out the absence of something expected or desired.\nA prepared place emphasizes a missing achievement or resource.\nHere is the dashboard for our paying users. There are none yet.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "its-a-trap",
+    "name": "It's a Trap!",
+    "family_id": "its-a-trap",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Memegen",
+      "provider_id": "ackbar",
+      "catalogue_url": "https://api.memegen.link/templates/",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_example"
+    },
+    "asset": {
+      "url": "https://api.memegen.link/images/ackbar/_/it's_a_trap!.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "fixed_caption_reaction_candidate",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Warn that an apparently attractive invitation has a hidden downside.",
+      "relational_pattern": "A tempting offer conceals a catch.",
+      "example_context": "The free trial asks for a card and renews at an expensive annual rate.",
+      "near_miss_context": "The invitation is transparent and has no concealed condition.",
+      "tags": [
+        "warning",
+        "hidden-catch",
+        "temptation"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [
+        "http://knowyourmeme.com/memes/its-a-trap"
+      ],
+      "context_source_checks": [
+        {
+          "url": "http://knowyourmeme.com/memes/its-a-trap",
+          "status": "reference_link_only_not_independently_read"
+        }
+      ],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "It's a Trap!\nWarn that an apparently attractive invitation has a hidden downside.\nA tempting offer conceals a catch.\nThe free trial asks for a card and renews at an expensive annual rate.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "aint-got-time",
+    "name": "Ain't Nobody Got Time for That",
+    "family_id": "aint-got-time",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Memegen",
+      "provider_id": "aint-got-time",
+      "catalogue_url": "https://api.memegen.link/templates/",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_example"
+    },
+    "asset": {
+      "url": "https://api.memegen.link/images/aint-got-time/memes~q/ain't_nobody_got_time_fo'_that.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "fixed_caption_reaction_candidate",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Reject an activity because it is not worth the effort or time.",
+      "relational_pattern": "A requested effort exceeds willingness to engage.",
+      "example_context": "To unsubscribe, they want me to print a form and mail it.",
+      "near_miss_context": "Someone needs genuine urgent support rather than a dismissive joke.",
+      "tags": [
+        "effort",
+        "time",
+        "refusal"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [
+        "https://knowyourmeme.com/memes/sweet-brown-aint-nobody-got-time-for-that"
+      ],
+      "context_source_checks": [
+        {
+          "url": "https://knowyourmeme.com/memes/sweet-brown-aint-nobody-got-time-for-that",
+          "status": "reference_link_only_not_independently_read"
+        }
+      ],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Ain't Nobody Got Time for That\nReject an activity because it is not worth the effort or time.\nA requested effort exceeds willingness to engage.\nTo unsubscribe, they want me to print a form and mail it.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "do-you-want-ants",
+    "name": "Do You Want Ants?",
+    "family_id": "do-you-want-ants",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Memegen",
+      "provider_id": "ants",
+      "catalogue_url": "https://api.memegen.link/templates/",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_example"
+    },
+    "asset": {
+      "url": "https://api.memegen.link/images/ants/do_you_want_ants~q/because_that's_how_you_get_ants.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "fixed_caption_reaction_candidate",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Point out that someone's behaviour invites the predictable problem they want to avoid.",
+      "relational_pattern": "Carelessness creates its own foreseeable consequence.",
+      "example_context": "He posts the meeting link publicly and then wonders why strangers join.",
+      "near_miss_context": "The cause of the problem is unknown or the person is not responsible.",
+      "tags": [
+        "warning",
+        "predictable-consequence",
+        "carelessness"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [
+        "http://knowyourmeme.com/memes/do-you-want-ants"
+      ],
+      "context_source_checks": [
+        {
+          "url": "http://knowyourmeme.com/memes/do-you-want-ants",
+          "status": "reference_link_only_not_independently_read"
+        }
+      ],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Do You Want Ants?\nPoint out that someone's behaviour invites the predictable problem they want to avoid.\nCarelessness creates its own foreseeable consequence.\nHe posts the meeting link publicly and then wonders why strangers join.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "life-finds-way",
+    "name": "Life Finds a Way",
+    "family_id": "life-finds-way",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Memegen",
+      "provider_id": "away",
+      "catalogue_url": "https://api.memegen.link/templates/",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_example"
+    },
+    "asset": {
+      "url": "https://api.memegen.link/images/away/life.../finds_a_way.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "fixed_caption_reaction_candidate",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Marvel at something persisting or succeeding despite obstacles.",
+      "relational_pattern": "An unlikely path emerges after obvious paths are blocked.",
+      "example_context": "The team ran out of tools and still built a working solution from spare parts.",
+      "near_miss_context": "An ordinary task succeeds exactly as planned without obstacles.",
+      "tags": [
+        "persistence",
+        "improvisation",
+        "unexpected-success"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [
+        "https://www.youtube.com/watch?v=dMjQ3hA9mEA"
+      ],
+      "context_source_checks": [
+        {
+          "url": "https://www.youtube.com/watch?v=dMjQ3hA9mEA",
+          "status": "reference_link_only_not_independently_read"
+        }
+      ],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Life Finds a Way\nMarvel at something persisting or succeeding despite obstacles.\nAn unlikely path emerges after obvious paths are blocked.\nThe team ran out of tools and still built a working solution from spare parts.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "bad-choice",
+    "name": "Milk Was a Bad Choice",
+    "family_id": "bad-choice",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Memegen",
+      "provider_id": "badchoice",
+      "catalogue_url": "https://api.memegen.link/templates/",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_example"
+    },
+    "asset": {
+      "url": "https://api.memegen.link/images/badchoice/milk/was_a_bad_choice.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "fixed_caption_reaction_candidate",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Admit regret after an ill-judged choice backfires.",
+      "relational_pattern": "The actor recognizes their own decision was the mistake.",
+      "example_context": "I drank a giant coffee at midnight and now it is four in the morning.",
+      "near_miss_context": "The decision was sensible and the outcome was entirely outside their control.",
+      "tags": [
+        "regret",
+        "bad-decision",
+        "consequence"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [
+        "https://www.youtube.com/watch?v=DeY0yPqibb0"
+      ],
+      "context_source_checks": [
+        {
+          "url": "https://www.youtube.com/watch?v=DeY0yPqibb0",
+          "status": "reference_link_only_not_independently_read"
+        }
+      ],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Milk Was a Bad Choice\nAdmit regret after an ill-judged choice backfires.\nThe actor recognizes their own decision was the mistake.\nI drank a giant coffee at midnight and now it is four in the morning.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "honest-work",
+    "name": "It Ain't Much, But It's Honest Work",
+    "family_id": "honest-work",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Memegen",
+      "provider_id": "bihw",
+      "catalogue_url": "https://api.memegen.link/templates/",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_example"
+    },
+    "asset": {
+      "url": "https://api.memegen.link/images/bihw/it_ain't_much/but_it's_honest_work.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "fixed_caption_reaction_candidate",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Take modest pride in a small but useful contribution.",
+      "relational_pattern": "A humble result is worthwhile despite its limited scale.",
+      "example_context": "I fixed one typo in a huge documentation site today.",
+      "near_miss_context": "The achievement is enormous or the contribution is actually harmful.",
+      "tags": [
+        "modest-pride",
+        "contribution",
+        "wholesome"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [
+        "https://knowyourmeme.com/memes/but-its-honest-work"
+      ],
+      "context_source_checks": [
+        {
+          "url": "https://knowyourmeme.com/memes/but-its-honest-work",
+          "status": "reference_link_only_not_independently_read"
+        }
+      ],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "It Ain't Much, But It's Honest Work\nTake modest pride in a small but useful contribution.\nA humble result is worthwhile despite its limited scale.\nI fixed one typo in a huge documentation site today.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "why-not-keep-it",
+    "name": "Why Shouldn't I Keep It?",
+    "family_id": "why-not-keep-it",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Memegen",
+      "provider_id": "bilbo",
+      "catalogue_url": "https://api.memegen.link/templates/",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_example"
+    },
+    "asset": {
+      "url": "https://api.memegen.link/images/bilbo/After_all..._why_not~q/Why_shouldn't_I_keep_it~q.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "fixed_caption_reaction_candidate",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Rationalize keeping or indulging in something one intended to give up.",
+      "relational_pattern": "Desire quietly rewrites a prior commitment.",
+      "example_context": "I planned to sell the old laptop, but now I am inventing reasons to keep it.",
+      "near_miss_context": "There was never a plan or reason to let the object go.",
+      "tags": [
+        "rationalization",
+        "attachment",
+        "temptation"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [
+        "https://knowyourmeme.com/memes/after-all-why-not-why-shouldnt-i-keep-it"
+      ],
+      "context_source_checks": [
+        {
+          "url": "https://knowyourmeme.com/memes/after-all-why-not-why-shouldnt-i-keep-it",
+          "status": "reference_link_only_not_independently_read"
+        }
+      ],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Why Shouldn't I Keep It?\nRationalize keeping or indulging in something one intended to give up.\nDesire quietly rewrites a prior commitment.\nI planned to sell the old laptop, but now I am inventing reasons to keep it.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "whats-in-box",
+    "name": "What's in the Box?",
+    "family_id": "whats-in-box",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Memegen",
+      "provider_id": "box",
+      "catalogue_url": "https://api.memegen.link/templates/",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_example"
+    },
+    "asset": {
+      "url": "https://api.memegen.link/images/box/_/What's_in_the_box!~q.webp",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "fixed_caption_reaction_candidate",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Exaggerate suspense or anxious curiosity about hidden contents.",
+      "relational_pattern": "Something withheld becomes the focus of intense anticipation.",
+      "example_context": "My friend keeps saying they have news but refuses to say what it is.",
+      "near_miss_context": "The information is already known and there is nothing being withheld.",
+      "tags": [
+        "suspense",
+        "curiosity",
+        "exaggeration"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [
+        "https://screenrant.com/hilarious-se7en-memes/"
+      ],
+      "context_source_checks": [
+        {
+          "url": "https://screenrant.com/hilarious-se7en-memes/",
+          "status": "reference_link_only_not_independently_read"
+        }
+      ],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "What's in the Box?\nExaggerate suspense or anxious curiosity about hidden contents.\nSomething withheld becomes the focus of intense anticipation.\nMy friend keeps saying they have news but refuses to say what it is.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "promised-cake",
+    "name": "I Was Told There Would Be Cake",
+    "family_id": "promised-cake",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Memegen",
+      "provider_id": "cake",
+      "catalogue_url": "https://api.memegen.link/templates/",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_example"
+    },
+    "asset": {
+      "url": "https://api.memegen.link/images/cake/_/I_was_told_there_would_be_cake.webp",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "fixed_caption_reaction_candidate",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Complain that an advertised benefit or incentive never materialized.",
+      "relational_pattern": "Participation was motivated by an expectation that was not met.",
+      "example_context": "I joined the workshop for the promised hands-on practice. It was all slides.",
+      "near_miss_context": "Nobody promised the benefit and the expectation was invented afterward.",
+      "tags": [
+        "broken-promise",
+        "disappointment",
+        "missing-benefit"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [
+        "https://www.youtube.com/watch?v=mDOKGa92NRo"
+      ],
+      "context_source_checks": [
+        {
+          "url": "https://www.youtube.com/watch?v=mDOKGa92NRo",
+          "status": "reference_link_only_not_independently_read"
+        }
+      ],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "I Was Told There Would Be Cake\nComplain that an advertised benefit or incentive never materialized.\nParticipation was motivated by an expectation that was not met.\nI joined the workshop for the promised hands-on practice. It was all slides.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "captain-now",
+    "name": "I Am the Captain Now",
+    "family_id": "captain-now",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Memegen",
+      "provider_id": "captain",
+      "catalogue_url": "https://api.memegen.link/templates/",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_example"
+    },
+    "asset": {
+      "url": "https://api.memegen.link/images/captain/look_at_me/i_am_the_captain_now.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "fixed_caption_reaction_candidate",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Announce taking control or reversing the usual hierarchy.",
+      "relational_pattern": "The previously subordinate party claims authority.",
+      "example_context": "The intern fixed the outage and is now assigning everyone follow-up tasks.",
+      "near_miss_context": "The established leader is simply continuing their usual role.",
+      "tags": [
+        "role-reversal",
+        "authority",
+        "taking-control"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [
+        "https://www.youtube.com/watch?v=dvA-mimf2yg"
+      ],
+      "context_source_checks": [
+        {
+          "url": "https://www.youtube.com/watch?v=dvA-mimf2yg",
+          "status": "reference_link_only_not_independently_read"
+        }
+      ],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "I Am the Captain Now\nAnnounce taking control or reversing the usual hierarchy.\nThe previously subordinate party claims authority.\nThe intern fixed the outage and is now assigning everyone follow-up tasks.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "center-for-ants",
+    "name": "A Center for Ants?",
+    "family_id": "center-for-ants",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Memegen",
+      "provider_id": "center",
+      "catalogue_url": "https://api.memegen.link/templates/",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_example"
+    },
+    "asset": {
+      "url": "https://api.memegen.link/images/center/what_is_this/a_center_for_ants.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "fixed_caption_reaction_candidate",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Mock something being far smaller than its intended purpose requires.",
+      "relational_pattern": "The offered scale is absurdly inadequate.",
+      "example_context": "They booked a four-seat room for a team of twenty.",
+      "near_miss_context": "The item is a deliberate miniature or is appropriately sized.",
+      "tags": [
+        "too-small",
+        "inadequate-scale",
+        "disbelief"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [
+        "http://knowyourmeme.com/memes/what-is-this-a-center-for-ants"
+      ],
+      "context_source_checks": [
+        {
+          "url": "http://knowyourmeme.com/memes/what-is-this-a-center-for-ants",
+          "status": "reference_link_only_not_independently_read"
+        }
+      ],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "A Center for Ants?\nMock something being far smaller than its intended purpose requires.\nThe offered scale is absurdly inadequate.\nThey booked a four-seat room for a team of twenty.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "chosen-one",
+    "name": "You Were the Chosen One!",
+    "family_id": "chosen-one",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Memegen",
+      "provider_id": "chosen",
+      "catalogue_url": "https://api.memegen.link/templates/",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_example"
+    },
+    "asset": {
+      "url": "https://api.memegen.link/images/chosen/you_were_the_chosen_one!.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "fixed_caption_reaction_candidate",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Express theatrical disappointment when a trusted hope becomes part of the problem.",
+      "relational_pattern": "The expected solution betrays the role assigned to it.",
+      "example_context": "The app I installed to reduce distractions now sends the most notifications.",
+      "near_miss_context": "An unrelated new product disappoints without any prior expectation of rescue.",
+      "tags": [
+        "betrayal",
+        "failed-hope",
+        "solution-becomes-problem"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [
+        "http://knowyourmeme.com/memes/you-were-the-chosen-one"
+      ],
+      "context_source_checks": [
+        {
+          "url": "http://knowyourmeme.com/memes/you-were-the-chosen-one",
+          "status": "reference_link_only_not_independently_read"
+        }
+      ],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "You Were the Chosen One!\nExpress theatrical disappointment when a trusted hope becomes part of the problem.\nThe expected solution betrays the role assigned to it.\nThe app I installed to reduce distractions now sends the most notifications.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "crazy-pills",
+    "name": "I Feel Like I'm Taking Crazy Pills",
+    "family_id": "crazy-pills",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Memegen",
+      "provider_id": "crazypills",
+      "catalogue_url": "https://api.memegen.link/templates/",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_example"
+    },
+    "asset": {
+      "url": "https://api.memegen.link/images/crazypills/_/i_feel_like_i'm_taking_crazy_pills.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "fixed_caption_reaction_candidate",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Express disbelief that everyone else is accepting an obvious absurdity.",
+      "relational_pattern": "One observer cannot reconcile a group's consensus with what seems apparent.",
+      "example_context": "Everyone is celebrating the new shorter meetings, which now happen twice as often.",
+      "near_miss_context": "The person is discussing genuine mental-health symptoms.",
+      "tags": [
+        "absurd-consensus",
+        "disbelief",
+        "exasperation"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [
+        "http://knowyourmeme.com/memes/i-feel-like-im-taking-crazy-pills"
+      ],
+      "context_source_checks": [
+        {
+          "url": "http://knowyourmeme.com/memes/i-feel-like-im-taking-crazy-pills",
+          "status": "reference_link_only_not_independently_read"
+        }
+      ],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "I Feel Like I'm Taking Crazy Pills\nExpress disbelief that everyone else is accepting an obvious absurdity.\nOne observer cannot reconcile a group's consensus with what seems apparent.\nEveryone is celebrating the new shorter meetings, which now happen twice as often.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "throne-of-lies",
+    "name": "You Sit on a Throne of Lies",
+    "family_id": "throne-of-lies",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Memegen",
+      "provider_id": "elf",
+      "catalogue_url": "https://api.memegen.link/templates/",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_example"
+    },
+    "asset": {
+      "url": "https://api.memegen.link/images/elf/_/you_sit_on_a_throne_of_lies.jpg",
+      "local_file": null,
+      "availability": "The catalogue listed this URL, but this research tool could not render it; global availability is unknown.",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "unavailable_via_web_tool_global_status_unknown",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "fixed_caption_reaction_candidate",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Playfully reject an obviously dubious claim.",
+      "relational_pattern": "Confident words conflict with evidence already available to the group.",
+      "example_context": "He says he was not eating the biscuits while still holding the empty packet.",
+      "near_miss_context": "The person is making a sincere disclosure that you have no reason to doubt.",
+      "tags": [
+        "disbelief",
+        "callout",
+        "contradiction"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [
+        "https://www.reactiongifs.com/you-sit-on-a-throne-of-lies/"
+      ],
+      "context_source_checks": [
+        {
+          "url": "https://www.reactiongifs.com/you-sit-on-a-throne-of-lies/",
+          "status": "page_read"
+        }
+      ],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "You Sit on a Throne of Lies\nPlayfully reject an obviously dubious claim.\nConfident words conflict with evidence already available to the group.\nHe says he was not eating the biscuits while still holding the empty packet.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "stop-fetch",
+    "name": "Stop Trying to Make Fetch Happen",
+    "family_id": "stop-fetch",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Memegen",
+      "provider_id": "fetch",
+      "catalogue_url": "https://api.memegen.link/templates/",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_example"
+    },
+    "asset": {
+      "url": "https://api.memegen.link/images/fetch/stop_trying_to_make_fetch_happen/it's_not_going_to_happen.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "fixed_caption_reaction_candidate",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Push back on someone repeatedly trying to force an idea or phrase into acceptance.",
+      "relational_pattern": "Persistence has become an attempt to manufacture agreement.",
+      "example_context": "For the sixth week in a row, he is trying to make everyone use his new nickname.",
+      "near_miss_context": "Someone is making a reasonable first attempt at a new idea.",
+      "tags": [
+        "forced-trend",
+        "repetition",
+        "pushback"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [
+        "http://knowyourmeme.com/memes/stop-trying-to-make-fetch-happen"
+      ],
+      "context_source_checks": [
+        {
+          "url": "http://knowyourmeme.com/memes/stop-trying-to-make-fetch-happen",
+          "status": "reference_link_only_not_independently_read"
+        }
+      ],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Stop Trying to Make Fetch Happen\nPush back on someone repeatedly trying to force an idea or phrase into acceptance.\nPersistence has become an attempt to manufacture agreement.\nFor the sixth week in a row, he is trying to make everyone use his new nickname.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "first-try",
+    "name": "First Try!",
+    "family_id": "first-try",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Memegen",
+      "provider_id": "firsttry",
+      "catalogue_url": "https://api.memegen.link/templates/",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_example"
+    },
+    "asset": {
+      "url": "https://api.memegen.link/images/firsttry/_/first_try!.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "fixed_caption_reaction_candidate",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Celebrate a success, potentially while jokingly hiding all the failed attempts.",
+      "relational_pattern": "The visible success conceals a less glamorous attempt history.",
+      "example_context": "After forty failed test runs, it finally passed. I announce that it worked immediately.",
+      "near_miss_context": "The audience needs an accurate accounting of how many attempts occurred.",
+      "tags": [
+        "success",
+        "ironic-boast",
+        "persistence"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [
+        "https://www.youtube.com/watch?v=44-RsrF_V_w"
+      ],
+      "context_source_checks": [
+        {
+          "url": "https://www.youtube.com/watch?v=44-RsrF_V_w",
+          "status": "reference_link_only_not_independently_read"
+        }
+      ],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "First Try!\nCelebrate a success, potentially while jokingly hiding all the failed attempts.\nThe visible success conceals a less glamorous attempt history.\nAfter forty failed test runs, it finally passed. I announce that it worked immediately.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "michael-no",
+    "name": "Michael Scott No God No",
+    "family_id": "michael-no",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Memegen",
+      "provider_id": "michael-scott",
+      "catalogue_url": "https://api.memegen.link/templates/",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_example"
+    },
+    "asset": {
+      "url": "https://api.memegen.link/images/michael-scott/no,_god!_no_god_please_no!/noooooooooooooooo!.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "fixed_caption_reaction_candidate",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Reject unwelcome news with exaggerated dread.",
+      "relational_pattern": "An anticipated inconvenience provokes a theatrical negative reaction.",
+      "example_context": "They have announced another compulsory weekend team-building session.",
+      "near_miss_context": "The user is sharing a sensitive event that needs a calm, supportive reply.",
+      "tags": [
+        "dread",
+        "refusal",
+        "exaggeration"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [
+        "https://www.youtube.com/watch?v=31g0YE61PLQ"
+      ],
+      "context_source_checks": [
+        {
+          "url": "https://www.youtube.com/watch?v=31g0YE61PLQ",
+          "status": "reference_link_only_not_independently_read"
+        }
+      ],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Michael Scott No God No\nReject unwelcome news with exaggerated dread.\nAn anticipated inconvenience provokes a theatrical negative reaction.\nThey have announced another compulsory weekend team-building session.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "take-money",
+    "name": "Shut Up and Take My Money!",
+    "family_id": "take-money",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Memegen",
+      "provider_id": "money",
+      "catalogue_url": "https://api.memegen.link/templates/",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_example"
+    },
+    "asset": {
+      "url": "https://api.memegen.link/images/money/shut_up_and/take_my_money!.webp",
+      "local_file": null,
+      "availability": "The catalogue listed this URL, but this research tool could not render it; global availability is unknown.",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "unavailable_via_web_tool_global_status_unknown",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "fixed_caption_reaction_candidate",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Express immediate enthusiasm for a product or proposal.",
+      "relational_pattern": "Desire is strong enough that further persuasion is unnecessary.",
+      "example_context": "Someone demonstrated a gadget that solves the exact annoyance I complain about daily.",
+      "near_miss_context": "The purchase would be risky and the user is requesting careful advice.",
+      "tags": [
+        "enthusiasm",
+        "desire",
+        "approval"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [
+        "http://knowyourmeme.com/memes/shut-up-and-take-my-money"
+      ],
+      "context_source_checks": [
+        {
+          "url": "http://knowyourmeme.com/memes/shut-up-and-take-my-money",
+          "status": "reference_link_only_not_independently_read"
+        }
+      ],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Shut Up and Take My Money!\nExpress immediate enthusiasm for a product or proposal.\nDesire is strong enough that further persuasion is unnecessary.\nSomeone demonstrated a gadget that solves the exact annoyance I complain about daily.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "facepalm",
+    "name": "Facepalm",
+    "family_id": "facepalm",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Memegen",
+      "provider_id": "facepalm",
+      "catalogue_url": "https://api.memegen.link/templates/",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_blank"
+    },
+    "asset": {
+      "url": "https://api.memegen.link/images/facepalm.jpg",
+      "local_file": null,
+      "availability": "Rendered by the web tool on 2026-09-19; not downloaded into this archive",
+      "visual_inspection": "assistant_visual_spot_check",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "rendered_in_web_tool",
+      "inspection_notes": "A person seated with one hand covering the face. No overlaid caption is visible. The facepalm pose is legible.",
+      "observed_render_dimensions": {
+        "width": 679,
+        "height": 600
+      },
+      "inspection_date": "2026-09-19"
+    },
+    "delivery": {
+      "suggested_mode": "visual_reaction_candidate",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "A person seated with one hand covering the face. No overlaid caption is visible. The facepalm pose is legible. Usage fit and media permissions still need validation.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "React with embarrassed exasperation to an avoidable mistake.",
+      "relational_pattern": "An obvious error is difficult to watch without reacting.",
+      "example_context": "I spent ten minutes looking for the glasses that were on my head.",
+      "near_miss_context": "A beginner asks a reasonable question and is trying to learn.",
+      "tags": [
+        "exasperation",
+        "avoidable-mistake",
+        "embarrassment"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [
+        "http://knowyourmeme.com/memes/facepalm"
+      ],
+      "context_source_checks": [
+        {
+          "url": "http://knowyourmeme.com/memes/facepalm",
+          "status": "reference_link_only_not_independently_read"
+        }
+      ],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Facepalm\nReact with embarrassed exasperation to an avoidable mistake.\nAn obvious error is difficult to watch without reacting.\nI spent ten minutes looking for the glasses that were on my head.",
+    "schema_version": "1.0"
+  },
+  {
+    "id": "afraid-to-ask",
+    "name": "Afraid to Ask Andy",
+    "family_id": "afraid-to-ask",
+    "annotation_language": "en",
+    "asset_language_status": "English-oriented source; image text not individually verified",
+    "source": {
+      "provider": "Memegen",
+      "provider_id": "afraid",
+      "catalogue_url": "https://api.memegen.link/templates/",
+      "observed_on": "2026-09-19",
+      "catalogue_fields_observed": [
+        "provider_id",
+        "display_name",
+        "asset_url"
+      ],
+      "name_handling": "Display names may be normalized; provider_id and asset URL identify the source entry.",
+      "asset_url_kind": "source_listed_example"
+    },
+    "asset": {
+      "url": "https://api.memegen.link/images/afraid/i_don't_know_what_this_meme_is_for/and_at_this_point_i'm_too_afraid_to_ask.jpg",
+      "local_file": null,
+      "availability": "URL observed in source catalogue; binary not downloaded or decoded",
+      "visual_inspection": "not_performed",
+      "dimensions_from_provider": null,
+      "redistribution_permission": "not_established",
+      "link_check": "not_attempted",
+      "inspection_notes": null
+    },
+    "delivery": {
+      "suggested_mode": "caption_template",
+      "audio_required": false,
+      "production_ready": false,
+      "review_note": "Inspect the exact image, verify text/crop/readability and permissions before display.",
+      "audience_suitability": "not_rated",
+      "caption_presence_verified": false
+    },
+    "interpretation": {
+      "message": "Admit a knowledge gap that has become awkward to reveal after pretending to follow along.",
+      "relational_pattern": "Delayed clarification creates social embarrassment.",
+      "example_context": "I have attended six meetings and still do not know what the project acronym means.",
+      "near_miss_context": "The person is asking early and comfortably, without any social hesitation.",
+      "tags": [
+        "knowledge-gap",
+        "embarrassment",
+        "late-question"
+      ],
+      "example_context_kind": "original_hypothetical_not_real_user_conversation",
+      "near_miss_kind": "original_hypothetical_not_human_label"
+    },
+    "annotation_provenance": {
+      "identity_and_asset": "Source catalogue metadata, transcribed from the live web response",
+      "meaning_examples_tags_and_delivery": "Assistant-authored hypotheses; not publisher annotations or human preference labels",
+      "human_validated": false,
+      "audience_tested": false,
+      "context_sources": [
+        "http://knowyourmeme.com/memes/afraid-to-ask-andy"
+      ],
+      "context_source_checks": [
+        {
+          "url": "http://knowyourmeme.com/memes/afraid-to-ask-andy",
+          "status": "reference_link_only_not_independently_read"
+        }
+      ],
+      "origin_attribution_verified": false
+    },
+    "rights": {
+      "media_license": "not_cleared",
+      "note": "A public URL or an open-source generator does not establish rights to the underlying image."
+    },
+    "retrieval_text": "Afraid to Ask Andy\nAdmit a knowledge gap that has become awkward to reveal after pretending to follow along.\nDelayed clarification creates social embarrassment.\nI have attended six meetings and still do not know what the project acronym means.",
+    "schema_version": "1.0"
+  }
+]

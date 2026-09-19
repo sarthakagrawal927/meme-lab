@@ -1,0 +1,723 @@
+{
+  "compiled_on": "2026-09-19",
+  "entry_count": 66,
+  "unique_link_count": 96,
+  "note": "An index of preserved research leads, not a claim that every link was revalidated or every resource is bundled. Images remain source URLs in the catalogue. No full papers copied.",
+  "entries": [
+    {
+      "title": "Imgflip",
+      "section": "Original source audits",
+      "purpose": "Primary template catalogue",
+      "status": "preserved_original_audit_not_repeated_in_handoff",
+      "links": [
+        "https://imgflip.com/api",
+        "https://api.imgflip.com/get_memes"
+      ],
+      "local_audit": "../original/meme_references_v1/source_audit.md",
+      "audit_id": "imgflip",
+      "id": "ref-001"
+    },
+    {
+      "title": "Memegen",
+      "section": "Original source audits",
+      "purpose": "Primary structured template/example catalogue",
+      "status": "preserved_original_audit_not_repeated_in_handoff",
+      "links": [
+        "https://github.com/jacebrowning/memegen",
+        "https://api.memegen.link/templates/"
+      ],
+      "local_audit": "../original/meme_references_v1/source_audit.md",
+      "audit_id": "memegen",
+      "id": "ref-002"
+    },
+    {
+      "title": "Know Your Meme",
+      "section": "Original source audits",
+      "purpose": "Cultural-context reference",
+      "status": "preserved_original_audit_not_repeated_in_handoff",
+      "links": [
+        "https://knowyourmeme.com/about",
+        "https://knowyourmeme.com/memes/this-is-fine",
+        "https://knowyourmeme.com/memes/absolute-cinema",
+        "https://knowyourmeme.com/memes/you-guys-are-getting-paid",
+        "https://knowyourmeme.com/memes/monkey-puppet"
+      ],
+      "local_audit": "../original/meme_references_v1/source_audit.md",
+      "audit_id": "knowyourmeme",
+      "id": "ref-003"
+    },
+    {
+      "title": "Reaction GIFs",
+      "section": "Original source audits",
+      "purpose": "Usage-context reference and future reaction assets",
+      "status": "preserved_original_audit_not_repeated_in_handoff",
+      "links": [
+        "https://www.reactiongifs.com/",
+        "https://www.reactiongifs.com/stone-cold-laugh-turns-serious/",
+        "https://www.reactiongifs.com/jack-nicholson-nodding-yes/",
+        "https://www.reactiongifs.com/jeremiah-johnson-nodding/",
+        "https://www.reactiongifs.com/leonardo-dicaprio-gatsby-cheers/",
+        "https://www.reactiongifs.com/you-sit-on-a-throne-of-lies/"
+      ],
+      "local_audit": "../original/meme_references_v1/source_audit.md",
+      "audit_id": "reactiongifs",
+      "id": "ref-004"
+    },
+    {
+      "title": "KLIPY",
+      "section": "Original source audits",
+      "purpose": "Hosted catalogue/API integration",
+      "status": "preserved_original_audit_not_repeated_in_handoff",
+      "links": [
+        "https://klipy.com/developers",
+        "https://docs.klipy.com/memes-api",
+        "https://docs.klipy.com/attribution"
+      ],
+      "local_audit": "../original/meme_references_v1/source_audit.md",
+      "audit_id": "klipy",
+      "id": "ref-005"
+    },
+    {
+      "title": "GIFDB",
+      "section": "Original source audits",
+      "purpose": "Manual discovery only in this release",
+      "status": "preserved_original_audit_not_repeated_in_handoff",
+      "links": [
+        "https://gifdb.com/memes",
+        "https://gifdb.com/terms/"
+      ],
+      "local_audit": "../original/meme_references_v1/source_audit.md",
+      "audit_id": "gifdb",
+      "id": "ref-006"
+    },
+    {
+      "title": "Memedroid",
+      "section": "Original source audits",
+      "purpose": "Discovery of community memes",
+      "status": "preserved_original_audit_not_repeated_in_handoff",
+      "links": [
+        "https://www.memedroid.com/",
+        "https://www.memedroid.com/tos"
+      ],
+      "local_audit": "../original/meme_references_v1/source_audit.md",
+      "audit_id": "memedroid",
+      "id": "ref-007"
+    },
+    {
+      "title": "Memebase / Cheezburger",
+      "section": "Original source audits",
+      "purpose": "Editorial discovery feed",
+      "status": "preserved_original_audit_not_repeated_in_handoff",
+      "links": [
+        "https://memebase.cheezburger.com/",
+        "https://cheezburger.com/terms-of-service"
+      ],
+      "local_audit": "../original/meme_references_v1/source_audit.md",
+      "audit_id": "memebase",
+      "id": "ref-008"
+    },
+    {
+      "title": "Frinkiac",
+      "section": "Original source audits",
+      "purpose": "Dialogue/frame retrieval for The Simpsons",
+      "status": "preserved_original_audit_not_repeated_in_handoff",
+      "links": [
+        "https://frinkiac.com/",
+        "https://langui.sh/2026/05/04/ten-years-of-frinkiac/"
+      ],
+      "local_audit": "../original/meme_references_v1/source_audit.md",
+      "audit_id": "frinkiac",
+      "id": "ref-009"
+    },
+    {
+      "title": "Morbotron",
+      "section": "Original source audits",
+      "purpose": "Dialogue/frame retrieval for Futurama",
+      "status": "preserved_original_audit_not_repeated_in_handoff",
+      "links": [
+        "https://morbotron.com/",
+        "https://langui.sh/2016/08/08/morbotron-futurama/",
+        "https://langui.sh/2026/05/04/ten-years-of-frinkiac/"
+      ],
+      "local_audit": "../original/meme_references_v1/source_audit.md",
+      "audit_id": "morbotron",
+      "id": "ref-010"
+    },
+    {
+      "title": "Clip.Cafe",
+      "section": "Original source audits",
+      "purpose": "Movie/TV scene discovery",
+      "status": "preserved_original_audit_not_repeated_in_handoff",
+      "links": [
+        "https://clip.cafe/",
+        "https://clip.cafe/termsandconditions/"
+      ],
+      "local_audit": "../original/meme_references_v1/source_audit.md",
+      "audit_id": "clipcafe",
+      "id": "ref-011"
+    },
+    {
+      "title": "Meme Depot",
+      "section": "Original source audits",
+      "purpose": "Curated-collection discovery",
+      "status": "preserved_original_audit_not_repeated_in_handoff",
+      "links": [
+        "https://memedepot.com/"
+      ],
+      "local_audit": "../original/meme_references_v1/source_audit.md",
+      "audit_id": "memedepot",
+      "id": "ref-012"
+    },
+    {
+      "title": "MemeCap",
+      "section": "Earlier dataset candidates",
+      "purpose": "Earlier English meme-understanding seed candidate.",
+      "status": "prior_conversation_reference_not_reverified_in_handoff",
+      "links": [
+        "https://github.com/eujhwang/meme-cap",
+        "https://arxiv.org/abs/2305.13703",
+        "https://huggingface.co/datasets/Leonardo6/memecap"
+      ],
+      "id": "ref-013"
+    },
+    {
+      "title": "MemeCMD",
+      "section": "Earlier dataset candidates",
+      "purpose": "Conversational meme retrieval and annotation design lead.",
+      "status": "prior_conversation_reference_not_reverified_in_handoff",
+      "links": [
+        "https://arxiv.org/abs/2507.00891"
+      ],
+      "id": "ref-014"
+    },
+    {
+      "title": "MemeCULT-1K",
+      "section": "Earlier dataset candidates",
+      "purpose": "South Asian cultural-context dataset lead; release availability must be rechecked.",
+      "status": "prior_conversation_reference_not_reverified_in_handoff",
+      "links": [
+        "https://github.com/TawsifDipto17/MemeCULT-1K",
+        "https://arxiv.org/abs/2609.01772"
+      ],
+      "id": "ref-015"
+    },
+    {
+      "title": "MemeLens",
+      "section": "Earlier dataset candidates",
+      "purpose": "Multilingual understanding dataset lead; not part of the runnable catalogue.",
+      "status": "prior_conversation_reference_not_reverified_in_handoff",
+      "links": [
+        "https://huggingface.co/datasets/QCRI/MemeLens",
+        "https://huggingface.co/QCRI/MemeLens-VLM",
+        "https://arxiv.org/abs/2601.12539"
+      ],
+      "id": "ref-016"
+    },
+    {
+      "title": "CM50",
+      "section": "Earlier dataset candidates",
+      "purpose": "Template-aware text retrieval and annotation lead.",
+      "status": "prior_conversation_reference_not_reverified_in_handoff",
+      "links": [
+        "https://github.com/Seefreem/meme_text_retrieval_p1",
+        "https://arxiv.org/abs/2501.13851",
+        "https://github.com/Seefreem/meme_text_retrieval_p1/blob/main/data/50_template_info.json"
+      ],
+      "id": "ref-017"
+    },
+    {
+      "title": "MemeMatch",
+      "section": "Earlier dataset candidates",
+      "purpose": "Larger retrieval-dataset lead; download and media coverage not validated for this handoff.",
+      "status": "prior_conversation_reference_not_reverified_in_handoff",
+      "links": [
+        "https://github.com/TriAnLe171/MemeMatch-v1.0",
+        "https://doi.org/10.34740/kaggle/dsv/14510064",
+        "https://ojs.aaai.org/index.php/ICWSM/article/view/42785",
+        "https://github.com/TriAnLe171/Meme_Recommendation_Project"
+      ],
+      "id": "ref-018"
+    },
+    {
+      "title": "MemeReaCon",
+      "section": "Earlier dataset candidates",
+      "purpose": "Conversational meme-understanding evaluation lead.",
+      "status": "prior_conversation_reference_not_reverified_in_handoff",
+      "links": [
+        "https://aclanthology.org/2025.emnlp-main.176/",
+        "https://arxiv.org/abs/2505.17433"
+      ],
+      "id": "ref-019"
+    },
+    {
+      "title": "StickerConv",
+      "section": "Earlier dataset candidates",
+      "purpose": "Sticker-conversation research lead; media access caveats were raised in discussion.",
+      "status": "prior_conversation_reference_not_reverified_in_handoff",
+      "links": [
+        "https://github.com/ZhangYiqun018/StickerConv"
+      ],
+      "id": "ref-020"
+    },
+    {
+      "title": "Learning When and What to Quote",
+      "section": "Reference-selection research",
+      "purpose": "Quotation recommendation; closest prior task discussed for dialogue replies.",
+      "status": "prior_conversation_reference_not_reverified_in_handoff",
+      "links": [
+        "https://aclanthology.org/2022.findings-emnlp.225/"
+      ],
+      "id": "ref-021"
+    },
+    {
+      "title": "Quotation Recommendation and Interpretation Based on Transformation from Queries to Quotations",
+      "section": "Reference-selection research",
+      "purpose": "Query-to-quotation associations and interpretation.",
+      "status": "prior_conversation_reference_not_reverified_in_handoff",
+      "links": [
+        "https://aclanthology.org/2021.acl-short.95/"
+      ],
+      "id": "ref-022"
+    },
+    {
+      "title": "MAC/FAC: A Model of Similarity-Based Retrieval",
+      "section": "Reference-selection research",
+      "purpose": "Cognitive model referenced for retrieval versus structural matching.",
+      "status": "prior_conversation_reference_not_reverified_in_handoff",
+      "links": [
+        "https://onlinelibrary.wiley.com/doi/10.1207/s15516709cog1902_1"
+      ],
+      "id": "ref-023"
+    },
+    {
+      "title": "Learning in the Rational Speech Acts Model",
+      "section": "Reference-selection research",
+      "purpose": "Speaker/listener intention and pragmatics lead.",
+      "status": "prior_conversation_reference_not_reverified_in_handoff",
+      "links": [
+        "https://arxiv.org/abs/1510.06807"
+      ],
+      "id": "ref-024"
+    },
+    {
+      "title": "Beyond the Literal",
+      "section": "Reference-selection research",
+      "purpose": "Pragmatic-intent preprint link from earlier discussion; bibliographic details not revalidated here.",
+      "status": "prior_conversation_reference_not_reverified_in_handoff",
+      "links": [
+        "https://arxiv.org/abs/2606.03604"
+      ],
+      "id": "ref-025"
+    },
+    {
+      "title": "Personalized Language Modeling from Personalized Human Feedback",
+      "section": "Reference-selection research",
+      "purpose": "Preference-learning lead; not a humour-specific result asserted here.",
+      "status": "prior_conversation_reference_not_reverified_in_handoff",
+      "links": [
+        "https://arxiv.org/abs/2402.05133"
+      ],
+      "id": "ref-026"
+    },
+    {
+      "title": "MemeBench",
+      "section": "Reference-selection research",
+      "purpose": "Meme-understanding preprint link from earlier discussion; details not revalidated here.",
+      "status": "prior_conversation_reference_not_reverified_in_handoff",
+      "links": [
+        "https://arxiv.org/abs/2607.27798"
+      ],
+      "id": "ref-027"
+    },
+    {
+      "title": "Reasoning-intensive retrieval lead",
+      "section": "Reference-selection research",
+      "purpose": "Earlier query-expansion/retrieval citation; retained without reasserting its experimental claims.",
+      "status": "prior_conversation_reference_not_reverified_in_handoff",
+      "links": [
+        "https://arxiv.org/abs/2508.07995"
+      ],
+      "id": "ref-028"
+    },
+    {
+      "title": "TypeSafe System One models and Jev",
+      "section": "Jev and retrieval tooling",
+      "purpose": "Original vendor introduction discussed for catalogue selection.",
+      "status": "prior_conversation_reference_not_reverified_in_handoff",
+      "links": [
+        "https://typesafe.ai/blog/introducing-system-one-models-and-jev"
+      ],
+      "id": "ref-029"
+    },
+    {
+      "title": "Jev Choice",
+      "section": "Jev and retrieval tooling",
+      "purpose": "Future selector interface lead; no Jev integration is implemented.",
+      "status": "prior_conversation_reference_not_reverified_in_handoff",
+      "links": [
+        "https://docs.typesafe.ai/primitives/choice"
+      ],
+      "id": "ref-030"
+    },
+    {
+      "title": "Jev skill-suggestion cookbook",
+      "section": "Jev and retrieval tooling",
+      "purpose": "Catalogue-selection example from earlier discussion.",
+      "status": "prior_conversation_reference_not_reverified_in_handoff",
+      "links": [
+        "https://docs.typesafe.ai/cookbooks/skill_suggestion"
+      ],
+      "id": "ref-031"
+    },
+    {
+      "title": "Jev state and input modalities",
+      "section": "Jev and retrieval tooling",
+      "purpose": "Input representation documentation lead.",
+      "status": "prior_conversation_reference_not_reverified_in_handoff",
+      "links": [
+        "https://docs.typesafe.ai/concepts/state"
+      ],
+      "id": "ref-032"
+    },
+    {
+      "title": "Jev models",
+      "section": "Jev and retrieval tooling",
+      "purpose": "Model/language/pricing lead; no old price or model-limit claim is treated as current.",
+      "status": "prior_conversation_reference_not_reverified_in_handoff",
+      "links": [
+        "https://docs.typesafe.ai/models"
+      ],
+      "id": "ref-033"
+    },
+    {
+      "title": "Jev jaggedness",
+      "section": "Jev and retrieval tooling",
+      "purpose": "Earlier limitations page; model/version scope must be rechecked before conclusions.",
+      "status": "prior_conversation_reference_not_reverified_in_handoff",
+      "links": [
+        "https://docs.typesafe.ai/model-jaggedness/jev-1.13"
+      ],
+      "id": "ref-034"
+    },
+    {
+      "title": "Jev confidence",
+      "section": "Jev and retrieval tooling",
+      "purpose": "Scoring documentation; a distribution is not a human humour rating.",
+      "status": "prior_conversation_reference_not_reverified_in_handoff",
+      "links": [
+        "https://docs.typesafe.ai/confidence"
+      ],
+      "id": "ref-035"
+    },
+    {
+      "title": "pgvector",
+      "section": "Jev and retrieval tooling",
+      "purpose": "Possible retrieval component later, not an MVP dependency.",
+      "status": "prior_conversation_reference_not_reverified_in_handoff",
+      "links": [
+        "https://github.com/pgvector/pgvector"
+      ],
+      "id": "ref-036"
+    },
+    {
+      "title": "Pocket FM Sherpa",
+      "section": "Story memory and audio — parked",
+      "purpose": "Original product considered for story memory and audio ideas.",
+      "status": "prior_conversation_reference_not_reverified_in_handoff",
+      "links": [
+        "https://pocketfm.com/sherpa"
+      ],
+      "id": "ref-037"
+    },
+    {
+      "title": "Pocket FM Narrative World Model",
+      "section": "Story memory and audio — parked",
+      "purpose": "Story-memory paper lead from the discussion.",
+      "status": "prior_conversation_reference_not_reverified_in_handoff",
+      "links": [
+        "https://arxiv.org/abs/2607.05577"
+      ],
+      "id": "ref-038"
+    },
+    {
+      "title": "Pocket FM listener-agent audit",
+      "section": "Story memory and audio — parked",
+      "purpose": "Earlier audience-model evaluation lead; original PDF is linked, not bundled.",
+      "status": "prior_conversation_reference_not_reverified_in_handoff",
+      "links": [
+        "https://pocketfm.com/about-us/research/listener-agents.pdf"
+      ],
+      "id": "ref-039"
+    },
+    {
+      "title": "SAGA — Script-to-Audio Generation Agent",
+      "section": "Story memory and audio — parked",
+      "purpose": "Later music/sound-effect planning lead; no BGM work in v0.1.",
+      "status": "prior_conversation_reference_not_reverified_in_handoff",
+      "links": [
+        "https://pocketfm.com/about-us/research/saga.pdf"
+      ],
+      "id": "ref-040"
+    },
+    {
+      "title": "GIPHY API documentation",
+      "section": "Additional access and discovery references",
+      "purpose": "Earlier provider constraints lead; no integration or dataset collected.",
+      "status": "prior_conversation_reference_not_reverified_in_handoff",
+      "links": [
+        "https://developers.giphy.com/docs/api/"
+      ],
+      "id": "ref-041"
+    },
+    {
+      "title": "Tenor support notice",
+      "section": "Additional access and discovery references",
+      "purpose": "Earlier service-status reference; consult current notice before using it.",
+      "status": "prior_conversation_reference_not_reverified_in_handoff",
+      "links": [
+        "https://support.google.com/tenor/answer/10455265?hl=en"
+      ],
+      "id": "ref-042"
+    },
+    {
+      "title": "Imgflip template browser",
+      "section": "Additional access and discovery references",
+      "purpose": "Human browsing entry point.",
+      "status": "prior_conversation_reference_not_reverified_in_handoff",
+      "links": [
+        "https://imgflip.com/memetemplates"
+      ],
+      "id": "ref-043"
+    },
+    {
+      "title": "Know Your Meme home",
+      "section": "Additional access and discovery references",
+      "purpose": "Context-reference entry point.",
+      "status": "prior_conversation_reference_not_reverified_in_handoff",
+      "links": [
+        "https://knowyourmeme.com/"
+      ],
+      "id": "ref-044"
+    },
+    {
+      "title": "It's a Trap! context reference",
+      "section": "Additional per-reference context links",
+      "purpose": "Preserved provenance link for the supplied annotation.",
+      "status": "original_record_check_reference_link_only_not_independently_read",
+      "links": [
+        "http://knowyourmeme.com/memes/its-a-trap"
+      ],
+      "id": "ref-045"
+    },
+    {
+      "title": "Ain't Nobody Got Time for That context reference",
+      "section": "Additional per-reference context links",
+      "purpose": "Preserved provenance link for the supplied annotation.",
+      "status": "original_record_check_reference_link_only_not_independently_read",
+      "links": [
+        "https://knowyourmeme.com/memes/sweet-brown-aint-nobody-got-time-for-that"
+      ],
+      "id": "ref-046"
+    },
+    {
+      "title": "Do You Want Ants? context reference",
+      "section": "Additional per-reference context links",
+      "purpose": "Preserved provenance link for the supplied annotation.",
+      "status": "original_record_check_reference_link_only_not_independently_read",
+      "links": [
+        "http://knowyourmeme.com/memes/do-you-want-ants"
+      ],
+      "id": "ref-047"
+    },
+    {
+      "title": "Life Finds a Way context reference",
+      "section": "Additional per-reference context links",
+      "purpose": "Preserved provenance link for the supplied annotation.",
+      "status": "original_record_check_reference_link_only_not_independently_read",
+      "links": [
+        "https://www.youtube.com/watch?v=dMjQ3hA9mEA"
+      ],
+      "id": "ref-048"
+    },
+    {
+      "title": "Milk Was a Bad Choice context reference",
+      "section": "Additional per-reference context links",
+      "purpose": "Preserved provenance link for the supplied annotation.",
+      "status": "original_record_check_reference_link_only_not_independently_read",
+      "links": [
+        "https://www.youtube.com/watch?v=DeY0yPqibb0"
+      ],
+      "id": "ref-049"
+    },
+    {
+      "title": "It Ain't Much, But It's Honest Work context reference",
+      "section": "Additional per-reference context links",
+      "purpose": "Preserved provenance link for the supplied annotation.",
+      "status": "original_record_check_reference_link_only_not_independently_read",
+      "links": [
+        "https://knowyourmeme.com/memes/but-its-honest-work"
+      ],
+      "id": "ref-050"
+    },
+    {
+      "title": "Why Shouldn't I Keep It? context reference",
+      "section": "Additional per-reference context links",
+      "purpose": "Preserved provenance link for the supplied annotation.",
+      "status": "original_record_check_reference_link_only_not_independently_read",
+      "links": [
+        "https://knowyourmeme.com/memes/after-all-why-not-why-shouldnt-i-keep-it"
+      ],
+      "id": "ref-051"
+    },
+    {
+      "title": "What's in the Box? context reference",
+      "section": "Additional per-reference context links",
+      "purpose": "Preserved provenance link for the supplied annotation.",
+      "status": "original_record_check_reference_link_only_not_independently_read",
+      "links": [
+        "https://screenrant.com/hilarious-se7en-memes/"
+      ],
+      "id": "ref-052"
+    },
+    {
+      "title": "I Was Told There Would Be Cake context reference",
+      "section": "Additional per-reference context links",
+      "purpose": "Preserved provenance link for the supplied annotation.",
+      "status": "original_record_check_reference_link_only_not_independently_read",
+      "links": [
+        "https://www.youtube.com/watch?v=mDOKGa92NRo"
+      ],
+      "id": "ref-053"
+    },
+    {
+      "title": "I Am the Captain Now context reference",
+      "section": "Additional per-reference context links",
+      "purpose": "Preserved provenance link for the supplied annotation.",
+      "status": "original_record_check_reference_link_only_not_independently_read",
+      "links": [
+        "https://www.youtube.com/watch?v=dvA-mimf2yg"
+      ],
+      "id": "ref-054"
+    },
+    {
+      "title": "A Center for Ants? context reference",
+      "section": "Additional per-reference context links",
+      "purpose": "Preserved provenance link for the supplied annotation.",
+      "status": "original_record_check_reference_link_only_not_independently_read",
+      "links": [
+        "http://knowyourmeme.com/memes/what-is-this-a-center-for-ants"
+      ],
+      "id": "ref-055"
+    },
+    {
+      "title": "You Were the Chosen One! context reference",
+      "section": "Additional per-reference context links",
+      "purpose": "Preserved provenance link for the supplied annotation.",
+      "status": "original_record_check_reference_link_only_not_independently_read",
+      "links": [
+        "http://knowyourmeme.com/memes/you-were-the-chosen-one"
+      ],
+      "id": "ref-056"
+    },
+    {
+      "title": "I Feel Like I'm Taking Crazy Pills context reference",
+      "section": "Additional per-reference context links",
+      "purpose": "Preserved provenance link for the supplied annotation.",
+      "status": "original_record_check_reference_link_only_not_independently_read",
+      "links": [
+        "http://knowyourmeme.com/memes/i-feel-like-im-taking-crazy-pills"
+      ],
+      "id": "ref-057"
+    },
+    {
+      "title": "Stop Trying to Make Fetch Happen context reference",
+      "section": "Additional per-reference context links",
+      "purpose": "Preserved provenance link for the supplied annotation.",
+      "status": "original_record_check_reference_link_only_not_independently_read",
+      "links": [
+        "http://knowyourmeme.com/memes/stop-trying-to-make-fetch-happen"
+      ],
+      "id": "ref-058"
+    },
+    {
+      "title": "First Try! context reference",
+      "section": "Additional per-reference context links",
+      "purpose": "Preserved provenance link for the supplied annotation.",
+      "status": "original_record_check_reference_link_only_not_independently_read",
+      "links": [
+        "https://www.youtube.com/watch?v=44-RsrF_V_w"
+      ],
+      "id": "ref-059"
+    },
+    {
+      "title": "Michael Scott No God No context reference",
+      "section": "Additional per-reference context links",
+      "purpose": "Preserved provenance link for the supplied annotation.",
+      "status": "original_record_check_reference_link_only_not_independently_read",
+      "links": [
+        "https://www.youtube.com/watch?v=31g0YE61PLQ"
+      ],
+      "id": "ref-060"
+    },
+    {
+      "title": "Shut Up and Take My Money! context reference",
+      "section": "Additional per-reference context links",
+      "purpose": "Preserved provenance link for the supplied annotation.",
+      "status": "original_record_check_reference_link_only_not_independently_read",
+      "links": [
+        "http://knowyourmeme.com/memes/shut-up-and-take-my-money"
+      ],
+      "id": "ref-061"
+    },
+    {
+      "title": "Facepalm context reference",
+      "section": "Additional per-reference context links",
+      "purpose": "Preserved provenance link for the supplied annotation.",
+      "status": "original_record_check_reference_link_only_not_independently_read",
+      "links": [
+        "http://knowyourmeme.com/memes/facepalm"
+      ],
+      "id": "ref-062"
+    },
+    {
+      "title": "Afraid to Ask Andy context reference",
+      "section": "Additional per-reference context links",
+      "purpose": "Preserved provenance link for the supplied annotation.",
+      "status": "original_record_check_reference_link_only_not_independently_read",
+      "links": [
+        "http://knowyourmeme.com/memes/afraid-to-ask-andy"
+      ],
+      "id": "ref-063"
+    },
+    {
+      "title": "Ollama chat endpoint",
+      "section": "Implementation documentation",
+      "purpose": "Native text-chat request/response contract.",
+      "status": "official_documentation_read_for_this_handoff_2026-09-19",
+      "links": [
+        "https://docs.ollama.com/api/chat"
+      ],
+      "id": "ref-064"
+    },
+    {
+      "title": "Ollama structured outputs",
+      "section": "Implementation documentation",
+      "purpose": "JSON-schema response format used by the native adapter.",
+      "status": "official_documentation_read_for_this_handoff_2026-09-19",
+      "links": [
+        "https://docs.ollama.com/capabilities/structured-outputs"
+      ],
+      "id": "ref-065"
+    },
+    {
+      "title": "Ollama compatibility",
+      "section": "Implementation documentation",
+      "purpose": "Chat-completions-compatible request and response example.",
+      "status": "official_documentation_read_for_this_handoff_2026-09-19",
+      "links": [
+        "https://docs.ollama.com/api/openai-compatibility"
+      ],
+      "id": "ref-066"
+    }
+  ]
+}

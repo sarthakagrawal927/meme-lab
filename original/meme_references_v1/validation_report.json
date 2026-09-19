@@ -1,0 +1,54 @@
+{
+  "created_on": "2026-09-19",
+  "record_count": 60,
+  "reaction_candidates": 30,
+  "caption_templates": 30,
+  "provider_counts": {
+    "Imgflip": 40,
+    "Memegen": 20
+  },
+  "source_sites_reviewed": 12,
+  "additional_page_only_gif_leads": 5,
+  "unique_ids": 60,
+  "unique_family_ids": 60,
+  "unique_source_asset_urls": 60,
+  "schema_validation": "passed_60_records_draft202012_uri_format_checks",
+  "json_jsonl_equivalence": true,
+  "media_files_bundled": 0,
+  "human_labels": 0,
+  "audience_evaluations": 0,
+  "image_spot_checks": [
+    "absolute-cinema",
+    "this-is-fine",
+    "monkey-puppet",
+    "facepalm",
+    "you-guys-getting-paid"
+  ],
+  "image_spot_check_method": "assistant_vision_web_tool_not_human_review",
+  "web_render_failed_global_status_unknown": [
+    "gatsby-toast",
+    "take-money",
+    "throne-of-lies"
+  ],
+  "not_performed": [
+    "Complete image availability audit",
+    "Media binary download and hashing",
+    "Full-image visual review",
+    "Cross-source perceptual duplicate detection",
+    "Human semantic or humour validation",
+    "Training or retrieval model evaluation",
+    "Full rights clearance",
+    "Authenticated provider integration"
+  ],
+  "preview_validation": {
+    "browser": "Chromium via Playwright",
+    "method": "Rendered generated HTML content in local browser context; no external media loaded",
+    "default_reaction_count": 30,
+    "all_record_count": 60,
+    "inspected_filter_count": 5,
+    "text_search": "passed",
+    "javascript_page_errors": 0,
+    "automatic_external_requests": 0,
+    "mobile_horizontal_overflow": false
+  }
+}

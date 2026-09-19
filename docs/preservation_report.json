@@ -1,0 +1,92 @@
+{
+  "date": "2026-09-19",
+  "original_zip_sha256": "678985984b5adee53b05f58bdbb39b2f62bc112da1d1399303802f8c2f36f036",
+  "preserved_original_files": 13,
+  "original_zip_copy_matches": true,
+  "files": [
+    {
+      "path": "original/meme_references_v1/README.md",
+      "sha256": "894951a2b820ecdfb529b27e6bbaa44668cc16bcd947019cd7f28efcfa7bd545",
+      "matches_original_zip": true
+    },
+    {
+      "path": "original/meme_references_v1/caption_templates.jsonl",
+      "sha256": "55ed2983e2a5e80a1e57e08729b4c1aea6711f7c14af829ae7ea2e046c23a13b",
+      "matches_original_zip": true
+    },
+    {
+      "path": "original/meme_references_v1/gif_source_leads.jsonl",
+      "sha256": "b869abacb65c7af5ae02c224762aaa23bcdbea5f6ff69f976dc411afac6d9c4f",
+      "matches_original_zip": true
+    },
+    {
+      "path": "original/meme_references_v1/manifest.sha256",
+      "sha256": "4397858d4f2e587b7fa38fa84a21d5e9dbdd19d549e20065a349913154cf0493",
+      "matches_original_zip": true
+    },
+    {
+      "path": "original/meme_references_v1/memes.json",
+      "sha256": "271997061620a8c381b4dc887cf13e012e65b2b7835aa33477586389f61bc56e",
+      "matches_original_zip": true
+    },
+    {
+      "path": "original/meme_references_v1/memes.jsonl",
+      "sha256": "546d7661e3153b9573e3ae001310404b9a4f33117dcda95b8ddbf7e6701842c6",
+      "matches_original_zip": true
+    },
+    {
+      "path": "original/meme_references_v1/preview.html",
+      "sha256": "e4c280be2566a1ed50fbbbb6a514b35a1e4646c649e3e8d4b4200f118903254c",
+      "matches_original_zip": true
+    },
+    {
+      "path": "original/meme_references_v1/reaction_candidates.jsonl",
+      "sha256": "ecbe05e772142daac8efd01b77583d57e80cd21c72df02101da6975e6434a9b5",
+      "matches_original_zip": true
+    },
+    {
+      "path": "original/meme_references_v1/schema.json",
+      "sha256": "7056d6e1d7fa4155a09bd84f954f903ed8808df7cf35cd2a45c653e9a7f7f717",
+      "matches_original_zip": true
+    },
+    {
+      "path": "original/meme_references_v1/source_audit.md",
+      "sha256": "30f89b4ffefcf46ad747d19a4797b95857d628661a243c05e45e035cf9ae8598",
+      "matches_original_zip": true
+    },
+    {
+      "path": "original/meme_references_v1/sources.json",
+      "sha256": "f5f1ba6f07d3a6574d33ccf06215d74e000a46db225746beeb24310b2deb574f",
+      "matches_original_zip": true
+    },
+    {
+      "path": "original/meme_references_v1/validate_dataset.py",
+      "sha256": "40a82ed39859c37bf170db42d080ec5c0ba444b49bf94b920ef921edb7869936",
+      "matches_original_zip": true
+    },
+    {
+      "path": "original/meme_references_v1/validation_report.json",
+      "sha256": "177e479151dc17f298e0b5a9bcb3a2a5ecb7860be490e5dd1d37700d63e1421b",
+      "matches_original_zip": true
+    }
+  ],
+  "loose_file_checks": [
+    {
+      "filename": "memes.jsonl",
+      "matches_archived_version": true
+    },
+    {
+      "filename": "reaction_candidates.jsonl",
+      "matches_archived_version": true
+    },
+    {
+      "filename": "source_audit.md",
+      "matches_archived_version": true
+    },
+    {
+      "filename": "preview.html",
+      "matches_archived_version": true
+    }
+  ],
+  "historical_preview_note": "Older screenshot retained unchanged, not used as final-count evidence."
+}

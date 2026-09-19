@@ -1,0 +1,19 @@
+{
+  "tool": "Playwright Chromium",
+  "live_model_used": false,
+  "render_method": "Actual HTML/CSS/JS embedded in a browser context; Python transports API requests to the actual local server because direct loopback browser navigation is blocked by this environment. Separate Node tests exercise direct HTTP routes.",
+  "checks": {
+    "initial_remote_requests": 0,
+    "model_disabled_without_configuration": true,
+    "catalogue_filters_search": "passed: 30 default, 60 all, 5 inspected, exact search",
+    "explicit_image_failure_placeholder": "passed (intentionally aborted request, not an upstream availability check)",
+    "source_cards": 12,
+    "baseline_top3_and_feedback": "passed",
+    "history": "passed",
+    "user_context_rendered_as_text": "passed",
+    "mobile_horizontal_overflow": false,
+    "image_load_success_plumbing": "passed with artificial fixture; real upstream NOT checked",
+    "javascript_page_errors": 0
+  },
+  "errors": []
+}

@@ -1,0 +1,297 @@
+[
+  {
+    "id": "imgflip",
+    "name": "Imgflip",
+    "role": "Primary template catalogue",
+    "recommendation": "Use a selected catalogue subset; do not equate a blank template with a finished reply.",
+    "verified": [
+      "A live get_memes response returned IDs, names, asset URLs, dimensions and template box counts.",
+      "The response includes broadly used English-oriented formats such as This Is Fine, Two Buttons and Absolute Cinema."
+    ],
+    "access_status": "Public catalogue endpoint read successfully. Paid search and caption endpoints not exercised.",
+    "context_quality": "Names and template metadata; no validated situation-to-reaction labels.",
+    "asset_status": "40 source-listed URLs retained. Four of those images were visually spot-checked; not a complete image download.",
+    "caveats": [
+      "Popularity/captioning activity is not a quality or conversational-fit score.",
+      "Underlying media rights were not established.",
+      "Provider search has caching/integration requirements; do not assume the same rules apply to every endpoint."
+    ],
+    "included_records": 40,
+    "links": [
+      "https://imgflip.com/api",
+      "https://api.imgflip.com/get_memes"
+    ],
+    "reviewed_on": "2026-09-19",
+    "review_method": "Selected official pages, API responses or creator documentation; not a complete site crawl or legal audit."
+  },
+  {
+    "id": "memegen",
+    "name": "Memegen",
+    "role": "Primary structured template/example catalogue",
+    "recommendation": "Use selected named records and source-listed examples; deduplicate and inspect before display.",
+    "verified": [
+      "The live catalogue exposes template IDs, names, blank and example URLs, keywords and source links.",
+      "The observed response contained duplicate astronaut and db IDs and an incomplete both record."
+    ],
+    "access_status": "Public catalogue read successfully. No bulk media download completed.",
+    "context_quality": "Metadata and reference leads, not reliable standalone usage explanations.",
+    "asset_status": "20 source-listed URLs retained: 19 example URLs and one blank facepalm image. Facepalm was visually spot-checked.",
+    "caveats": [
+      "Example captions can be situation-specific, not universal reactions.",
+      "The software repository licence does not establish clearance of underlying movie, TV or other images.",
+      "Not every source link was independently read."
+    ],
+    "included_records": 20,
+    "links": [
+      "https://github.com/jacebrowning/memegen",
+      "https://api.memegen.link/templates/"
+    ],
+    "reviewed_on": "2026-09-19",
+    "review_method": "Selected official pages, API responses or creator documentation; not a complete site crawl or legal audit."
+  },
+  {
+    "id": "knowyourmeme",
+    "name": "Know Your Meme",
+    "role": "Cultural-context reference",
+    "recommendation": "Use selected entries to investigate meaning, variations and origin; keep factual claims distinct from proposed uses.",
+    "verified": [
+      "The site describes editorial/community research with review by editors and moderators.",
+      "Selected entries explain meaning and usage beyond the image appearance."
+    ],
+    "access_status": "About page and selected meme pages read. No public bulk export or supported bulk API verified.",
+    "context_quality": "The strongest cultural reference source in this comparison, as an assessment of the inspected pages, not a measured benchmark.",
+    "asset_status": "No media copied from this source.",
+    "caveats": [
+      "An explanatory article is not a set of human preference labels.",
+      "Do not assume bulk copying or redistribution permission."
+    ],
+    "included_records": 0,
+    "links": [
+      "https://knowyourmeme.com/about",
+      "https://knowyourmeme.com/memes/this-is-fine",
+      "https://knowyourmeme.com/memes/absolute-cinema",
+      "https://knowyourmeme.com/memes/you-guys-are-getting-paid",
+      "https://knowyourmeme.com/memes/monkey-puppet"
+    ],
+    "reviewed_on": "2026-09-19",
+    "review_method": "Selected official pages, API responses or creator documentation; not a complete site crawl or legal audit."
+  },
+  {
+    "id": "reactiongifs",
+    "name": "Reaction GIFs",
+    "role": "Usage-context reference and future reaction assets",
+    "recommendation": "Prioritize for reaction-use ideas; do not pretend page descriptions are a downloadable licensed GIF dataset.",
+    "verified": [
+      "Several inspected entries include How It’s Used sections.",
+      "The Stone Cold entry describes a shift from amusement into seriousness when a statement turns out not to be a joke."
+    ],
+    "access_status": "Home, tag index and selected entries read. Raw media links for the evaluated pages could not be resolved with the available web tool; no bulk export/API verified.",
+    "context_quality": "Strong direct relevance to choosing replies; editorial claims were not systematically fact-checked.",
+    "asset_status": "Five additional page-level leads are supplied separately without direct media URLs. None is counted among the core 60.",
+    "caveats": [
+      "GIF timing may carry meaning that a still frame loses.",
+      "Do not train on guessed actor/origin credits.",
+      "No media redistribution permission established."
+    ],
+    "included_records": 0,
+    "links": [
+      "https://www.reactiongifs.com/",
+      "https://www.reactiongifs.com/stone-cold-laugh-turns-serious/",
+      "https://www.reactiongifs.com/jack-nicholson-nodding-yes/",
+      "https://www.reactiongifs.com/jeremiah-johnson-nodding/",
+      "https://www.reactiongifs.com/leonardo-dicaprio-gatsby-cheers/",
+      "https://www.reactiongifs.com/you-sit-on-a-throne-of-lies/"
+    ],
+    "reviewed_on": "2026-09-19",
+    "review_method": "Selected official pages, API responses or creator documentation; not a complete site crawl or legal audit."
+  },
+  {
+    "id": "klipy",
+    "name": "KLIPY",
+    "role": "Hosted catalogue/API integration",
+    "recommendation": "Evaluate with an authorized API key when you need maintained GIF/meme/clip delivery, rather than a static dataset dump.",
+    "verified": [
+      "Official developer pages offer meme, GIF, sticker and clip APIs.",
+      "The documentation distinguishes standard media delivery from approved caching integrations."
+    ],
+    "access_status": "Developer documentation inspected. No authenticated request, production approval or catalogue-wide sample inspected.",
+    "context_quality": "Search/API availability is documented; actual relevance quality was not tested.",
+    "asset_status": "No data or media included.",
+    "caveats": [
+      "Published integration/caching requirements must be followed.",
+      "Provider marketing scale claims are not benchmark evidence."
+    ],
+    "included_records": 0,
+    "links": [
+      "https://klipy.com/developers",
+      "https://docs.klipy.com/memes-api",
+      "https://docs.klipy.com/attribution"
+    ],
+    "reviewed_on": "2026-09-19",
+    "review_method": "Selected official pages, API responses or creator documentation; not a complete site crawl or legal audit."
+  },
+  {
+    "id": "gifdb",
+    "name": "GIFDB",
+    "role": "Manual discovery only in this release",
+    "recommendation": "Exclude from automated collection without permission.",
+    "verified": [
+      "The site has ready-made reaction categories.",
+      "Its Access section says ordinary automated scripts/bots are not the intended access method, except public XML RSS feeds.",
+      "Its Linking section restricts direct large-file linking and integration without permission."
+    ],
+    "access_status": "Category and terms pages inspected; no automated media collection undertaken.",
+    "context_quality": "Category labels are broad; no systematic situation-use annotations verified.",
+    "asset_status": "No data or media included.",
+    "caveats": [
+      "Terms are a concrete collection blocker for the proposed bulk dataset, not merely an absent API."
+    ],
+    "included_records": 0,
+    "links": [
+      "https://gifdb.com/memes",
+      "https://gifdb.com/terms/"
+    ],
+    "reviewed_on": "2026-09-19",
+    "review_method": "Selected official pages, API responses or creator documentation; not a complete site crawl or legal audit."
+  },
+  {
+    "id": "memedroid",
+    "name": "Memedroid",
+    "role": "Discovery of community memes",
+    "recommendation": "Use for discovering candidates, not as automatically trusted training labels.",
+    "verified": [
+      "The inspected site exposes finished user-submitted memes, tags, votes and time-window browsing."
+    ],
+    "access_status": "Home and terms inspected. No bulk export or supported API verified.",
+    "context_quality": "Votes signal engagement with a post, not appropriateness as a reply to a different conversation.",
+    "asset_status": "No data or media included.",
+    "caveats": [
+      "Topic-specific captions and variable moderation make blind ingestion unsuitable.",
+      "Bulk access and redistribution rights not established."
+    ],
+    "included_records": 0,
+    "links": [
+      "https://www.memedroid.com/",
+      "https://www.memedroid.com/tos"
+    ],
+    "reviewed_on": "2026-09-19",
+    "review_method": "Selected official pages, API responses or creator documentation; not a complete site crawl or legal audit."
+  },
+  {
+    "id": "memebase",
+    "name": "Memebase / Cheezburger",
+    "role": "Editorial discovery feed",
+    "recommendation": "Use to discover formats and finished examples; do not treat collections as clean reaction records.",
+    "verified": [
+      "The site publishes themed collections of memes and internet humour."
+    ],
+    "access_status": "Home and terms inspected. No structured bulk export or supported dataset API verified.",
+    "context_quality": "Collection-level editorial framing; uneven per-image context.",
+    "asset_status": "No data or media included.",
+    "caveats": [
+      "A compilation can mix formats, screenshots and content that only makes sense in its original post.",
+      "Bulk permissions not established."
+    ],
+    "included_records": 0,
+    "links": [
+      "https://memebase.cheezburger.com/",
+      "https://cheezburger.com/terms-of-service"
+    ],
+    "reviewed_on": "2026-09-19",
+    "review_method": "Selected official pages, API responses or creator documentation; not a complete site crawl or legal audit."
+  },
+  {
+    "id": "frinkiac",
+    "name": "Frinkiac",
+    "role": "Dialogue/frame retrieval for The Simpsons",
+    "recommendation": "A strong source to investigate in the dialogue phase; not a general meme corpus.",
+    "verified": [
+      "The creator’s May 2026 account describes improved subtitle alignment, neighbouring transcripts and GIF/comic tools.",
+      "It describes deduplicating neighbouring frames so search results do not overrepresent one scene."
+    ],
+    "access_status": "Creator documentation read. The application was not fully inspectable in the text browser; no supported bulk export verified.",
+    "context_quality": "Dialogue and local scene context are useful; conversational deployment labels are still missing.",
+    "asset_status": "No frames, subtitles or media included.",
+    "caveats": [
+      "One-show cultural scope.",
+      "A site supporting sharing is not blanket permission to distribute its entire media archive."
+    ],
+    "included_records": 0,
+    "links": [
+      "https://frinkiac.com/",
+      "https://langui.sh/2026/05/04/ten-years-of-frinkiac/"
+    ],
+    "reviewed_on": "2026-09-19",
+    "review_method": "Selected official pages, API responses or creator documentation; not a complete site crawl or legal audit."
+  },
+  {
+    "id": "morbotron",
+    "name": "Morbotron",
+    "role": "Dialogue/frame retrieval for Futurama",
+    "recommendation": "A focused dialogue extension after meme selection works.",
+    "verified": [
+      "The creator describes search, meme and GIF functionality for Futurama.",
+      "The May 2026 modernization account says the shared updates are live on both Frinkiac and Morbotron."
+    ],
+    "access_status": "Creator launch and modernization accounts read. No supported bulk export verified.",
+    "context_quality": "Scene/transcript context; not human-ranked reply preferences.",
+    "asset_status": "No media included.",
+    "caveats": [
+      "Do not use the 2016 launch counts as current catalogue size.",
+      "One-show scope and unresolved bulk media rights."
+    ],
+    "included_records": 0,
+    "links": [
+      "https://morbotron.com/",
+      "https://langui.sh/2016/08/08/morbotron-futurama/",
+      "https://langui.sh/2026/05/04/ten-years-of-frinkiac/"
+    ],
+    "reviewed_on": "2026-09-19",
+    "review_method": "Selected official pages, API responses or creator documentation; not a complete site crawl or legal audit."
+  },
+  {
+    "id": "clipcafe",
+    "name": "Clip.Cafe",
+    "role": "Movie/TV scene discovery",
+    "recommendation": "Reserve for dialogue research or an explicitly authorized integration; exclude from this archive.",
+    "verified": [
+      "The site offers transcript/scene-description searches with movie, character and duration filters.",
+      "The terms state access for personal use subject to restrictions and reserve intellectual-property rights."
+    ],
+    "access_status": "Interface and terms inspected. No open bulk dataset or approved app integration verified.",
+    "context_quality": "Potentially useful scene context; retrieval suitability for meme replies not benchmarked.",
+    "asset_status": "No clips, scripts or transcripts included.",
+    "caveats": [
+      "Personal-use website access is not a demonstrated right to package clips in a public dataset."
+    ],
+    "included_records": 0,
+    "links": [
+      "https://clip.cafe/",
+      "https://clip.cafe/termsandconditions/"
+    ],
+    "reviewed_on": "2026-09-19",
+    "review_method": "Selected official pages, API responses or creator documentation; not a complete site crawl or legal audit."
+  },
+  {
+    "id": "memedepot",
+    "name": "Meme Depot",
+    "role": "Curated-collection discovery",
+    "recommendation": "Interesting material to browse, but not a verified exportable dataset backbone.",
+    "verified": [
+      "The landing page describes saving images/GIFs/videos with AI tagging and searchable collections."
+    ],
+    "access_status": "Public landing page and visible collection descriptions inspected; no public API or export verified.",
+    "context_quality": "AI tags may assist discovery; label quality and cultural coverage were not tested.",
+    "asset_status": "No data or media included.",
+    "caveats": [
+      "Collection counts need not represent unique reusable reactions.",
+      "No blanket reuse permission established."
+    ],
+    "included_records": 0,
+    "links": [
+      "https://memedepot.com/"
+    ],
+    "reviewed_on": "2026-09-19",
+    "review_method": "Selected official pages, API responses or creator documentation; not a complete site crawl or legal audit."
+  }
+]

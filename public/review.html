@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Meme Lab — relevance review</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/review.css">
+</head>
+<body class="review-page">
+  <div class="review-shell">
+    <header class="review-topbar">
+      <a class="brand" href="/" aria-label="Back to Meme Lab"><span>meme</span><strong>lab</strong></a>
+      <a class="back-link" href="/">← Experiment workspace</a>
+    </header>
+
+    <main class="review-main">
+      <section class="review-intro">
+        <div>
+          <p class="eyebrow">OWNER DATASET · BLIND REVIEW</p>
+          <h1>Does this meme fit?</h1>
+          <p>Judge the connection only. The model condition, rationale, and pre-label stay hidden.</p>
+        </div>
+        <div class="progress-copy">
+          <strong id="progress-count">Loading…</strong>
+          <span id="progress-remaining"></span>
+        </div>
+      </section>
+
+      <div class="progress-track" aria-hidden="true"><span id="progress-bar"></span></div>
+      <div id="review-status" class="visually-hidden" role="status"></div>
+
+      <section id="review-card" class="review-card" hidden>
+        <div class="review-card-head">
+          <span id="case-label" class="step-label">CASE</span>
+          <span id="saved-state" class="saved-state">Unreviewed</span>
+        </div>
+
+        <section class="situation-block" aria-labelledby="situation-title">
+          <span id="situation-title">THE TEXT</span>
+          <p id="situation-text"></p>
+        </section>
+
+        <section class="candidate-block" aria-labelledby="candidate-title">
+          <div class="candidate-copy">
+            <span class="candidate-kicker">THE MEME</span>
+            <h2 id="candidate-title"></h2>
+            <p>Does this cultural reference meaningfully connect to the text above?</p>
+          </div>
+          <div id="candidate-media" class="review-media">
+            <p>Loading preview…</p>
+          </div>
+        </section>
+
+        <fieldset class="verdicts">
+          <legend>Your judgment</legend>
+          <button class="verdict relevant" data-verdict="relevant">
+            <span class="shortcut">1</span>
+            <strong>Relevant</strong>
+            <small>The reference clearly connects.</small>
+          </button>
+          <button class="verdict not-relevant" data-verdict="not_relevant">
+            <span class="shortcut">2</span>
+            <strong>Not relevant</strong>
+            <small>It misreads the text or target.</small>
+          </button>
+          <button class="verdict unsure" data-verdict="unsure">
+            <span class="shortcut">3</span>
+            <strong>Unsure</strong>
+            <small>There may be a connection, but it is weak.</small>
+          </button>
+        </fieldset>
+
+        <label class="review-note">Optional note
+          <textarea id="review-note" maxlength="1000" placeholder="Wrong target, too generic, unfamiliar reference…"></textarea>
+        </label>
+
+        <div class="review-nav">
+          <button id="previous-item" class="secondary">← Previous</button>
+          <span>Keys 1–3 save · arrows navigate</span>
+          <button id="next-item" class="secondary">Skip / Next →</button>
+        </div>
+      </section>
+
+      <section id="review-complete" class="review-complete" hidden>
+        <span class="complete-mark">✓</span>
+        <h2>Dataset review complete</h2>
+        <p>Every candidate has a relevance judgment. You can still revisit and revise any item.</p>
+        <button id="revisit-items" class="secondary">Review from the beginning</button>
+      </section>
+
+      <p class="review-footnote">“Relevant” is deliberately narrower than “I would send this.” Your relevance labels improve retrieval; sendability remains a separate taste judgment.</p>
+    </main>
+  </div>
+  <script type="module" src="/review.js"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+{
+  "$schema": "fleet.design-review.v1",
+  "version": 1,
+  "project": "meme_lab",
+  "target": "Meme Lab primary experiment workspace",
+  "surfaceMode": "operate",
+  "mode": "overhaul",
+  "register": "product",
+  "context": {
+    "product": "PRODUCT.md",
+    "design": "DESIGN.md"
+  },
+  "direction": {
+    "references": [],
+    "probes": [
+      {
+        "id": "simple-air",
+        "path": "design-probes/simple-air.html"
+      },
+      {
+        "id": "simple-cards",
+        "path": "design-probes/simple-cards.html"
+      },
+      {
+        "id": "clean-canvas",
+        "path": "design-probes/simple-grid.html"
+      }
+    ],
+    "selected": "clean-canvas",
+    "approval": "approved",
+    "before": "artifacts/design/rejected-ui.png",
+    "library": {
+      "strategy": "upstream-first",
+      "primary": "existing-project-system",
+      "sources": [],
+      "runtime": "existing",
+      "customReplacement": {
+        "used": true,
+        "authorization": "owner-requested",
+        "reason": "The product-defining blind A/B review has no matching generic block, and adding a runtime UI dependency solely for this plain-JS local experiment would weaken the stack."
+      }
+    },
+    "contract": {
+      "purpose": "Help the owner test whether metadata improves apt existing-meme selection without forcing a joke.",
+      "purposeSource": "PRODUCT.md and PRD.md sections 1 and 7",
+      "canonicalPurpose": "Meme Lab helps its owner judge apt existing cultural references by running local, paired, feedback-backed selector experiments.",
+      "purposeAlignment": "match",
+      "driftNote": "",
+      "audience": "The owner running English-first local meme-selection experiments.",
+      "job": "Pre-label a situation, run identical names-only and enriched conditions, judge blind arms, then reveal the diagnosis.",
+      "thesis": "A crisp white working canvas with pale-blue navigation, mint and yellow state landmarks, restrained borders and the experiment visible immediately.",
+      "system": "Clean Canvas uses a lightweight workspace rail, compact full-width situation setup and equal A/B comparison panes; catalogue, sources and history remain secondary.",
+      "signature": "Seeded A/B arm cards that conceal condition labels and rationales until both judgments are recorded.",
+      "risk": "Candidate names must remain visible for meaningful judgment, so the workflow is condition-blind rather than fully blind; the selected visual system must also scale to catalogue, sources and history."
+    }
+  },
+  "evidence": {
+    "screenshots": [
+      {
+        "width": 390,
+        "path": "artifacts/design/after-390.png"
+      },
+      {
+        "width": 768,
+        "path": "artifacts/design/after-768.png"
+      },
+      {
+        "width": 1440,
+        "path": "artifacts/design/after-1440.png"
+      }
+    ],
+    "projectCheck": {
+      "command": "npm test && npm run check",
+      "status": "pass"
+    },
+    "critique": {
+      "score": 36,
+      "maximum": 40
+    },
+    "audit": {
+      "score": 19,
+      "maximum": 20
+    },
+    "unresolved": {
+      "p0": 0,
+      "p1": 0
+    },
+    "detector": {
+      "posture": "advisory",
+      "findings": []
+    },
+    "comprehension": {
+      "status": "not-applicable",
+      "reviewer": "",
+      "answers": {
+        "product": "",
+        "audience": "",
+        "value": "",
+        "mechanism": "",
+        "proof": "",
+        "nextAction": ""
+      },
+      "purposeScore": {
+        "product": 0,
+        "audience": 0,
+        "value": 0,
+        "mechanism": 0,
+        "proof": 0,
+        "nextAction": 0,
+        "total": 0
+      },
+      "mismatches": []
+    }
+  },
+  "ownerFeedback": {
+    "decision": "keep",
+    "note": "Owner selected direction C, Clean Canvas, from the simpler light and colorful second round; the candidate relevance labeller extends that system."
+  }
+}

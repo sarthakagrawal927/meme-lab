@@ -1,0 +1,26 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["decision", "situation", "intent", "target", "candidates", "none_reason"],
+  "properties": {
+    "decision": {"type":"string", "enum":["meme","none"]},
+    "situation": {"type":"string", "maxLength":600},
+    "intent": {"type":"string", "maxLength":400},
+    "target": {"type":"string", "maxLength":300},
+    "candidates": {"type":"array", "maxItems":3, "uniqueItems":true, "items": {
+      "type":"object", "additionalProperties":false, "required":["id","reason"],
+      "properties":{"id":{"type":"string"},"reason":{"type":"string","maxLength":500}}
+    }},
+    "none_reason": {"type":"string", "maxLength":500}
+  },
+  "allOf": [
+    {
+      "if": {"properties":{"decision":{"const":"none"}}},
+      "then": {"properties":{"candidates":{"maxItems":0},"none_reason":{"minLength":1}}}
+    },
+    {
+      "if": {"properties":{"decision":{"const":"meme"}}},
+      "then": {"properties":{"candidates":{"minItems":1},"none_reason":{"maxLength":0}}}
+    }
+  ]
+}

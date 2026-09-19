@@ -4,13 +4,22 @@
   "private": true,
   "type": "module",
   "description": "A local reference-selection experiment. No runtime dependencies.",
-  "engines": {"node": ">=22"},
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "start": "node server.mjs",
+    "build:public-catalogue": "node scripts/build-public-catalogue.mjs",
+    "dev:public": "npm run build:public-catalogue && wrangler dev",
+    "deploy:public": "npm run build:public-catalogue && wrangler deploy",
+    "types:worker": "wrangler types worker-configuration.d.ts",
     "test": "node --test tests/*.test.mjs",
     "check": "node scripts/check-package.mjs",
     "experiment:holdout": "node scripts/run-holdout.mjs",
     "experiment:review": "node scripts/review-holdout.mjs",
     "experiment:summarize": "node scripts/summarize-holdout.mjs"
+  },
+  "devDependencies": {
+    "wrangler": "^4.135.0"
   }
 }

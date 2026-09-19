@@ -2,6 +2,10 @@
 
 Read [PRD.md](PRD.md) for the product scope. This folder includes a runnable starter **and the complete original dataset release**, not just a mockup.
 
+## Live playground
+
+Paste one comment and get the best meme first at **https://meme-lab-play.sarthakagrawal927.workers.dev**. The public Worker uses the 30 reaction-reference catalogue and does not expose the local experiment history, holdout, or results.
+
 ## Open it locally
 
 Requires **Node.js 22 or newer**. No dependency installation or build step.

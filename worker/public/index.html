@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Paste a comment and get the meme that fits it best.">
+  <title>Meme Lab — Find the meme</title>
+  <link rel="stylesheet" href="/app.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Meme Lab home"><span>meme</span>lab</a>
+    <span class="beta">PLAYGROUND</span>
+  </header>
+
+  <main>
+    <section class="composer" aria-labelledby="page-title">
+      <p class="eyebrow">ONE COMMENT. ONE MEME.</p>
+      <h1 id="page-title">Drop the comment.<br>Get the meme.</h1>
+      <p class="intro">Paste the message, situation, or reply you are reacting to. The best match comes first.</p>
+
+      <form id="meme-form">
+        <label for="comment">The comment</label>
+        <textarea id="comment" name="comment" maxlength="1000" required placeholder="My manager moved the deadline up and called it a small adjustment…"></textarea>
+        <div class="form-row">
+          <div class="examples" aria-label="Example comments">
+            <button type="button" data-example="My manager moved the deadline up and called it a small adjustment.">Deadline</button>
+            <button type="button" data-example="The demo worked perfectly until the client joined the call.">Demo</button>
+            <button type="button" data-example="I opened one email and somehow created six new tasks.">Inbox</button>
+          </div>
+          <button id="submit" class="primary" type="submit"><span>Find the meme</span><span aria-hidden="true">→</span></button>
+        </div>
+      </form>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+    </section>
+
+    <section id="loading" class="loading-card" hidden aria-label="Finding a meme">
+      <div class="loading-image"></div>
+      <div class="loading-lines"><span></span><span></span><span></span></div>
+    </section>
+
+    <section id="result" class="result" hidden aria-live="polite">
+      <div id="best-result" class="best-result"></div>
+      <div id="alternatives-wrap" class="alternatives-wrap" hidden>
+        <div class="section-title"><span>ALSO FITS</span><span>Two backups, just in case.</span></div>
+        <div id="alternatives" class="alternatives"></div>
+      </div>
+      <button id="try-again" class="try-again" type="button">Try another comment ↗</button>
+    </section>
+
+    <section id="no-match" class="no-match" hidden>
+      <span class="no-match-mark">∅</span>
+      <p class="eyebrow">NO STRONG MATCH</p>
+      <h2>Better to say nothing.</h2>
+      <p id="no-match-reason"></p>
+      <button id="edit-comment" class="primary" type="button">Edit the comment</button>
+    </section>
+  </main>
+
+  <footer>
+    <span>30 reaction references</span>
+    <span>Sometimes no meme is the right meme.</span>
+  </footer>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

@@ -4118,29 +4118,6 @@
     "mime_type": "image/jpeg"
   },
   {
-    "id": "18799628-blank-white-template",
-    "name": "Blank White Template",
-    "message": "Use Blank White Template for a broadly relatable reaction to a situation that matches the visual contrast.",
-    "relational_pattern": "The image frames a relationship or contrast between an expectation and the observed reaction: blank white template.",
-    "example_context": "A team receives an unexpectedly complicated request after agreeing to a simple plan; this template communicates the shared reaction.",
-    "near_miss_context": "Do not use when the joke depends on knowing the original show, celebrity, or a specific caption; the surrounding text must explain the situation.",
-    "tags": [
-      "reaction",
-      "relatable",
-      "confusion"
-    ],
-    "image_url": "https://i.imgflip.com/4/b6xvw.jpg",
-    "media_status": "source-preview",
-    "availability": "live",
-    "meme_strength": 58,
-    "asset_quality": 41,
-    "uniqueness_score": 31,
-    "media_type": "image",
-    "media_url": "https://i.imgflip.com/4/b6xvw.jpg",
-    "preview_url": "https://i.imgflip.com/4/b6xvw.jpg",
-    "mime_type": "image/jpeg"
-  },
-  {
     "id": "124276589-drake-noyes",
     "name": "Drake No/Yes",
     "message": "Use Drake No/Yes for a broadly relatable reaction to a situation that matches the visual contrast.",
@@ -16131,28 +16108,6 @@
     "media_type": "image",
     "media_url": "https://i.imgflip.com/4/vx58.jpg",
     "preview_url": "https://i.imgflip.com/4/vx58.jpg",
-    "mime_type": "image/jpeg"
-  },
-  {
-    "id": "86936060-spongebob-time-card-background",
-    "name": "Spongebob time card background",
-    "message": "Use when time passes much longer than expected",
-    "relational_pattern": "An event appears to take an extended duration due to the passage of time",
-    "example_context": "A child watching a video game session that feels like hours when it's actually only 15 minutes",
-    "near_miss_context": "Avoid when time perception is distorted but the actual duration is short",
-    "tags": [
-      "time dilation",
-      "perception"
-    ],
-    "image_url": "https://i.imgflip.com/4/1frcak.jpg",
-    "media_status": "source-preview",
-    "availability": "live",
-    "meme_strength": 48,
-    "asset_quality": 35,
-    "uniqueness_score": 100,
-    "media_type": "image",
-    "media_url": "https://i.imgflip.com/4/1frcak.jpg",
-    "preview_url": "https://i.imgflip.com/4/1frcak.jpg",
     "mime_type": "image/jpeg"
   },
   {
@@ -41958,37 +41913,6 @@
     "availability": "live"
   },
   {
-    "id": "blank-comic-panel-1x2",
-    "name": "Blank Comic Panel 1x2",
-    "message": "Use Blank Comic Panel 1x2 when someone is waiting for a response.",
-    "relational_pattern": "The tension between anticipation and the absence of communication.",
-    "example_context": "For example, when a person is waiting for a reply after sending a message.",
-    "near_miss_context": "Avoid Blank Comic Panel 1x2 when the situation lacks both waiting and anticipation; the image would suggest the wrong relationship.",
-    "tags": [
-      "waiting",
-      "anticipation",
-      "communication",
-      "blank",
-      "panel"
-    ],
-    "image_url": "https://i.imgflip.com/4/35zfgv.jpg",
-    "media_type": "image",
-    "media_url": "https://i.imgflip.com/4/35zfgv.jpg",
-    "preview_url": "https://i.imgflip.com/4/35zfgv.jpg",
-    "mime_type": "image/jpeg",
-    "media_status": "source-preview",
-    "meme_strength": 65,
-    "asset_quality": 40,
-    "uniqueness_score": 48,
-    "provenance": {
-      "provider": "JustMeme.wtf",
-      "provider_id": "blank-comic-panel-1x2",
-      "source_url": "https://justmeme.wtf/api/v1/templates/blank-comic-panel-1x2",
-      "observed_on": "2026-09-20"
-    },
-    "availability": "live"
-  },
-  {
     "id": "grave",
     "name": "Grant Gustin Next To Oliver Queen's Grave",
     "message": "Use Grant Gustin Next To Oliver Queen's Grave when someone is mourning a loss.",
@@ -42905,35 +42829,6 @@
       "provider": "JustMeme.wtf",
       "provider_id": "butthurt-dweller",
       "source_url": "https://justmeme.wtf/api/v1/templates/butthurt-dweller",
-      "observed_on": "2026-09-20"
-    },
-    "availability": "live"
-  },
-  {
-    "id": "blank-blue-background",
-    "name": "Blank Blue Background",
-    "message": "Use Blank Blue Background when reaction collides with social contrast, and that mismatch becomes the point of the conversation.",
-    "relational_pattern": "Blank Blue Background frames reaction against social contrast, turning the contrast into a concise social reaction.",
-    "example_context": "For example, send Blank Blue Background when a conversation moves from reaction to social contrast and everyone notices the mismatch.",
-    "near_miss_context": "Avoid Blank Blue Background when the situation lacks both reaction and social contrast; the image would suggest the wrong relationship.",
-    "tags": [
-      "reaction",
-      "social contrast",
-      "long tail"
-    ],
-    "image_url": "https://i.imgflip.com/4/29rwg.jpg",
-    "media_type": "image",
-    "media_url": "https://i.imgflip.com/4/29rwg.jpg",
-    "preview_url": "https://i.imgflip.com/4/29rwg.jpg",
-    "mime_type": "image/jpeg",
-    "media_status": "source-preview",
-    "meme_strength": 55,
-    "asset_quality": 46,
-    "uniqueness_score": 67,
-    "provenance": {
-      "provider": "JustMeme.wtf",
-      "provider_id": "blank-blue-background",
-      "source_url": "https://justmeme.wtf/api/v1/templates/blank-blue-background",
       "observed_on": "2026-09-20"
     },
     "availability": "live"
@@ -43904,35 +43799,6 @@
       "provider": "JustMeme.wtf",
       "provider_id": "182659911-puppet-monkey-looking-away",
       "source_url": "https://justmeme.wtf/api/v1/templates/182659911-puppet-monkey-looking-away",
-      "observed_on": "2026-09-20"
-    },
-    "availability": "live"
-  },
-  {
-    "id": "blank-colored-background",
-    "name": "Blank Colored Background",
-    "message": "Use Blank Colored Background when a clean, minimalist space is needed.",
-    "relational_pattern": "A neutral background that emphasizes simplicity and focus.",
-    "example_context": "For example, a designer creating a website with a clean interface.",
-    "near_miss_context": "Avoid Blank Colored Background when the situation lacks both minimalist and clean; the image would suggest the wrong relationship.",
-    "tags": [
-      "minimalist",
-      "clean",
-      "background"
-    ],
-    "image_url": "https://i.imgflip.com/4/266w.jpg",
-    "media_type": "image",
-    "media_url": "https://i.imgflip.com/4/266w.jpg",
-    "preview_url": "https://i.imgflip.com/4/266w.jpg",
-    "mime_type": "image/jpeg",
-    "media_status": "source-preview",
-    "meme_strength": 52,
-    "asset_quality": 47,
-    "uniqueness_score": 67,
-    "provenance": {
-      "provider": "JustMeme.wtf",
-      "provider_id": "blank-colored-background",
-      "source_url": "https://justmeme.wtf/api/v1/templates/blank-colored-background",
       "observed_on": "2026-09-20"
     },
     "availability": "live"
@@ -46242,36 +46108,6 @@
       "provider": "JustMeme.wtf",
       "provider_id": "4503404-all-your-base",
       "source_url": "https://justmeme.wtf/api/v1/templates/4503404-all-your-base",
-      "observed_on": "2026-09-20"
-    },
-    "availability": "live"
-  },
-  {
-    "id": "blank-comic-panel-2x1",
-    "name": "Blank Comic Panel 2x1",
-    "message": "Use Blank Comic Panel 2x1 when a clean, empty space is needed for a new comic panel.",
-    "relational_pattern": "The absence of content to allow for creative storytelling in a comic sequence.",
-    "example_context": "For example, when a comic book needs a blank page to start a new scene.",
-    "near_miss_context": "Avoid when the panel contains any text or visual elements.",
-    "tags": [
-      "blank",
-      "comic",
-      "panel",
-      "2x1"
-    ],
-    "image_url": "https://i.imgflip.com/4/35zfek.jpg",
-    "media_type": "image",
-    "media_url": "https://i.imgflip.com/4/35zfek.jpg",
-    "preview_url": "https://i.imgflip.com/4/35zfek.jpg",
-    "mime_type": "image/jpeg",
-    "media_status": "source-preview",
-    "meme_strength": 57,
-    "asset_quality": 28,
-    "uniqueness_score": 44,
-    "provenance": {
-      "provider": "JustMeme.wtf",
-      "provider_id": "blank-comic-panel-2x1",
-      "source_url": "https://justmeme.wtf/api/v1/templates/blank-comic-panel-2x1",
       "observed_on": "2026-09-20"
     },
     "availability": "live"
@@ -90735,6 +90571,222 @@
       "usage_evidence": {
         "kind": "observed_reaction_usage",
         "conversation_uses": 111,
+        "dataset": "GIF Reply",
+        "paper": "https://aclanthology.org/2021.findings-emnlp.244/"
+      }
+    },
+    "availability": "live"
+  },
+  {
+    "id": "gif-rlhetl7j6qizs",
+    "name": "I Understood That Reference",
+    "message": "Use I Understood That Reference when someone finally recognizes an allusion that everyone else already understood.",
+    "relational_pattern": "A delayed moment of recognition turns shared knowledge into a small personal victory.",
+    "example_context": "For example, a coworker mentions an obscure movie quote and you are delighted to recognize it.",
+    "near_miss_context": "Avoid when someone is confused by the reference or only pretends to understand it.",
+    "tags": [
+      "recognition",
+      "shared reference",
+      "captain america",
+      "finally understood"
+    ],
+    "image_url": "https://media.giphy.com/media/rlhETl7j6QIzS/giphy.gif",
+    "media_type": "gif",
+    "media_url": "https://media.giphy.com/media/rlhETl7j6QIzS/giphy.gif",
+    "preview_url": "https://media.giphy.com/media/rlhETl7j6QIzS/giphy_s.gif",
+    "mime_type": "image/gif",
+    "media_status": "source-preview",
+    "meme_strength": 72,
+    "asset_quality": 70,
+    "uniqueness_score": 100,
+    "provenance": {
+      "provider": "GIF Reply dataset / GIPHY",
+      "provider_id": "rlhETl7j6QIzS",
+      "source_url": "https://giphy.com/gifs/rlhETl7j6QIzS",
+      "observed_on": "2026-09-21",
+      "usage_evidence": {
+        "kind": "observed_reaction_usage",
+        "conversation_uses": 111,
+        "dataset": "GIF Reply",
+        "paper": "https://aclanthology.org/2021.findings-emnlp.244/"
+      }
+    },
+    "availability": "live"
+  },
+  {
+    "id": "gif-38vz5mbf9gf4q",
+    "name": "Suspicious Oprah Glare",
+    "message": "Use Suspicious Oprah Glare when a questionable claim earns immediate, silent distrust instead of a verbal challenge.",
+    "relational_pattern": "One person makes a dubious move while the observer answers with unmistakable suspicion.",
+    "example_context": "For example, your sibling claims the missing dessert vanished before they entered the kitchen.",
+    "near_miss_context": "Avoid when the observer is merely surprised, impressed, or openly confronting the speaker.",
+    "tags": [
+      "suspicion",
+      "side eye",
+      "distrust",
+      "questionable claim"
+    ],
+    "image_url": "https://media.giphy.com/media/38vz5MBF9gF4Q/giphy.gif",
+    "media_type": "gif",
+    "media_url": "https://media.giphy.com/media/38vz5MBF9gF4Q/giphy.gif",
+    "preview_url": "https://media.giphy.com/media/38vz5MBF9gF4Q/giphy_s.gif",
+    "mime_type": "image/gif",
+    "media_status": "source-preview",
+    "meme_strength": 72,
+    "asset_quality": 70,
+    "uniqueness_score": 100,
+    "provenance": {
+      "provider": "GIF Reply dataset / GIPHY",
+      "provider_id": "38vz5MBF9gF4Q",
+      "source_url": "https://giphy.com/gifs/38vz5MBF9gF4Q",
+      "observed_on": "2026-09-21",
+      "usage_evidence": {
+        "kind": "observed_reaction_usage",
+        "conversation_uses": 110,
+        "dataset": "GIF Reply",
+        "paper": "https://aclanthology.org/2021.findings-emnlp.244/"
+      }
+    },
+    "availability": "live"
+  },
+  {
+    "id": "gif-bpadrs0hkj7irh150l",
+    "name": "Nick Cannon Thinking",
+    "message": "Use Nick Cannon Thinking when new information is interesting enough to deserve a closer, more skeptical look.",
+    "relational_pattern": "Initial curiosity becomes focused consideration as the listener decides whether an idea has merit.",
+    "example_context": "For example, a friend describes an unexpectedly clever shortcut that might actually solve your problem.",
+    "near_miss_context": "Avoid when the reaction is immediate approval, total confusion, or complete disinterest.",
+    "tags": [
+      "thinking",
+      "interested",
+      "considering",
+      "curiosity"
+    ],
+    "image_url": "https://media.giphy.com/media/BpadRS0HKJ7Irh150L/giphy.gif",
+    "media_type": "gif",
+    "media_url": "https://media.giphy.com/media/BpadRS0HKJ7Irh150L/giphy.gif",
+    "preview_url": "https://media.giphy.com/media/BpadRS0HKJ7Irh150L/giphy_s.gif",
+    "mime_type": "image/gif",
+    "media_status": "source-preview",
+    "meme_strength": 72,
+    "asset_quality": 70,
+    "uniqueness_score": 100,
+    "provenance": {
+      "provider": "GIF Reply dataset / GIPHY",
+      "provider_id": "BpadRS0HKJ7Irh150L",
+      "source_url": "https://giphy.com/gifs/BpadRS0HKJ7Irh150L",
+      "observed_on": "2026-09-21",
+      "usage_evidence": {
+        "kind": "observed_reaction_usage",
+        "conversation_uses": 110,
+        "dataset": "GIF Reply",
+        "paper": "https://aclanthology.org/2021.findings-emnlp.244/"
+      }
+    },
+    "availability": "live"
+  },
+  {
+    "id": "gif-yik4gzo7gqjuhznlum",
+    "name": "You Salty?",
+    "message": "Use You Salty? when teasing someone whose bitterness is obvious after losing an argument or competition.",
+    "relational_pattern": "A winner playfully calls attention to the loser's exaggerated resentment.",
+    "example_context": "For example, your friend blames the controller after losing the same game three times.",
+    "near_miss_context": "Avoid when the frustration is serious, justified, or unrelated to losing status.",
+    "tags": [
+      "salty",
+      "teasing",
+      "sore loser",
+      "bitterness"
+    ],
+    "image_url": "https://media.giphy.com/media/YiK4Gzo7gQJUHzNluM/giphy.gif",
+    "media_type": "gif",
+    "media_url": "https://media.giphy.com/media/YiK4Gzo7gQJUHzNluM/giphy.gif",
+    "preview_url": "https://media.giphy.com/media/YiK4Gzo7gQJUHzNluM/giphy_s.gif",
+    "mime_type": "image/gif",
+    "media_status": "source-preview",
+    "meme_strength": 72,
+    "asset_quality": 70,
+    "uniqueness_score": 100,
+    "provenance": {
+      "provider": "GIF Reply dataset / GIPHY",
+      "provider_id": "YiK4Gzo7gQJUHzNluM",
+      "source_url": "https://giphy.com/gifs/YiK4Gzo7gQJUHzNluM",
+      "observed_on": "2026-09-21",
+      "usage_evidence": {
+        "kind": "observed_reaction_usage",
+        "conversation_uses": 109,
+        "dataset": "GIF Reply",
+        "paper": "https://aclanthology.org/2021.findings-emnlp.244/"
+      }
+    },
+    "availability": "live"
+  },
+  {
+    "id": "gif-129jpe5upmzwny",
+    "name": "Everything Hurts and I Am Dying",
+    "message": "Use Everything Hurts and I Am Dying when ordinary exhaustion feels catastrophically worse than the situation deserves.",
+    "relational_pattern": "A manageable discomfort is described with theatrical, total physical collapse.",
+    "example_context": "For example, you finish one workout after months away and every staircase becomes an enemy.",
+    "near_miss_context": "Avoid when someone faces a genuine medical emergency or calmly reports minor discomfort.",
+    "tags": [
+      "exhaustion",
+      "dramatic pain",
+      "overwhelmed",
+      "leslie knope"
+    ],
+    "image_url": "https://media.giphy.com/media/129Jpe5uPmZWNy/giphy.gif",
+    "media_type": "gif",
+    "media_url": "https://media.giphy.com/media/129Jpe5uPmZWNy/giphy.gif",
+    "preview_url": "https://media.giphy.com/media/129Jpe5uPmZWNy/giphy_s.gif",
+    "mime_type": "image/gif",
+    "media_status": "source-preview",
+    "meme_strength": 72,
+    "asset_quality": 70,
+    "uniqueness_score": 100,
+    "provenance": {
+      "provider": "GIF Reply dataset / GIPHY",
+      "provider_id": "129Jpe5uPmZWNy",
+      "source_url": "https://giphy.com/gifs/129Jpe5uPmZWNy",
+      "observed_on": "2026-09-21",
+      "usage_evidence": {
+        "kind": "observed_reaction_usage",
+        "conversation_uses": 108,
+        "dataset": "GIF Reply",
+        "paper": "https://aclanthology.org/2021.findings-emnlp.244/"
+      }
+    },
+    "availability": "live"
+  },
+  {
+    "id": "gif-ifxlk48cnyddi",
+    "name": "How Do You Do, Fellow Kids?",
+    "message": "Use How Do You Do, Fellow Kids? when someone tries painfully hard to appear younger or culturally current.",
+    "relational_pattern": "An obvious outsider adopts superficial youth signals while fooling nobody in the group.",
+    "example_context": "For example, a manager adds three-year-old slang to a mandatory company announcement.",
+    "near_miss_context": "Avoid when someone naturally belongs to the group or uses current language without forcing it.",
+    "tags": [
+      "out of touch",
+      "trying to fit in",
+      "fellow kids",
+      "forced youth"
+    ],
+    "image_url": "https://media.giphy.com/media/ifxLK48cnyDDi/giphy.gif",
+    "media_type": "gif",
+    "media_url": "https://media.giphy.com/media/ifxLK48cnyDDi/giphy.gif",
+    "preview_url": "https://media.giphy.com/media/ifxLK48cnyDDi/giphy_s.gif",
+    "mime_type": "image/gif",
+    "media_status": "source-preview",
+    "meme_strength": 72,
+    "asset_quality": 70,
+    "uniqueness_score": 100,
+    "provenance": {
+      "provider": "GIF Reply dataset / GIPHY",
+      "provider_id": "ifxLK48cnyDDi",
+      "source_url": "https://giphy.com/gifs/ifxLK48cnyDDi",
+      "observed_on": "2026-09-21",
+      "usage_evidence": {
+        "kind": "observed_reaction_usage",
+        "conversation_uses": 108,
         "dataset": "GIF Reply",
         "paper": "https://aclanthology.org/2021.findings-emnlp.244/"
       }

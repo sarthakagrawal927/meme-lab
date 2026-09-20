@@ -1,0 +1,35 @@
+{
+  "version": "non-reaction-assets-v1",
+  "reported_on": "2026-09-21",
+  "content_types": [
+    "empty-canvas",
+    "decorative-background",
+    "blank-layout"
+  ],
+  "records": [
+    {
+      "id": "18799628-blank-white-template",
+      "reason": "A plain white canvas has no reaction, character, or punchline of its own."
+    },
+    {
+      "id": "86936060-spongebob-time-card-background",
+      "reason": "The uncaptained SpongeBob card is only a decorative background, not a complete time-passing reaction."
+    },
+    {
+      "id": "blank-blue-background",
+      "reason": "A geometric blue background is an editing asset rather than a meme reaction."
+    },
+    {
+      "id": "blank-colored-background",
+      "reason": "A multicolour background is an editing asset rather than a meme reaction."
+    },
+    {
+      "id": "blank-comic-panel-1x2",
+      "reason": "Empty comic boxes provide layout space but communicate no reaction without authored content."
+    },
+    {
+      "id": "blank-comic-panel-2x1",
+      "reason": "Empty comic boxes provide layout space but communicate no reaction without authored content."
+    }
+  ]
+}

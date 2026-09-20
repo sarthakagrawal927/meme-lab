@@ -1,12 +1,13 @@
 {
   "version": "stage-3000-verified-meme-and-gif-v1",
-  "selected_records": 2000,
-  "static_meme_additions": 811,
-  "reaction_gif_additions": 1189,
+  "selected_records": 2002,
+  "static_meme_additions": 807,
+  "reaction_gif_additions": 1195,
   "excluded_artwork_records": 1189,
+  "excluded_non_reaction_records": 6,
   "media_types": {
-    "image": 1811,
-    "gif": 1189
+    "image": 1805,
+    "gif": 1195
   },
   "canonical_coverage": {
     "covered": 38,

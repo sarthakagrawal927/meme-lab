@@ -1,19 +1,27 @@
 {
   "records": 3000,
   "providers": {
-    "inherited meme catalogue": 1000,
-    "JustMeme.wtf": 811,
-    "GIF Reply dataset / GIPHY": 1189
+    "inherited meme catalogue": 998,
+    "JustMeme.wtf": 807,
+    "GIF Reply dataset / GIPHY": 1195
   },
   "media_types": {
-    "image": 1811,
-    "gif": 1189
+    "image": 1805,
+    "gif": 1195
   },
   "rights_status": {
     "not_established": 3000
   },
   "excluded_providers": [
     "National Gallery of Art, Washington"
+  ],
+  "excluded_non_reaction_ids": [
+    "18799628-blank-white-template",
+    "86936060-spongebob-time-card-background",
+    "blank-blue-background",
+    "blank-colored-background",
+    "blank-comic-panel-1x2",
+    "blank-comic-panel-2x1"
   ],
   "canonical_coverage": {
     "version": "canonical-meme-coverage-v1",

@@ -198,7 +198,7 @@ export default {
           const entries=batch.flatMap((record,index)=>{
             const catalogueIndex=rangeStart+start+index;
             const base=`meme-${String(catalogueIndex+1).padStart(4,'0')}`;
-            const metadata={catalogue_id:record.id,name:record.name,stage,control:catalogueIndex<30,core:catalogueIndex<1000};
+            const metadata={catalogue_id:record.id,name:record.name,stage,control:catalogueIndex<30,core:stage>=3000?record.core===true:catalogueIndex<1000};
             return [
               {id:`${base}-meaning`,values:vectors[index*2],metadata:{...metadata,view:'meaning'}},
               {id:`${base}-example`,values:vectors[index*2+1],metadata:{...metadata,view:'example'}}

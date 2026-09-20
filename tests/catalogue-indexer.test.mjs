@@ -16,7 +16,7 @@ test('catalogue indexer selects only explicit supported stages',{skip:indexer?fa
   assert.throws(()=>indexer.configuredCatalogue({CATALOGUE_STAGE:'unexpected'}),/Unsupported catalogue stage/);
 });
 
-test('stage-3000 seeding marks the first thousand records as core',{skip:indexer?false:'stage-3000 catalogue has not been generated yet'},async()=>{
+test('stage-3000 seeding marks only retained stage-1000 records as core',{skip:indexer?false:'stage-3000 catalogue has not been generated yet'},async()=>{
   const upserts=[];
   const env={
     CATALOGUE_STAGE:'3000',
@@ -26,10 +26,10 @@ test('stage-3000 seeding marks the first thousand records as core',{skip:indexer
       upsert:async entries=>{upserts.push(...entries);return{count:entries.length};}
     }
   };
-  const response=await indexer.default.fetch(new Request('https://example.test/seed?start=999&limit=2',{method:'POST'}),env);
+  const response=await indexer.default.fetch(new Request('https://example.test/seed?start=997&limit=2',{method:'POST'}),env);
   assert.equal(response.status,200);
   const body=await response.json();
-  assert.deepEqual({start:body.range_start,end:body.range_end,upserted:body.upserted},{start:999,end:1001,upserted:4});
+  assert.deepEqual({start:body.range_start,end:body.range_end,upserted:body.upserted},{start:997,end:999,upserted:4});
   assert(upserts.slice(0,2).every(entry=>entry.metadata.core===true));
   assert(upserts.slice(2).every(entry=>entry.metadata.core===false));
 });

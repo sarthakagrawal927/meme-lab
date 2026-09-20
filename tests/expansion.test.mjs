@@ -12,7 +12,8 @@ const appScript=await readFile(new URL('../worker/public/app.js',import.meta.url
 const collectionScript=await readFile(new URL('../worker/public/collection.js',import.meta.url),'utf8');
 const workerSource=await readFile(new URL('../worker/src/index.mjs',import.meta.url),'utf8');
 const doodles=await readFile(new URL('../worker/public/doodles.svg',import.meta.url),'utf8');
-const stage300Collection=publicCollection.slice(0,300);
+const stage300Collection=JSON.parse(await readFile(new URL('../worker/tools/stage-300-catalogue.json',import.meta.url),'utf8'));
+const stage1000Collection=JSON.parse(await readFile(new URL('../worker/tools/stage-1000-catalogue.json',import.meta.url),'utf8'));
 const candidates=parseJsonl(await readFile(new URL('../expansion/candidates/stage-300.jsonl',import.meta.url),'utf8'));
 const source=parseJsonl(await readFile(new URL('../expansion/sources/stage-300-source.jsonl',import.meta.url),'utf8'));
 const stage1000Source=parseJsonl(await readFile(new URL('../expansion/sources/stage-1000-source.jsonl',import.meta.url),'utf8'));
@@ -26,6 +27,8 @@ const stage1000Candidates=parseJsonl(await readFile(new URL('../expansion/candid
 const stage3000Candidates=parseJsonl(await readFile(new URL('../expansion/candidates/stage-3000.jsonl',import.meta.url),'utf8'));
 const reactionGifSource=parseJsonl(await readFile(new URL('../expansion/sources/stage-3000-reaction-gifs.jsonl',import.meta.url),'utf8'));
 const reactionGifReport=JSON.parse(await readFile(new URL('../expansion/sources/stage-3000-reaction-gifs-report.json',import.meta.url),'utf8'));
+const replacementGifSource=parseJsonl(await readFile(new URL('../expansion/sources/stage-3000-reaction-gif-replacements.jsonl',import.meta.url),'utf8'));
+const nonReactionExclusions=JSON.parse(await readFile(new URL('../expansion/exclusions/non-reaction-assets.json',import.meta.url),'utf8'));
 const catalogueIntegrity=JSON.parse(await readFile(new URL('../worker/public/catalogue-integrity.json',import.meta.url),'utf8'));
 const stage1000Cases=parseJsonl(await readFile(new URL('../eval/relevance_stage1000_v1.jsonl',import.meta.url),'utf8'));
 const cases=parseJsonl(await readFile(new URL('../eval/relevance_holdout_v1.jsonl',import.meta.url),'utf8'));
@@ -51,10 +54,12 @@ test('public collection contains 3,000 actual meme and reaction records with exp
   assert(publicCollection.every(record=>typeof record.preview_url==='string'&&record.preview_url.startsWith('https://')));
   assert(publicCollection.every(record=>['image','gif'].includes(record.media_type)));
   assert(publicCollection.every(record=>Number.isFinite(record.meme_strength)&&Number.isFinite(record.asset_quality)));
-  assert.equal(publicCollection.filter(record=>record.media_type==='gif').length,1189);
+  assert.equal(publicCollection.filter(record=>record.media_type==='gif').length,1195);
   assert.equal(publicCollection.filter(record=>record.id.startsWith('nga-')).length,0);
   assert(publicCollection.some(record=>record.name==='My Name Is Jeff'&&record.media_type==='gif'));
-  assert.deepEqual(catalogueIntegrity.media_types,{image:1811,gif:1189});
+  assert.deepEqual(catalogueIntegrity.media_types,{image:1805,gif:1195});
+  assert.equal(nonReactionExclusions.records.length,6);
+  assert(nonReactionExclusions.records.every(excluded=>!publicCollection.some(record=>record.id===excluded.id)));
   assert.equal(catalogueIntegrity.canonical_coverage.items.find(item=>item.id==='my-name-is-jeff')?.status,'covered');
 });
 
@@ -116,12 +121,14 @@ test('historical stage-3000 artwork pool remains auditable but is replaced by us
   assert.equal(stage3000SemanticUniqueness.embedding_duplicate_candidates,10);
   assert.equal(reactionGifSource.length,1189);
   assert.doesNotThrow(()=>validateReactionGifCandidates(reactionGifSource,{minimum:1189}));
+  assert.equal(replacementGifSource.length,6);
+  assert.doesNotThrow(()=>validateReactionGifCandidates(replacementGifSource,{minimum:6}));
   assert.equal(reactionGifReport.minimum_observed_conversation_uses,111);
   assert.equal(reactionGifReport.owner_requested_canonical_records,1);
-  assert.equal(stage3000Candidates.length,2000);
-  assert.doesNotThrow(()=>validateExpansionRecords(stage3000Candidates,{knownIds:publicCollection.slice(0,1000).map(record=>record.id)}));
-  assert.deepEqual(validateMeaningSpecificMetadata(stage3000Candidates),{records:2000});
-  assert.equal(stage3000Candidates.filter(record=>record.media?.type==='gif').length,1189);
+  assert.equal(stage3000Candidates.length,2002);
+  assert.doesNotThrow(()=>validateExpansionRecords(stage3000Candidates,{knownIds:stage1000Collection.map(record=>record.id)}));
+  assert.deepEqual(validateMeaningSpecificMetadata(stage3000Candidates),{records:2002});
+  assert.equal(stage3000Candidates.filter(record=>record.media?.type==='gif').length,1195);
   assert.equal(stage3000Candidates.filter(record=>record.provenance?.provider==='National Gallery of Art, Washington').length,0);
 });
 

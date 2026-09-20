@@ -183,18 +183,19 @@
   },
   "stage_3000_source": {
     "status": "live_unvalidated",
-    "baseline_records": 1000,
-    "static_meme_additions": 811,
-    "reaction_gif_additions": 1189,
+    "baseline_records": 998,
+    "static_meme_additions": 807,
+    "reaction_gif_additions": 1195,
     "excluded_artwork_records": 1189,
+    "excluded_non_reaction_records": 6,
     "providers": {
-      "inherited meme catalogue": 1000,
-      "JustMeme.wtf": 811,
-      "GIF Reply dataset / GIPHY": 1189
+      "inherited meme catalogue": 998,
+      "JustMeme.wtf": 807,
+      "GIF Reply dataset / GIPHY": 1195
     },
     "media_types": {
-      "image": 1811,
-      "gif": 1189
+      "image": 1805,
+      "gif": 1195
     },
     "rights_status": {
       "not_established": 3000

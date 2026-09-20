@@ -28,4 +28,5 @@ test('catalogue integrity rejects artwork filler and counts media types',()=>{
   ]);
   assert.deepEqual(report.media_types,{image:1,gif:1});
   assert.throws(()=>catalogueIntegrity([{id:'nga-1',media_type:'image'}]),/Artwork filler/);
+  assert.throws(()=>catalogueIntegrity([{id:'blank-background',media_type:'image'}],{excludedIds:['blank-background']}),/Excluded non-reaction asset/);
 });

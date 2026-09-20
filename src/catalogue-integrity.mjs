@@ -31,7 +31,8 @@ export function canonicalCoverage(records,manifest) {
   };
 }
 
-export function catalogueIntegrity(records,{excludedProvider='National Gallery of Art, Washington'}={}) {
+export function catalogueIntegrity(records,{excludedProvider='National Gallery of Art, Washington',excludedIds=[]}={}) {
+  const excluded=new Set(excludedIds);
   const providerCounts={};
   const mediaTypeCounts={};
   const rightsCounts={};
@@ -43,6 +44,7 @@ export function catalogueIntegrity(records,{excludedProvider='National Gallery o
     const rights=record.media_status==='approved'?'established':'not_established';
     rightsCounts[rights]=(rightsCounts[rights]??0)+1;
     if(provider===excludedProvider||record.id?.startsWith('nga-')) throw new Error(`Artwork filler ${record.id} cannot enter the meme catalogue.`);
+    if(excluded.has(record.id)) throw new Error(`Excluded non-reaction asset ${record.id} cannot enter the meme catalogue.`);
   }
-  return {records:records.length,providers:providerCounts,media_types:mediaTypeCounts,rights_status:rightsCounts,excluded_providers:[excludedProvider]};
+  return {records:records.length,providers:providerCounts,media_types:mediaTypeCounts,rights_status:rightsCounts,excluded_providers:[excludedProvider],excluded_non_reaction_ids:[...excluded]};
 }

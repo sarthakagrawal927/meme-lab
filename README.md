@@ -4,7 +4,7 @@ Read [PRODUCT.md](PRODUCT.md) for the current product contract and [PRD.md](PRD.
 
 ## Live playground
 
-Paste one comment and get ranked meme options at **https://memes.significanthobbies.com**. One-tap feedback is retained for 30 days so the ranking can improve. The live 3,000-reference catalogue contains 1,811 static memes and 1,189 usage-backed reaction GIFs; the earlier artwork fillers are excluded. The `workers.dev` route remains an equivalent preview URL.
+Paste one comment and get ranked meme options at **https://memes.significanthobbies.com**. One-tap feedback is retained for 30 days so the ranking can improve. The live 3,000-reference catalogue contains 1,805 static memes and 1,195 usage-backed reaction GIFs; the earlier artwork fillers and six inert editing canvases are excluded. The `workers.dev` route remains an equivalent preview URL.
 
 ## Open it locally
 
@@ -47,9 +47,9 @@ Compatibility varies by provider. Set `MEME_JSON_MODE=false` only if your compat
 
 Jev does **not** implement either local model route. The public Worker uses classifier.dev's Jev fast tier to rate every candidate in a 30-item semantic shortlist and to guard serious help-seeking prompts. It returns one primary result plus four backups with ordinal fit labels instead of presenting Jev's competitive values as probabilities. When both a narrator and another participant are present, three parallel Jev calls select distinct memes for **My reaction**, **Their side**, and **The situation**, then one batch rates the selected five on the same ordinal scale. If a perspective call fails, the Worker retries the general Jev ranking. If classifier ranking remains unavailable or throttled, the API returns a retryable `503`; it never invokes a large text-generation fallback.
 
-The corrected 3,000-record index stores separate `meaning` and `example` vectors, for 6,000 vectors total. It contains 1,811 static meme templates and 1,189 reaction GIFs; it contains no National Gallery artwork. To reseed it, confirm string metadata indexing for `view` plus boolean metadata indexing for `control` and `core`, wait for all mutations to finish, then call the tool's `/seed` endpoint in six bounded 500-record ranges (`start=0,500,…,2500&limit=500`). The `core` flag reserves ten shortlist positions for the original 1,000 without preventing the broader catalogue from contributing the other twenty. Verify the corrected index and evaluation before switching production traffic.
+The corrected 3,000-record index stores separate `meaning` and `example` vectors, for 6,000 vectors total. It contains 1,805 static meme templates and 1,195 reaction GIFs; it contains no National Gallery artwork or empty editing canvases. To reseed it, confirm string metadata indexing for `view` plus boolean metadata indexing for `control` and `core`, wait for all mutations to finish, then call the tool's `/seed` endpoint in six bounded 500-record ranges (`start=0,500,…,2500&limit=500`). The `core` flag reserves ten shortlist positions for the retained baseline without preventing the broader catalogue from contributing the other twenty. Verify the corrected index and evaluation before switching production traffic.
 
-The GIF tranche comes from the public GIF Reply research dataset: 1.56 million observed text-to-GIF conversation pairs with stable GIF hashes and GIPHY mappings. The 1,188 research-selected GIFs each appeared in at least 111 replies; “My Name Is Jeff” is included as an explicit owner-requested canonical entry. Usage evidence is not a redistribution licence, so these remain source previews with rights marked not established.
+The GIF tranche comes from the public GIF Reply research dataset: 1.56 million observed text-to-GIF conversation pairs with stable GIF hashes and GIPHY mappings. The 1,194 research-selected GIFs each appeared in at least 108 replies; “My Name Is Jeff” is included as an explicit owner-requested canonical entry. Usage evidence is not a redistribution licence, so these remain source previews with rights marked not established.
 
 ## First run
 

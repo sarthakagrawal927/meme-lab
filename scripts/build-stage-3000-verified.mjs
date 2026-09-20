@@ -6,20 +6,29 @@ import {canonicalCoverage,catalogueIntegrity,normalizeMedia} from '../src/catalo
 import {parseJsonl,validateExpansionRecords,validateMeaningSpecificMetadata} from '../src/expansion.mjs';
 
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
-const [staticText,gifText,coverageText,statusText,evalText,scoreText]=await Promise.all([
+const [staticText,gifText,replacementGifText,exclusionText,coverageText,statusText,evalText,scoreText]=await Promise.all([
   readFile(resolve(root,'expansion/reviewed/stage-3000-static.jsonl'),'utf8'),
   readFile(resolve(root,'expansion/reviewed/stage-3000-reaction-gifs.jsonl'),'utf8'),
+  readFile(resolve(root,'expansion/reviewed/stage-3000-reaction-gif-replacements.jsonl'),'utf8'),
+  readFile(resolve(root,'expansion/exclusions/non-reaction-assets.json'),'utf8'),
   readFile(resolve(root,'expansion/canonical-memes.json'),'utf8'),
   readFile(resolve(root,'worker/public/expansion-status.json'),'utf8'),
   readFile(resolve(root,'eval/stage-3000-eval-definition.json'),'utf8'),
   readFile(resolve(root,'expansion/sources/stage-3000-local-scores.jsonl'),'utf8')
 ]);
-const staticAdditions=parseJsonl(staticText,'stage-3000 static meme additions');
-const gifAdditions=parseJsonl(gifText,'stage-3000 reaction GIF additions');
+const exclusions=JSON.parse(exclusionText);
+const excludedIds=new Set(exclusions.records.map(record=>record.id));
+const filteredStage1000=stage1000.filter(record=>!excludedIds.has(record.id));
+const staticAdditions=parseJsonl(staticText,'stage-3000 static meme additions').filter(record=>!excludedIds.has(record.id));
+const gifAdditions=[
+  ...parseJsonl(gifText,'stage-3000 reaction GIF additions'),
+  ...parseJsonl(replacementGifText,'stage-3000 replacement reaction GIF additions')
+];
 const additions=[...staticAdditions,...gifAdditions];
 const scoresById=new Map(parseJsonl(scoreText,'local catalogue signals').map(record=>[record.id,record]));
-if(stage1000.length!==1000||staticAdditions.length!==811||gifAdditions.length!==1189||additions.length!==2000) throw new Error(`Verified stage 3,000 needs 1,000 + 811 + 1,189 records; found ${stage1000.length} + ${staticAdditions.length} + ${gifAdditions.length}.`);
-validateExpansionRecords(additions,{knownIds:stage1000.map(record=>record.id)});
+const stage1000Ids=new Set(stage1000.map(record=>record.id));
+if(excludedIds.size!==6||filteredStage1000.length!==998||staticAdditions.length!==807||gifAdditions.length!==1195||additions.length!==2002) throw new Error(`Verified stage 3,000 needs 998 retained baseline + 807 static additions + 1,195 GIFs; found ${filteredStage1000.length} + ${staticAdditions.length} + ${gifAdditions.length}.`);
+validateExpansionRecords(additions,{knownIds:filteredStage1000.map(record=>record.id)});
 validateMeaningSpecificMetadata(additions);
 
 const publicFields=record=>normalizeMedia({
@@ -43,16 +52,16 @@ const publicFields=record=>normalizeMedia({
   provenance:record.provenance,
   availability:'live'
 });
-const catalogue=[...stage1000.map(record=>{
+const catalogue=[...filteredStage1000.map(record=>{
   const signal=scoresById.get(record.id);
   return normalizeMedia({...record,meme_strength:signal?.meme_strength??50,asset_quality:signal?.asset_quality??50,uniqueness_score:signal?.uniqueness_score??100,availability:'live'});
 }),...additions.map(publicFields)];
 if(catalogue.length!==3000||new Set(catalogue.map(record=>record.id)).size!==3000) throw new Error('Verified stage-3,000 catalogue must contain exactly 3,000 unique records.');
-const integrity=catalogueIntegrity(catalogue);
+const integrity=catalogueIntegrity(catalogue,{excludedIds});
 const coverage=canonicalCoverage(catalogue,JSON.parse(coverageText));
 if(!coverage.items.find(item=>item.id==='my-name-is-jeff'&&item.status==='covered')) throw new Error('My Name Is Jeff must be covered before the verified catalogue can build.');
 
-const semanticFields=({id,name,message,relational_pattern,example_context,near_miss_context,tags,meme_strength,asset_quality,uniqueness_score})=>({id,name,message,relational_pattern,example_context,near_miss_context,tags,meme_strength,asset_quality,uniqueness_score});
+const semanticFields=({id,name,message,relational_pattern,example_context,near_miss_context,tags,meme_strength,asset_quality,uniqueness_score})=>({id,name,message,relational_pattern,example_context,near_miss_context,tags,meme_strength,asset_quality,uniqueness_score,core:stage1000Ids.has(id)});
 const currentStatus=JSON.parse(statusText);
 const evalDefinition=JSON.parse(evalText);
 const expandedStatus={
@@ -68,10 +77,11 @@ const expandedStatus={
   eval:{...currentStatus.eval,cases:evalDefinition.cases,stage_3000_cases:evalDefinition.cases,humour:evalDefinition.humour,no_meme:evalDefinition.no_meme,pending_owner_review:evalDefinition.pending_owner_review,pending_owner_review_total:evalDefinition.pending_owner_review},
   stage_3000_source:{
     status:'live_unvalidated',
-    baseline_records:1000,
+    baseline_records:filteredStage1000.length,
     static_meme_additions:staticAdditions.length,
     reaction_gif_additions:gifAdditions.length,
     excluded_artwork_records:1189,
+    excluded_non_reaction_records:excludedIds.size,
     providers:integrity.providers,
     media_types:integrity.media_types,
     rights_status:integrity.rights_status,
@@ -86,6 +96,7 @@ const reviewSummary={
   static_meme_additions:staticAdditions.length,
   reaction_gif_additions:gifAdditions.length,
   excluded_artwork_records:1189,
+  excluded_non_reaction_records:excludedIds.size,
   media_types:integrity.media_types,
   canonical_coverage:{covered:coverage.covered,total:coverage.total,missing:coverage.missing},
   human_validated:false,

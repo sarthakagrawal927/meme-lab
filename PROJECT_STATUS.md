@@ -7,7 +7,7 @@
 
 - Paste one complete comment or situation and receive the best meme first, four backups, ordinal fit labels, and honest confidence.
 - Multi-person comments now return distinct viewpoints where available: **My reaction**, **Their side**, and **The situation**.
-- The production release contains the corrected 3,000-reference snapshot: 1,811 static memes and 1,189 usage-backed reaction GIFs, with no National Gallery artwork.
+- The production release contains the corrected 3,000-reference snapshot: 1,805 static memes and 1,195 usage-backed reaction GIFs, with no National Gallery artwork or inert editing canvases.
 - See meme strength and image quality separately from contextual fit. Popularity and asset quality do not masquerade as relevance.
 - Serious help, safety, care, grief, apology, and factual-guidance requests are guarded before humour is considered.
 - One-tap feedback is retained for 30 days.
@@ -15,8 +15,8 @@
 ## Correcting the 3,000 catalogue
 
 - An audit found that 1,189 of the earlier 3,000 records were public-domain artworks without evidence of meme use. They are excluded from the corrected catalogue.
-- The honest static baseline is 1,811 named meme templates: 1,689 Imgflip assets and 122 Memegen assets.
-- The replacement tranche contains 1,189 reaction GIFs. 1,188 come from the GIF Reply research dataset of 1.56 million observed conversation-to-GIF replies, with at least 111 observed uses per selected GIF. “My Name Is Jeff” is an explicit owner-requested canonical entry.
+- The honest static baseline is 1,805 named meme templates: six blank backgrounds and empty panel layouts were removed after owner feedback.
+- The replacement tranche contains 1,195 reaction GIFs. 1,194 come from the GIF Reply research dataset of 1.56 million observed conversation-to-GIF replies, with at least 108 observed uses per selected GIF. “My Name Is Jeff” is an explicit owner-requested canonical entry.
 - The catalogue now records `media_type`, full media URL, preview URL, MIME type, source provenance, evidence state, and rights state. GIFs animate in results while collection cards load lighter previews.
 - A checked-in 40-item canonical coverage manifest reports recognizable gaps directly instead of letting the raw count conceal them.
 - Local Qwen writes meaning-specific message, social-dynamic, example, near-miss, and tag metadata. These annotations remain assistant-authored pending owner feedback.

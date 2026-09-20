@@ -11,6 +11,12 @@
   "ai": {
     "binding": "AI"
   },
+  "vectorize": [
+    {
+      "binding": "MEME_INDEX",
+      "index_name": "meme-lab-catalogue"
+    }
+  ],
   "d1_databases": [
     {
       "binding": "DB",

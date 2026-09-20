@@ -2,6 +2,24 @@ const REQUIRED_RECORD_FIELDS=['id','name','message','relational_pattern','exampl
 const VALID_RIGHTS=['established','not_established','unavailable'];
 const VALID_REVIEW=['needs_metadata_review','needs_asset_and_delivery_review','approved'];
 
+export function validateSourceCandidates(records,{knownNames=[]}={}) {
+  if(records.length<240) throw new Error(`Stage-300 sourcing needs at least 240 candidates; found ${records.length}.`);
+  const ids=new Set();
+  const names=new Set(knownNames.map(name=>name.toLowerCase().replaceAll(/[^a-z0-9]+/g,' ').trim()));
+  for(const record of records) {
+    if(typeof record.proposed_id!=='string'||!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(record.proposed_id)||ids.has(record.proposed_id)) throw new Error(`Invalid or duplicate source candidate ID: ${record.proposed_id}.`);
+    ids.add(record.proposed_id);
+    const normalizedName=record.name?.toLowerCase().replaceAll(/[^a-z0-9]+/g,' ').trim();
+    if(!normalizedName||names.has(normalizedName)) throw new Error(`Duplicate or invalid source candidate name: ${record.name}.`);
+    names.add(normalizedName);
+    if(record.provider!=='JustMeme.wtf'||typeof record.source_url!=='string'||!record.source_url.startsWith('https://justmeme.wtf/api/v1/templates/')) throw new Error(`${record.proposed_id} has invalid source provenance.`);
+    if(!Array.isArray(record.categories)||record.categories.length===0||record.categories.some(category=>typeof category!=='string'||!category.trim())) throw new Error(`${record.proposed_id} needs source categories.`);
+    if(typeof record.image_url!=='string'||!record.image_url.startsWith('https://')) throw new Error(`${record.proposed_id} needs a source image URL.`);
+    if(record.rights_status!=='not_established'||record.review_status!=='needs_metadata_review'||record.human_validated!==false) throw new Error(`${record.proposed_id} has an invalid safety state.`);
+  }
+  return records;
+}
+
 export function parseJsonl(text,label='JSONL') {
   return text.trim().split('\n').filter(Boolean).map((line,index)=>{
     try { return JSON.parse(line); }
@@ -64,16 +82,19 @@ export function validateStages(manifest) {
   return manifest.stages;
 }
 
-export function expansionStatus({manifest,liveCount,candidateCount,evalSummary}) {
+export function expansionStatus({manifest,liveCount,candidateCount,reviewedExternalCount=0,evalSummary,experimentSummary=null}) {
   const next=manifest.stages.find(stage=>stage.status==='building')??manifest.stages.find(stage=>stage.status==='planned');
   return {
     version:manifest.version,
     live_records:liveCount,
+    candidate_records:candidateCount,
+    assistant_reviewed_external_records:reviewedExternalCount,
     sourced_records:liveCount+candidateCount,
     next_target:next?.target_records??liveCount,
     records_to_source:Math.max(0,(next?.target_records??liveCount)-liveCount-candidateCount),
     retrieval:{live:'direct_all_candidates',expanded:'semantic_top_30_then_rerank_top_3'},
     eval:evalSummary,
+    latest_experiment:experimentSummary,
     stages:manifest.stages.map(({target_records,status,label})=>({target_records,status,label}))
   };
 }

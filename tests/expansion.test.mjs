@@ -4,12 +4,15 @@ import {readFile} from 'node:fs/promises';
 import {parseJsonl,validateExpansionRecords,validateEvalCases,validateStages,expansionStatus} from '../src/expansion.mjs';
 
 const catalogue=JSON.parse(await readFile(new URL('../worker/public/catalogue.json',import.meta.url),'utf8'));
-const candidates=parseJsonl(await readFile(new URL('../expansion/candidates/stage-300-seed.jsonl',import.meta.url),'utf8'));
+const candidates=parseJsonl(await readFile(new URL('../expansion/candidates/stage-300.jsonl',import.meta.url),'utf8'));
+const source=parseJsonl(await readFile(new URL('../expansion/sources/stage-300-source.jsonl',import.meta.url),'utf8'));
 const cases=parseJsonl(await readFile(new URL('../eval/relevance_holdout_v1.jsonl',import.meta.url),'utf8'));
 const manifest=JSON.parse(await readFile(new URL('../expansion/stages.json',import.meta.url),'utf8'));
+const stageReport=JSON.parse(await readFile(new URL('../eval/stage-300-summary.json',import.meta.url),'utf8'));
 
-test('stage-300 seed adds 30 non-live candidates without ID collisions',()=>{
-  assert.equal(candidates.length,30);
+test('stage-300 pool adds 270 non-live candidates without ID collisions',()=>{
+  assert.equal(candidates.length,270);
+  assert.equal(source.length,300);
   assert.doesNotThrow(()=>validateExpansionRecords(candidates,{knownIds:catalogue.map(record=>record.id)}));
   assert(candidates.every(record=>record.review.status==='needs_asset_and_delivery_review'));
   assert(candidates.every(record=>record.media.rights_status==='not_established'));
@@ -25,9 +28,11 @@ test('expansion stages preserve direct control and bounded retrieval',()=>{
   const stages=validateStages(manifest);
   assert.equal(stages[0].retrieval.strategy,'direct_all_candidates');
   assert(stages.slice(1).every(stage=>stage.retrieval.shortlist_size===30&&stage.retrieval.result_size===3));
-  const status=expansionStatus({manifest,liveCount:catalogue.length,candidateCount:candidates.length,evalSummary:{cases:30,humour:20,no_meme:10,pending_owner_review:30}});
-  assert.equal(status.sourced_records,60);
-  assert.equal(status.records_to_source,240);
+  const status=expansionStatus({manifest,liveCount:catalogue.length,candidateCount:candidates.length,reviewedExternalCount:240,evalSummary:{cases:30,humour:20,no_meme:10,pending_owner_review:30}});
+  assert.equal(status.sourced_records,300);
+  assert.equal(status.candidate_records,270);
+  assert.equal(status.assistant_reviewed_external_records,240);
+  assert.equal(status.records_to_source,0);
 });
 
 test('validators reject duplicate expansion IDs and accidental holdout approval',()=>{
@@ -35,4 +40,12 @@ test('validators reject duplicate expansion IDs and accidental holdout approval'
   const changed=cases.map(record=>({...record}));
   changed[0].human_validated=true;
   assert.throws(()=>validateEvalCases(changed,{allowedIds:new Set(catalogue.map(record=>record.id))}),/explicitly unvalidated/);
+});
+
+test('stage-300 draft clears absolute gates but does not claim control parity or promotion',()=>{
+  assert.equal(stageReport.human_validated,false);
+  assert.equal(stageReport.gates.absolute_stage_300.passed,true);
+  assert.equal(stageReport.gates.control_parity.passed,false);
+  assert.equal(stageReport.gates.owner_confirmed_eval,false);
+  assert.equal(stageReport.promotion_ready,false);
 });

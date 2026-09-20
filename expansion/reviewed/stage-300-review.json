@@ -1,0 +1,26 @@
+{
+  "version": "stage-300-assistant-review-v1",
+  "source_records": 300,
+  "selected_records": 240,
+  "rejected_records": 60,
+  "batches": [
+    {
+      "file": "batch-a.jsonl",
+      "selected": 80,
+      "rejected": 20
+    },
+    {
+      "file": "batch-b.jsonl",
+      "selected": 80,
+      "rejected": 20
+    },
+    {
+      "file": "batch-c.jsonl",
+      "selected": 80,
+      "rejected": 20
+    }
+  ],
+  "human_validated": false,
+  "status": "needs_owner_metadata_asset_and_delivery_review",
+  "uncertainty": "Selection and semantic descriptions are assistant-authored. Media rights, delivery fitness, and relevance have not been human validated."
+}

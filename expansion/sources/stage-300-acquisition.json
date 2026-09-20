@@ -1,0 +1,38 @@
+{
+  "version": "stage-300-acquisition-v1",
+  "observed_on": "2026-09-20",
+  "backend": "documented_public_api",
+  "provider": "JustMeme.wtf",
+  "pages_attempted": 4,
+  "pages_succeeded": 4,
+  "pages_failed": 0,
+  "per_page": [
+    {
+      "page": 1,
+      "url": "https://justmeme.wtf/api/v1/templates?limit=100&page=1",
+      "count": 100
+    },
+    {
+      "page": 2,
+      "url": "https://justmeme.wtf/api/v1/templates?limit=100&page=2",
+      "count": 100
+    },
+    {
+      "page": 3,
+      "url": "https://justmeme.wtf/api/v1/templates?limit=100&page=3",
+      "count": 100
+    },
+    {
+      "page": 4,
+      "url": "https://justmeme.wtf/api/v1/templates?limit=100&page=4",
+      "count": 100
+    }
+  ],
+  "retained_candidates": 300,
+  "filters": [
+    "exclude existing 60 names and IDs",
+    "deduplicate normalized names and IDs",
+    "metadata only; no image downloads"
+  ],
+  "uncertainty": "Template names and categories are source metadata. Meaning, delivery fitness, audience suitability, and media rights require separate review."
+}

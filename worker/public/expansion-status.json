@@ -1,9 +1,11 @@
 {
   "version": "catalogue-expansion-v1",
   "live_records": 30,
-  "sourced_records": 60,
+  "candidate_records": 270,
+  "assistant_reviewed_external_records": 240,
+  "sourced_records": 300,
   "next_target": 300,
-  "records_to_source": 240,
+  "records_to_source": 0,
   "retrieval": {
     "live": "direct_all_candidates",
     "expanded": "semantic_top_30_then_rerank_top_3"
@@ -13,6 +15,60 @@
     "humour": 20,
     "no_meme": 10,
     "pending_owner_review": 30
+  },
+  "latest_experiment": {
+    "created_at": "2026-09-20T05:39:00.514Z",
+    "human_validated": false,
+    "labels": "assistant-authored_pending_owner_review",
+    "control_30": {
+      "top_1": 0.85,
+      "top_3": 0.95,
+      "correct_abstention": 0.9,
+      "inappropriate_joking": 0.1,
+      "unknown_ids": 0,
+      "latency_ms": {
+        "p50": 2590,
+        "p95": 4513
+      },
+      "confidence_counts": {
+        "high": 9,
+        "medium": 11,
+        "low": 10
+      }
+    },
+    "stage_300": {
+      "top_1": 0.8,
+      "top_3": 0.9,
+      "correct_abstention": 0.8,
+      "inappropriate_joking": 0.2,
+      "unknown_ids": 0,
+      "latency_ms": {
+        "p50": 2754,
+        "p95": 4213
+      },
+      "confidence_counts": {
+        "high": 15,
+        "medium": 7,
+        "low": 8
+      }
+    },
+    "gates": {
+      "absolute_stage_300": {
+        "top_3": true,
+        "correct_abstention": true,
+        "inappropriate_joking": true,
+        "unknown_ids": true,
+        "passed": true
+      },
+      "control_parity": {
+        "top_3": false,
+        "correct_abstention": false,
+        "latency_p95": true,
+        "passed": false
+      },
+      "owner_confirmed_eval": false
+    },
+    "promotion_ready": false
   },
   "stages": [
     {

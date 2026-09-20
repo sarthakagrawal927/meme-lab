@@ -11,6 +11,7 @@
     "start": "node server.mjs",
     "build:public-catalogue": "node scripts/build-public-catalogue.mjs",
     "build:expansion": "node scripts/build-expansion.mjs",
+    "acquire:stage-300": "node scripts/acquire-stage-300.mjs",
     "build:public": "npm run build:public-catalogue && npm run build:expansion",
     "dev:public": "npm run build:public && wrangler dev",
     "deploy:public": "npm run build:public && wrangler deploy",
@@ -19,7 +20,9 @@
     "check": "node scripts/check-package.mjs && node scripts/check-expansion.mjs",
     "experiment:holdout": "node scripts/run-holdout.mjs",
     "experiment:review": "node scripts/review-holdout.mjs",
-    "experiment:summarize": "node scripts/summarize-holdout.mjs"
+    "experiment:summarize": "node scripts/summarize-holdout.mjs",
+    "experiment:retrieval": "node scripts/run-vector-retrieval.mjs",
+    "experiment:stage-300": "node scripts/run-stage-300-eval.mjs"
   },
   "devDependencies": {
     "wrangler": "^4.135.0"

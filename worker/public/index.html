@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="/app.css">
 </head>
 <body class="page-try">
-  <div class="doodle-field" aria-hidden="true"></div>
   <header class="topbar">
     <a class="brand" href="/" aria-label="Meme Lab home"><span>meme</span>lab</a>
     <nav class="site-nav" aria-label="Main navigation">
@@ -16,21 +15,22 @@
       <a href="/collection">Collection</a>
       <a href="/how-it-works">How it works</a>
     </nav>
-    <span class="beta">PLAYGROUND</span>
+    <span class="beta">3,000 LIVE</span>
   </header>
 
   <main>
     <section class="composer" aria-labelledby="page-title">
-      <p class="eyebrow">ONE COMMENT. ONE MEME.</p>
-      <h1 id="page-title">Drop the comment.<br>Get the meme.</h1>
-      <p class="intro">Paste the message, situation, or reply you are reacting to. Get one best match and up to four backups with honest fit labels.</p>
+      <p class="eyebrow">REACTION MATCHING</p>
+      <h1 id="page-title">Find the meme that fits.</h1>
+      <p class="intro">Describe the whole situation. Meme Lab returns one best match and four honestly ranked alternatives.</p>
 
       <form id="meme-form">
         <label for="comment">The comment</label>
         <textarea id="comment" name="comment" maxlength="1000" required placeholder="Paste a real comment, or describe what happened…"></textarea>
+        <p class="retention-note">Your comment and returned candidates are kept for 30 days to support feedback.</p>
         <div class="form-row">
           <div class="examples" aria-label="Example comments">
-            <span>Try a full example</span>
+            <span>Use a full example</span>
             <button type="button" data-example="I spent an hour looking for my phone while using its flashlight.">I spent an hour looking for my phone while using its flashlight.</button>
             <button type="button" data-example="My coworker said the meeting could have been an email, then scheduled a follow-up meeting about it.">My coworker said the meeting could have been an email, then scheduled a follow-up meeting about it.</button>
             <button type="button" data-example="My sibling ate the leftovers with my name on them, then asked why I looked upset.">My sibling ate the leftovers with my name on them, then asked why I looked upset.</button>

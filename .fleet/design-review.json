@@ -2,7 +2,7 @@
   "$schema": "fleet.design-review.v1",
   "version": 1,
   "project": "meme_lab",
-  "target": "Meme Lab public 3,000-reference playground with responsive doodle layer",
+  "target": "Meme Lab public playground professional redesign",
   "surfaceMode": "operate",
   "mode": "overhaul",
   "register": "product",
@@ -11,66 +11,65 @@
     "design": "DESIGN.md"
   },
   "direction": {
-    "references": [],
-    "probes": [
-      {
-        "id": "simple-air",
-        "path": "design-probes/simple-air.html"
-      },
-      {
-        "id": "simple-cards",
-        "path": "design-probes/simple-cards.html"
-      },
-      {
-        "id": "clean-canvas",
-        "path": "design-probes/simple-grid.html"
-      }
+    "references": [
+      "Current live Clean Canvas surface",
+      "Professional media-selection tools",
+      "Editorial image contact sheets"
     ],
-    "selected": "clean-canvas",
+    "probes": [
+      {"id": "cutting-room", "path": "design-probes/professional-cutting-room.html"},
+      {"id": "reference-desk", "path": "design-probes/professional-reference-desk.html"},
+      {"id": "contact-sheet", "path": "design-probes/professional-contact-sheet.html"}
+    ],
+    "selected": "reference-desk",
     "approval": "approved",
-    "before": "artifacts/design/rejected-ui.png",
+    "before": "artifacts/design/after-doodles-1440.png",
     "library": {
       "strategy": "upstream-first",
-      "primary": "existing-project-system",
-      "sources": [],
+      "primary": "preline",
+      "sources": [
+        "https://preline.co/docs/sidebar.html",
+        "https://preline.co/docs/textarea.html",
+        "https://preline.co/docs/card.html"
+      ],
       "runtime": "existing",
       "customReplacement": {
-        "used": true,
-        "authorization": "owner-requested",
-        "reason": "The product-defining blind A/B review has no matching generic block, and adding a runtime UI dependency solely for this plain-JS local experiment would weaken the stack."
+        "used": false,
+        "authorization": "not-required",
+        "reason": ""
       }
     },
     "contract": {
-      "purpose": "Turn one pasted comment or situation into a useful meme immediately without forcing a joke.",
+      "purpose": "Turn one pasted comment or situation into a useful meme immediately without making the operating surface feel juvenile.",
       "purposeSource": "PRODUCT.md",
       "canonicalPurpose": "Meme Lab turns one pasted comment or situation into a useful meme immediately.",
       "purposeAlignment": "match",
       "driftNote": "",
       "audience": "The owner first, with a public playground for lightweight feedback.",
-      "job": "Paste one complete comment, see the best meme and four ranked backups across useful viewpoints, then record whether the result landed; read the full evidence-backed project journey when needed.",
-      "thesis": "A crisp white working canvas with pale-blue navigation, mint and yellow state landmarks, restrained borders, and colorful hand-drawn reaction marks around the working area.",
-      "system": "Clean Canvas keeps its lightweight workspace rail and compact task flow, while a fixed edge-only doodle field adds meme-native personality without entering controls or result cards.",
-      "signature": "A best-match result with four viewpoint-aware alternatives, surrounded by reaction bursts, speech bubbles, stars, arrows, hearts, and a hand-drawn 3K mark.",
-      "risk": "The intentionally abundant doodles must remain decorative, non-interactive, and subordinate to the comment form, result hierarchy, and long-form reading experience."
+      "job": "Describe one complete situation, inspect the best meme and four honest alternatives, and record whether the recommendation fits.",
+      "thesis": "A restrained reference workspace replaces doodles, candy-colored tiles, and oversized marketing composition while keeping the task immediate.",
+      "system": "Navy navigation, white working surfaces, cobalt actions, quiet semantic states, compact typography, modest corners, and uniform media fields cover all three public pages.",
+      "signature": "The ranked result behaves like a reference record: real meme media, fit label, perspective, catalogue signals, and four compact alternatives.",
+      "risk": "Professional restraint can drift toward generic software, so meme media remains visually dominant and perspective-aware ranking stays explicit."
     }
   },
   "evidence": {
     "screenshots": [
       {
         "width": 390,
-        "path": "artifacts/design/after-doodles-390.png"
+        "path": "artifacts/design/after-390.png"
       },
       {
         "width": 768,
-        "path": "artifacts/design/after-doodles-768.png"
+        "path": "artifacts/design/after-768.png"
       },
       {
         "width": 1440,
-        "path": "artifacts/design/after-doodles-1440.png"
+        "path": "artifacts/design/after-1440.png"
       }
     ],
     "projectCheck": {
-      "command": "npm test && npm run check && node /Users/sarthak/Desktop/fleet/saas-maker/tooling/scripts/design-workflow.mjs check --project /Users/sarthak/Downloads/meme_lab",
+      "command": "npm test && npm run check && git diff --check && pnpm exec wrangler deploy --dry-run",
       "status": "pass"
     },
     "critique": {
@@ -78,7 +77,7 @@
       "maximum": 40
     },
     "audit": {
-      "score": 19,
+      "score": 18,
       "maximum": 20
     },
     "unresolved": {
@@ -87,7 +86,10 @@
     },
     "detector": {
       "posture": "advisory",
-      "findings": []
+      "findings": [],
+      "command": "node /Users/sarthak/Desktop/fleet/.agents/skills/impeccable/scripts/detect.mjs --json worker/public/index.html worker/public/collection.html worker/public/how-it-works.html worker/public/app.css",
+      "status": "pass",
+      "count": 0
     },
     "comprehension": {
       "status": "not-applicable",
@@ -114,6 +116,6 @@
   },
   "ownerFeedback": {
     "decision": "keep",
-    "note": "Owner selected direction C, Clean Canvas, then explicitly requested many doodles. The responsive edge illustration layer preserves the approved system and adds playful meme-native character."
+    "note": "Owner asked to avoid overengineering and approved the recommended simple Reference Desk direction."
   }
 }

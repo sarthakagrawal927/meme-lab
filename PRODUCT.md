@@ -8,7 +8,7 @@ The first user is the owner, but the playground is public for lightweight feedba
 
 ## Product behavior
 
-The corrected catalogue contains 3,000 searchable references: 1,811 static meme templates and 1,189 usage-backed reaction GIFs. Arbitrary artwork is not counted as meme coverage. Every reference has a specific meaning, social dynamic, example, near-miss, provenance, media type and state, meme-strength score, and asset-quality score.
+The corrected catalogue contains 3,000 searchable references: 1,805 static meme templates and 1,195 usage-backed reaction GIFs. Arbitrary artwork, empty editing canvases, and decorative backgrounds are not counted as meme coverage. Every reference has a specific meaning, social dynamic, example, near-miss, provenance, media type and state, meme-strength score, and asset-quality score.
 
 Runtime ranking is deliberately bounded:
 

@@ -1,0 +1,74 @@
+{
+  "$schema": "fleet.design-review.v1",
+  "version": 1,
+  "project": "meme_lab",
+  "target": "Meme Lab public 3,000-reference playground with responsive doodle layer",
+  "surfaceMode": "operate",
+  "mode": "overhaul",
+  "register": "product",
+  "context": {
+    "product": "PRODUCT.md",
+    "design": "DESIGN.md"
+  },
+  "direction": {
+    "references": [],
+    "probes": [
+      {"id": "simple-air", "path": "design-probes/simple-air.html"},
+      {"id": "simple-cards", "path": "design-probes/simple-cards.html"},
+      {"id": "clean-canvas", "path": "design-probes/simple-grid.html"}
+    ],
+    "selected": "clean-canvas",
+    "approval": "approved",
+    "before": "artifacts/design/rejected-ui.png",
+    "library": {
+      "strategy": "upstream-first",
+      "primary": "existing-project-system",
+      "sources": [],
+      "runtime": "existing",
+      "customReplacement": {
+        "used": true,
+        "authorization": "owner-requested",
+        "reason": "The product-defining blind A/B review has no matching generic block, and adding a runtime UI dependency solely for this plain-JS local experiment would weaken the stack."
+      }
+    },
+    "contract": {
+      "purpose": "Turn one pasted comment or situation into a useful meme immediately without forcing a joke.",
+      "purposeSource": "PRODUCT.md",
+      "canonicalPurpose": "Meme Lab turns one pasted comment or situation into a useful meme immediately.",
+      "purposeAlignment": "match",
+      "driftNote": "",
+      "audience": "The owner first, with a public playground for lightweight feedback.",
+      "job": "Paste one complete comment, see the best meme and four ranked backups across useful viewpoints, then record whether the result landed; read the full evidence-backed project journey when needed.",
+      "thesis": "A crisp white working canvas with pale-blue navigation, mint and yellow state landmarks, restrained borders, and colorful hand-drawn reaction marks around the working area.",
+      "system": "Clean Canvas keeps its lightweight workspace rail and compact task flow, while a fixed edge-only doodle field adds meme-native personality without entering controls or result cards.",
+      "signature": "A best-match result with four viewpoint-aware alternatives, surrounded by reaction bursts, speech bubbles, stars, arrows, hearts, and a hand-drawn 3K mark.",
+      "risk": "The intentionally abundant doodles must remain decorative, non-interactive, and subordinate to the comment form, result hierarchy, and long-form reading experience."
+    }
+  },
+  "evidence": {
+    "screenshots": [
+      {"width": 390, "path": "artifacts/design/after-doodles-390.png"},
+      {"width": 768, "path": "artifacts/design/after-doodles-768.png"},
+      {"width": 1440, "path": "artifacts/design/after-doodles-1440.png"}
+    ],
+    "projectCheck": {
+      "command": "npm test && npm run check && node /Users/sarthak/Desktop/fleet/saas-maker/tooling/scripts/design-workflow.mjs check --project /Users/sarthak/Downloads/meme_lab",
+      "status": "pass"
+    },
+    "critique": {"score": 36, "maximum": 40},
+    "audit": {"score": 19, "maximum": 20},
+    "unresolved": {"p0": 0, "p1": 0},
+    "detector": {"posture": "advisory", "findings": []},
+    "comprehension": {
+      "status": "not-applicable",
+      "reviewer": "",
+      "answers": {"product": "", "audience": "", "value": "", "mechanism": "", "proof": "", "nextAction": ""},
+      "purposeScore": {"product": 0, "audience": 0, "value": 0, "mechanism": 0, "proof": 0, "nextAction": 0, "total": 0},
+      "mismatches": []
+    }
+  },
+  "ownerFeedback": {
+    "decision": "keep",
+    "note": "Owner selected direction C, Clean Canvas, then explicitly requested many doodles. The responsive edge illustration layer preserves the approved system and adds playful meme-native character."
+  }
+}

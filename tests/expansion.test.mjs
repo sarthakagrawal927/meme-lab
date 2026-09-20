@@ -11,7 +11,6 @@ const collectionPage=await readFile(new URL('../worker/public/collection.html',i
 const appScript=await readFile(new URL('../worker/public/app.js',import.meta.url),'utf8');
 const collectionScript=await readFile(new URL('../worker/public/collection.js',import.meta.url),'utf8');
 const workerSource=await readFile(new URL('../worker/src/index.mjs',import.meta.url),'utf8');
-const doodles=await readFile(new URL('../worker/public/doodles.svg',import.meta.url),'utf8');
 const stage300Collection=JSON.parse(await readFile(new URL('../worker/tools/stage-300-catalogue.json',import.meta.url),'utf8'));
 const stage1000Collection=JSON.parse(await readFile(new URL('../worker/tools/stage-1000-catalogue.json',import.meta.url),'utf8'));
 const candidates=parseJsonl(await readFile(new URL('../expansion/candidates/stage-300.jsonl',import.meta.url),'utf8'));
@@ -80,14 +79,15 @@ test('How It Works documents the complete 30-to-30000 journey and evidence bound
   assert.doesNotMatch(howItWorks,/Best 3|Jev fit scores|generated explanation step on the normal path/);
 });
 
-test('every public surface includes the decorative doodle layer',()=>{
-  for(const page of [tryItPage,collectionPage,howItWorks]) assert.match(page,/class="doodle-field" aria-hidden="true"/);
+test('every public surface uses the restrained application shell',()=>{
+  for(const page of [tryItPage,collectionPage,howItWorks]) {
+    assert.match(page,/class="topbar"/);
+    assert.doesNotMatch(page,/class="doodle-field"/);
+  }
   assert.match(tryItPage,/body class="page-try"/);
   assert.match(collectionPage,/body class="page-collection"/);
   assert.match(howItWorks,/body class="page-how"/);
-  assert.match(doodles,/<svg[^>]+viewBox="0 0 1600 1000"/);
-  assert.match(doodles,/LOL/);
-  assert.match(doodles,/>3K</);
+  assert.match(tryItPage,/Find the meme that fits\./);
 });
 
 test('public surfaces render GIF results and lightweight collection previews',()=>{

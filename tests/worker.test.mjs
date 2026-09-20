@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
 import worker from '../worker/src/index.mjs';
-import {humourBelongs,needsSeriousHandling,rankCandidates,requiresFactualAnswer} from '../worker/src/classification.mjs';
+import {hasMultiplePerspectives,humourBelongs,needsSeriousHandling,PERSPECTIVES,rankCandidates,rankCandidatesByPerspective,requiresFactualAnswer} from '../worker/src/classification.mjs';
 import {MODEL,validateSelection,normalizeSelection,normalizeRankedSelection,validateRankedSelection,presentSelection} from '../worker/src/recommendation.mjs';
 import {CORE_RESERVE,EMBEDDING_MODEL,mergeWithReserve,retrieveCandidates} from '../worker/src/retrieval.mjs';
 import {reciprocalRankFuse} from '../worker/src/rank-fusion.mjs';
@@ -224,6 +225,90 @@ test('classifier ranking is pinned while explanation scores stay descending',asy
   assert.deepEqual(normalized.candidates.map(candidate=>candidate.id),['this-is-fine','first-try','waiting-skeleton']);
   assert.deepEqual(normalized.candidates.map(candidate=>candidate.score),[88,87,86]);
   assert.doesNotThrow(()=>validateRankedSelection(normalized,ranked.map(candidate=>candidate.id)));
+});
+
+test('multi-person comments activate perspective ranking without changing single-view comments',()=>{
+  assert.equal(hasMultiplePerspectives('My sibling ate the leftovers with my name on them, then asked why I looked upset.'),true);
+  assert.equal(hasMultiplePerspectives('My coworker scheduled another meeting after telling me the first could have been an email.'),true);
+  assert.equal(hasMultiplePerspectives('They replied “k” to the six-paragraph message I spent an hour writing.'),true);
+  assert.equal(hasMultiplePerspectives('I spent an hour looking for my phone while using its flashlight.'),false);
+  assert.equal(hasMultiplePerspectives('The tests finally passed after another identical run.'),false);
+});
+
+test('perspective routing eval stays unique, explicit, and pending owner validation',()=>{
+  const cases=readFileSync(new URL('../eval/perspective_v1.jsonl',import.meta.url),'utf8').trim().split('\n').map(line=>JSON.parse(line));
+  assert.equal(cases.length,8);
+  assert.equal(new Set(cases.map(record=>record.id)).size,cases.length);
+  for(const record of cases) {
+    assert.equal(record.expected_mode,'perspective');
+    assert.deepEqual(record.expected_perspectives,['self','other','situation']);
+    assert.equal(record.owner_validated,false);
+    assert.equal(hasMultiplePerspectives(record.comment),true);
+  }
+});
+
+test('perspective ranking returns one distinct candidate for each explicit lens',async()=>{
+  const candidates=[
+    {id:'my-reaction',name:'How Could You',message:'Betrayed disbelief.',relational_pattern:'Someone reacts to a boundary being ignored.'},
+    {id:'their-side',name:'Kirby Eating',message:'Shamelessly enjoying the food.',relational_pattern:'Someone takes and enjoys food without concern.'},
+    {id:'the-situation',name:'You Took Everything',message:'Something personally valued was taken.',relational_pattern:'One person takes what belonged to another.'}
+  ];
+  const calls=[];
+  const scoreSets={
+    self:[.92,.04,.04],
+    other:[.05,.9,.05],
+    situation:[.06,.08,.86]
+  };
+  const fetchImpl=async(_url,options)=>{
+    const body=JSON.parse(options.body);
+    const perspective=PERSPECTIVES.find(record=>record.instructions===body.instructions);
+    calls.push(perspective.key);
+    return Response.json({results:[{label:body.labels[scoreSets[perspective.key].indexOf(Math.max(...scoreSets[perspective.key]))],scores:Object.fromEntries(body.labels.map((label,index)=>[label,scoreSets[perspective.key][index]]))}]});
+  };
+  const ranked=await rankCandidatesByPerspective('My sibling ate my labelled leftovers, then asked why I was upset.',candidates,{fetchImpl});
+  assert.deepEqual(calls.sort(),['other','self','situation']);
+  assert.deepEqual(ranked.map(candidate=>candidate.id),['my-reaction','their-side','the-situation']);
+  assert.deepEqual(new Set(ranked.map(candidate=>candidate.perspective)),new Set(['self','other','situation']));
+  assert.deepEqual(ranked.map(candidate=>candidate.perspective_label),['My reaction','Their side','The situation']);
+});
+
+test('perspective ranking de-duplicates a shared winner and public output keeps each lens',async()=>{
+  const candidates=[
+    {id:'waiting-skeleton',name:'Waiting Skeleton',message:'Waiting a long time.',relational_pattern:'Someone waits.'},
+    {id:'this-is-fine',name:'This Is Fine',message:'Calm during chaos.',relational_pattern:'Someone minimizes trouble.'},
+    {id:'first-try',name:'First Try',message:'Success hides effort.',relational_pattern:'Someone hides failed attempts.'}
+  ];
+  let call=0;
+  const scoreSets=[[.9,.08,.02],[.88,.1,.02],[.86,.03,.11]];
+  const fetchImpl=async(_url,options)=>{
+    const body=JSON.parse(options.body);
+    const scores=scoreSets[call++];
+    return Response.json({results:[{label:body.labels[0],scores:Object.fromEntries(body.labels.map((label,index)=>[label,scores[index]]))}]});
+  };
+  const ranked=await rankCandidatesByPerspective('My coworker told me everything was fine while our launch burned.',candidates,{fetchImpl});
+  assert.equal(new Set(ranked.map(candidate=>candidate.id)).size,3);
+  const perspectives=new Map(ranked.map(record=>[record.id,{perspective:record.perspective,perspective_label:record.perspective_label}]));
+  const mappedSelection={...selection,candidates:ranked.map((record,index)=>({id:record.id,reason:`${record.name} fits because this complete explanation maps the chosen viewpoint to the comment.`,score:90-index}))};
+  const presented=presentSelection(mappedSelection,{perspectives});
+  assert.deepEqual(new Set(presented.candidates.map(candidate=>candidate.perspective)),new Set(['self','other','situation']));
+});
+
+test('classifier ranking rejects missing or flat scores instead of silently pinning retrieval order',async()=>{
+  const candidates=[
+    {id:'one',name:'One',message:'One message.',relational_pattern:'One pattern.'},
+    {id:'two',name:'Two',message:'Two message.',relational_pattern:'Two pattern.'},
+    {id:'three',name:'Three',message:'Three message.',relational_pattern:'Three pattern.'}
+  ];
+  const incomplete=async(_url,options)=>{
+    const {labels}=JSON.parse(options.body);
+    return Response.json({results:[{label:labels[0],scores:{[labels[0]]:1}}]});
+  };
+  const flat=async(_url,options)=>{
+    const {labels}=JSON.parse(options.body);
+    return Response.json({results:[{label:labels[0],scores:Object.fromEntries(labels.map(label=>[label,1/3]))}]});
+  };
+  await assert.rejects(rankCandidates('A comment.',candidates,{fetchImpl:incomplete}),/incomplete candidate scores/);
+  await assert.rejects(rankCandidates('A comment.',candidates,{fetchImpl:flat}),/flat candidate scores/);
 });
 
 test('static responses receive security and no-index headers',async()=>{

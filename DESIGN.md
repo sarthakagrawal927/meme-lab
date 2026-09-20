@@ -9,6 +9,7 @@ Meme Lab uses the owner-selected **Clean Canvas** system: a crisp white workspac
 - The comment composer and **Find the meme** action are the first-viewport focus.
 - The best match receives the strongest image and type hierarchy.
 - Up to two alternatives stay compact and clearly secondary.
+- For multi-person comments, label each result by perspective and introduce the alternatives as other angles on the same moment.
 - Contextual fit remains the primary score. Meme strength and image quality appear as one quiet supporting sentence.
 - Low confidence is visibly labelled without hiding the result. A no-meme decision gets its own calm, unambiguous state.
 - Collection and How it works remain simple secondary navigation surfaces.
@@ -17,6 +18,7 @@ Meme Lab uses the owner-selected **Clean Canvas** system: a crisp white workspac
 
 - Load image previews automatically from allowlisted providers and fall back to the reference name without blocking the result.
 - Preserve sentence-based explanations that name the meme and map it to a concrete detail in the comment.
+- Keep each explanation faithful to its displayed perspective: narrator reaction, other participant, or situation.
 - Never pad the alternatives list with misleading options.
 - Keep one-tap feedback close to the result and state its 30-day retention.
 - Keep all 3,000 references searchable and paginated; no experimental/live filtering exists in the personal tool.

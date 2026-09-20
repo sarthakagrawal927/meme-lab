@@ -38,7 +38,9 @@ function renderBest(candidate) {
   const copy=document.createElement('div');
   copy.className='result-copy';
   const lowConfidence=currentRecommendation?.confidence==='low';
-  const rank=Object.assign(document.createElement('span'),{className:`rank${lowConfidence?' low-confidence':''}`,textContent:`${lowConfidence?'LOW CONFIDENCE':'BEST MATCH'} · FIT ${candidate.score}/100`});
+  const perspectiveAware=candidate.perspective&&candidate.perspective!=='best_match';
+  const matchLabel=perspectiveAware?candidate.perspective_label.toUpperCase():'BEST MATCH';
+  const rank=Object.assign(document.createElement('span'),{className:`rank${lowConfidence?' low-confidence':''}`,textContent:`${lowConfidence?'LOW CONFIDENCE · ':''}${matchLabel} · FIT ${candidate.score}/100`});
   const title=Object.assign(document.createElement('h2'),{textContent:candidate.name});
   const reason=Object.assign(document.createElement('p'),{textContent:candidate.reason});
   const signals=Object.assign(document.createElement('p'),{className:'signal-note',textContent:candidate.signal_summary});
@@ -52,13 +54,16 @@ function renderAlternatives(candidates) {
   const host=$('#alternatives');
   host.replaceChildren();
   $('#alternatives-wrap').hidden=!candidates.length;
+  const perspectiveAware=candidates.some(candidate=>candidate.perspective&&candidate.perspective!=='best_match');
+  $('#alternatives-title').textContent=perspectiveAware?'OTHER PERSPECTIVES':'ALSO FITS';
+  $('#alternatives-subtitle').textContent=perspectiveAware?'Same moment, different angles.':'Two backups, just in case.';
   for(const candidate of candidates) {
     const card=document.createElement('article');
     card.className='alternative';
     const copy=document.createElement('div');
     copy.className='alternative-copy';
     copy.append(
-      Object.assign(document.createElement('span'),{textContent:`#${candidate.rank} · FIT ${candidate.score}/100`}),
+      Object.assign(document.createElement('span'),{textContent:`${candidate.perspective&&candidate.perspective!=='best_match'?candidate.perspective_label.toUpperCase():`#${candidate.rank}`} · FIT ${candidate.score}/100`}),
       Object.assign(document.createElement('h3'),{textContent:candidate.name}),
       Object.assign(document.createElement('p'),{textContent:candidate.reason}),
       Object.assign(document.createElement('p'),{className:'signal-note',textContent:candidate.signal_summary})

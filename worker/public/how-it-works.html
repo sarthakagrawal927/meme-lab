@@ -22,7 +22,7 @@
     <section class="page-intro how-intro">
       <p class="eyebrow">PRODUCT + IMPLEMENTATION</p>
       <h1>How one comment<br>becomes the best options.</h1>
-      <p class="intro">The live product compares meaning, real-world usage, social dynamics, and tone—not just words. It retrieves 30 likely matches from 3,000 memes, ranks the best three, then explains each choice.</p>
+      <p class="intro">The live product compares meaning, real-world usage, social dynamics, tone, and viewpoint—not just words. It retrieves 30 likely matches from 3,000 memes, ranks the best three, then explains each choice.</p>
       <a class="primary page-cta" href="/">Try a comment <span aria-hidden="true">→</span></a>
     </section>
 
@@ -38,13 +38,13 @@
           <p class="eyebrow">THE LIVE 3,000</p>
           <h2 id="live-system-title">Retrieve. Classify. Explain.</h2>
         </div>
-        <p>Each reference has a name, meaning, relational pattern, example, provenance, media status, meme-strength score, and image-quality score. Two semantic views narrow 3,000 records to 30 before a dedicated classifier ranks the best three.</p>
+        <p>Each reference has a name, meaning, relational pattern, example, provenance, media status, meme-strength score, and image-quality score. Two semantic views narrow 3,000 records to 30. If more than one person is involved, the classifier deliberately chooses distinct memes for my reaction, their side, and the situation.</p>
       </div>
       <ol class="pipeline" aria-label="Current recommendation pipeline">
         <li><span>01</span><strong>Validate</strong><p>Trim and bound the comment. Treat it as untrusted text.</p></li>
         <li><span>02</span><strong>Retrieve 30</strong><p>Search meaning and usage-example vectors separately, then fuse both ranked lists.</p></li>
-        <li><span>03</span><strong>Guard and rank</strong><p>Jev checks sensitive help-seeking text and ranks the three closest social reactions.</p></li>
-        <li><span>04</span><strong>Explain three</strong><p>Llama writes specific explanations and fit scores without changing the ranked IDs.</p></li>
+        <li><span>03</span><strong>Guard and rank</strong><p>Jev checks sensitive help-seeking text, then ranks once or through three explicit perspective lenses.</p></li>
+        <li><span>04</span><strong>Explain three</strong><p>Llama writes specific explanations and fit scores without changing the ranked IDs or their viewpoints.</p></li>
       </ol>
     </section>
 
@@ -68,7 +68,7 @@
       <div class="implementation-grid">
         <article><span>Workers AI</span><h3>Two views, one comment</h3><p>Every reference gets one vector for meaning and another for concrete usage examples.</p></article>
         <article><span>Vectorize</span><h3>A fused shortlist</h3><p>Separate meaning and usage searches are combined with reciprocal-rank fusion, then capped at 30 candidates.</p></article>
-        <article><span>Jev classifier</span><h3>Tone and relationship</h3><p>A fast classifier checks whether humour belongs and ranks candidates by social fit rather than keyword overlap.</p></article>
+        <article><span>Jev classifier</span><h3>Tone, relationship, viewpoint</h3><p>A fast classifier checks whether humour belongs and ranks by social fit. Multi-person comments get one distinct result for the narrator, the other person, and the event.</p></article>
         <article><span>D1 feedback</span><h3>Evidence, not vibes</h3><p>Yes/no feedback is retained for evaluation; it does not silently retrain the live model.</p></article>
       </div>
     </section>

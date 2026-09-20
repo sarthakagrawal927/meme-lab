@@ -91,17 +91,22 @@ export function validateRankedSelection(value,rankedIds) {
   return selection;
 }
 
-export function presentSelection(selection) {
+export function presentSelection(selection,{perspectives=new Map()}={}) {
   return {
     request_id:crypto.randomUUID(),
     decision:selection.decision,
     confidence:selection.confidence,
     none_reason:selection.decision==='none'?selection.none_reason:'',
-    candidates:selection.candidates.map((candidate,rank)=>({
-      ...publicById.get(candidate.id),
-      rank:rank+1,
-      reason:candidate.reason,
-      score:candidate.score
-    }))
+    candidates:selection.candidates.map((candidate,rank)=>{
+      const perspective=perspectives.get(candidate.id);
+      return {
+        ...publicById.get(candidate.id),
+        rank:rank+1,
+        reason:candidate.reason,
+        score:candidate.score,
+        perspective:perspective?.perspective??'best_match',
+        perspective_label:perspective?.perspective_label??'Best match'
+      };
+    })
   };
 }

@@ -4,4 +4,5 @@ runs/*
 private/
 results/
 node_modules/
+.wrangler/
 .DS_Store

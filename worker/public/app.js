@@ -6,6 +6,7 @@ const status=$('#status');
 const loading=$('#loading');
 const result=$('#result');
 const noMatch=$('#no-match');
+let currentRecommendation=null;
 
 function showOnly(target) {
   loading.hidden=target!=='loading';
@@ -75,12 +76,17 @@ async function findMeme() {
     const data=await response.json();
     if(!response.ok) throw new Error(data.error||'Could not find a meme.');
     if(data.decision==='none') {
+      currentRecommendation=data;
       $('#no-match-reason').textContent=data.none_reason;
       showOnly('none');
       return;
     }
+    currentRecommendation=data;
     renderBest(data.candidates[0]);
     renderAlternatives(data.candidates.slice(1));
+    $('#feedback').hidden=!data.feedback_enabled;
+    $('#feedback-status').textContent='';
+    for(const button of document.querySelectorAll('[data-verdict]')) { button.disabled=false;button.removeAttribute('aria-pressed'); }
     showOnly('result');
     result.scrollIntoView({behavior:'smooth',block:'start'});
   } catch(error) {
@@ -96,3 +102,18 @@ form.addEventListener('submit',event=>{event.preventDefault();findMeme();});
 for(const button of document.querySelectorAll('[data-example]')) button.addEventListener('click',()=>{comment.value=button.dataset.example;comment.focus();});
 $('#try-again').addEventListener('click',()=>{showOnly('form');comment.focus();window.scrollTo({top:0,behavior:'smooth'});});
 $('#edit-comment').addEventListener('click',()=>{showOnly('form');comment.focus();window.scrollTo({top:0,behavior:'smooth'});});
+for(const button of document.querySelectorAll('[data-verdict]')) button.addEventListener('click',async()=>{
+  if(!currentRecommendation?.request_id||!currentRecommendation.candidates?.[0]) return;
+  for(const peer of document.querySelectorAll('[data-verdict]')) peer.disabled=true;
+  $('#feedback-status').textContent='Saving…';
+  try {
+    const response=await fetch('/api/feedback',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({request_id:currentRecommendation.request_id,verdict:button.dataset.verdict,candidate_id:currentRecommendation.candidates[0].id})});
+    const data=await response.json();
+    if(!response.ok) throw new Error(data.error||'Could not save feedback.');
+    button.setAttribute('aria-pressed','true');
+    $('#feedback-status').textContent='Saved. Thank you.';
+  } catch(error) {
+    $('#feedback-status').textContent=error.message;
+    for(const peer of document.querySelectorAll('[data-verdict]')) peer.disabled=false;
+  }
+});

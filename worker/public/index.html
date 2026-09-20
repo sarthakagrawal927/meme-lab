@@ -45,6 +45,17 @@
         <div class="section-title"><span>ALSO FITS</span><span>Two backups, just in case.</span></div>
         <div id="alternatives" class="alternatives"></div>
       </div>
+      <div id="feedback" class="feedback" hidden>
+        <div>
+          <strong>Did it land?</strong>
+          <span>Stored for 30 days to improve the next pick.</span>
+        </div>
+        <div class="feedback-actions">
+          <button type="button" data-verdict="landed">Yes, that fits</button>
+          <button type="button" data-verdict="missed">Nope</button>
+        </div>
+        <p id="feedback-status" role="status" aria-live="polite"></p>
+      </div>
       <button id="try-again" class="try-again" type="button">Try another comment ↗</button>
     </section>
 

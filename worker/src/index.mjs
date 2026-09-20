@@ -103,6 +103,37 @@ export function presentSelection(selection) {
   };
 }
 
+async function persistRecommendation(env,recommendation,comment) {
+  const createdAt=new Date();
+  const expiresAt=new Date(createdAt.getTime()+30*24*60*60*1000);
+  await env.DB.prepare(`INSERT INTO recommendations
+    (id, comment_text, decision, candidates_json, model, created_at, expires_at)
+    VALUES (?, ?, ?, ?, ?, ?, ?)`)
+    .bind(recommendation.request_id,comment,recommendation.decision,JSON.stringify(recommendation.candidates.map(({id,rank})=>({id,rank}))),MODEL,createdAt.toISOString(),expiresAt.toISOString())
+    .run();
+}
+
+async function saveFeedback(request,env) {
+  if(request.headers.get('content-type')?.split(';')[0]!=='application/json') return json({error:'Expected JSON.'},415);
+  const contentLength=Number(request.headers.get('content-length')??0);
+  if(contentLength>2000) return json({error:'Request too large.'},413);
+  let body;
+  try { body=await request.json(); }
+  catch { return json({error:'Invalid JSON.'},400); }
+  if(typeof body?.request_id!=='string'||!/^[a-f0-9-]{36}$/.test(body.request_id)) return json({error:'Unknown recommendation.'},400);
+  if(!['landed','missed'].includes(body.verdict)) return json({error:'Unknown verdict.'},400);
+  if(body.candidate_id!==null&&!allowedIds.has(body.candidate_id)) return json({error:'Unknown candidate.'},400);
+  const recommendation=await env.DB.prepare('SELECT id FROM recommendations WHERE id = ? AND expires_at > ?').bind(body.request_id,new Date().toISOString()).first();
+  if(!recommendation) return json({error:'This recommendation is no longer available.'},404);
+  await env.DB.prepare(`INSERT INTO feedback (id, recommendation_id, verdict, candidate_id, created_at)
+    VALUES (?, ?, ?, ?, ?)
+    ON CONFLICT(recommendation_id) DO UPDATE SET verdict = excluded.verdict, candidate_id = excluded.candidate_id, created_at = excluded.created_at`)
+    .bind(crypto.randomUUID(),body.request_id,body.verdict,body.candidate_id,new Date().toISOString())
+    .run();
+  console.log(JSON.stringify({event:'feedback',verdict:body.verdict}));
+  return json({saved:true,verdict:body.verdict});
+}
+
 async function recommend(request,env) {
   if(request.headers.get('content-type')?.split(';')[0]!=='application/json') return json({error:'Expected JSON.'},415);
   const contentLength=Number(request.headers.get('content-length')??0);
@@ -139,7 +170,14 @@ async function recommend(request,env) {
       selection=validateSelection(parsed);
     }
     console.log(JSON.stringify({event:'recommendation',status:'ok',duration_ms:Date.now()-started,decision:selection.decision,candidate_count:selection.candidates.length,repair_attempted}));
-    return json(presentSelection(selection));
+    const recommendation=presentSelection(selection);
+    let feedback_enabled=true;
+    try { await persistRecommendation(env,recommendation,comment); }
+    catch(error) {
+      feedback_enabled=false;
+      console.error(JSON.stringify({event:'recommendation_store',status:'error',error:safeError(error)}));
+    }
+    return json({...recommendation,feedback_enabled});
   } catch(error) {
     console.error(JSON.stringify({event:'recommendation',status:'error',duration_ms:Date.now()-started,error:safeError(error)}));
     return json({error:'The meme picker had a wobble. Try again.'},502);
@@ -166,7 +204,15 @@ export default {
       if(origin&&origin!==url.origin) return json({error:'Cross-origin requests are blocked.'},403);
       return recommend(request,env);
     }
+    if(url.pathname==='/api/feedback'&&request.method==='POST') {
+      const origin=request.headers.get('origin');
+      if(origin&&origin!==url.origin) return json({error:'Cross-origin requests are blocked.'},403);
+      return saveFeedback(request,env);
+    }
     if(url.pathname.startsWith('/api/')) return json({error:'Not found.'},404);
     return secureAsset(await env.ASSETS.fetch(request));
+  },
+  async scheduled(controller,env,ctx) {
+    ctx.waitUntil(env.DB.prepare('DELETE FROM recommendations WHERE expires_at <= ?').bind(new Date(controller.scheduledTime).toISOString()).run());
   }
 };

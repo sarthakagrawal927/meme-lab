@@ -11,6 +11,17 @@
   "ai": {
     "binding": "AI"
   },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "meme-lab-feedback",
+      "database_id": "5d85d86c-6383-4409-be18-d3ac05042d69",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "triggers": {
+    "crons": ["15 3 * * *"]
+  },
   "observability": {
     "enabled": true,
     "logs": {

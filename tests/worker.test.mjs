@@ -4,9 +4,14 @@ import worker,{MODEL,validateSelection,presentSelection} from '../worker/src/ind
 
 const selection={decision:'meme',none_reason:'',candidates:[{id:'waiting-skeleton',reason:'The wait became the whole experience.'}]};
 const assetResponse=new Response('<h1>ok</h1>',{headers:{'Content-Type':'text/html'}});
+const stored=[];
 const env={
   AI:{run:async(model,input)=>{assert.equal(model,MODEL);assert.equal(input.response_format.type,'json_schema');return{response:selection};}},
-  ASSETS:{fetch:async()=>assetResponse.clone()}
+  ASSETS:{fetch:async()=>assetResponse.clone()},
+  DB:{prepare:sql=>({bind:(...values)=>({
+    run:async()=>{stored.push({sql,values});return{success:true,meta:{changes:1}};},
+    first:async()=>({id:values[0]})
+  })})}
 };
 
 test('public worker returns a validated known meme without exposing prompt data',async()=>{
@@ -15,7 +20,16 @@ test('public worker returns a validated known meme without exposing prompt data'
   const body=await response.json();
   assert.equal(body.candidates[0].id,'waiting-skeleton');
   assert.equal(body.candidates[0].rank,1);
+  assert.equal(body.feedback_enabled,true);
   assert(!JSON.stringify(body).includes('CATALOGUE_JSON'));
+});
+
+test('public worker saves one-tap feedback for an existing recommendation',async()=>{
+  const requestId=crypto.randomUUID();
+  const response=await worker.fetch(new Request('https://example.test/api/feedback',{method:'POST',headers:{'Content-Type':'application/json','Origin':'https://example.test'},body:JSON.stringify({request_id:requestId,verdict:'landed',candidate_id:'waiting-skeleton'})}),env);
+  assert.equal(response.status,200);
+  assert.deepEqual(await response.json(),{saved:true,verdict:'landed'});
+  assert(stored.some(entry=>entry.sql.includes('INSERT INTO feedback')));
 });
 
 test('public worker rejects empty, oversized, cross-origin, and unknown API requests',async()=>{

@@ -4,7 +4,7 @@ Read [PRD.md](PRD.md) for the product scope. This folder includes a runnable sta
 
 ## Live playground
 
-Paste one comment and get the best meme first at **https://meme-lab-play.sarthakagrawal927.workers.dev**. The public Worker uses the 30 reaction-reference catalogue and does not expose the local experiment history, holdout, or results.
+Paste one comment and get the best meme first at **https://meme-lab-play.sarthakagrawal927.workers.dev**. One-tap feedback is retained for 30 days so the ranking can improve. The public Worker uses the 30 reaction-reference catalogue and does not expose the local experiment history, holdout, or results.
 
 ## Open it locally
 

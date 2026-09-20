@@ -12,6 +12,9 @@
     "example_context": {"type": "string", "minLength": 1},
     "near_miss_context": {"type": "string", "minLength": 1},
     "tags": {"type": "array", "minItems": 2, "items": {"type": "string", "minLength": 1}},
+    "meme_strength": {"type": "number", "minimum": 0, "maximum": 100},
+    "asset_quality": {"type": "number", "minimum": 0, "maximum": 100},
+    "uniqueness_score": {"type": "number", "minimum": 0, "maximum": 100},
     "provenance": {
       "type": "object",
       "additionalProperties": false,
@@ -29,7 +32,8 @@
       "required": ["image_url", "rights_status"],
       "properties": {
         "image_url": {"type": ["string", "null"]},
-        "rights_status": {"enum": ["established", "not_established", "unavailable"]}
+        "rights_status": {"enum": ["established", "not_established", "unavailable"]},
+        "license_url": {"type": "string", "format": "uri"}
       }
     },
     "review": {

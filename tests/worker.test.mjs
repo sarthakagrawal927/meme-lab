@@ -3,7 +3,9 @@ import assert from 'node:assert/strict';
 import worker from '../worker/src/index.mjs';
 import {humourBelongs,needsSeriousHandling,rankCandidates,requiresFactualAnswer} from '../worker/src/classification.mjs';
 import {MODEL,validateSelection,normalizeSelection,normalizeRankedSelection,validateRankedSelection,presentSelection} from '../worker/src/recommendation.mjs';
-import {EMBEDDING_MODEL,reciprocalRankFuse,retrieveCandidates} from '../worker/src/retrieval.mjs';
+import {CORE_RESERVE,EMBEDDING_MODEL,mergeWithReserve,retrieveCandidates} from '../worker/src/retrieval.mjs';
+import {reciprocalRankFuse} from '../worker/src/rank-fusion.mjs';
+import {rankRelevanceCandidates,staticCandidateSignals} from '../worker/src/candidate-signals.mjs';
 
 const selection={decision:'meme',confidence:'high',none_reason:'',candidates:[{id:'waiting-skeleton',reason:'Waiting Skeleton turns the endless approval delay into the entire frustrating experience.',score:94}]};
 const assetResponse=new Response('<h1>ok</h1>',{headers:{'Content-Type':'text/html'}});
@@ -34,9 +36,29 @@ test('public worker returns a validated known meme without exposing prompt data'
   assert.equal(body.candidates[0].id,'waiting-skeleton');
   assert.equal(body.candidates[0].rank,1);
   assert.equal(body.candidates[0].score,94);
+  assert.equal(body.candidates[0].meme_strength,61);
+  assert.equal(body.candidates[0].asset_quality,50);
+  assert.match(body.candidates[0].signal_summary,/meme strength at 61\/100 and image quality at 50\/100/);
   assert.equal(body.confidence,'high');
   assert.equal(body.feedback_enabled,true);
   assert(!JSON.stringify(body).includes('CATALOGUE_JSON'));
+});
+
+test('static prior only breaks close calls after relevance chooses the eligible candidates',()=>{
+  const ranked=rankRelevanceCandidates([
+    {id:'relevance-first',name:'First',classifier_score:.9,retrieval_rank:1,meme_strength:10,asset_quality:10},
+    {id:'close-low-prior',name:'Close low',classifier_score:.8,retrieval_rank:2,meme_strength:10,asset_quality:10},
+    {id:'close-high-prior',name:'Close high',classifier_score:.78,retrieval_rank:3,meme_strength:100,asset_quality:100},
+    {id:'excluded-high-prior',name:'Excluded',classifier_score:.779,retrieval_rank:4,meme_strength:100,asset_quality:100}
+  ],{limit:3});
+  assert.deepEqual(ranked.map(candidate=>candidate.id),['relevance-first','close-high-prior','close-low-prior']);
+  assert(!ranked.some(candidate=>candidate.id==='excluded-high-prior'));
+});
+
+test('static signals stay deterministic and describe both public scores',()=>{
+  const signals=staticCandidateSignals({id:'waiting-skeleton',image_url:'https://i.imgflip.com/2fm6x.jpg',media_status:'source-preview'});
+  assert.deepEqual({meme_strength:signals.meme_strength,asset_quality:signals.asset_quality,static_prior:signals.static_prior},{meme_strength:90,asset_quality:78,static_prior:86});
+  assert.match(signals.signal_summary,/^Static signals rate meme strength at 90\/100 and image quality at 78\/100 \(direct source preview\)\.$/);
 });
 
 test('semantic retrieval fuses meaning and example ranks without duplicate memes',()=>{
@@ -53,20 +75,31 @@ test('semantic retrieval fuses meaning and example ranks without duplicate memes
   assert.equal(fused.filter(match=>match.catalogue_id==='b').length,1);
 });
 
-test('production retrieval queries both indexed views and returns unique catalogue records',async()=>{
+test('core reserve keeps twenty broad slots and ten core slots in a top-thirty shortlist',()=>{
+  const broad=Array.from({length:30},(_,index)=>({catalogue_id:`broad-${index+1}`}));
+  const core=Array.from({length:10},(_,index)=>({catalogue_id:`core-${index+1}`}));
+  const merged=mergeWithReserve(broad,core,{limit:30,reserve:CORE_RESERVE});
+  assert.deepEqual(merged.slice(0,20).map(match=>match.catalogue_id),broad.slice(0,20).map(match=>match.catalogue_id));
+  assert.deepEqual(merged.slice(20).map(match=>match.catalogue_id),core.map(match=>match.catalogue_id));
+});
+
+test('production retrieval queries broad and core indexed views and returns unique catalogue records',async()=>{
   const filters=[];
   const retrievalEnv={
     AI:{run:async()=>({data:[[1,0,0]]})},
     MEME_INDEX:{query:async(_vector,options)=>{
       filters.push(options.filter);
+      if(options.filter.core) return options.filter.view==='meaning'
+        ? {matches:[{id:'core-meaning-a',score:.9,metadata:{catalogue_id:'waiting-skeleton',view:'meaning',core:true}},{id:'core-meaning-b',score:.8,metadata:{catalogue_id:'first-try',view:'meaning',core:true}}]}
+        : {matches:[{id:'core-example-b',score:.95,metadata:{catalogue_id:'first-try',view:'example',core:true}}]};
       return options.filter.view==='meaning'
         ? {matches:[{id:'meme-meaning-a',score:.9,metadata:{catalogue_id:'waiting-skeleton',view:'meaning'}},{id:'meme-meaning-b',score:.8,metadata:{catalogue_id:'this-is-fine',view:'meaning'}}]}
         : {matches:[{id:'meme-example-b',score:.95,metadata:{catalogue_id:'this-is-fine',view:'example'}},{id:'meme-example-c',score:.85,metadata:{catalogue_id:'first-try',view:'example'}}]};
     }}
   };
   const records=await retrieveCandidates(retrievalEnv,'A situation worth testing.',3);
-  assert.deepEqual(filters,[{view:'meaning'},{view:'example'}]);
-  assert.deepEqual(records.map(record=>record.id),['this-is-fine','waiting-skeleton','first-try']);
+  assert.deepEqual(filters,[{view:'meaning'},{view:'example'},{core:true,view:'meaning'},{core:true,view:'example'}]);
+  assert.deepEqual(records.map(record=>record.id),['this-is-fine','first-try','waiting-skeleton']);
 });
 
 test('public worker saves one-tap feedback for an existing recommendation',async()=>{
@@ -201,5 +234,5 @@ test('static responses receive security and no-index headers',async()=>{
 
 test('health reports the full live catalogue',async()=>{
   const response=await worker.fetch(new Request('https://example.test/api/health'),env);
-  assert.deepEqual(await response.json(),{status:'ok',catalogue:1000});
+  assert.deepEqual(await response.json(),{status:'ok',catalogue:3000});
 });

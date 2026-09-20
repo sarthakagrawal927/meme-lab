@@ -14,7 +14,9 @@ const stage3000NgaSource=parseJsonl(await readFile(new URL('../expansion/sources
 const stage3000Source=parseJsonl(await readFile(new URL('../expansion/sources/stage-3000-source.jsonl',import.meta.url),'utf8'));
 const stage3000Acquisition=JSON.parse(await readFile(new URL('../expansion/sources/stage-3000-acquisition.json',import.meta.url),'utf8'));
 const stage3000Uniqueness=JSON.parse(await readFile(new URL('../expansion/sources/stage-3000-uniqueness-report.json',import.meta.url),'utf8'));
+const stage3000SemanticUniqueness=JSON.parse(await readFile(new URL('../expansion/sources/stage-3000-semantic-uniqueness.json',import.meta.url),'utf8'));
 const stage1000Candidates=parseJsonl(await readFile(new URL('../expansion/candidates/stage-1000.jsonl',import.meta.url),'utf8'));
+const stage3000Candidates=parseJsonl(await readFile(new URL('../expansion/candidates/stage-3000.jsonl',import.meta.url),'utf8'));
 const stage1000Cases=parseJsonl(await readFile(new URL('../eval/relevance_stage1000_v1.jsonl',import.meta.url),'utf8'));
 const cases=parseJsonl(await readFile(new URL('../eval/relevance_holdout_v1.jsonl',import.meta.url),'utf8'));
 const coverageCases=parseJsonl(await readFile(new URL('../eval/relevance_stage300_v1.jsonl',import.meta.url),'utf8'));
@@ -30,12 +32,14 @@ test('stage-300 pool adds 270 non-live candidates without ID collisions',()=>{
   assert(candidates.every(record=>record.media.rights_status==='not_established'));
 });
 
-test('public collection exposes the full live stage-1000 catalogue with previews',()=>{
-  assert.equal(publicCollection.length,1000);
-  assert.equal(publicCollection.filter(record=>record.availability==='live').length,1000);
-  assert.equal(new Set(publicCollection.map(record=>record.id)).size,1000);
+test('public collection exposes the full live stage-3000 catalogue with previews and static signals',()=>{
+  assert.equal(publicCollection.length,3000);
+  assert.equal(publicCollection.filter(record=>record.availability==='live').length,3000);
+  assert.equal(new Set(publicCollection.map(record=>record.id)).size,3000);
   assert(publicCollection.every(record=>record.availability==='live'));
   assert(publicCollection.every(record=>typeof record.image_url==='string'&&record.image_url.startsWith('https://')));
+  assert(publicCollection.every(record=>Number.isFinite(record.meme_strength)&&Number.isFinite(record.asset_quality)));
+  assert(publicCollection.some(record=>record.license_url==='https://creativecommons.org/publicdomain/zero/1.0/'));
 });
 
 test('stage-1000 acquisition adds a bounded non-live source pool',()=>{
@@ -57,6 +61,11 @@ test('stage-3000 acquisition closes the raw source gap with unique fingerprint c
   assert.equal(stage3000Uniqueness.coverage.target_image_fingerprints.total,2227);
   assert.equal(stage3000Uniqueness.summary.incomplete_fingerprint_coverage,false);
   assert.equal(stage3000Uniqueness.summary.eligible_after_hard_blocks,2221);
+  assert.equal(stage3000SemanticUniqueness.selected_records,2000);
+  assert.equal(stage3000SemanticUniqueness.embedding_duplicate_candidates,10);
+  assert.equal(stage3000Candidates.length,2000);
+  assert.doesNotThrow(()=>validateExpansionRecords(stage3000Candidates,{knownIds:publicCollection.slice(0,1000).map(record=>record.id)}));
+  assert.deepEqual(validateMeaningSpecificMetadata(stage3000Candidates),{records:2000});
 });
 
 test('stage-1000 candidate pool contains 700 specific records and a diverse held-out evaluation',()=>{
@@ -68,7 +77,7 @@ test('stage-1000 candidate pool contains 700 specific records and a diverse held
   const base=expansionStatus({manifest,liveCount:300,candidateCount:0,reviewedExternalCount:240,evalSummary:{cases:30,humour:20,no_meme:10,pending_owner_review:30}});
   const status=withCandidatePool(base,{candidateCount:700,reviewedExternalCount:940,evalSummary});
   assert.equal(status.sourced_records,1000);
-  assert.equal(status.records_to_source,2000);
+  assert.equal(status.records_to_source,0);
   assert.equal(status.records_to_ultimate_target,2000);
   assert.equal(status.ultimate_progress_percent,33);
   assert.equal(status.eval.stage_1000_cases,60);
@@ -89,8 +98,8 @@ test('expansion stages preserve direct control and bounded retrieval',()=>{
   assert.equal(status.live_records,300);
   assert.equal(status.candidate_records,0);
   assert.equal(status.assistant_reviewed_external_records,240);
-  assert.equal(status.next_target,3000);
-  assert.equal(status.records_to_source,2700);
+  assert.equal(status.next_target,1000);
+  assert.equal(status.records_to_source,700);
   assert.equal(status.ultimate_target,3000);
   assert.equal(status.records_to_ultimate_target,2700);
   assert.equal(status.ultimate_progress_percent,10);

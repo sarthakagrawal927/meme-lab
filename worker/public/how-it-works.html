@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="See how Meme Lab retrieves and scores matches from a live 1,000-meme collection.">
+  <meta name="description" content="See how Meme Lab retrieves and scores matches from a live 3,000-meme collection.">
   <title>Meme Lab — How it works</title>
   <link rel="stylesheet" href="/app.css">
 </head>
@@ -22,23 +22,23 @@
     <section class="page-intro how-intro">
       <p class="eyebrow">PRODUCT + IMPLEMENTATION</p>
       <h1>How one comment<br>becomes the best options.</h1>
-      <p class="intro">The live product compares meaning, real-world usage, social dynamics, and tone—not just words. It retrieves 30 likely matches from 1,000 memes, ranks the best three, then explains each choice.</p>
+      <p class="intro">The live product compares meaning, real-world usage, social dynamics, and tone—not just words. It retrieves 30 likely matches from 3,000 memes, ranks the best three, then explains each choice.</p>
       <a class="primary page-cta" href="/">Try a comment <span aria-hidden="true">→</span></a>
     </section>
 
     <section class="live-strip" aria-label="Current implementation status">
       <span class="status-dot" aria-hidden="true"></span>
-      <div><strong>Live now: <span data-status="live_records">1,000</span> reactions</strong><span>Semantic retrieval · three scored options · serious-content guard · feedback</span></div>
+      <div><strong>Live now: <span data-status="live_records">3,000</span> reactions</strong><span>Semantic retrieval · three scored options · serious-content guard · feedback</span></div>
       <span class="live-pill">PERSONAL TOOL</span>
     </section>
 
     <section class="technical-section" aria-labelledby="live-system-title">
       <div class="technical-heading">
         <div>
-          <p class="eyebrow">THE LIVE 1,000</p>
+          <p class="eyebrow">THE LIVE 3,000</p>
           <h2 id="live-system-title">Retrieve. Classify. Explain.</h2>
         </div>
-        <p>Each reference has a name, meaning, relational pattern, example, tags, provenance, and media status. Two semantic views narrow 1,000 records to 30 before a dedicated classifier ranks the best three.</p>
+        <p>Each reference has a name, meaning, relational pattern, example, provenance, media status, meme-strength score, and image-quality score. Two semantic views narrow 3,000 records to 30 before a dedicated classifier ranks the best three.</p>
       </div>
       <ol class="pipeline" aria-label="Current recommendation pipeline">
         <li><span>01</span><strong>Validate</strong><p>Trim and bound the comment. Treat it as untrusted text.</p></li>
@@ -54,7 +54,7 @@
           <p class="eyebrow">THE RETRIEVAL SYSTEM</p>
           <h2 id="retrieval-title">The path scales to 30,000.</h2>
         </div>
-        <p>At 3,000, retrieval keeps the prompt bounded. At 30,000, a first routing decision chooses meme, movie dialogue, or no reaction before searching the matching corpus.</p>
+        <p>At 3,000, retrieval keeps the prompt bounded. Relevance chooses the eligible three first; static meme strength and image quality only reorder genuinely close calls. At 30,000, a router will choose meme, movie dialogue, or no reaction before searching the matching corpus.</p>
       </div>
       <div class="flow-line" role="img" aria-label="Comment becomes an embedding, dual-view semantic search returns 30 candidates, and the reranker returns three options">
         <div><span>COMMENT</span><strong>What happened</strong></div>
@@ -82,7 +82,7 @@
         <p id="expansion-progress"><span data-status="live_records">300</span> references are live in the personal tool. Evaluation now guides metadata cleanup and the next expansion.</p>
       </div>
       <div class="goal-meter" aria-label="Progress toward 3,000 live memes">
-        <div class="goal-meter-copy"><strong><span data-status="live_records">1,000</span> / <span data-status="ultimate_target">3,000</span> live</strong><span>“I love you 3,000” is the north star.</span></div>
+        <div class="goal-meter-copy"><strong><span data-status="live_records">3,000</span> / <span data-status="ultimate_target">3,000</span> live</strong><span>“I love you 3,000” is live.</span></div>
         <div class="goal-track" aria-hidden="true"><span id="ultimate-progress"></span></div>
         <small><span data-status="records_to_ultimate_target">2,700</span> memes remaining · <span data-status="ultimate_progress_percent">10</span>% complete</small>
       </div>
@@ -90,7 +90,7 @@
         <li class="stage-live"><span class="stage-number">30</span><div><strong>Seed control</strong><p>Curated metadata, direct all-candidate comparison, live public feedback.</p></div><em>LIVE</em></li>
         <li class="stage-live"><span class="stage-number">300</span><div><strong>Common reactions</strong><p>Semantic retrieval, scored multi-option results, searchable collection, and feedback.</p></div><em>LIVE</em></li>
         <li class="stage-live"><span class="stage-number">1K</span><div><strong>Broader vocabulary</strong><p>Seven hundred new records add long-tail reactions with searchable previews and meaning-specific metadata.</p></div><em>LIVE</em></li>
-        <li class="stage-building"><span class="stage-number">3K</span><div><strong>I love you 3,000</strong><p>The raw source gap is closed with 2,227 candidates from canonical memes and CC0 open originals. All images are fingerprinted; six exact duplicates are blocked and 87 fuzzy matches need review.</p></div><em>BUILDING</em></li>
+        <li class="stage-live"><span class="stage-number">3K</span><div><strong>I love you 3,000</strong><p>Two thousand additions were promoted from 2,227 candidates after exact-image, perceptual-hash, alias, and local CLIP embedding checks. Local Qwen generated specific sentence metadata; every result now reports strength and image quality separately from fit.</p></div><em>LIVE</em></li>
         <li><span class="stage-number">30K</span><div><strong>Movie dialogue reactions</strong><p>Route to a separate dialogue corpus first, then retrieve and rank within it so memes do not crowd out the right line.</p></div><em>NEXT CORPUS</em></li>
       </ol>
     </section>
@@ -98,8 +98,8 @@
     <section class="eval-card" aria-labelledby="eval-title">
       <div>
         <p class="eyebrow">THE EVAL DATASET</p>
-        <h2 id="eval-title"><span data-status="eval_cases">170</span> labelled situations guide the next jump.</h2>
-        <p>The original and expansion sets cover 50 situations. The 1,000-meme work adds a 60-case tuned regression set plus a fresh 60-case shadow set; both contain 45 humour and 15 no-meme prompts. Labels were independently cross-audited and still need owner review.</p>
+        <h2 id="eval-title"><span data-status="eval_cases">100</span> labelled situations guide the next jump.</h2>
+        <p>The original and expansion sets cover 50 situations. The 1,000-meme work added a 60-case tuned regression set and a fresh 60-case shadow set. The 3,000-meme gate keeps that independent shadow set and adds 40 long-tail cases, for 100 cases total. Labels remain pending owner review.</p>
       </div>
       <ul>
         <li><strong>Top 1</strong><span>Did the first choice land?</span></li>
@@ -107,7 +107,7 @@
         <li><strong>Abstention</strong><span>Did it stay serious when humour did not belong?</span></li>
         <li><strong>Calibration</strong><span>Did low confidence actually mean weaker results?</span></li>
       </ul>
-      <p class="eval-note" id="eval-status"><strong>Fresh shadow set:</strong> dual-view retrieval reached 64% retrieval, 56% top-one relevance, 64% top-three relevance, and 100% correct serious-content abstention. The separate tuned regression set reached 96% top-three. Labels remain pending owner review.</p>
+      <p class="eval-note" id="eval-status"><strong>Current 100-case set:</strong> retrieval reached 72% at 30, 67% top-one relevance, 71% top-three relevance, and 96% correct serious-content abstention. The fresh long-tail slice reached 93% retrieval and top-three. Labels remain pending owner review.</p>
     </section>
 
     <section class="honesty-card">
@@ -120,8 +120,8 @@
   </main>
 
   <footer>
-    <a href="/collection">Browse all 1,000 live memes</a>
-    <span>Current stage: 1,000 live · 3,000 building</span>
+    <a href="/collection">Browse all 3,000 live memes</a>
+    <span>Current stage: 3,000 live · 30,000 next</span>
   </footer>
   <script type="module" src="/how-it-works.js"></script>
 </body>

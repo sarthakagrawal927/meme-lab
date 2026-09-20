@@ -1,0 +1,31 @@
+{
+  "version": "stage-3000-local-model-review-v1",
+  "source_records": 2227,
+  "selected_records": 2000,
+  "rejected_records": 221,
+  "selected_by_provider": {
+    "JustMeme.wtf": 811,
+    "National Gallery of Art, Washington": 1189
+  },
+  "local_scoring_model": "Xenova/clip-vit-base-patch32 (quantized q8, local inference)",
+  "metadata_model": "qwen3:4b via local Ollama",
+  "score_formula": "62% meme strength + 18% asset quality + 20% embedding uniqueness",
+  "meme_strength": {
+    "minimum": 25,
+    "median": 39,
+    "maximum": 75
+  },
+  "asset_quality": {
+    "minimum": 16,
+    "median": 81,
+    "maximum": 88
+  },
+  "uniqueness_score": {
+    "minimum": 7,
+    "median": 72,
+    "maximum": 100
+  },
+  "human_validated": false,
+  "status": "live_assistant_reviewed_pending_owner_feedback",
+  "uncertainty": "Selection, strength, quality, uniqueness and semantic descriptions are locally model-authored and not human validated."
+}

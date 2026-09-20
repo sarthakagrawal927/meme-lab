@@ -1,0 +1,20 @@
+{
+  "version": "stage-3000-eval-v1",
+  "label_status": "mixed_prior_shadow_and_synthetic_pending_owner_review",
+  "human_validated": false,
+  "sources": {
+    "prior_shadow": "eval/relevance_stage1000_shadow_v1.jsonl",
+    "reviewed_stage3000": "expansion/reviewed/stage-3000.jsonl",
+    "fresh_humour": "eval/relevance_stage3000_fresh_humour.jsonl",
+    "fresh_no_meme": "eval/relevance_stage3000_fresh_no_meme.jsonl"
+  },
+  "cases": 100,
+  "humour": 75,
+  "no_meme": 25,
+  "prior_shadow_cases": 60,
+  "synthetic_assistant_authored_cases": 40,
+  "fresh_humour_cases": 30,
+  "fresh_no_meme_cases": 10,
+  "distinct_stage3000_targets": 30,
+  "pending_owner_review": 100
+}

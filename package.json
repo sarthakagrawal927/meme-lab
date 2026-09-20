@@ -12,6 +12,7 @@
     "build:public-catalogue": "node scripts/build-public-catalogue.mjs",
     "build:expansion": "node scripts/build-expansion.mjs",
     "build:stage-1000": "node scripts/build-stage-1000.mjs",
+    "build:stage-3000": "node scripts/build-stage-3000.mjs",
     "build:stage-1000-shadow-eval": "node scripts/build-stage-1000-shadow-eval.mjs",
     "acquire:stage-300": "node scripts/acquire-stage-300.mjs",
     "acquire:stage-1000": "node scripts/acquire-stage-1000.mjs",
@@ -20,7 +21,14 @@
     "build:stage-3000-source": "node scripts/build-stage-3000-source.mjs",
     "fingerprint:stage-3000": "node scripts/fingerprint-stage-3000-images.mjs",
     "audit:stage-3000": "node scripts/audit-stage-3000-uniqueness.mjs --fingerprints expansion/sources/stage-3000-image-fingerprints.json --output expansion/sources/stage-3000-uniqueness-report.json",
-    "build:public": "npm run build:public-catalogue && npm run build:expansion && npm run build:stage-1000",
+    "signals:stage-3000": "node scripts/build-stage-3000-local-signals.mjs",
+    "select:stage-3000": "uv run scripts/select-stage-3000.py",
+    "metadata:stage-3000": "node scripts/generate-stage-3000-metadata.mjs --resume",
+    "metadata:stage-3000:merge": "node scripts/merge-stage-3000-metadata.mjs",
+    "eval:stage-3000:generate": "node scripts/generate-stage-3000-eval.mjs",
+    "eval:stage-3000:build": "node scripts/build-stage-3000-eval.mjs",
+    "eval:stage-3000:validate": "node scripts/validate-stage-3000-eval.mjs",
+    "build:public": "npm run build:public-catalogue && npm run build:expansion && npm run build:stage-1000 && npm run build:stage-3000",
     "dev:public": "npm run build:public && wrangler dev",
     "deploy:public": "npm run build:public && wrangler deploy",
     "types:worker": "wrangler types worker-configuration.d.ts",
@@ -42,9 +50,12 @@
     "experiment:stage-1000-shadow-jev": "node scripts/run-stage-1000-jev.mjs http://127.0.0.1:8789 shadow",
     "experiment:stage-1000-shadow-safety": "node scripts/run-stage-1000-safety-eval.mjs shadow",
     "experiment:stage-1000-rescore": "node scripts/rescore-stage-1000-results.mjs",
-    "experiment:stage-1000-shadow-rescore": "node scripts/rescore-stage-1000-results.mjs shadow"
+    "experiment:stage-1000-shadow-rescore": "node scripts/rescore-stage-1000-results.mjs shadow",
+    "experiment:stage-3000": "node scripts/run-stage-3000-jev.mjs",
+    "experiment:stage-3000-safety": "node scripts/run-stage-3000-safety-eval.mjs"
   },
   "devDependencies": {
+    "@huggingface/transformers": "^4.3.0",
     "wrangler": "^4.135.0"
   }
 }

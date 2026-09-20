@@ -1,4 +1,4 @@
-import {catalogue} from './catalogue.stage1000.generated.mjs';
+import {catalogue} from './catalogue.stage3000.generated.mjs';
 import {humourBelongs,needsSeriousHandling,rankCandidates,requiresFactualAnswer} from './classification.mjs';
 import {MODEL,validateSelection,normalizeSelection,normalizeRankedSelection,validateRankedSelection,presentSelection} from './recommendation.mjs';
 import {retrieveCandidates} from './retrieval.mjs';
@@ -202,7 +202,7 @@ function secureAsset(response) {
   headers.set('Referrer-Policy','no-referrer');
   headers.set('X-Frame-Options','DENY');
   headers.set('Permissions-Policy','camera=(), microphone=(), geolocation=()');
-  headers.set('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https://i.imgflip.com https://api.memegen.link; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'");
+  headers.set('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https://i.imgflip.com https://api.memegen.link https://api.nga.gov; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'");
   headers.set('X-Robots-Tag','noindex, nofollow');
   return new Response(response.body,{status:response.status,statusText:response.statusText,headers});
 }

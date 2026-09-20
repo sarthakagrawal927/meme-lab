@@ -1,0 +1,99 @@
+{
+  "version": "stage-3000-local-clip-selection-v1",
+  "model": "Xenova/clip-vit-base-patch32 (quantized q8, local inference)",
+  "reference_records": 1000,
+  "target_records": 2221,
+  "duplicate_threshold": 0.985,
+  "embedding_duplicate_candidates": 10,
+  "selected_records": 2000,
+  "rejected_records": 221,
+  "selected_by_provider": {
+    "JustMeme.wtf": 811,
+    "National Gallery of Art, Washington": 1189
+  },
+  "score_formula": "62% meme strength + 18% asset quality + 20% embedding uniqueness",
+  "selection_score": {
+    "minimum": 43.98,
+    "median": 53.65,
+    "maximum": 74.42
+  },
+  "meme_strength": {
+    "minimum": 25,
+    "median": 39.0,
+    "maximum": 75
+  },
+  "asset_quality": {
+    "minimum": 16,
+    "median": 81.0,
+    "maximum": 88
+  },
+  "uniqueness_score": {
+    "minimum": 7,
+    "median": 72.0,
+    "maximum": 100
+  },
+  "duplicate_examples": [
+    {
+      "id": "117981773-boy-holding-his-breath",
+      "nearest_id": "41022477-hold-fart",
+      "nearest_scope": "reference",
+      "similarity": 0.992984
+    },
+    {
+      "id": "97554839-man-triggered-at-school",
+      "nearest_id": "55694416-straining-kid",
+      "nearest_scope": "reference",
+      "similarity": 0.992078
+    },
+    {
+      "id": "168457574-holding-hands",
+      "nearest_id": "174628976-hand-clasping",
+      "nearest_scope": "reference",
+      "similarity": 0.989507
+    },
+    {
+      "id": "rollsafe",
+      "nearest_id": "roll-safe",
+      "nearest_scope": "reference",
+      "similarity": 0.989396
+    },
+    {
+      "id": "happy-guy-rage-face",
+      "nearest_id": "tears-of-joy",
+      "nearest_scope": "target",
+      "similarity": 0.987986
+    },
+    {
+      "id": "tears-of-joy",
+      "nearest_id": "happy-guy-rage-face",
+      "nearest_scope": "target",
+      "similarity": 0.987986
+    },
+    {
+      "id": "grumpy-cat-happy",
+      "nearest_id": "grumpy-cat",
+      "nearest_scope": "reference",
+      "similarity": 0.98595
+    },
+    {
+      "id": "12558820-side-eyeing-chloe",
+      "nearest_id": "23444927-confused-little-girl",
+      "nearest_scope": "target",
+      "similarity": 0.985265
+    },
+    {
+      "id": "23444927-confused-little-girl",
+      "nearest_id": "12558820-side-eyeing-chloe",
+      "nearest_scope": "target",
+      "similarity": 0.985265
+    },
+    {
+      "id": "feelsgood",
+      "nearest_id": "19750160-feels-good-man",
+      "nearest_scope": "reference",
+      "similarity": 0.985261
+    }
+  ],
+  "selected_ids_sha256": "ee71f6e58b44847925978635b1277f6a865a8a92ba58dd78f3cbd0e0e841c26e",
+  "human_validated": false
+}

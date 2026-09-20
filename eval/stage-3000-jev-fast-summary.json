@@ -1,0 +1,30 @@
+{
+  "version": "stage-3000-jev-fast-v1",
+  "created_at": "2026-09-20T16:18:21.310Z",
+  "input_hash": "71f206869dcb6f90cce37e8fc6a11ec14019cc3f664e9fa9bb61bf45e4b58345",
+  "labels": "mixed_prior_shadow_and_synthetic_pending_owner_review",
+  "human_validated": false,
+  "total_dataset_cases": 100,
+  "evaluated_humour_cases": 75,
+  "unevaluated_no_meme_cases": 25,
+  "metrics": {
+    "retrieval_at_30": 0.72,
+    "top_1": 0.6666666666666666,
+    "top_3": 0.7066666666666667,
+    "top_3_given_retrieval": 0.9814814814814815
+  },
+  "slices": {
+    "prior_shadow": {
+      "retrieval_at_30": 0.5777777777777777,
+      "top_1": 0.5333333333333333,
+      "top_3": 0.5555555555555556,
+      "top_3_given_retrieval": 0.9615384615384616
+    },
+    "fresh_stage3000": {
+      "retrieval_at_30": 0.9333333333333333,
+      "top_1": 0.8666666666666667,
+      "top_3": 0.9333333333333333,
+      "top_3_given_retrieval": 1
+    }
+  }
+}

@@ -1,21 +1,27 @@
 # Meme Lab product contract
 
-Meme Lab helps its owner judge apt existing cultural references by running local, paired, feedback-backed selector experiments.
+Meme Lab turns one pasted comment or situation into a useful meme immediately.
 
-## Audience
+## Audience and outcome
 
-The first user is the owner, testing English-oriented internet references against fresh situations and conversations.
+The first user is the owner, but the playground is public for lightweight feedback. The best match appears first, followed by up to two scored alternatives. A low-confidence match stays visibly low confidence; a serious or genuinely mismatched input gets no meme.
 
-## Outcome
+## Product behavior
 
-Determine whether enriched contextual metadata improves reference selection over names alone without increasing inappropriate joking. Separate coverage, selection, perspective/taste, abstention and asset delivery failures.
+The live catalogue contains 3,000 searchable references. Every reference has a specific meaning, social dynamic, example, near-miss, provenance, media state, meme-strength score, and image-quality score.
 
-## Mechanism
+Runtime ranking is deliberately bounded:
 
-Compare the same input, model, style and candidate pool in seeded names-only and enriched A/B arms. Conceal condition labels and rationales until both arms are judged. Preserve runs and revisions as local append-only events.
+1. Two semantic searches retrieve 30 likely references.
+2. A classifier chooses the three most relevant candidates.
+3. Static strength and image quality may reorder only candidates within a narrow relevance margin.
+4. A language model writes a short, comment-specific explanation and fit score.
+5. Feedback records whether the recommendation landed or missed.
 
-## Lifecycle and next action
+## Evidence boundary
 
-This is a local experiment, not a production meme service or a human-validated benchmark. The next action is to review the stored five-pair session, then collect a fresh 20-humour/10-no-meme holdout before further prompt or catalogue tuning.
+Catalogue metadata, strength, quality, uniqueness, and evaluation labels are model-authored unless explicitly marked otherwise. They are useful engineering evidence, not human-validated cultural truth. Media provenance and rights state remain visible; CC0 open originals are labelled separately from source previews whose redistribution rights are not established.
 
-The full scope, exclusions and evidence boundaries remain authoritative in [PRD.md](PRD.md).
+## Next decision
+
+Improve ranking from live misses and the 100-case evaluation set. Once the 3,000-meme pipeline is stable, expand toward 30,000 reactions with movie dialogue as a separate routed corpus.

@@ -214,7 +214,7 @@ export function validateStages(manifest) {
 }
 
 export function expansionStatus({manifest,liveCount,candidateCount,reviewedExternalCount=0,evalSummary,coverageEvalSummary=null,experimentSummary=null,coverageExperimentSummary=null}) {
-  const next=manifest.stages.find(stage=>stage.status==='building')??manifest.stages.find(stage=>stage.status==='planned');
+  const next=manifest.stages.find(stage=>stage.target_records>liveCount)??manifest.stages.at(-1);
   const ultimateTarget=manifest.stages.at(-1).target_records;
   const sourcedRecords=liveCount+candidateCount;
   return {

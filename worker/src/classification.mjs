@@ -1,3 +1,5 @@
+import {rankRelevanceCandidates} from './candidate-signals.mjs';
+
 export const JEV_ENDPOINT='https://classifier.dev/v1/classify';
 
 const HUMOUR_LABEL='meme-ready humour or a playful reaction belongs';
@@ -51,9 +53,10 @@ export async function rankCandidates(comment,candidates,{fetchImpl=fetch,timeout
     fetchImpl,
     timeoutMs
   });
-  return candidates.map((record,index)=>({
+  const scored=candidates.map((record,index)=>({
     ...record,
     classifier_score:Number.isFinite(Number(result.scores[labels[index]]))?Number(result.scores[labels[index]]):0,
     retrieval_rank:index+1
-  })).sort((a,b)=>b.classifier_score-a.classifier_score||a.retrieval_rank-b.retrieval_rank).slice(0,limit);
+  }));
+  return rankRelevanceCandidates(scored,{limit});
 }

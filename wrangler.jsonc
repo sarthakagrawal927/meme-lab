@@ -22,7 +22,7 @@
   "vectorize": [
     {
       "binding": "MEME_INDEX",
-      "index_name": "meme-lab-catalogue-stage-1000"
+      "index_name": "meme-lab-catalogue-stage-3000"
     }
   ],
   "d1_databases": [

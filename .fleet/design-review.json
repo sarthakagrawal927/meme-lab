@@ -2,7 +2,7 @@
   "$schema": "fleet.design-review.v1",
   "version": 1,
   "project": "meme_lab",
-  "target": "Meme Lab primary experiment workspace",
+  "target": "Meme Lab public 3,000-reference playground",
   "surfaceMode": "operate",
   "mode": "overhaul",
   "register": "product",
@@ -41,17 +41,17 @@
       }
     },
     "contract": {
-      "purpose": "Help the owner test whether metadata improves apt existing-meme selection without forcing a joke.",
-      "purposeSource": "PRODUCT.md and PRD.md sections 1 and 7",
-      "canonicalPurpose": "Meme Lab helps its owner judge apt existing cultural references by running local, paired, feedback-backed selector experiments.",
+      "purpose": "Turn one pasted comment or situation into a useful meme immediately without forcing a joke.",
+      "purposeSource": "PRODUCT.md",
+      "canonicalPurpose": "Meme Lab turns one pasted comment or situation into a useful meme immediately.",
       "purposeAlignment": "match",
       "driftNote": "",
-      "audience": "The owner running English-first local meme-selection experiments.",
-      "job": "Pre-label a situation, run identical names-only and enriched conditions, judge blind arms, then reveal the diagnosis.",
+      "audience": "The owner first, with a public playground for lightweight feedback.",
+      "job": "Paste one comment, see the best meme and up to two alternatives, then record whether the result landed.",
       "thesis": "A crisp white working canvas with pale-blue navigation, mint and yellow state landmarks, restrained borders and the experiment visible immediately.",
       "system": "Clean Canvas uses a lightweight workspace rail, compact full-width situation setup and equal A/B comparison panes; catalogue, sources and history remain secondary.",
-      "signature": "Seeded A/B arm cards that conceal condition labels and rationales until both judgments are recorded.",
-      "risk": "Candidate names must remain visible for meaningful judgment, so the workflow is condition-blind rather than fully blind; the selected visual system must also scale to catalogue, sources and history."
+      "signature": "A best-match result with two restrained alternatives, separate fit and static-quality signals, and one-tap feedback.",
+      "risk": "Strength and image quality must remain subordinate to contextual relevance, while a 3,000-item collection stays searchable and calm."
     }
   },
   "evidence": {

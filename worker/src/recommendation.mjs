@@ -1,13 +1,21 @@
-import {catalogue} from './catalogue.stage1000.generated.mjs';
+import {catalogue} from './catalogue.stage3000.generated.mjs';
+import {staticCandidateSignals} from './candidate-signals.mjs';
 
 export const MODEL='@cf/meta/llama-3.3-70b-instruct-fp8-fast';
 const allowedIds=new Set(catalogue.map(record=>record.id));
-const publicById=new Map(catalogue.map(record=>[record.id,{
-  id:record.id,
-  name:record.name,
-  image_url:record.image_url,
-  media_status:record.media_status
-}]));
+const publicById=new Map(catalogue.map(record=>{
+  const {meme_strength,asset_quality,signal_summary}=staticCandidateSignals(record);
+  return [record.id,{
+    id:record.id,
+    name:record.name,
+    image_url:record.image_url,
+    media_status:record.media_status,
+    license_url:record.license_url,
+    meme_strength,
+    asset_quality,
+    signal_summary
+  }];
+}));
 const comparable=value=>value.toLocaleLowerCase().replaceAll(/[^\p{L}\p{N}]+/gu,' ').trim();
 
 function hasCompleteExplanation(reason,candidateId) {

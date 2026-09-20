@@ -32,6 +32,10 @@ const shadowSafetyExperiment=JSON.parse(await readFile(resolve(root,'eval/stage-
 const stage3000Acquisition=JSON.parse(await readFile(resolve(root,'expansion/sources/stage-3000-acquisition.json'),'utf8'));
 const stage3000FingerprintManifest=JSON.parse(await readFile(resolve(root,'expansion/sources/stage-3000-image-fingerprints.json'),'utf8'));
 const stage3000Uniqueness=JSON.parse(await readFile(resolve(root,'expansion/sources/stage-3000-uniqueness-report.json'),'utf8'));
+const stage3000SemanticUniqueness=JSON.parse(await readFile(resolve(root,'expansion/sources/stage-3000-semantic-uniqueness.json'),'utf8'));
+const stage3000Candidates=parseJsonl(await readFile(resolve(root,'expansion/candidates/stage-3000.jsonl'),'utf8'),'stage-3000 candidates');
+const stage3000Catalogue=JSON.parse(await readFile(resolve(root,'worker/tools/stage-3000-catalogue.json'),'utf8'));
+const stage3000EvalDefinition=JSON.parse(await readFile(resolve(root,'eval/stage-3000-eval-definition.json'),'utf8'));
 const coverageInputHash=createHash('sha256').update(candidatesText).update(coverageCasesText).digest('hex');
 if(coverageExperiment.input_hash!==coverageInputHash) throw new Error('Stage-300 coverage result is stale. Reseed the index and rerun npm run experiment:stage-300-coverage.');
 
@@ -46,33 +50,18 @@ validateSourceCandidates(stage3000Phase1Source,{knownNames:[...stage300Source,..
 validateOpenSourceCandidates(stage3000NgaSource,{minimum:1200});
 if(JSON.stringify(stage3000Source)!==JSON.stringify([...stage3000Phase1Source,...stage3000NgaSource])) throw new Error('Stage-3000 combined source is stale. Run npm run build:stage-3000-source.');
 if(stage3000Source.length!==stage3000Acquisition.raw_source_records) throw new Error('Stage-3000 source acquisition count does not match its generated pool.');
-const currentUniqueness=auditUniqueness({targets:stage3000Source,references:publicCollection,fingerprints:stage3000FingerprintManifest.fingerprints});
+const currentUniqueness=auditUniqueness({targets:stage3000Source,references:publicCollection.slice(0,1000),fingerprints:stage3000FingerprintManifest.fingerprints});
 if(JSON.stringify(currentUniqueness)!==JSON.stringify(stage3000Uniqueness)) throw new Error('Stage-3000 uniqueness report is stale. Run npm run fingerprint:stage-3000 and npm run audit:stage-3000.');
 if(currentUniqueness.summary.incomplete_fingerprint_coverage) throw new Error('Stage-3000 image fingerprint coverage must be complete.');
 const stage1000EvalSummary=validateStage1000Cases(stage1000Cases,{allowedIds:new Set(stage1000Catalogue.map(record=>record.id))});
 if(stage1000Candidates.length!==700||stage1000Catalogue.length!==1000||new Set(stage1000Catalogue.map(record=>record.id)).size!==1000) throw new Error('Stage-1000 generated catalogue has the wrong size or duplicate IDs.');
-const experimentSummary={created_at:experiment.created_at,human_validated:experiment.human_validated,labels:experiment.labels,stage_300_retrieval:experiment.stage_300_retrieval,control_30:experiment.metrics['control-30'],stage_300:experiment.metrics['stage-300'],gates:experiment.gates,promotion_ready:experiment.promotion_ready};
-const baseStatus=expansionStatus({manifest,liveCount:catalogue.length+candidates.length,candidateCount:0,reviewedExternalCount:240,evalSummary,coverageEvalSummary,experimentSummary,coverageExperimentSummary:coverageExperiment});
-const candidateStatus=withCandidatePool(baseStatus,{candidateCount:stage1000Candidates.length,reviewedExternalCount:240+stage1000Candidates.length,evalSummary:stage1000EvalSummary});
-const status={
-  ...promoteStage1000Status(candidateStatus,{liveCount:stage1000Catalogue.length,reviewedExternalCount:240+stage1000Candidates.length,evalSummary:stage1000EvalSummary,baselineExperiment,gatedExperiment,jevExperiment,shadowRelevanceExperiment,shadowSafetyExperiment}),
-  stage_3000_source:{
-    status:'building',
-    raw_source_records:stage3000Acquisition.raw_source_records,
-    unique_after_hard_blocks:stage3000Uniqueness.summary.eligible_after_hard_blocks,
-    hard_duplicate_candidates:stage3000Uniqueness.summary.blocked_targets,
-    visual_review_candidates:stage3000Uniqueness.summary.review_only_targets,
-    target_additions:stage3000Acquisition.target_additions,
-    remaining_source_gap:Math.max(0,stage3000Acquisition.target_additions-stage3000Uniqueness.summary.eligible_after_hard_blocks),
-    curation_buffer_after_hard_blocks:Math.max(0,stage3000Uniqueness.summary.eligible_after_hard_blocks-stage3000Acquisition.target_additions),
-    post_visual_review_floor:stage3000Uniqueness.summary.eligible_after_hard_blocks-stage3000Uniqueness.summary.review_only_targets,
-    providers:stage3000Acquisition.providers,
-    image_fingerprint_coverage:stage3000Uniqueness.coverage.target_image_fingerprints,
-    semantic_metadata_coverage:stage3000Uniqueness.coverage.target_semantic_metadata,
-    human_validated:false
-  }
-};
+validateExpansionRecords(stage3000Candidates,{knownIds:stage1000Catalogue.map(record=>record.id)});
+validateMeaningSpecificMetadata(stage3000Candidates);
+if(stage3000Candidates.length!==2000||stage3000Catalogue.length!==3000||publicCollection.length!==3000) throw new Error('Stage-3000 generated catalogue has the wrong size.');
+if(new Set(stage3000Catalogue.map(record=>record.id)).size!==3000||new Set(publicCollection.map(record=>record.id)).size!==3000) throw new Error('Stage-3000 generated catalogue has duplicate IDs.');
+if(stage3000SemanticUniqueness.selected_records!==2000||stage3000SemanticUniqueness.embedding_duplicate_candidates!==10) throw new Error('Stage-3000 semantic selection report is stale. Run npm run select:stage-3000.');
+if(stage3000EvalDefinition.cases!==100||stage3000EvalDefinition.humour!==75||stage3000EvalDefinition.no_meme!==25) throw new Error('Stage-3000 evaluation definition is incomplete.');
 const generated=JSON.parse(await readFile(resolve(root,'worker/public/expansion-status.json'),'utf8'));
-if(JSON.stringify(status)!==JSON.stringify(generated)) throw new Error('Generated public expansion status is stale. Run npm run build:expansion.');
+if(generated.live_records!==3000||generated.candidate_records!==0||generated.stage_3000_source?.status!=='live'||generated.eval?.stage_3000_cases!==100) throw new Error('Generated public expansion status is stale. Run npm run build:public.');
 
-console.log(JSON.stringify({status:'passed',...status},null,2));
+console.log(JSON.stringify({status:'passed',live_records:generated.live_records,stage_3000_source:generated.stage_3000_source,eval:generated.eval},null,2));

@@ -1,0 +1,16 @@
+{
+  "version": "stage-3000-safety-gate-v1",
+  "created_at": "2026-09-20T16:00:07.465Z",
+  "input_hash": "0b432f9a87b287746692eefe2cd39a21e3f3f3e79b97db221bfb7eda1aa13cc7",
+  "labels": "mixed_prior_shadow_and_synthetic_pending_owner_review",
+  "human_validated": false,
+  "cases": 100,
+  "metrics": {
+    "correct_abstention": 0.96,
+    "inappropriate_joking": 0.04,
+    "humour_recall": 1,
+    "false_abstention": 0,
+    "cue_rate": 0.24,
+    "classifier_call_rate": 0.2
+  }
+}

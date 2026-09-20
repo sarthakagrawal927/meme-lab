@@ -1,10 +1,10 @@
-# Meme Lab — local experiment
+# Meme Lab
 
-Read [PRD.md](PRD.md) for the product scope. This folder includes a runnable starter **and the complete original dataset release**, not just a mockup.
+Read [PRODUCT.md](PRODUCT.md) for the current product contract and [PRD.md](PRD.md) for the original experiment scope. This folder includes the live Worker, the local experiment harness, and the complete original dataset release.
 
 ## Live playground
 
-Paste one comment and get ranked meme options at **https://memes.significanthobbies.com**. One-tap feedback is retained for 30 days so the ranking can improve. The public Worker uses the 1,000-reference catalogue and does not expose the local experiment history, holdout, or results. The `workers.dev` route remains an equivalent preview URL.
+Paste one comment and get ranked meme options at **https://memes.significanthobbies.com**. One-tap feedback is retained for 30 days so the ranking can improve. The public Worker uses the 3,000-reference catalogue and does not expose local experiment history or raw results. The `workers.dev` route remains an equivalent preview URL.
 
 ## Open it locally
 
@@ -47,7 +47,7 @@ Compatibility varies by provider. Set `MEME_JSON_MODE=false` only if your compat
 
 Jev does **not** implement either local model route. The public Worker uses classifier.dev's Jev fast tier to rank a 30-item semantic shortlist and to guard serious help-seeking prompts; Cloudflare Workers AI generates the candidate explanations. If classifier.dev is unavailable, the existing structured Workers AI selector is the fallback.
 
-The 1,000-record remote index stores separate `meaning` and `example` vectors. Before seeding a new Vectorize index, create string metadata indexing for `view` and boolean metadata indexing for `control`, wait for both mutations to finish, then run the tool's `/seed` endpoint. Vectorize does not retroactively index metadata on vectors inserted before a metadata index exists. Keep reseeding on the experiment Worker because delete/upsert processing is asynchronous; verify `vectorCount` and a filtered query before deploying production code that depends on the new vectors.
+The 3,000-record remote index stores separate `meaning` and `example` vectors, for 6,000 vectors total. Before seeding a new Vectorize index, create string metadata indexing for `view` plus boolean metadata indexing for `control` and `core`, wait for all mutations to finish, then call the tool's `/seed` endpoint in six bounded 500-record ranges (`start=0,500,…,2500&limit=500`). The `core` flag reserves ten shortlist positions for the original 1,000 without preventing the broader 3,000-record search from contributing the other twenty. Vectorize does not retroactively index metadata on vectors inserted before a metadata index exists. Keep reseeding on the experiment Worker because delete/upsert processing is asynchronous; verify `vectorCount` and a filtered query before deploying production code that depends on the new vectors.
 
 ## First run
 

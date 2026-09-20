@@ -134,7 +134,7 @@ export function createApp(config, {storeDir=resolve(ROOT,'runs')}={}) {
         commonHeaders(res);
         // Original single-file HTML intentionally embeds its own script. It is preserved byte-for-byte.
         if(path.startsWith('/design-probes')) res.setHeader('Content-Security-Policy',"default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; frame-ancestors 'none'");
-        else if(!path.startsWith('/original/')) res.setHeader('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https://i.imgflip.com https://api.memegen.link; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'");
+        else if(!path.startsWith('/original/')) res.setHeader('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https://i.imgflip.com https://api.memegen.link https://api.nga.gov; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'");
         res.writeHead(200,{'Content-Type':mime[extname(file)]||'text/plain; charset=utf-8'}); return res.end(await readFile(file));
       }
       if(req.headers['x-meme-lab']!=='1') return json(res,403,{error:'Missing local-app request header.'});

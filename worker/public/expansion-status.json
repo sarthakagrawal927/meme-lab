@@ -1,27 +1,28 @@
 {
   "version": "catalogue-expansion-v1",
-  "live_records": 1000,
+  "live_records": 3000,
   "candidate_records": 0,
-  "assistant_reviewed_external_records": 940,
-  "sourced_records": 1000,
+  "assistant_reviewed_external_records": 2940,
+  "sourced_records": 3000,
   "next_target": 3000,
-  "records_to_source": 2000,
+  "records_to_source": 0,
   "ultimate_target": 3000,
-  "records_to_ultimate_target": 2000,
-  "ultimate_progress_percent": 33,
+  "records_to_ultimate_target": 0,
+  "ultimate_progress_percent": 100,
   "retrieval": {
     "live": "dual_view_semantic_top_30_then_classify_top_3",
     "expanded": "dual_view_semantic_top_30_then_classify_top_3"
   },
   "eval": {
-    "cases": 30,
-    "humour": 20,
-    "no_meme": 10,
-    "pending_owner_review": 30,
+    "cases": 100,
+    "humour": 75,
+    "no_meme": 25,
+    "pending_owner_review": 100,
     "expansion_cases": 20,
-    "pending_owner_review_total": 170,
+    "pending_owner_review_total": 100,
     "stage_1000_cases": 60,
-    "stage_1000_shadow_cases": 60
+    "stage_1000_shadow_cases": 60,
+    "stage_3000_cases": 100
   },
   "latest_experiment": {
     "created_at": "2026-09-20T05:51:04.229Z",
@@ -120,7 +121,7 @@
     },
     {
       "target_records": 3000,
-      "status": "building",
+      "status": "live",
       "label": "Long-tail collection"
     }
   ],
@@ -181,37 +182,53 @@
     "production_path": "serious-content gate, dual-view vector retrieval with reciprocal-rank fusion, Jev top 3, Llama explanations"
   },
   "stage_3000_source": {
-    "status": "building",
+    "status": "live",
     "raw_source_records": 2227,
-    "unique_after_hard_blocks": 2221,
-    "hard_duplicate_candidates": 6,
-    "visual_review_candidates": 87,
-    "target_additions": 2000,
-    "remaining_source_gap": 0,
-    "curation_buffer_after_hard_blocks": 221,
-    "post_visual_review_floor": 2134,
-    "providers": [
-      {
-        "provider": "JustMeme.wtf",
-        "records": 827,
-        "backend": "documented_public_api",
-        "rights_status": "not_established"
-      },
-      {
-        "provider": "National Gallery of Art, Washington",
-        "records": 1400,
-        "backend": "official_downloadable_csv",
-        "rights_status": "cc0-public-domain"
-      }
-    ],
-    "image_fingerprint_coverage": {
-      "present": 2227,
-      "total": 2227
+    "selected_records": 2000,
+    "rejected_records": 221,
+    "embedding_duplicate_candidates": 10,
+    "providers": {
+      "JustMeme.wtf": 811,
+      "National Gallery of Art, Washington": 1189
     },
-    "semantic_metadata_coverage": {
-      "present": 0,
-      "total": 2227
-    },
+    "image_fingerprint_coverage": 1,
+    "semantic_metadata_coverage": 1,
+    "local_scoring_model": "Xenova/clip-vit-base-patch32 (quantized q8, local inference)",
+    "score_formula": "62% meme strength + 18% asset quality + 20% embedding uniqueness",
     "human_validated": false
+  },
+  "latest_stage_3000_experiment": {
+    "created_at": "2026-09-20T16:18:21.310Z",
+    "human_validated": false,
+    "labels": "mixed_prior_shadow_and_synthetic_pending_owner_review",
+    "relevance": {
+      "retrieval_at_30": 0.72,
+      "top_1": 0.6666666666666666,
+      "top_3": 0.7066666666666667,
+      "top_3_given_retrieval": 0.9814814814814815
+    },
+    "relevance_slices": {
+      "prior_shadow": {
+        "retrieval_at_30": 0.5777777777777777,
+        "top_1": 0.5333333333333333,
+        "top_3": 0.5555555555555556,
+        "top_3_given_retrieval": 0.9615384615384616
+      },
+      "fresh_stage3000": {
+        "retrieval_at_30": 0.9333333333333333,
+        "top_1": 0.8666666666666667,
+        "top_3": 0.9333333333333333,
+        "top_3_given_retrieval": 1
+      }
+    },
+    "safety": {
+      "correct_abstention": 0.96,
+      "inappropriate_joking": 0.04,
+      "humour_recall": 1,
+      "false_abstention": 0,
+      "cue_rate": 0.24,
+      "classifier_call_rate": 0.2
+    },
+    "production_path": "serious-content gate, dual-view vector retrieval, Jev relevance ranking, static close-call prior, Llama explanations"
   }
 }

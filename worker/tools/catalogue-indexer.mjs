@@ -1,6 +1,7 @@
-import stage300Catalogue from './stage-300-catalogue.json';
-import stage1000Catalogue from './stage-1000-catalogue.json';
-import {reciprocalRankFuse} from '../src/retrieval.mjs';
+import stage300Catalogue from './stage-300-catalogue.json' with {type:'json'};
+import stage1000Catalogue from './stage-1000-catalogue.json' with {type:'json'};
+import stage3000Catalogue from './stage-3000-catalogue.json' with {type:'json'};
+import {reciprocalRankFuse} from '../src/rank-fusion.mjs';
 
 const EMBEDDING_MODEL='@cf/baai/bge-base-en-v1.5';
 const EMBEDDING_POOLING='cls';
@@ -9,8 +10,12 @@ const BGE_RERANK_MODEL='@cf/baai/bge-reranker-base';
 const JEV_ENDPOINT='https://classifier.dev/v1/classify';
 const BATCH_SIZE=50;
 
-function configuredCatalogue(env) {
-  return env.CATALOGUE_STAGE==='1000'?{records:stage1000Catalogue,stage:1000}:{records:stage300Catalogue,stage:300};
+export function configuredCatalogue(env) {
+  const stage=env.CATALOGUE_STAGE??'300';
+  if(stage==='300') return {records:stage300Catalogue,stage:300};
+  if(stage==='1000') return {records:stage1000Catalogue,stage:1000};
+  if(stage==='3000') return {records:stage3000Catalogue,stage:3000};
+  throw new Error(`Unsupported catalogue stage: ${stage}.`);
 }
 
 function semanticText(record) {
@@ -57,17 +62,23 @@ async function retrieveViewPair(env,vector,topK,filter={}) {
   }));
 }
 
-async function retrieve(env,text,topK=30,{controlReserve=0,filter}={}) {
-  const [vector]=await embed(env,[text]);
-  if(controlReserve===0) return retrieveViewPair(env,vector,topK,filter);
-  const [broadMatches,controlMatches]=await Promise.all([
-    retrieveViewPair(env,vector,topK),
-    retrieveViewPair(env,vector,controlReserve,{control:true})
-  ]);
-  const broadSlots=Math.max(0,topK-controlReserve);
-  const ordered=[...broadMatches.slice(0,broadSlots),...controlMatches,...broadMatches.slice(broadSlots)];
+function mergeWithReserve(broadMatches,reservedMatches,{limit,reserve}) {
+  const reservedSlots=Math.min(limit,Math.max(0,reserve));
+  const broadSlots=Math.max(0,limit-reservedSlots);
+  const ordered=[...broadMatches.slice(0,broadSlots),...reservedMatches.slice(0,reservedSlots),...broadMatches.slice(broadSlots)];
   const seen=new Set();
-  return ordered.filter(match=>!seen.has(match.id)&&seen.add(match.id)).slice(0,topK);
+  return ordered.filter(match=>!seen.has(match.id)&&seen.add(match.id)).slice(0,limit);
+}
+
+async function retrieve(env,text,topK=30,{controlReserve=0,coreReserve=0,filter}={}) {
+  const [vector]=await embed(env,[text]);
+  const reserve=Math.max(controlReserve,coreReserve);
+  if(reserve===0) return retrieveViewPair(env,vector,topK,filter);
+  const [broadMatches,reservedMatches]=await Promise.all([
+    retrieveViewPair(env,vector,topK),
+    retrieveViewPair(env,vector,reserve,controlReserve>0?{control:true}:{core:true})
+  ]);
+  return mergeWithReserve(broadMatches,reservedMatches,{limit:topK,reserve});
 }
 
 function normalizeSelection(value) {
@@ -168,20 +179,26 @@ export default {
     const byId=new Map(catalogue.map(record=>[record.id,record]));
     try {
       if(url.pathname==='/seed'&&request.method==='POST') {
-        const legacyIds=catalogue.map(record=>record.id).filter(id=>new TextEncoder().encode(id).length<=64);
-        const generatedIds=catalogue.flatMap((_,index)=>{
-          const base=`meme-${String(index+1).padStart(4,'0')}`;
+        const requestedStart=Number.parseInt(url.searchParams.get('start')??'0',10);
+        const requestedLimit=Number.parseInt(url.searchParams.get('limit')??String(catalogue.length),10);
+        const rangeStart=Math.max(0,Math.min(catalogue.length,Number.isFinite(requestedStart)?requestedStart:0));
+        const rangeLimit=Math.max(1,Math.min(500,Number.isFinite(requestedLimit)?requestedLimit:500));
+        const rangeEnd=Math.min(catalogue.length,rangeStart+rangeLimit);
+        const selectedCatalogue=catalogue.slice(rangeStart,rangeEnd);
+        const generatedIds=selectedCatalogue.flatMap((_,index)=>{
+          const base=`meme-${String(rangeStart+index+1).padStart(4,'0')}`;
           return [base,`${base}-meaning`,`${base}-example`];
         });
-        for(const ids of [legacyIds,generatedIds]) for(let start=0;start<ids.length;start+=100) await env.MEME_INDEX.deleteByIds(ids.slice(start,start+100));
+        for(let start=0;start<generatedIds.length;start+=100) await env.MEME_INDEX.deleteByIds(generatedIds.slice(start,start+100));
         let upserted=0;
-        for(let start=0;start<catalogue.length;start+=BATCH_SIZE) {
-          const batch=catalogue.slice(start,start+BATCH_SIZE);
+        for(let start=0;start<selectedCatalogue.length;start+=BATCH_SIZE) {
+          const batch=selectedCatalogue.slice(start,start+BATCH_SIZE);
           const texts=batch.flatMap(record=>[semanticText(record),exampleText(record)]);
           const vectors=await embed(env,texts);
           const entries=batch.flatMap((record,index)=>{
-            const base=`meme-${String(start+index+1).padStart(4,'0')}`;
-            const metadata={catalogue_id:record.id,name:record.name,stage,control:start+index<30};
+            const catalogueIndex=rangeStart+start+index;
+            const base=`meme-${String(catalogueIndex+1).padStart(4,'0')}`;
+            const metadata={catalogue_id:record.id,name:record.name,stage,control:catalogueIndex<30,core:catalogueIndex<1000};
             return [
               {id:`${base}-meaning`,values:vectors[index*2],metadata:{...metadata,view:'meaning'}},
               {id:`${base}-example`,values:vectors[index*2+1],metadata:{...metadata,view:'example'}}
@@ -190,15 +207,17 @@ export default {
           const mutation=await env.MEME_INDEX.upsert(entries);
           upserted+=mutation.count??entries.length;
         }
-        return Response.json({status:'seeded',model:EMBEDDING_MODEL,pooling:EMBEDDING_POOLING,records:catalogue.length,vectors_per_record:2,upserted});
+        return Response.json({status:'seeded',model:EMBEDDING_MODEL,pooling:EMBEDDING_POOLING,records:catalogue.length,range_start:rangeStart,range_end:rangeEnd,range_records:selectedCatalogue.length,vectors_per_record:2,upserted,complete:rangeEnd===catalogue.length});
       }
       if(url.pathname==='/query'&&request.method==='GET') {
         const text=url.searchParams.get('q')?.trim();
         const topK=Math.min(50,Math.max(1,Number.parseInt(url.searchParams.get('topK')??'30',10)||30));
         if(!text) return Response.json({error:'q is required'},{status:400});
-        const controlReserve=url.searchParams.get('hybrid')==='1'?10:0;
-        const matches=await retrieve(env,text,topK,{controlReserve});
-        return Response.json({query:text,model:EMBEDDING_MODEL,pooling:EMBEDDING_POOLING,control_reserve:controlReserve,matches});
+        const hybrid=url.searchParams.get('hybrid')==='1';
+        const coreReserve=hybrid&&stage>=3000?10:0;
+        const controlReserve=hybrid&&stage<3000?10:0;
+        const matches=await retrieve(env,text,topK,{controlReserve,coreReserve});
+        return Response.json({query:text,model:EMBEDDING_MODEL,pooling:EMBEDDING_POOLING,control_reserve:controlReserve,core_reserve:coreReserve,matches});
       }
       if(url.pathname==='/recommend'&&request.method==='POST') {
         const body=await request.json();

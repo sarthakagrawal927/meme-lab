@@ -311,6 +311,40 @@ test('classifier ranking rejects missing or flat scores instead of silently pinn
   await assert.rejects(rankCandidates('A comment.',candidates,{fetchImpl:flat}),/flat candidate scores/);
 });
 
+test('a failed perspective lens falls back to general ranking without invented perspective labels',async()=>{
+  const known=[
+    {id:'this-is-fine',score:.9,metadata:{catalogue_id:'this-is-fine'}},
+    {id:'first-try',score:.8,metadata:{catalogue_id:'first-try'}},
+    {id:'waiting-skeleton',score:.7,metadata:{catalogue_id:'waiting-skeleton'}}
+  ];
+  const classifierInstructions=[];
+  const fallbackEnv={
+    ...env,
+    AI:{run:async(model,input)=>{
+      if(model===EMBEDDING_MODEL) return {data:[[1,0,0]]};
+      return {response:{decision:'meme',confidence:'medium',none_reason:'',candidates:[
+        {id:'this-is-fine',reason:'This Is Fine fits because calm denial clashes with the obvious chaos described here.',score:88},
+        {id:'first-try',reason:'First Try fits because the polished claim conceals a much messier reality underneath.',score:77},
+        {id:'waiting-skeleton',reason:'Waiting Skeleton fits because the unresolved situation leaves everyone stuck awaiting a sensible response.',score:66}
+      ]}};
+    }},
+    MEME_INDEX:{query:async()=>({matches:known})},
+    CLASSIFIER_FETCH:async(_url,options)=>{
+      const body=JSON.parse(options.body);
+      classifierInstructions.push(body.instructions);
+      if(body.instructions===PERSPECTIVES.find(record=>record.key==='other').instructions) throw new Error('Perspective classifier unavailable.');
+      const scores=Object.fromEntries(body.labels.map((label,index)=>[label,[.8,.15,.05][index]??0]));
+      return Response.json({results:[{label:body.labels[0],scores}]});
+    }
+  };
+  const response=await worker.fetch(new Request('https://example.test/api/recommend',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({comment:'My manager said everything was fine while I watched the launch fail.'})}),fallbackEnv);
+  assert.equal(response.status,200);
+  const body=await response.json();
+  assert.equal(classifierInstructions.length,4);
+  assert.equal(classifierInstructions.some(instructions=>instructions.startsWith('Rank the existing meme reaction')),true);
+  assert.deepEqual(body.candidates.map(candidate=>candidate.perspective),['best_match','best_match','best_match']);
+});
+
 test('static responses receive security and no-index headers',async()=>{
   const response=await worker.fetch(new Request('https://example.test/'),env);
   assert.equal(response.headers.get('x-frame-options'),'DENY');

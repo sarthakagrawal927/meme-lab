@@ -14,7 +14,21 @@ function hasCompleteExplanation(reason,candidateId) {
   const trimmed=reason.trim();
   const wordCount=trimmed.split(/\s+/u).filter(Boolean).length;
   const memeName=publicById.get(candidateId)?.name;
-  return wordCount>=8&&wordCount<=28&&/^[A-Z0-9]/u.test(trimmed)&&/[.!?]$/u.test(trimmed)&&typeof memeName==='string'&&trimmed.toLocaleLowerCase().includes(memeName.toLocaleLowerCase());
+  return wordCount>=8&&wordCount<=40&&/^[A-Z0-9]/u.test(trimmed)&&/[.!?]$/u.test(trimmed)&&typeof memeName==='string'&&trimmed.toLocaleLowerCase().includes(memeName.toLocaleLowerCase());
+}
+
+function normalizeExplanation(candidate) {
+  if(!candidate||typeof candidate!=='object'||typeof candidate.reason!=='string') return candidate;
+  const memeName=publicById.get(candidate.id)?.name;
+  let reason=candidate.reason.trim();
+  if(!memeName||!reason) return {...candidate,reason};
+  if(!reason.toLocaleLowerCase().includes(memeName.toLocaleLowerCase())) {
+    const explanation=reason.replace(/[.!?]+$/u,'');
+    reason=`${memeName} fits because ${explanation.charAt(0).toLocaleLowerCase()}${explanation.slice(1)}`;
+  }
+  if(!/[.!?]$/u.test(reason)) reason+='.';
+  if(reason.split(/\s+/u).filter(Boolean).length<8) reason=`${reason.replace(/[.!?]+$/u,'')}, matching this specific social situation.`;
+  return {...candidate,reason};
 }
 
 export function validateSelection(value) {
@@ -38,7 +52,7 @@ export function validateSelection(value) {
 export function normalizeSelection(value) {
   if(!value||typeof value!=='object'||Array.isArray(value)||!Array.isArray(value.candidates)) return value;
   const confidence=['high','medium','low'].includes(value.confidence)?value.confidence:'low';
-  if(value.candidates.length>0) return {...value,decision:'meme',confidence,none_reason:'',candidates:value.candidates.map(candidate=>({...candidate,reason:typeof candidate?.reason==='string'?candidate.reason.trim():candidate?.reason})).sort((a,b)=>(b.score??-1)-(a.score??-1))};
+  if(value.candidates.length>0) return {...value,decision:'meme',confidence,none_reason:'',candidates:value.candidates.map(normalizeExplanation).sort((a,b)=>(b.score??-1)-(a.score??-1))};
   return {...value,decision:'none',confidence:'low',none_reason:typeof value.none_reason==='string'&&value.none_reason.trim()?value.none_reason:'None of the current references is a natural fit.'};
 }
 

@@ -73,6 +73,17 @@ test('missing confidence downgrades safely and low-confidence memes remain visib
   assert.deepEqual({decision:none.decision,confidence:none.confidence,reason:none.none_reason},{decision:'none',confidence:'low',reason:'None of the current references is a natural fit.'});
 });
 
+test('normalization repairs explanation formatting without changing the model meaning',()=>{
+  const normalized=normalizeSelection({
+    decision:'meme',
+    confidence:'high',
+    none_reason:'',
+    candidates:[{id:'waiting-skeleton',reason:'The promised reply has become an absurdly long wait',score:92}]
+  });
+  assert.equal(normalized.candidates[0].reason,'Waiting Skeleton fits because the promised reply has become an absurdly long wait.');
+  assert.doesNotThrow(()=>validateSelection(normalized));
+});
+
 test('multiple meme options are ordered by fit score and keep their scores',()=>{
   const normalized=normalizeSelection({
     decision:'meme',

@@ -179,29 +179,41 @@ test('multiple meme options are ordered by fit score and keep their scores',()=>
   assert.deepEqual(presentSelection(validateSelection(normalized)).candidates.map(candidate=>candidate.score),[89,72]);
 });
 
-test('classifier scores become the public fit scores and weak alternatives are not padded in',()=>{
+test('selection validation accepts one primary result and four distinct backups',()=>{
+  const candidates=[
+    ['waiting-skeleton','Waiting Skeleton makes the prolonged delay the central frustration in this situation.'],
+    ['this-is-fine','This Is Fine captures calm denial while visible trouble keeps getting worse.'],
+    ['first-try','First Try frames a difficult success as if it happened without effort.'],
+    ['surprised-pikachu','Surprised Pikachu fits because the predictable consequence is treated like a genuine shock.'],
+    ['boardroom-suggestion','Boardroom Meeting Suggestion fits because a sensible idea receives a wildly disproportionate rejection.']
+  ].map(([id,reason],index)=>({id,reason,score:90-index}));
+  assert.equal(validateSelection({decision:'meme',confidence:'high',none_reason:'',candidates}).candidates.length,5);
+  assert.throws(()=>validateSelection({decision:'meme',confidence:'high',none_reason:'',candidates:[...candidates,{...candidates[0],id:'drake-hotline-bling'}]}),/too many candidates/);
+});
+
+test('classifier scores become public fit scores and all ranked backups remain visible',()=>{
   const ranked=[
     {id:'waiting-skeleton',classifier_score:.78},
     {id:'this-is-fine',classifier_score:.21},
     {id:'first-try',classifier_score:.01}
   ];
-  assert.equal(MINIMUM_VISIBLE_FIT,.1);
-  assert.equal(MINIMUM_VISIBLE_PERSPECTIVE_FIT,.25);
+  assert.equal(MINIMUM_VISIBLE_FIT,0);
+  assert.equal(MINIMUM_VISIBLE_PERSPECTIVE_FIT,0);
   assert.deepEqual(selectionFromRanking(ranked),{
     decision:'meme',
     confidence:'high',
     none_reason:'',
-    candidates:[{id:'waiting-skeleton',score:78},{id:'this-is-fine',score:21}]
+    candidates:[{id:'waiting-skeleton',score:78},{id:'this-is-fine',score:21},{id:'first-try',score:1}]
   });
   const low=selectionFromRanking([{id:'waiting-skeleton',classifier_score:.08},{id:'this-is-fine',classifier_score:.04}]);
-  assert.deepEqual(low.candidates,[{id:'waiting-skeleton',score:8}]);
+  assert.deepEqual(low.candidates,[{id:'waiting-skeleton',score:8},{id:'this-is-fine',score:4}]);
   assert.equal(low.confidence,'low');
   const perspectives=selectionFromRanking([
     {id:'waiting-skeleton',classifier_score:.6,perspective:'self'},
     {id:'this-is-fine',classifier_score:.24,perspective:'other'},
     {id:'first-try',classifier_score:.25,perspective:'situation'}
   ]);
-  assert.deepEqual(perspectives.candidates,[{id:'waiting-skeleton',score:60},{id:'first-try',score:25}]);
+  assert.deepEqual(perspectives.candidates,[{id:'waiting-skeleton',score:60},{id:'this-is-fine',score:24},{id:'first-try',score:25}]);
 });
 
 test('classifier gate only runs for high-precision serious cues',async()=>{
@@ -357,7 +369,28 @@ test('perspective ranking assigns a contested meme to the globally strongest len
   assert.equal(ranked.find(candidate=>candidate.id==='shared').perspective,'situation');
   assert.equal(ranked.find(candidate=>candidate.id==='self-alternative').perspective,'self');
   assert.equal(ranked.find(candidate=>candidate.id==='other-alternative').perspective,'other');
-  assert.deepEqual(selectionFromRanking(ranked).candidates,[{id:'shared',score:68}]);
+  assert.deepEqual(selectionFromRanking(ranked).candidates,[{id:'shared',score:68},{id:'self-alternative',score:23},{id:'other-alternative',score:14}]);
+});
+
+test('perspective ranking can return three viewpoint winners plus two distinct backups',async()=>{
+  const candidates=[
+    {id:'self',name:'Self',message:'Self reaction.',relational_pattern:'Narrator reacts.'},
+    {id:'other',name:'Other',message:'Other reaction.',relational_pattern:'Other person reacts.'},
+    {id:'situation',name:'Situation',message:'Situation reaction.',relational_pattern:'The dynamic itself.'},
+    {id:'backup-one',name:'Backup One',message:'Another useful reaction.',relational_pattern:'A secondary angle.'},
+    {id:'backup-two',name:'Backup Two',message:'One more useful reaction.',relational_pattern:'Another secondary angle.'}
+  ];
+  const scoreSets={self:[.9,.02,.01,.4,.3],other:[.03,.88,.02,.38,.35],situation:[.02,.03,.86,.37,.36]};
+  const fetchImpl=async(_url,options)=>{
+    const body=JSON.parse(options.body);
+    const perspective=PERSPECTIVES.find(record=>record.instructions===body.instructions);
+    const scores=scoreSets[perspective.key];
+    return Response.json({results:[{label:body.labels[scores.indexOf(Math.max(...scores))],scores:Object.fromEntries(body.labels.map((label,index)=>[label,scores[index]]))}]});
+  };
+  const ranked=await rankCandidatesByPerspective('My coworker did something and I reacted.',candidates,{fetchImpl,limit:5});
+  assert.equal(ranked.length,5);
+  assert.equal(new Set(ranked.map(candidate=>candidate.id)).size,5);
+  assert.deepEqual(new Set(ranked.map(candidate=>candidate.perspective)),new Set(['self','other','situation']));
 });
 
 test('classifier ranking rejects missing or flat scores instead of silently pinning retrieval order',async()=>{
@@ -409,7 +442,7 @@ test('a failed perspective lens falls back to general ranking without invented p
   const body=await response.json();
   assert.equal(classifierInstructions.length,4);
   assert.equal(classifierInstructions.some(instructions=>instructions.startsWith('Rank the existing meme reaction')),true);
-  assert.deepEqual(body.candidates.map(candidate=>candidate.perspective),['best_match','best_match']);
+  assert.deepEqual(body.candidates.map(candidate=>candidate.perspective),['best_match','best_match','best_match']);
 });
 
 test('static responses receive security and no-index headers',async()=>{

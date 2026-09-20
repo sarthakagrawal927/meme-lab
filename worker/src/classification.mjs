@@ -126,6 +126,18 @@ export async function rankCandidatesByPerspective(comment,candidates,{fetchImpl=
     perspective:results[index].perspective.key,
     perspective_label:results[index].perspective.label
   }))??[];
+  const selectedIds=new Set(selected.map(candidate=>candidate.id));
+  const supplemental=results.flatMap(({perspective,ranked})=>ranked.map(candidate=>({
+    ...candidate,
+    perspective:perspective.key,
+    perspective_label:perspective.label
+  }))).sort((left,right)=>right.classifier_score-left.classifier_score||left.retrieval_rank-right.retrieval_rank||left.id.localeCompare(right.id));
+  for(const candidate of supplemental) {
+    if(selected.length>=limit) break;
+    if(selectedIds.has(candidate.id)) continue;
+    selectedIds.add(candidate.id);
+    selected.push(candidate);
+  }
   if(selected.length<limit) throw new Error('Perspective ranking could not produce distinct candidates.');
   return selected.sort((left,right)=>right.classifier_score-left.classifier_score||left.perspective.localeCompare(right.perspective)).slice(0,limit);
 }

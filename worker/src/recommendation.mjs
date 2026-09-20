@@ -2,8 +2,9 @@ import {catalogue} from './catalogue.stage3000.generated.mjs';
 import {staticCandidateSignals} from './candidate-signals.mjs';
 
 export const MODEL='@cf/meta/llama-3.3-70b-instruct-fp8-fast';
-export const MINIMUM_VISIBLE_FIT=0.1;
-export const MINIMUM_VISIBLE_PERSPECTIVE_FIT=0.25;
+export const MAX_RECOMMENDATIONS=5;
+export const MINIMUM_VISIBLE_FIT=0;
+export const MINIMUM_VISIBLE_PERSPECTIVE_FIT=0;
 const allowedIds=new Set(catalogue.map(record=>record.id));
 const publicById=new Map(catalogue.map(record=>{
   const {meme_strength,asset_quality,signal_summary}=staticCandidateSignals(record);
@@ -46,7 +47,7 @@ function normalizeExplanation(candidate) {
 export function validateSelection(value) {
   if(!value||typeof value!=='object'||Array.isArray(value)) throw new Error('The model returned an invalid result.');
   if(!['meme','none'].includes(value.decision)||!['high','medium','low'].includes(value.confidence)||typeof value.none_reason!=='string'||!Array.isArray(value.candidates)) throw new Error('The model returned an invalid result.');
-  if(value.candidates.length>3) throw new Error('The model returned too many candidates.');
+  if(value.candidates.length>MAX_RECOMMENDATIONS) throw new Error('The model returned too many candidates.');
   const seen=new Set();
   for(const candidate of value.candidates) {
     if(!candidate||typeof candidate!=='object'||Array.isArray(candidate)||!allowedIds.has(candidate.id)) throw new Error('The model returned an unknown candidate.');

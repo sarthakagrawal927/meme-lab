@@ -5,7 +5,7 @@
 
 ## 1. Product
 
-A local playground: paste a situation or short conversation, receive up to three existing memes or a genuine **no strong match**, then choose what you would actually send. The first audience is the owner, using English-oriented internet references. The long-term direction is movie dialogue and audiovisual reactions, but neither is required to validate this experiment.
+A local playground: paste a situation or short conversation, receive one primary meme plus up to four distinct backups or a genuine **no strong match**, then choose what you would actually send. The first audience is the owner, using English-oriented internet references. The long-term direction is movie dialogue and audiovisual reactions, but neither is required to validate this experiment.
 
 Example distinction: “Build a streaming service by Friday for $20” is an unreasonable demand; “My client asked for that” is a complaint inviting solidarity; “What can I realistically prototype for $20?” is a sincere question. The agent must distinguish the speaker, the target, and the underlying mismatch, not merely match the words “budget” and “software.”
 
@@ -31,7 +31,7 @@ No bulk scraping, new tagging pipeline, mandatory annotation project, embeddings
 
 **Try a situation.** Paste up to 6,000 characters, optionally choose a synthetic smoke case, select playful/gentle/dry delivery, and run a selector. Context includes the whole pasted exchange. Recent chosen references can be supplied as a preference, not a hard ban.
 
-**Inspect the result.** Show zero to three distinct catalogue references, best first. Permit NONE without filling empty slots. Display the exact source-linked asset only after an explicit image-load action. Surface missing captions, crop issues, unavailable media, and unreviewed status. Keep a brief fit explanation available; do not mistake that explanation for independent evidence of quality.
+**Inspect the result.** Show zero to five distinct catalogue references, best first. Permit NONE without filling empty slots. Display the exact source-linked asset only after an explicit image-load action. Surface missing captions, crop issues, unavailable media, and unreviewed status. Keep a brief fit explanation available; do not mistake that explanation for independent evidence of quality.
 
 **Judge the choice.** Save “I'd send this,” “related, not apt,” or “miss.” Separate **no meme belongs here** from **a better meme exists but none of these fit**. Allow a replacement from all 60 references and a free-text note for missing references. Log whether the asset had actually loaded when it was rated.
 

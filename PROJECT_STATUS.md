@@ -5,7 +5,7 @@
 
 ## Live product
 
-- Paste one complete comment or situation and receive the best meme first, up to two alternatives, a Jev fit score, and confidence.
+- Paste one complete comment or situation and receive the best meme first, up to four backups, Jev fit scores, and confidence.
 - Multi-person comments now return distinct viewpoints where available: **My reaction**, **Their side**, and **The situation**.
 - Browse and search 3,000 live references in a paginated collection.
 - See meme strength and image quality separately from contextual fit. Relevance chooses the eligible three; static scores only break close calls.
@@ -19,7 +19,7 @@
 - Exact URLs, perceptual hashes, normalized names, aliases, and local CLIP image embeddings check uniqueness. Six hard duplicates and ten near-copy embedding candidates are excluded.
 - Local quantized CLIP scores reaction usefulness, image quality, and embedding uniqueness. The final 2,000 additions are selected from the remaining buffer.
 - Local Qwen writes meaning-specific message, social-dynamic, example, near-miss, and tag metadata. These annotations are assistant-authored and remain pending owner feedback.
-- Production still uses bounded retrieval: two BGE embedding views return 30 candidates, with ten shortlist slots reserved for the original 1,000. Jev ranks ordinary comments once and multi-person comments through three parallel perspective lenses. Its scores return directly; general alternatives below 10/100 and perspective alternatives below 25/100 are omitted. The 70B Workers AI selector runs only when classifier ranking fails.
+- Production still uses bounded retrieval: two BGE embedding views return 30 candidates, with ten shortlist slots reserved for the original 1,000. Jev returns five distinct results; multi-person comments use three parallel perspective lenses and fill remaining slots with the strongest unused lens matches. Its scores return directly, including honestly low scores on weaker backups. The 70B Workers AI selector runs only when classifier ranking fails.
 
 ## Evaluation
 

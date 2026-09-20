@@ -22,13 +22,13 @@
     <section class="page-intro how-intro">
       <p class="eyebrow">PRODUCT + IMPLEMENTATION</p>
       <h1>How one comment<br>becomes the best options.</h1>
-      <p class="intro">The live product compares meaning, real-world usage, social dynamics, tone, and viewpoint—not just words. It retrieves 30 likely matches from 3,000 memes, then returns up to three scored choices.</p>
+      <p class="intro">The live product compares meaning, real-world usage, social dynamics, tone, and viewpoint—not just words. It retrieves 30 likely matches from 3,000 memes, then returns one primary choice and up to four scored backups.</p>
       <a class="primary page-cta" href="/">Try a comment <span aria-hidden="true">→</span></a>
     </section>
 
     <section class="live-strip" aria-label="Current implementation status">
       <span class="status-dot" aria-hidden="true"></span>
-      <div><strong>Live now: <span data-status="live_records">3,000</span> reactions</strong><span>Semantic retrieval · three scored options · serious-content guard · feedback</span></div>
+      <div><strong>Live now: <span data-status="live_records">3,000</span> reactions</strong><span>Semantic retrieval · five scored options · serious-content guard · feedback</span></div>
       <span class="live-pill">PERSONAL TOOL</span>
     </section>
 
@@ -43,8 +43,8 @@
       <ol class="pipeline" aria-label="Current recommendation pipeline">
         <li><span>01</span><strong>Validate</strong><p>Trim and bound the comment. Treat it as untrusted text.</p></li>
         <li><span>02</span><strong>Retrieve 30</strong><p>Search meaning and usage-example vectors separately, then fuse both ranked lists.</p></li>
-        <li><span>03</span><strong>Guard and rank</strong><p>Jev checks sensitive help-seeking text, then ranks once or through three explicit perspective lenses. Weak viewpoint alternatives are omitted instead of forced.</p></li>
-        <li><span>04</span><strong>Return immediately</strong><p>Jev's scores become fit scores. Weak alternatives are omitted; the larger fallback model stays off the normal path.</p></li>
+        <li><span>03</span><strong>Guard and rank</strong><p>Jev checks sensitive help-seeking text, then ranks once or through three explicit perspective lenses.</p></li>
+        <li><span>04</span><strong>Return immediately</strong><p>Jev's scores become fit scores for one primary result and four backups, including honestly low scores. The larger fallback model stays off the normal path.</p></li>
       </ol>
     </section>
 
@@ -56,7 +56,7 @@
         </div>
         <p>At 3,000, retrieval keeps the prompt bounded. Relevance chooses the eligible three first; static meme strength and image quality only reorder genuinely close calls. At 30,000, a router will choose meme, movie dialogue, or no reaction before searching the matching corpus.</p>
       </div>
-      <div class="flow-line" role="img" aria-label="Comment becomes an embedding, dual-view semantic search returns 30 candidates, and the reranker returns three options">
+      <div class="flow-line" role="img" aria-label="Comment becomes an embedding, dual-view semantic search returns 30 candidates, and the reranker returns up to five options">
         <div><span>COMMENT</span><strong>What happened</strong></div>
         <b aria-hidden="true">→</b>
         <div><span>EMBED</span><strong>Meaning + usage</strong></div>

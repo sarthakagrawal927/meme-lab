@@ -55,7 +55,7 @@ function renderAlternatives(candidates) {
   $('#alternatives-wrap').hidden=!candidates.length;
   const perspectiveAware=candidates.some(candidate=>candidate.perspective&&candidate.perspective!=='best_match');
   $('#alternatives-title').textContent=perspectiveAware?'OTHER PERSPECTIVES':'ALSO FITS';
-  $('#alternatives-subtitle').textContent=perspectiveAware?'Different angles, plus strong backups.':'Four backups, ranked by fit.';
+  $('#alternatives-subtitle').textContent=perspectiveAware?'Different angles, ranked by fit.':'Four backups, ranked by fit.';
   for(const candidate of candidates) {
     const card=document.createElement('article');
     card.className='alternative';

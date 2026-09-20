@@ -13,6 +13,7 @@ const reviewedPath=resolve(root,valueFor('--reviewed','expansion/reviewed/stage-
 const outputPath=resolve(root,valueFor('--output','eval/relevance_stage3000_fresh_humour.jsonl'));
 const model=valueFor('--model','qwen3:4b');
 const endpoint=valueFor('--endpoint','http://127.0.0.1:11434/api/chat');
+const batchSize=Math.max(1,Math.min(10,Number(valueFor('--batch-size','5'))));
 const parseJsonl=(text,label)=>text.trim().split('\n').filter(Boolean).map((line,index)=>{
   try { return JSON.parse(line); }
   catch { throw new Error(`${label} has invalid JSON on line ${index+1}.`); }
@@ -25,21 +26,33 @@ catch(error) {
   throw error;
 }
 const reviewed=parseJsonl(reviewedText,'stage-3,000 reviewed metadata');
-const targets=selectStage3000EvalTargets(reviewed);
+const gifRecords=reviewed.filter(record=>record.media?.type==='gif');
+const targets=selectStage3000EvalTargets(gifRecords);
 const prior=parseJsonl(await readFile(resolve(root,'eval/relevance_stage1000_shadow_v1.jsonl'),'utf8'),'stage-1,000 shadow evaluation');
 const schema={
   type:'object',additionalProperties:false,required:['cases'],properties:{cases:{type:'array',items:{type:'object',additionalProperties:false,required:['primary_target_id','title','context','failure_modes'],properties:{primary_target_id:{type:'string'},title:{type:'string'},context:{type:'string'},failure_modes:{type:'array',minItems:1,maxItems:3,items:{type:'string'}}}}}}
 };
 const generated=[];
-for(let offset=0;offset<targets.length;offset+=10) {
-  const batch=targets.slice(offset,offset+10);
+for(let offset=0;offset<targets.length;offset+=batchSize) {
+  const batch=targets.slice(offset,offset+batchSize);
   const compact=batch.map(({id,name,message,relational_pattern,example_context,near_miss_context,tags})=>({id,name,message,relational_pattern,example_context,near_miss_context,tags}));
   const prompt=`Create one independent meme-relevance evaluation case for every supplied record. Preserve every primary_target_id exactly. Write a fresh, natural social situation in which a person would genuinely send that exact meme. Do not mention the meme or copy/paraphrase its example_context, message, or name. Vary relationships and settings across work, family, friendship, internet, and everyday life. The context must contain enough relational detail to distinguish the intended meme from merely topical matches. The title should describe the situation, not the template. failure_modes should name one to three concrete likely retrieval mistakes. Return exactly ${batch.length} cases in the same order.\n\nRecords:\n${JSON.stringify(compact)}`;
-  const response=await fetch(endpoint,{method:'POST',headers:{'content-type':'application/json'},signal:AbortSignal.timeout(120000),body:JSON.stringify({model,stream:false,think:false,format:schema,options:{temperature:0.45,num_ctx:12288},messages:[{role:'user',content:prompt}]})});
-  if(!response.ok) throw new Error(`Ollama returned ${response.status}: ${await response.text()}`);
-  const payload=await response.json();
-  const parsed=JSON.parse(payload?.message?.content??'null');
-  if(!Array.isArray(parsed?.cases)||parsed.cases.length!==batch.length) throw new Error(`Ollama returned ${parsed?.cases?.length??0} cases for a ${batch.length}-record batch.`);
+  let parsed;
+  let lastError;
+  for(let attempt=1;attempt<=3;attempt+=1) {
+    try {
+      const response=await fetch(endpoint,{method:'POST',headers:{'content-type':'application/json'},signal:AbortSignal.timeout(120000),body:JSON.stringify({model,stream:false,think:false,format:schema,options:{temperature:0.35,num_ctx:12288},messages:[{role:'user',content:prompt}]})});
+      if(!response.ok) throw new Error(`Ollama returned ${response.status}: ${await response.text()}`);
+      const payload=await response.json();
+      parsed=JSON.parse(payload?.message?.content??'null');
+      if(!Array.isArray(parsed?.cases)||parsed.cases.length!==batch.length) throw new Error(`Ollama returned ${parsed?.cases?.length??0} cases for a ${batch.length}-record batch.`);
+      break;
+    } catch(error) {
+      lastError=error;
+      console.error(`Eval batch ${offset+1} attempt ${attempt} failed: ${error.message}`);
+    }
+  }
+  if(!parsed||parsed.cases.length!==batch.length) throw lastError;
   for(const [index,draft] of parsed.cases.entries()) {
     const target=batch[index];
     if(draft.primary_target_id!==target.id) throw new Error(`Ollama changed or reordered target ${target.id}.`);

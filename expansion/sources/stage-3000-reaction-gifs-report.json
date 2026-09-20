@@ -1,0 +1,29 @@
+{
+  "version": "stage-3000-reaction-gifs-v1",
+  "observed_on": "2026-09-21",
+  "source": {
+    "dataset": "GIF Reply",
+    "repository": "https://github.com/xingyaoww/gif-reply",
+    "conversations": "https://drive.google.com/file/d/1KnLdnpK9XQgyEMDzJLz-_Q1w8zKJjdUw/view",
+    "metadata": "https://drive.google.com/file/d/1lSmVliELmbEfZgKhtUrMaRmeVkcof6Dx/view",
+    "giphy_mapping": "https://drive.google.com/file/d/1OBEWu4RKkLciwtDnR0ecVqbjCPU9cVG7/view"
+  },
+  "raw_unique_gifs": 115404,
+  "mapped_gifs": 115404,
+  "safe_semantic_candidates": 58449,
+  "selected_records": 1189,
+  "media_validation": {
+    "checked": true,
+    "unavailable_candidates_skipped": 6
+  },
+  "minimum_observed_conversation_uses": 111,
+  "owner_requested_canonical_records": 1,
+  "media_types": {
+    "gif": 1189
+  },
+  "rights_status": {
+    "not_established": 1189
+  },
+  "human_validated": false,
+  "uncertainty": "Popularity comes from observed reaction use in a research dataset. Media rights remain unestablished and semantic metadata still requires owner feedback."
+}

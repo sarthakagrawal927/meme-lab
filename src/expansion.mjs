@@ -1,6 +1,7 @@
 const REQUIRED_RECORD_FIELDS=['id','name','message','relational_pattern','example_context','near_miss_context','tags','provenance','media','review'];
 const VALID_RIGHTS=['established','not_established','unavailable'];
 const VALID_REVIEW=['needs_metadata_review','needs_asset_and_delivery_review','approved'];
+const VALID_MEDIA_TYPES=['image','gif'];
 
 export function validateSourceCandidates(records,{knownNames=[],minimum=240}={}) {
   if(records.length<minimum) throw new Error(`Sourcing needs at least ${minimum} candidates; found ${records.length}.`);
@@ -40,6 +41,27 @@ export function validateOpenSourceCandidates(records,{minimum=1}={}) {
   return records;
 }
 
+export function validateReactionGifCandidates(records,{minimum=1}={}) {
+  if(records.length<minimum) throw new Error(`Reaction GIF sourcing needs at least ${minimum} candidates; found ${records.length}.`);
+  const ids=new Set();
+  const mediaUrls=new Set();
+  for(const record of records) {
+    if(typeof record.proposed_id!=='string'||!/^gif-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(record.proposed_id)||ids.has(record.proposed_id)) throw new Error(`Invalid or duplicate reaction GIF ID: ${record.proposed_id}.`);
+    ids.add(record.proposed_id);
+    if(record.provider!=='GIF Reply dataset / GIPHY'||!record.source_url?.startsWith('https://giphy.com/gifs/')) throw new Error(`${record.proposed_id} has invalid reaction GIF provenance.`);
+    if(record.media_type!=='gif'||record.mime_type!=='image/gif') throw new Error(`${record.proposed_id} needs explicit GIF media metadata.`);
+    if(!record.media_url?.startsWith('https://media.giphy.com/media/')||!record.preview_url?.startsWith('https://media.giphy.com/media/')) throw new Error(`${record.proposed_id} needs GIPHY media and preview URLs.`);
+    if(mediaUrls.has(record.media_url)) throw new Error(`Duplicate reaction GIF media URL: ${record.media_url}.`);
+    mediaUrls.add(record.media_url);
+    if(!Array.isArray(record.categories)||!record.categories.includes('reaction-gif')||typeof record.assistive_text!=='string'||!record.assistive_text.trim()) throw new Error(`${record.proposed_id} needs reaction GIF categories and descriptive evidence.`);
+    if(record.rights_status!=='not_established'||record.review_status!=='needs_metadata_review'||record.human_validated!==false) throw new Error(`${record.proposed_id} has an invalid review state.`);
+    const evidence=record.usage_evidence;
+    if(!['observed_reaction_usage','owner_requested_canonical'].includes(evidence?.kind)) throw new Error(`${record.proposed_id} needs usage evidence.`);
+    if(evidence.kind==='observed_reaction_usage'&&(!Number.isInteger(evidence.conversation_uses)||evidence.conversation_uses<1)) throw new Error(`${record.proposed_id} needs a positive observed usage count.`);
+  }
+  return records;
+}
+
 export function parseJsonl(text,label='JSONL') {
   return text.trim().split('\n').filter(Boolean).map((line,index)=>{
     try { return JSON.parse(line); }
@@ -58,7 +80,11 @@ export function validateExpansionRecords(records,{knownIds=[]}={}) {
     if(!Array.isArray(record.tags)||record.tags.length<2||record.tags.some(tag=>typeof tag!=='string'||!tag.trim())) throw new Error(`${record.id} needs at least two tags.`);
     if(typeof record.provenance?.provider!=='string'||typeof record.provenance?.source_url!=='string'||!record.provenance.source_url.startsWith('https://')||typeof record.provenance?.observed_on!=='string') throw new Error(`${record.id} has incomplete provenance.`);
     if(!VALID_RIGHTS.includes(record.media?.rights_status)) throw new Error(`${record.id} has an invalid media rights status.`);
-    if(record.media.rights_status==='established'&&!record.media.image_url) throw new Error(`${record.id} claims established media without an image.`);
+    const mediaType=record.media?.type??'image';
+    const mediaUrl=record.media?.url??record.media?.image_url;
+    if(!VALID_MEDIA_TYPES.includes(mediaType)||typeof mediaUrl!=='string'||!mediaUrl.startsWith('https://')) throw new Error(`${record.id} has invalid media metadata.`);
+    if(mediaType==='gif'&&record.media?.mime_type!=='image/gif') throw new Error(`${record.id} needs an image/gif MIME type.`);
+    if(record.media.rights_status==='established'&&!mediaUrl) throw new Error(`${record.id} claims established media without an asset.`);
     if(!VALID_REVIEW.includes(record.review?.status)||record.review?.human_validated!==false) throw new Error(`${record.id} has an invalid review state.`);
   }
   return records;

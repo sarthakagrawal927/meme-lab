@@ -1,11 +1,17 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {parseJsonl,validateOpenSourceCandidates,validateSourceCandidates,validateExpansionRecords,validateEvalCases,validateStageCoverageCases,validateStage1000Cases,validateCoverageMetadata,validateMeaningSpecificMetadata,validateStages,expansionStatus,withCandidatePool} from '../src/expansion.mjs';
+import {parseJsonl,validateOpenSourceCandidates,validateReactionGifCandidates,validateSourceCandidates,validateExpansionRecords,validateEvalCases,validateStageCoverageCases,validateStage1000Cases,validateCoverageMetadata,validateMeaningSpecificMetadata,validateStages,expansionStatus,withCandidatePool} from '../src/expansion.mjs';
 
 const catalogue=JSON.parse(await readFile(new URL('../worker/public/catalogue.json',import.meta.url),'utf8'));
 const publicCollection=JSON.parse(await readFile(new URL('../worker/public/collection.json',import.meta.url),'utf8'));
 const howItWorks=await readFile(new URL('../worker/public/how-it-works.html',import.meta.url),'utf8');
+const tryItPage=await readFile(new URL('../worker/public/index.html',import.meta.url),'utf8');
+const collectionPage=await readFile(new URL('../worker/public/collection.html',import.meta.url),'utf8');
+const appScript=await readFile(new URL('../worker/public/app.js',import.meta.url),'utf8');
+const collectionScript=await readFile(new URL('../worker/public/collection.js',import.meta.url),'utf8');
+const workerSource=await readFile(new URL('../worker/src/index.mjs',import.meta.url),'utf8');
+const doodles=await readFile(new URL('../worker/public/doodles.svg',import.meta.url),'utf8');
 const stage300Collection=publicCollection.slice(0,300);
 const candidates=parseJsonl(await readFile(new URL('../expansion/candidates/stage-300.jsonl',import.meta.url),'utf8'));
 const source=parseJsonl(await readFile(new URL('../expansion/sources/stage-300-source.jsonl',import.meta.url),'utf8'));
@@ -18,6 +24,9 @@ const stage3000Uniqueness=JSON.parse(await readFile(new URL('../expansion/source
 const stage3000SemanticUniqueness=JSON.parse(await readFile(new URL('../expansion/sources/stage-3000-semantic-uniqueness.json',import.meta.url),'utf8'));
 const stage1000Candidates=parseJsonl(await readFile(new URL('../expansion/candidates/stage-1000.jsonl',import.meta.url),'utf8'));
 const stage3000Candidates=parseJsonl(await readFile(new URL('../expansion/candidates/stage-3000.jsonl',import.meta.url),'utf8'));
+const reactionGifSource=parseJsonl(await readFile(new URL('../expansion/sources/stage-3000-reaction-gifs.jsonl',import.meta.url),'utf8'));
+const reactionGifReport=JSON.parse(await readFile(new URL('../expansion/sources/stage-3000-reaction-gifs-report.json',import.meta.url),'utf8'));
+const catalogueIntegrity=JSON.parse(await readFile(new URL('../worker/public/catalogue-integrity.json',import.meta.url),'utf8'));
 const stage1000Cases=parseJsonl(await readFile(new URL('../eval/relevance_stage1000_v1.jsonl',import.meta.url),'utf8'));
 const cases=parseJsonl(await readFile(new URL('../eval/relevance_holdout_v1.jsonl',import.meta.url),'utf8'));
 const coverageCases=parseJsonl(await readFile(new URL('../eval/relevance_stage300_v1.jsonl',import.meta.url),'utf8'));
@@ -33,14 +42,20 @@ test('stage-300 pool adds 270 non-live candidates without ID collisions',()=>{
   assert(candidates.every(record=>record.media.rights_status==='not_established'));
 });
 
-test('public collection exposes the full live stage-3000 catalogue with previews and static signals',()=>{
+test('public collection contains 3,000 actual meme and reaction records with explicit media metadata',()=>{
   assert.equal(publicCollection.length,3000);
   assert.equal(publicCollection.filter(record=>record.availability==='live').length,3000);
   assert.equal(new Set(publicCollection.map(record=>record.id)).size,3000);
   assert(publicCollection.every(record=>record.availability==='live'));
-  assert(publicCollection.every(record=>typeof record.image_url==='string'&&record.image_url.startsWith('https://')));
+  assert(publicCollection.every(record=>typeof record.media_url==='string'&&record.media_url.startsWith('https://')));
+  assert(publicCollection.every(record=>typeof record.preview_url==='string'&&record.preview_url.startsWith('https://')));
+  assert(publicCollection.every(record=>['image','gif'].includes(record.media_type)));
   assert(publicCollection.every(record=>Number.isFinite(record.meme_strength)&&Number.isFinite(record.asset_quality)));
-  assert(publicCollection.some(record=>record.license_url==='https://creativecommons.org/publicdomain/zero/1.0/'));
+  assert.equal(publicCollection.filter(record=>record.media_type==='gif').length,1189);
+  assert.equal(publicCollection.filter(record=>record.id.startsWith('nga-')).length,0);
+  assert(publicCollection.some(record=>record.name==='My Name Is Jeff'&&record.media_type==='gif'));
+  assert.deepEqual(catalogueIntegrity.media_types,{image:1811,gif:1189});
+  assert.equal(catalogueIntegrity.canonical_coverage.items.find(item=>item.id==='my-name-is-jeff')?.status,'covered');
 });
 
 test('How It Works documents the complete 30-to-30000 journey and evidence boundaries',()=>{
@@ -53,10 +68,29 @@ test('How It Works documents the complete 30-to-30000 journey and evidence bound
     'THE MODEL BAKE-OFF',
     'SPEED RIGHT NOW',
     'STORAGE, MEDIA, AND COST',
+    'No expensive fallback',
     'Memes plus movie dialogue',
     'not human ground truth'
   ]) assert.match(howItWorks,new RegExp(required.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')));
   assert.doesNotMatch(howItWorks,/Best 3|Jev fit scores|generated explanation step on the normal path/);
+});
+
+test('every public surface includes the decorative doodle layer',()=>{
+  for(const page of [tryItPage,collectionPage,howItWorks]) assert.match(page,/class="doodle-field" aria-hidden="true"/);
+  assert.match(tryItPage,/body class="page-try"/);
+  assert.match(collectionPage,/body class="page-collection"/);
+  assert.match(howItWorks,/body class="page-how"/);
+  assert.match(doodles,/<svg[^>]+viewBox="0 0 1600 1000"/);
+  assert.match(doodles,/LOL/);
+  assert.match(doodles,/>3K</);
+});
+
+test('public surfaces render GIF results and lightweight collection previews',()=>{
+  assert.match(appScript,/candidate\.media_url\|\|candidate\.image_url/);
+  assert.match(appScript,/candidate\.media_type==='gif'/);
+  assert.match(collectionScript,/meme\.preview_url\|\|meme\.media_url/);
+  assert.match(workerSource,/https:\/\/media\.giphy\.com/);
+  assert.doesNotMatch(workerSource,/https:\/\/api\.nga\.gov/);
 });
 
 test('stage-1000 acquisition adds a bounded non-live source pool',()=>{
@@ -65,7 +99,7 @@ test('stage-1000 acquisition adds a bounded non-live source pool',()=>{
   assert(stage1000Source.every(record=>record.review_status==='needs_metadata_review'&&record.human_validated===false));
 });
 
-test('stage-3000 acquisition closes the raw source gap with unique fingerprint coverage',()=>{
+test('historical stage-3000 artwork pool remains auditable but is replaced by usage-backed GIFs',()=>{
   assert.equal(stage3000Phase1Source.length,827);
   assert.equal(stage3000NgaSource.length,1400);
   assert.equal(stage3000Source.length,2227);
@@ -80,9 +114,15 @@ test('stage-3000 acquisition closes the raw source gap with unique fingerprint c
   assert.equal(stage3000Uniqueness.summary.eligible_after_hard_blocks,2221);
   assert.equal(stage3000SemanticUniqueness.selected_records,2000);
   assert.equal(stage3000SemanticUniqueness.embedding_duplicate_candidates,10);
+  assert.equal(reactionGifSource.length,1189);
+  assert.doesNotThrow(()=>validateReactionGifCandidates(reactionGifSource,{minimum:1189}));
+  assert.equal(reactionGifReport.minimum_observed_conversation_uses,111);
+  assert.equal(reactionGifReport.owner_requested_canonical_records,1);
   assert.equal(stage3000Candidates.length,2000);
   assert.doesNotThrow(()=>validateExpansionRecords(stage3000Candidates,{knownIds:publicCollection.slice(0,1000).map(record=>record.id)}));
   assert.deepEqual(validateMeaningSpecificMetadata(stage3000Candidates),{records:2000});
+  assert.equal(stage3000Candidates.filter(record=>record.media?.type==='gif').length,1189);
+  assert.equal(stage3000Candidates.filter(record=>record.provenance?.provider==='National Gallery of Art, Washington').length,0);
 });
 
 test('stage-1000 candidate pool contains 700 specific records and a diverse held-out evaluation',()=>{

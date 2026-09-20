@@ -14,7 +14,8 @@ const pageSize=24;
 function imageFor(meme,index) {
   const frame=document.createElement('div');
   frame.className='collection-media';
-  if(!meme.image_url) {
+  const mediaUrl=meme.media_type==='gif'?(meme.preview_url||meme.media_url||meme.image_url):(meme.media_url||meme.image_url);
+  if(!mediaUrl) {
     frame.append(Object.assign(document.createElement('span'),{className:'media-fallback',textContent:'Preview unavailable'}));
     return frame;
   }
@@ -24,8 +25,9 @@ function imageFor(meme,index) {
   image.decoding='async';
   image.referrerPolicy='no-referrer';
   image.onerror=()=>frame.replaceChildren(Object.assign(document.createElement('span'),{className:'media-fallback',textContent:'Preview unavailable'}));
-  image.src=meme.image_url;
+  image.src=mediaUrl;
   frame.append(image);
+  if(meme.media_type==='gif') frame.append(Object.assign(document.createElement('span'),{className:'media-kind',textContent:'GIF'}));
   return frame;
 }
 

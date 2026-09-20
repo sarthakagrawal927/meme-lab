@@ -1,31 +1,32 @@
 # Meme Lab project status
 
-**Updated:** 20 September 2026  
-**Lifecycle:** Live personal meme picker with an evidence-labelled evaluation pipeline.
+**Updated:** 21 September 2026
+**Lifecycle:** Live personal meme picker; corrected meme-and-GIF catalogue prepared locally and pending owner-authorized release.
 
 ## Live product
 
 - Paste one complete comment or situation and receive the best meme first, four backups, ordinal fit labels, and honest confidence.
 - Multi-person comments now return distinct viewpoints where available: **My reaction**, **Their side**, and **The situation**.
-- Browse and search 3,000 live references in a paginated collection.
+- The production release contains the corrected 3,000-reference snapshot: 1,811 static memes and 1,189 usage-backed reaction GIFs, with no National Gallery artwork.
 - See meme strength and image quality separately from contextual fit. Popularity and asset quality do not masquerade as relevance.
 - Serious help, safety, care, grief, apology, and factual-guidance requests are guarded before humour is considered.
 - One-tap feedback is retained for 30 days.
 
-## How 3,000 was built
+## Correcting the 3,000 catalogue
 
-- The original 1,000 references remain intact.
-- The stage-3,000 source pool contained 2,227 candidates: 827 canonical meme templates and 1,400 National Gallery of Art CC0 open originals.
-- Exact URLs, perceptual hashes, normalized names, aliases, and local CLIP image embeddings check uniqueness. Six hard duplicates and ten near-copy embedding candidates are excluded.
-- Local quantized CLIP scores reaction usefulness, image quality, and embedding uniqueness. The final 2,000 additions are selected from the remaining buffer.
-- Local Qwen writes meaning-specific message, social-dynamic, example, near-miss, and tag metadata. These annotations are assistant-authored and remain pending owner feedback.
-- Production still uses bounded retrieval: two BGE embedding views return 30 candidates, with ten shortlist slots reserved for the original 1,000. Jev independently rates all 30 with five ordered fit levels and returns five distinct results. Multi-person comments use three parallel perspective lenses, fill remaining slots with the strongest unused matches, and receive one final ordinal rescore. The UI shows fit labels rather than probabilities. The 70B Workers AI selector runs only when classifier ranking fails.
+- An audit found that 1,189 of the earlier 3,000 records were public-domain artworks without evidence of meme use. They are excluded from the corrected catalogue.
+- The honest static baseline is 1,811 named meme templates: 1,689 Imgflip assets and 122 Memegen assets.
+- The replacement tranche contains 1,189 reaction GIFs. 1,188 come from the GIF Reply research dataset of 1.56 million observed conversation-to-GIF replies, with at least 111 observed uses per selected GIF. “My Name Is Jeff” is an explicit owner-requested canonical entry.
+- The catalogue now records `media_type`, full media URL, preview URL, MIME type, source provenance, evidence state, and rights state. GIFs animate in results while collection cards load lighter previews.
+- A checked-in 40-item canonical coverage manifest reports recognizable gaps directly instead of letting the raw count conceal them.
+- Local Qwen writes meaning-specific message, social-dynamic, example, near-miss, and tag metadata. These annotations remain assistant-authored pending owner feedback.
+- Production still uses bounded retrieval: two BGE embedding views return 30 candidates, with ten shortlist slots reserved for the original 1,000. Jev independently rates all 30 with five ordered fit levels and returns five distinct results. Multi-person comments use three parallel perspective lenses, fill remaining slots with the strongest unused matches, and receive one final ordinal rescore. The UI shows fit labels rather than probabilities. If Jev is unavailable or throttled, the API returns a retryable 503 and never invokes a large text-generation model.
 
 ## Evaluation
 
 - The existing fresh 60-case shadow set remains the independent regression check: 45 humour and 15 no-meme prompts.
-- Stage 3,000 adds 40 long-tail cases for a 100-case suite: 30 humour and 10 no-meme cases.
-- On the assistant-authored labels, the final gate reached 72% retrieval-at-30, 67% top-one, 71% top-three, and 96% correct serious-content abstention. The fresh long-tail slice reached 93% retrieval and top-three; when an acceptable meme reached retrieval, reranking placed one in the top three 98% of the time.
+- Stage 3,000 keeps the 60-case independent shadow set and replaces the invalid artwork-specific slice with 30 GIF-focused humour cases plus 10 no-meme cases.
+- Prior stage-3,000 metrics are invalidated because they evaluated the removed artwork records. New retrieval and ranking results must be generated after the corrected Vectorize index is seeded.
 - Labels are assistant-authored and not human validated. Metrics are directional until owner feedback accumulates.
 - A focused 14-case routing set now covers multi-person situations, quoted first-person speech, inanimate pronouns, and negation. It checks when perspective mode should and should not run; the labels remain assistant-authored pending owner review.
 - A corrected 12-case hard-ranking set compares five scoring strategies across 101 unique candidate pairs. Blind model review selected rich ordinal Jev: exact first choices improved from 7/12 to 9/12 and the best returned candidate ranked first on 10/12 rather than 7/12. This evidence is independent of scorer output but is not human ground truth.
@@ -33,7 +34,8 @@
 
 ## Next stage
 
-- Keep improving misses from live feedback and the 100-case evaluation set.
+- Continue owner review of the fresh 100-case stage-3,000 evaluation and use production feedback to improve the weakest GIF metadata.
+- Keep improving canonical-coverage misses and owner-labelled evaluation cases.
 - At 30,000, add movie-dialogue reactions as a separate corpus and route each input to meme, dialogue, or none before corpus-specific retrieval.
 
-Tracking: [public beta #1](https://github.com/sarthakagrawal927/meme-lab/issues/1), [catalogue expansion #2](https://github.com/sarthakagrawal927/meme-lab/issues/2).
+Tracking: [public beta #1](https://github.com/sarthakagrawal927/meme-lab/issues/1), [catalogue expansion #2](https://github.com/sarthakagrawal927/meme-lab/issues/2), [verified meme and GIF rebuild #4](https://github.com/sarthakagrawal927/meme-lab/issues/4).

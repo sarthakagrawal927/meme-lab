@@ -13,7 +13,7 @@ For 30,000 references, route the comment to `meme`, `movie_dialogue`, or `none` 
 
 | Arm | Task | Result | Latency | Disposition |
 |---|---|---:|---:|---|
-| Current Llama 3.3 70B | 300-catalogue relevance | 80% top-three on 20 expansion-only cases | 3.85s p95 | Keep only as structural fallback |
+| Llama 3.3 70B | 300-catalogue relevance | 80% top-three on 20 expansion-only cases | 3.85s p95 | Removed from production fallback to prevent unbounded spike cost |
 | Dual-view vector top 30 + Jev fast | Fresh 1,000-catalogue shadow relevance | 55.6% top-one; 64.4% top-three; 100% top-three given retrieval | Classifier stage only | Best generalization signal; retrieval remains the bottleneck |
 | Dual-view vector top 30 + Jev fast | Tuned 1,000-catalogue regression | 84.4% top-one; 95.6% top-three; 97.7% top-three given retrieval | Classifier stage only | Regression coverage, not an unbiased quality estimate |
 | Serious cue + Jev gate | Fresh 1,000-catalogue shadow safety | 100% correct abstention; 0% inappropriate joking; 0% false abstention | Classifier runs on 20% of cases | Live safety path with deterministic factual-request guards |

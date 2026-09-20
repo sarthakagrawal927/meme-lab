@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import worker from '../worker/src/index.mjs';
 import {FIT_LABELS,hasMultiplePerspectives,humourBelongs,needsSeriousHandling,PERSPECTIVES,rankCandidates,rankCandidatesByPerspective,requiresFactualAnswer} from '../worker/src/classification.mjs';
-import {MINIMUM_VISIBLE_FIT,MINIMUM_VISIBLE_PERSPECTIVE_FIT,MODEL,validateSelection,normalizeSelection,normalizeRankedSelection,validateRankedSelection,presentSelection,selectionFromRanking} from '../worker/src/recommendation.mjs';
+import {MINIMUM_VISIBLE_FIT,MINIMUM_VISIBLE_PERSPECTIVE_FIT,validateSelection,normalizeSelection,normalizeRankedSelection,validateRankedSelection,presentSelection,selectionFromRanking} from '../worker/src/recommendation.mjs';
 import {CORE_RESERVE,EMBEDDING_MODEL,mergeWithReserve,retrieveCandidates} from '../worker/src/retrieval.mjs';
 import {reciprocalRankFuse} from '../worker/src/rank-fusion.mjs';
 import {rankRelevanceCandidates,staticCandidateSignals} from '../worker/src/candidate-signals.mjs';
@@ -16,9 +16,7 @@ const ordinalBatch=body=>({results:body.inputs.map((_,index)=>oneHot(body.labels
 const env={
   AI:{run:async(model,input)=>{
     if(model===EMBEDDING_MODEL) return {data:[[1,0,0]]};
-    assert.equal(model,MODEL);
-    assert.equal(input.response_format.type,'json_schema');
-    return{response:selection};
+    assert.fail(`Unexpected Workers AI model: ${model} with ${JSON.stringify(input)}`);
   }},
   MEME_INDEX:{query:async()=>({matches:[{id:'meme-0021',score:.92,metadata:{catalogue_id:'waiting-skeleton'}}]})},
   CLASSIFIER_FETCH:async(_url,options)=>{
@@ -44,6 +42,10 @@ test('public worker returns a validated known meme without exposing prompt data'
   assert.equal('reason' in body.candidates[0],false);
   assert.equal(body.candidates[0].meme_strength,61);
   assert.equal(body.candidates[0].asset_quality,50);
+  assert.equal(body.candidates[0].media_type,'image');
+  assert.equal(body.candidates[0].media_url,body.candidates[0].image_url);
+  assert.equal(body.candidates[0].preview_url,body.candidates[0].image_url);
+  assert.equal(body.candidates[0].source_url,body.candidates[0].image_url);
   assert.match(body.candidates[0].signal_summary,/meme strength at 61\/100 and image quality at 50\/100/);
   assert.equal(body.confidence,'high');
   assert.equal(body.feedback_enabled,true);
@@ -460,6 +462,24 @@ test('a failed perspective lens falls back to general ranking without invented p
   assert.equal(classifierInstructions.length,4);
   assert.equal(classifierInstructions.some(instructions=>instructions.startsWith('Judge each comment-and-candidate pair independently')),true);
   assert.deepEqual(body.candidates.map(candidate=>candidate.perspective),['best_match','best_match','best_match']);
+});
+
+test('classifier throttling returns 503 without invoking a text-generation fallback',async()=>{
+  const aiModels=[];
+  const noFallbackEnv={
+    ...env,
+    AI:{run:async model=>{
+      aiModels.push(model);
+      if(model===EMBEDDING_MODEL) return {data:[[1,0,0]]};
+      throw new Error(`Unexpected text-generation fallback: ${model}`);
+    }},
+    CLASSIFIER_FETCH:async()=>new Response('Rate limited.',{status:429})
+  };
+  const response=await worker.fetch(new Request('https://example.test/api/recommend',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({comment:'The tests failed again after I changed absolutely nothing.'})}),noFallbackEnv);
+  assert.equal(response.status,503);
+  assert.equal(response.headers.get('retry-after'),'60');
+  assert.deepEqual(aiModels,[EMBEDDING_MODEL]);
+  assert.deepEqual(await response.json(),{error:'Meme ranking is temporarily unavailable. Try again shortly.'});
 });
 
 test('static responses receive security and no-index headers',async()=>{

@@ -7,7 +7,8 @@
   <title>Meme Lab — How it works</title>
   <link rel="stylesheet" href="/app.css">
 </head>
-<body>
+<body class="page-how">
+  <div class="doodle-field" aria-hidden="true"></div>
   <header class="topbar">
     <a class="brand" href="/" aria-label="Meme Lab home"><span>meme</span>lab</a>
     <nav class="site-nav" aria-label="Main navigation">
@@ -55,7 +56,7 @@
         <article class="journey-card journey-blue"><span>01 · CONTROL</span><strong>30 useful reactions</strong><p>The original release held 60 records: 30 reaction candidates and 30 caption templates. The picker deliberately used the 30 reactions as a small all-candidate control so every model choice could be inspected.</p></article>
         <article class="journey-card journey-mint"><span>02 · COVERAGE</span><strong>300 common references</strong><p>Two hundred and forty reviewed external records expanded the vocabulary. Vector retrieval replaced direct comparison, the collection became searchable, and the first public feedback loop went live.</p></article>
         <article class="journey-card journey-yellow"><span>03 · GENERALIZATION</span><strong>1,000 broader references</strong><p>Seven hundred long-tail records forced dual-view retrieval, a fresh 60-case shadow set, a serious-content gate, and the first classifier bake-off. This is where Jev beat embedding-only ranking.</p></article>
-        <article class="journey-card journey-rose"><span>04 · SCALE</span><strong>3,000 live references</strong><p>A 2,227-record source pool produced 2,000 additions after provenance, exact-copy, perceptual, alias, and CLIP checks. The live index now stores a meaning vector and a usage-example vector for every reference.</p></article>
+        <article class="journey-card journey-rose"><span>04 · SCALE</span><strong>3,000 live references</strong><p>The first attempt hit the number by treating 1,189 public-domain artworks as reactions. The audit rejected that shortcut and replaced every artwork with a usage-backed reaction GIF.</p></article>
         <article class="journey-card journey-white"><span>05 · QUALITY</span><strong>Five options, real viewpoints</strong><p>Complete sentence examples revealed that one situation can support the narrator’s reaction, the other person’s side, and the event itself. The UI now returns one primary choice and four visible backups across those angles.</p></article>
         <article class="journey-card journey-white"><span>06 · CALIBRATION</span><strong>Labels instead of fake probability</strong><p>Jev’s old competitive score looked like a probability but was not one. A blind hard-case evaluation selected independent ordinal ratings, so the product now says weak, plausible, strong, or exact.</p></article>
       </div>
@@ -118,7 +119,7 @@
         <article><span>Core reserve</span><h3>Known-good coverage survives</h3><p>Twenty shortlist slots search the full catalogue; ten reserve candidates from the original 1,000 so noisy expansion records cannot erase the stronger base.</p></article>
         <article><span>Jev fast</span><h3>Social fit beats keyword overlap</h3><p>Full metadata lets the classifier judge actors, target, tone, viewpoint, example, and near-miss rather than choosing the most familiar shared word.</p></article>
         <article><span>Perspective mode</span><h3>Parallel lenses, then one scale</h3><p>Three lens passes select distinct viewpoint candidates. A final batch rates the selected five on the same ordinal scale before the UI orders them.</p></article>
-        <article><span>Fallback</span><h3>The larger model is exceptional</h3><p>The structured 70B selector runs only if classifier ranking fails. It is resilience, not an explanation step on every request.</p></article>
+        <article><span>Failure policy</span><h3>No expensive fallback</h3><p>If classifier ranking is unavailable or throttled, the API returns a retryable error. It never turns a traffic spike into unplanned 70B inference spend.</p></article>
       </div>
     </section>
 
@@ -126,25 +127,25 @@
       <div class="technical-heading">
         <div>
           <p class="eyebrow">HOW 3,000 WAS BUILT</p>
-          <h2 id="catalogue-title">Acquisition was easy. Uniqueness was the work.</h2>
+          <h2 id="catalogue-title">The first 3,000 was wrong. The rebuild fixed the count.</h2>
         </div>
-        <p>The stage-3,000 pool combined canonical meme sources with public-domain art. Automated checks block exact copies and surface fuzzy lookalikes without pretending semantic similarity always means duplication.</p>
+        <p>A reusable image is not automatically a meme. The corrected catalogue keeps 1,811 named meme templates and replaces all artwork filler with 1,189 reaction GIFs backed by observed conversational use.</p>
       </div>
       <div class="metric-grid" aria-label="Stage 3,000 catalogue facts">
-        <article><strong>2,227</strong><span>raw candidates</span></article>
-        <article><strong>2,000</strong><span>selected additions</span></article>
-        <article><strong>221</strong><span>rejected records</span></article>
-        <article><strong>811</strong><span>selected meme templates</span></article>
-        <article><strong>1,189</strong><span>selected CC0 artworks</span></article>
-        <article><strong>100%</strong><span>fingerprint + metadata coverage</span></article>
+        <article><strong>1,811</strong><span>static meme templates</span></article>
+        <article><strong>1,189</strong><span>reaction GIFs</span></article>
+        <article><strong>1.56M</strong><span>observed reply pairs</span></article>
+        <article><strong>111+</strong><span>uses per selected research GIF</span></article>
+        <article><strong>1,189</strong><span>artwork fillers removed</span></article>
+        <article><strong>40</strong><span>canonical memes tracked explicitly</span></article>
       </div>
       <ol class="evidence-list">
-        <li><span>01</span><div><strong>Identify the source</strong><p>Keep provider, canonical source URL, media URL, licence URL when available, and an explicit preview-rights state.</p></div></li>
-        <li><span>02</span><div><strong>Block hard duplicates</strong><p>Compare canonical URLs, exact bytes, normalized names, and conservative aliases before a record can enter selection.</p></div></li>
-        <li><span>03</span><div><strong>Detect visual near-copies</strong><p>Perceptual hashes flag resized or transformed versions of the same image. Ten embedding-near candidates were separately surfaced for review.</p></div></li>
-        <li><span>04</span><div><strong>Measure embedding uniqueness</strong><p>A local quantized CLIP model checks visual neighbourhoods. Similar meaning can remain if the actual reaction and image are usefully distinct.</p></div></li>
-        <li><span>05</span><div><strong>Score the collection—not relevance</strong><p>Selection used 62% meme strength, 18% asset quality, and 20% embedding uniqueness. These values never claim that a meme fits a new comment.</p></div></li>
-        <li><span>06</span><div><strong>Write specific metadata locally</strong><p>Local Qwen generated complete meaning, social-dynamic, example, near-miss, and tag sentences. They remain assistant-authored pending owner feedback.</p></div></li>
+        <li><span>01</span><div><strong>Require usage evidence</strong><p>The GIF Reply research dataset contains 1.56 million real text-to-GIF reply pairs. Popularity comes from observed reactions, not visual guesswork.</p></div></li>
+        <li><span>02</span><div><strong>Keep stable provenance</strong><p>Every GIF keeps its research hash, GIPHY ID, source page, direct media URL, preview URL, and observed-use count.</p></div></li>
+        <li><span>03</span><div><strong>Block unsafe and duplicate media</strong><p>Source IDs, media URLs, normalized names, content tags, and duplicate checks prevent repeated or unsuitable records from padding the count.</p></div></li>
+        <li><span>04</span><div><strong>Track canonical gaps</strong><p>A checked-in must-have list makes missing cultural staples visible. “My Name Is Jeff” is now a real GIF record, not an invisible omission.</p></div></li>
+        <li><span>05</span><div><strong>Keep strength separate from fit</strong><p>Observed popularity influences meme strength. It never decides whether the reaction fits the sentence submitted right now.</p></div></li>
+        <li><span>06</span><div><strong>Write specific metadata locally</strong><p>Local Qwen writes full meaning, social-dynamic, example, near-miss, and tag sentences. They remain assistant-authored pending owner feedback.</p></div></li>
       </ol>
     </section>
 
@@ -163,7 +164,7 @@
             <tr><td><strong>Jev fast + full metadata</strong></td><td>19/20 top-one in the enriched shortlist trial; strongest direct fit signal.</td><td>~1.27s p95 on retrieved top 30</td><td><span class="decision-pill decision-live">LIVE</span></td></tr>
             <tr><td><strong>Rich ordinal Jev</strong></td><td>9/12 exact first and 10/12 best-returned-first on the corrected hard set.</td><td>1.60s p95 classifier stage</td><td><span class="decision-pill decision-live">QUALITY WINNER</span></td></tr>
             <tr><td><strong>Compact ordinal Jev</strong></td><td>Same 9/12 exact first, but the best returned candidate ranked first on 9/12 instead of 10/12.</td><td>1.20s p95</td><td><span class="decision-pill decision-next">SPEED FALLBACK</span></td></tr>
-            <tr><td><strong>Llama 3.3 70B</strong></td><td>80% top-three on 20 expansion cases; useful structure but unnecessary prose and slower responses.</td><td>3.85s p95</td><td><span class="decision-pill">FALLBACK ONLY</span></td></tr>
+            <tr><td><strong>Llama 3.3 70B</strong></td><td>80% top-three on 20 expansion cases; useful structure but unnecessary prose, slower responses, and unacceptable spike cost.</td><td>3.85s p95</td><td><span class="decision-pill decision-stop">REMOVED</span></td></tr>
             <tr><td><strong>BGE reranker</strong></td><td>20% top-one and 45% top-three. It recognized topic similarity better than social sendability.</td><td>1.83s p95</td><td><span class="decision-pill">NOT FINAL JUDGE</span></td></tr>
             <tr><td><strong>GLiNER 2.5</strong></td><td>8/12 on meme-versus-none routing. Useful at extracting grief, emergency, authority, and tone features.</td><td>52ms mean</td><td><span class="decision-pill decision-next">FEATURE CANDIDATE</span></td></tr>
             <tr><td><strong>Laya</strong></td><td>8/12 overall but 0/4 on meme cases. It routed too aggressively away from humour.</td><td>~60ms median</td><td><span class="decision-pill">RESEARCH ONLY</span></td></tr>
@@ -234,15 +235,15 @@
       <div class="technical-heading">
         <div>
           <p class="eyebrow">STORAGE, MEDIA, AND COST</p>
-          <h2 id="boundaries-title">The catalogue is stored. Most image files are not.</h2>
+          <h2 id="boundaries-title">The catalogue is stored. The media stays with its source.</h2>
         </div>
         <p>The build pipeline is mostly local, but the live runtime is not yet completely local or free: it currently uses Cloudflare Workers AI, Vectorize, D1, and classifier.dev.</p>
       </div>
       <div class="boundary-grid">
         <article><span>CATALOGUE</span><h3>Versioned JSON and generated modules</h3><p>Names, meanings, examples, near-misses, provenance, quality signals, and source URLs live with the project and generate the public collection.</p></article>
         <article><span>SEMANTIC INDEX</span><h3>6,000 vectors in Vectorize</h3><p>Meaning and usage vectors are stored remotely so every request searches a bounded index instead of loading all 3,000 records.</p></article>
-        <article><span>IMAGES</span><h3>Provider-hosted previews</h3><p>Imgflip, Memegen, and National Gallery images load from their source URLs. Meme Lab does not silently rebundle media or imply redistribution rights.</p></article>
-        <article><span>RIGHTS</span><h3>CC0 and source previews stay distinct</h3><p>National Gallery CC0 originals link to their licence. Other source previews remain labelled “media rights not established.”</p></article>
+        <article><span>MEDIA</span><h3>Provider-hosted images and GIFs</h3><p>Imgflip, Memegen, and GIPHY assets load from recorded source URLs. Results animate GIFs; collection cards use lighter previews.</p></article>
+        <article><span>RIGHTS</span><h3>Usage evidence is not a licence</h3><p>Research-backed popularity proves that a GIF is used as a reaction. It does not establish redistribution rights, so every external asset remains a labelled source preview.</p></article>
         <article><span>FEEDBACK</span><h3>Bounded D1 records</h3><p>The comment, returned candidate IDs, decision, labels, and yes/no feedback support evaluation and receive a 30-day expiry.</p></article>
         <article><span>LOCAL WORK</span><h3>CLIP and Qwen built the collection</h3><p>Uniqueness signals and long-form metadata were generated locally. The fastest local routing models tested so far were not accurate enough for the live decision.</p></article>
       </div>
@@ -265,6 +266,7 @@
         <li><strong>Jev smart and serial ensembles:</strong> 5–14 second paths were too slow without a matching quality gain.</li>
         <li><strong>Current small local routers:</strong> cheap and private, but too eager to abstain from genuine humour.</li>
         <li><strong>Claiming model labels as truth:</strong> every metric remains visibly marked pending owner review.</li>
+        <li><strong>Counting arbitrary artwork as memes:</strong> the audit removed 1,189 public-domain images that had no evidence of meme use.</li>
       </ul>
     </section>
 
@@ -301,7 +303,7 @@
         <p class="eyebrow">THE RULE THAT SURVIVED EVERY STAGE</p>
         <h2>Bigger is useful only if the results stay honest.</h2>
       </div>
-      <p>Three thousand is live, not “finished.” The collection is machine-curated, evaluation labels are not yet human ground truth, source previews do not imply media rights, and a weak match stays visibly weak. The next improvement comes from owner feedback and replayable evidence—not a more impressive model name.</p>
+      <p>Three thousand is live, not “finished.” The corrected set contains meme templates and usage-backed reaction GIFs only. Metadata and evaluation labels still need owner review, source previews do not imply media rights, and a weak match stays visibly weak.</p>
     </section>
   </main>
 

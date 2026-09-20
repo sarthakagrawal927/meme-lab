@@ -60,7 +60,8 @@ const requestBatch=async batch=>{
     name:record.name,
     categories:record.categories,
     visual_description:record.assistive_text?.slice(0,500)??null,
-    provider:record.provider
+    provider:record.provider,
+    usage_evidence:record.usage_evidence??null
   }));
   const prompt=`Write retrieval metadata for each meme/reaction-image candidate below. Return exactly one record per input ID and preserve every ID exactly.
 
@@ -145,10 +146,15 @@ for(let offset=0;offset<pending.length;offset+=batchSize) {
         provider:candidate.provider,
         provider_id:candidate.source_id,
         source_url:candidate.source_url,
-        observed_on:candidate.observed_on
+        observed_on:candidate.observed_on,
+        ...(candidate.usage_evidence?{usage_evidence:candidate.usage_evidence}:{})
       },
       media:{
         image_url:candidate.image_url,
+        type:candidate.media_type??'image',
+        url:candidate.media_url??candidate.image_url,
+        ...(candidate.preview_url?{preview_url:candidate.preview_url}:{}),
+        ...(candidate.mime_type?{mime_type:candidate.mime_type}:{}),
         rights_status:openLicense?'established':'not_established',
         ...(openLicense?{license_url:candidate.license_url}: {})
       },

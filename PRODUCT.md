@@ -8,7 +8,7 @@ The first user is the owner, but the playground is public for lightweight feedba
 
 ## Product behavior
 
-The live catalogue contains 3,000 searchable references. Every reference has a specific meaning, social dynamic, example, near-miss, provenance, media state, meme-strength score, and image-quality score.
+The corrected catalogue contains 3,000 searchable references: 1,811 static meme templates and 1,189 usage-backed reaction GIFs. Arbitrary artwork is not counted as meme coverage. Every reference has a specific meaning, social dynamic, example, near-miss, provenance, media type and state, meme-strength score, and asset-quality score.
 
 Runtime ranking is deliberately bounded:
 
@@ -16,11 +16,11 @@ Runtime ranking is deliberately bounded:
 2. Jev independently rates all 30 candidates as wrong, weak, plausible, strong, or exact. Multi-person comments first select distinct candidates through three explicit lenses—**My reaction**, **Their side**, and **The situation**—then rate the selected five on the same ordinal scale.
 3. Static meme strength and image quality remain separate catalogue signals; they are not presented as contextual relevance.
 4. The primary result and four ranked backups remain visible even when some options are weak. The UI shows ordinal fit labels rather than presenting Jev's competitive score as a probability.
-5. Feedback records whether the recommendation landed or missed. There is no generated explanation step on the normal path; the larger language model runs only if classifier ranking fails.
+5. Feedback records whether the recommendation landed or missed. There is no generated explanation or large-model fallback: if classifier ranking is unavailable, the request fails clearly instead of creating surprise inference spend.
 
 ## Evidence boundary
 
-Catalogue metadata, strength, quality, uniqueness, and evaluation labels are model-authored unless explicitly marked otherwise. They are useful engineering evidence, not human-validated cultural truth. Media provenance and rights state remain visible; CC0 open originals are labelled separately from source previews whose redistribution rights are not established.
+Catalogue metadata, strength, quality, uniqueness, and evaluation labels are model-authored unless explicitly marked otherwise. They are useful engineering evidence, not human-validated cultural truth. Reaction popularity comes from observed conversational use; media provenance and rights state remain separate, and usage evidence does not imply redistribution permission.
 
 ## Next decision
 

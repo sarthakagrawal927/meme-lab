@@ -2,7 +2,7 @@
   "$schema": "fleet.design-review.v1",
   "version": 1,
   "project": "meme_lab",
-  "target": "Meme Lab public 3,000-reference playground",
+  "target": "Meme Lab public 3,000-reference playground with responsive doodle layer",
   "surfaceMode": "operate",
   "mode": "overhaul",
   "register": "product",
@@ -48,29 +48,29 @@
       "driftNote": "",
       "audience": "The owner first, with a public playground for lightweight feedback.",
       "job": "Paste one complete comment, see the best meme and four ranked backups across useful viewpoints, then record whether the result landed; read the full evidence-backed project journey when needed.",
-      "thesis": "A crisp white working canvas with pale-blue navigation, mint and yellow state landmarks, restrained borders and the experiment visible immediately.",
-      "system": "Clean Canvas uses a lightweight workspace rail, compact full-width situation setup and equal A/B comparison panes; catalogue, sources and history remain secondary.",
-      "signature": "A best-match result with four restrained viewpoint-aware alternatives, ordinal fit labels, separate static-quality signals, and one-tap feedback.",
-      "risk": "Strength and image quality must remain subordinate to contextual relevance, while a 3,000-item collection stays searchable and calm."
+      "thesis": "A crisp white working canvas with pale-blue navigation, mint and yellow state landmarks, restrained borders, and colorful hand-drawn reaction marks around the working area.",
+      "system": "Clean Canvas keeps its lightweight workspace rail and compact task flow, while a fixed edge-only doodle field adds meme-native personality without entering controls or result cards.",
+      "signature": "A best-match result with four viewpoint-aware alternatives, surrounded by reaction bursts, speech bubbles, stars, arrows, hearts, and a hand-drawn 3K mark.",
+      "risk": "The intentionally abundant doodles must remain decorative, non-interactive, and subordinate to the comment form, result hierarchy, and long-form reading experience."
     }
   },
   "evidence": {
     "screenshots": [
       {
         "width": 390,
-        "path": "artifacts/design/after-390.png"
+        "path": "artifacts/design/after-doodles-390.png"
       },
       {
         "width": 768,
-        "path": "artifacts/design/after-768.png"
+        "path": "artifacts/design/after-doodles-768.png"
       },
       {
         "width": 1440,
-        "path": "artifacts/design/after-1440.png"
+        "path": "artifacts/design/after-doodles-1440.png"
       }
     ],
     "projectCheck": {
-      "command": "npm test && npm run check",
+      "command": "npm test && npm run check && node /Users/sarthak/Desktop/fleet/saas-maker/tooling/scripts/design-workflow.mjs check --project /Users/sarthak/Downloads/meme_lab",
       "status": "pass"
     },
     "critique": {
@@ -114,6 +114,6 @@
   },
   "ownerFeedback": {
     "decision": "keep",
-    "note": "Owner selected direction C, Clean Canvas, from the simpler light and colorful second round; the candidate relevance labeller extends that system."
+    "note": "Owner selected direction C, Clean Canvas, then explicitly requested many doodles. The responsive edge illustration layer preserves the approved system and adds playful meme-native character."
   }
 }

@@ -4,7 +4,7 @@ Read [PRODUCT.md](PRODUCT.md) for the current product contract and [PRD.md](PRD.
 
 ## Live playground
 
-Paste one comment and get ranked meme options at **https://memes.significanthobbies.com**. One-tap feedback is retained for 30 days so the ranking can improve. The public Worker uses the 3,000-reference catalogue and does not expose local experiment history or raw results. The `workers.dev` route remains an equivalent preview URL.
+Paste one comment and get ranked meme options at **https://memes.significanthobbies.com**. One-tap feedback is retained for 30 days so the ranking can improve. The live 3,000-reference catalogue contains 1,811 static memes and 1,189 usage-backed reaction GIFs; the earlier artwork fillers are excluded. The `workers.dev` route remains an equivalent preview URL.
 
 ## Open it locally
 
@@ -45,9 +45,11 @@ An existing **chat-completions-compatible** server can instead be configured wit
 
 Compatibility varies by provider. Set `MEME_JSON_MODE=false` only if your compatible endpoint rejects `response_format`; local validation still applies. A cloud endpoint requires HTTPS, the appropriate authorized API key, and `MEME_ALLOW_REMOTE=true`. The UI identifies a non-loopback endpoint. A loopback runtime can still invoke cloud models: use a genuinely local model for private conversations.
 
-Jev does **not** implement either local model route. The public Worker uses classifier.dev's Jev fast tier to rate every candidate in a 30-item semantic shortlist and to guard serious help-seeking prompts. It returns one primary result plus four backups with ordinal fit labels instead of presenting Jev's competitive values as probabilities. When both a narrator and another participant are present, three parallel Jev calls select distinct memes for **My reaction**, **Their side**, and **The situation**, then one batch rates the selected five on the same ordinal scale. If any perspective call fails, the Worker retries the general Jev ranking before using the structured Workers AI selector as the final fallback. There is no generated explanation step on the normal interaction path.
+Jev does **not** implement either local model route. The public Worker uses classifier.dev's Jev fast tier to rate every candidate in a 30-item semantic shortlist and to guard serious help-seeking prompts. It returns one primary result plus four backups with ordinal fit labels instead of presenting Jev's competitive values as probabilities. When both a narrator and another participant are present, three parallel Jev calls select distinct memes for **My reaction**, **Their side**, and **The situation**, then one batch rates the selected five on the same ordinal scale. If a perspective call fails, the Worker retries the general Jev ranking. If classifier ranking remains unavailable or throttled, the API returns a retryable `503`; it never invokes a large text-generation fallback.
 
-The 3,000-record remote index stores separate `meaning` and `example` vectors, for 6,000 vectors total. Before seeding a new Vectorize index, create string metadata indexing for `view` plus boolean metadata indexing for `control` and `core`, wait for all mutations to finish, then call the tool's `/seed` endpoint in six bounded 500-record ranges (`start=0,500,…,2500&limit=500`). The `core` flag reserves ten shortlist positions for the original 1,000 without preventing the broader 3,000-record search from contributing the other twenty. Vectorize does not retroactively index metadata on vectors inserted before a metadata index exists. Keep reseeding on the experiment Worker because delete/upsert processing is asynchronous; verify `vectorCount` and a filtered query before deploying production code that depends on the new vectors.
+The corrected 3,000-record index stores separate `meaning` and `example` vectors, for 6,000 vectors total. It contains 1,811 static meme templates and 1,189 reaction GIFs; it contains no National Gallery artwork. To reseed it, confirm string metadata indexing for `view` plus boolean metadata indexing for `control` and `core`, wait for all mutations to finish, then call the tool's `/seed` endpoint in six bounded 500-record ranges (`start=0,500,…,2500&limit=500`). The `core` flag reserves ten shortlist positions for the original 1,000 without preventing the broader catalogue from contributing the other twenty. Verify the corrected index and evaluation before switching production traffic.
+
+The GIF tranche comes from the public GIF Reply research dataset: 1.56 million observed text-to-GIF conversation pairs with stable GIF hashes and GIPHY mappings. The 1,188 research-selected GIFs each appeared in at least 111 replies; “My Name Is Jeff” is included as an explicit owner-requested canonical entry. Usage evidence is not a redistribution licence, so these remain source previews with rights marked not established.
 
 ## First run
 
@@ -100,7 +102,7 @@ See [test_report.md](docs/test_report.md) for packaged test coverage. A live `qw
 
 ## Data and privacy boundaries
 
-Annotations are drafts; zero original human preference labels. Sixty references are not sixty verified ready-to-send images. Thirty entries are caption-dependent. Five GIF leads contain page URLs, not GIF binaries. Meme media is not bundled. The audit and source documents retain their limitations; no new permission clearance is implied.
+Annotations are drafts and evaluation labels are not human ground truth. Meme media is not bundled. Static images and GIFs load from their recorded providers, and no new permission clearance is implied. The canonical coverage report makes known gaps visible instead of padding the count with arbitrary reusable images.
 
 The app listens on `127.0.0.1`, makes no model request until asked, and does not prefetch remote images. Media loads contact the original provider. Pasting an exported prompt into another service shares its content. Local run files contain your full pasted conversations in plaintext; do not commit or share them accidentally. To reset, stop the server and remove the JSON event files inside `runs/`, retaining `.gitkeep`. There is no production authentication; do not expose this server through a tunnel or bind it publicly.
 

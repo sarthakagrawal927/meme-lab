@@ -1,7 +1,6 @@
 import {catalogue} from './catalogue.stage3000.generated.mjs';
 import {staticCandidateSignals} from './candidate-signals.mjs';
 
-export const MODEL='@cf/meta/llama-3.3-70b-instruct-fp8-fast';
 export const MAX_RECOMMENDATIONS=5;
 export const MINIMUM_VISIBLE_FIT=0;
 export const MINIMUM_VISIBLE_PERSPECTIVE_FIT=0;
@@ -12,6 +11,11 @@ const publicById=new Map(catalogue.map(record=>{
     id:record.id,
     name:record.name,
     image_url:record.image_url,
+    media_type:record.media_type??'image',
+    media_url:record.media_url??record.image_url,
+    preview_url:record.preview_url??record.image_url,
+    mime_type:record.mime_type,
+    source_url:record.provenance?.source_url??record.source_url??record.image_url,
     media_status:record.media_status,
     license_url:record.license_url,
     meme_strength,

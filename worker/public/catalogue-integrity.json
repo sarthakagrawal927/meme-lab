@@ -1,0 +1,400 @@
+{
+  "records": 3000,
+  "providers": {
+    "inherited meme catalogue": 1000,
+    "JustMeme.wtf": 811,
+    "GIF Reply dataset / GIPHY": 1189
+  },
+  "media_types": {
+    "image": 1811,
+    "gif": 1189
+  },
+  "rights_status": {
+    "not_established": 3000
+  },
+  "excluded_providers": [
+    "National Gallery of Art, Washington"
+  ],
+  "canonical_coverage": {
+    "version": "canonical-meme-coverage-v1",
+    "total": 40,
+    "covered": 38,
+    "missing": 2,
+    "items": [
+      {
+        "id": "my-name-is-jeff",
+        "name": "My Name Is Jeff",
+        "aliases": [
+          "22 jump street",
+          "channing tatum jeff"
+        ],
+        "status": "covered",
+        "catalogue_id": "gif-s2e0eucjhwjr6x9pbw"
+      },
+      {
+        "id": "this-is-fine",
+        "name": "This Is Fine",
+        "aliases": [
+          "this is fine dog"
+        ],
+        "status": "covered",
+        "catalogue_id": "this-is-fine"
+      },
+      {
+        "id": "distracted-boyfriend",
+        "name": "Distracted Boyfriend",
+        "aliases": [
+          "distracted boyfriend"
+        ],
+        "status": "covered",
+        "catalogue_id": "distracted-boyfriend"
+      },
+      {
+        "id": "drake-hotline-bling",
+        "name": "Drake Hotline Bling",
+        "aliases": [
+          "drakeposting",
+          "drake hotline"
+        ],
+        "status": "covered",
+        "catalogue_id": "drake-preference"
+      },
+      {
+        "id": "woman-yelling-at-cat",
+        "name": "Woman Yelling at a Cat",
+        "aliases": [
+          "woman yelling cat"
+        ],
+        "status": "covered",
+        "catalogue_id": "woman-yelling-cat"
+      },
+      {
+        "id": "two-buttons",
+        "name": "Two Buttons",
+        "aliases": [
+          "daily struggle",
+          "two button choice"
+        ],
+        "status": "covered",
+        "catalogue_id": "two-buttons"
+      },
+      {
+        "id": "change-my-mind",
+        "name": "Change My Mind",
+        "aliases": [
+          "steven crowder sign"
+        ],
+        "status": "covered",
+        "catalogue_id": "change-my-mind"
+      },
+      {
+        "id": "expanding-brain",
+        "name": "Expanding Brain",
+        "aliases": [
+          "galaxy brain"
+        ],
+        "status": "covered",
+        "catalogue_id": "expanding-brain"
+      },
+      {
+        "id": "surprised-pikachu",
+        "name": "Surprised Pikachu",
+        "aliases": [
+          "shocked pikachu"
+        ],
+        "status": "covered",
+        "catalogue_id": "surprised-pikachu"
+      },
+      {
+        "id": "hide-the-pain-harold",
+        "name": "Hide the Pain Harold",
+        "aliases": [
+          "harold pain"
+        ],
+        "status": "covered",
+        "catalogue_id": "hide-pain-harold"
+      },
+      {
+        "id": "one-does-not-simply",
+        "name": "One Does Not Simply",
+        "aliases": [
+          "boromir"
+        ],
+        "status": "covered",
+        "catalogue_id": "one-does-not-simply"
+      },
+      {
+        "id": "success-kid",
+        "name": "Success Kid",
+        "aliases": [
+          "success baby"
+        ],
+        "status": "covered",
+        "catalogue_id": "success-kid"
+      },
+      {
+        "id": "bad-luck-brian",
+        "name": "Bad Luck Brian",
+        "aliases": [
+          "bad luck brian"
+        ],
+        "status": "covered",
+        "catalogue_id": "bad-luck-brian"
+      },
+      {
+        "id": "grumpy-cat",
+        "name": "Grumpy Cat",
+        "aliases": [
+          "tardar sauce"
+        ],
+        "status": "covered",
+        "catalogue_id": "grumpy-cat"
+      },
+      {
+        "id": "doge",
+        "name": "Doge",
+        "aliases": [
+          "shiba inu doge"
+        ],
+        "status": "covered",
+        "catalogue_id": "buff-doge-cheems"
+      },
+      {
+        "id": "roll-safe",
+        "name": "Roll Safe",
+        "aliases": [
+          "think about it",
+          "tapping head"
+        ],
+        "status": "covered",
+        "catalogue_id": "roll-safe"
+      },
+      {
+        "id": "confused-nick-young",
+        "name": "Confused Nick Young",
+        "aliases": [
+          "nick young question marks",
+          "nick young"
+        ],
+        "status": "covered",
+        "catalogue_id": "41547816-nick-young"
+      },
+      {
+        "id": "blinking-white-guy",
+        "name": "Blinking White Guy",
+        "aliases": [
+          "blinking guy",
+          "drew scanlon"
+        ],
+        "status": "covered",
+        "catalogue_id": "270335523-blinking-guy-vertical-blank"
+      },
+      {
+        "id": "michael-scott-no",
+        "name": "Michael Scott No",
+        "aliases": [
+          "no god please no"
+        ],
+        "status": "covered",
+        "catalogue_id": "michael-no"
+      },
+      {
+        "id": "leonardo-dicaprio-cheers",
+        "name": "Leonardo DiCaprio Cheers",
+        "aliases": [
+          "gatsby toast",
+          "leo cheers"
+        ],
+        "status": "covered",
+        "catalogue_id": "gatsby-toast"
+      },
+      {
+        "id": "kermit-tea",
+        "name": "Kermit Drinking Tea",
+        "aliases": [
+          "but thats none of my business",
+          "kermit tea"
+        ],
+        "status": "covered",
+        "catalogue_id": "but-thats-none-of-my-business-neutral"
+      },
+      {
+        "id": "elmo-fire",
+        "name": "Elmo Fire",
+        "aliases": [
+          "elmo flames",
+          "hellmo"
+        ],
+        "status": "covered",
+        "catalogue_id": "137362128-elmo-fire"
+      },
+      {
+        "id": "homer-bush",
+        "name": "Homer Disappearing into Bushes",
+        "aliases": [
+          "homer hedge",
+          "homer backing away",
+          "homer disappears into bush"
+        ],
+        "status": "covered",
+        "catalogue_id": "171219241-homer-disappears-into-bush"
+      },
+      {
+        "id": "mocking-spongebob",
+        "name": "Mocking SpongeBob",
+        "aliases": [
+          "mocking spongebob"
+        ],
+        "status": "covered",
+        "catalogue_id": "mocking-spongebob"
+      },
+      {
+        "id": "futurama-fry",
+        "name": "Futurama Fry",
+        "aliases": [
+          "not sure if",
+          "fry squint"
+        ],
+        "status": "covered",
+        "catalogue_id": "futurama-fry"
+      },
+      {
+        "id": "ancient-aliens",
+        "name": "Ancient Aliens",
+        "aliases": [
+          "aliens guy"
+        ],
+        "status": "covered",
+        "catalogue_id": "ancient-aliens"
+      },
+      {
+        "id": "is-this-a-pigeon",
+        "name": "Is This a Pigeon",
+        "aliases": [
+          "anime butterfly pigeon"
+        ],
+        "status": "covered",
+        "catalogue_id": "is-this-a-pigeon"
+      },
+      {
+        "id": "picard-facepalm",
+        "name": "Captain Picard Facepalm",
+        "aliases": [
+          "picard facepalm"
+        ],
+        "status": "covered",
+        "catalogue_id": "captain-picard-facepalm"
+      },
+      {
+        "id": "disaster-girl",
+        "name": "Disaster Girl",
+        "aliases": [
+          "fire girl"
+        ],
+        "status": "covered",
+        "catalogue_id": "disaster-girl"
+      },
+      {
+        "id": "side-eyeing-chloe",
+        "name": "Side Eyeing Chloe",
+        "aliases": [
+          "side eye chloe"
+        ],
+        "status": "missing",
+        "catalogue_id": null
+      },
+      {
+        "id": "arthur-fist",
+        "name": "Arthur Fist",
+        "aliases": [
+          "arthurs fist"
+        ],
+        "status": "covered",
+        "catalogue_id": "arthur-fist"
+      },
+      {
+        "id": "bernie-once-again",
+        "name": "Bernie Sanders Once Again",
+        "aliases": [
+          "once again asking"
+        ],
+        "status": "covered",
+        "catalogue_id": "bernie-i-am-once-again-asking-for-your-support"
+      },
+      {
+        "id": "always-has-been",
+        "name": "Always Has Been",
+        "aliases": [
+          "wait its all"
+        ],
+        "status": "covered",
+        "catalogue_id": "always-has-been"
+      },
+      {
+        "id": "trade-offer",
+        "name": "Trade Offer",
+        "aliases": [
+          "i receive you receive"
+        ],
+        "status": "covered",
+        "catalogue_id": "trade-offer"
+      },
+      {
+        "id": "gru-plan",
+        "name": "Gru's Plan",
+        "aliases": [
+          "gru presentation"
+        ],
+        "status": "covered",
+        "catalogue_id": "grus-plan"
+      },
+      {
+        "id": "monkey-puppet",
+        "name": "Monkey Puppet Side Eye",
+        "aliases": [
+          "awkward monkey puppet",
+          "monkey puppet"
+        ],
+        "status": "covered",
+        "catalogue_id": "monkey-puppet"
+      },
+      {
+        "id": "crying-jordan",
+        "name": "Crying Jordan",
+        "aliases": [
+          "jordan crying"
+        ],
+        "status": "covered",
+        "catalogue_id": "10866054-crying-michael-jordan"
+      },
+      {
+        "id": "shaq-sleeping",
+        "name": "Sleeping Shaq",
+        "aliases": [
+          "shaq awake"
+        ],
+        "status": "missing",
+        "catalogue_id": null
+      },
+      {
+        "id": "office-handshake",
+        "name": "The Office Handshake",
+        "aliases": [
+          "same picture handshake"
+        ],
+        "status": "covered",
+        "catalogue_id": "206622427-the-office-handshake"
+      },
+      {
+        "id": "uno-draw-25",
+        "name": "UNO Draw 25",
+        "aliases": [
+          "draw 25 cards"
+        ],
+        "status": "covered",
+        "catalogue_id": "uno-draw-25"
+      }
+    ]
+  },
+  "human_validated": false
+}

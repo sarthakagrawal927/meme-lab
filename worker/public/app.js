@@ -26,7 +26,8 @@ function showOnly(target) {
 function media(candidate,className) {
   const wrap=document.createElement('div');
   wrap.className=className;
-  if(!candidate.image_url) {
+  const mediaUrl=candidate.media_url||candidate.image_url;
+  if(!mediaUrl) {
     wrap.append(Object.assign(document.createElement('span'),{className:'media-fallback',textContent:'Preview unavailable'}));
     return wrap;
   }
@@ -36,8 +37,9 @@ function media(candidate,className) {
   image.loading='eager';
   image.decoding='async';
   image.onerror=()=>wrap.replaceChildren(Object.assign(document.createElement('span'),{className:'media-fallback',textContent:'Preview unavailable'}));
-  image.src=candidate.image_url;
+  image.src=mediaUrl;
   wrap.append(image);
+  if(candidate.media_type==='gif') wrap.append(Object.assign(document.createElement('span'),{className:'media-kind',textContent:'GIF'}));
   return wrap;
 }
 
@@ -52,8 +54,13 @@ function renderBest(candidate) {
   const rank=Object.assign(document.createElement('span'),{className:`rank${lowConfidence?' low-confidence':''}`,textContent:`${lowConfidence?'LOW CONFIDENCE · ':''}${matchLabel} · ${fitText(candidate)}`});
   const title=Object.assign(document.createElement('h2'),{textContent:displayText(candidate.name)});
   const signals=Object.assign(document.createElement('p'),{className:'signal-note',textContent:candidate.signal_summary});
-  const sourceText=candidate.license_url?'Open original · CC0 public domain':candidate.media_status==='approved'?'Approved image':'Source preview · media rights not established';
-  const source=Object.assign(document.createElement('p'),{className:'source-note',textContent:sourceText});
+  const sourceText=candidate.license_url?'Open original · licensed source':candidate.media_status==='approved'?'Open approved source':'Open source preview · media rights not established';
+  const source=document.createElement('p');
+  source.className='source-note';
+  if(candidate.source_url) {
+    const link=Object.assign(document.createElement('a'),{textContent:sourceText,href:candidate.source_url,target:'_blank',rel:'noopener noreferrer'});
+    source.append(link);
+  } else source.textContent=sourceText;
   copy.append(rank,title,signals,source);
   host.append(media(candidate,'hero-media'),copy);
 }

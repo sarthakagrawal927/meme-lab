@@ -1,4 +1,5 @@
-[
+// Generated from the live 1,000-record catalogue. Do not edit.
+export const catalogue=[
   {
     "id": "absolute-cinema",
     "name": "Absolute Cinema",
@@ -16014,4 +16015,4 @@
     "media_status": "source-preview",
     "availability": "live"
   }
-]
+];

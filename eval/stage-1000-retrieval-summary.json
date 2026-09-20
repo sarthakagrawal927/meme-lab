@@ -1,0 +1,34 @@
+{
+  "version": "stage-1000-single-vector-retrieval-v1",
+  "created_at": "2026-09-20T09:10:42.954Z",
+  "human_validated": false,
+  "cases": 45,
+  "metrics": {
+    "recall_at_10": 0.3111111111111111,
+    "recall_at_30": 0.4444444444444444,
+    "recall_at_50": 0.5333333333333333
+  },
+  "misses_at_50": [
+    "eval-stage1000-001",
+    "eval-stage1000-002",
+    "eval-stage1000-003",
+    "eval-stage1000-005",
+    "eval-stage1000-006",
+    "eval-stage1000-007",
+    "eval-stage1000-010",
+    "eval-stage1000-011",
+    "eval-stage1000-012",
+    "eval-stage1000-014",
+    "eval-stage1000-015",
+    "eval-stage1000-038",
+    "eval-stage1000-042",
+    "eval-stage1000-044",
+    "eval-stage1000-046",
+    "eval-stage1000-047",
+    "eval-stage1000-048",
+    "eval-stage1000-053",
+    "eval-stage1000-055",
+    "eval-stage1000-056",
+    "eval-stage1000-059"
+  ]
+}

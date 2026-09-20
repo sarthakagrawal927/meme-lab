@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="See how Meme Lab retrieves and scores matches from a live 300-meme collection.">
+  <meta name="description" content="See how Meme Lab retrieves and scores matches from a live 1,000-meme collection.">
   <title>Meme Lab — How it works</title>
   <link rel="stylesheet" href="/app.css">
 </head>
@@ -22,29 +22,29 @@
     <section class="page-intro how-intro">
       <p class="eyebrow">PRODUCT + IMPLEMENTATION</p>
       <h1>How one comment<br>becomes the best options.</h1>
-      <p class="intro">The live product compares meaning, social dynamics, and tone—not just words. It retrieves a focused shortlist from 300 memes, then returns up to three scored options.</p>
+      <p class="intro">The live product compares meaning, social dynamics, and tone—not just words. It retrieves 30 likely matches from 1,000 memes, ranks the best three, then explains each choice.</p>
       <a class="primary page-cta" href="/">Try a comment <span aria-hidden="true">→</span></a>
     </section>
 
     <section class="live-strip" aria-label="Current implementation status">
       <span class="status-dot" aria-hidden="true"></span>
-      <div><strong>Live now: <span data-status="live_records">300</span> reactions</strong><span>Semantic retrieval · up to three scored options · confidence · feedback</span></div>
+      <div><strong>Live now: <span data-status="live_records">1,000</span> reactions</strong><span>Semantic retrieval · three scored options · serious-content guard · feedback</span></div>
       <span class="live-pill">PERSONAL TOOL</span>
     </section>
 
     <section class="technical-section" aria-labelledby="live-system-title">
       <div class="technical-heading">
         <div>
-          <p class="eyebrow">THE LIVE 300</p>
-          <h2 id="live-system-title">Retrieve first. Rank second.</h2>
+          <p class="eyebrow">THE LIVE 1,000</p>
+          <h2 id="live-system-title">Retrieve. Classify. Explain.</h2>
         </div>
-        <p>Each reference has a name, meaning, relational pattern, example, tags, provenance, and media status. Vector search narrows 300 records to the 30 most relevant before reranking.</p>
+        <p>Each reference has a name, meaning, relational pattern, example, tags, provenance, and media status. Vector search narrows 1,000 records to 30 before a dedicated classifier ranks the best three.</p>
       </div>
       <ol class="pipeline" aria-label="Current recommendation pipeline">
         <li><span>01</span><strong>Validate</strong><p>Trim and bound the comment. Treat it as untrusted text.</p></li>
         <li><span>02</span><strong>Retrieve 30</strong><p>Use BGE embeddings and Vectorize to find the closest semantic matches.</p></li>
-        <li><span>03</span><strong>Rank and score</strong><p>Llama judges tone and social fit, then returns known IDs with 0–100 scores.</p></li>
-        <li><span>04</span><strong>Show up to three</strong><p>Load the plausible previews, best first, and store optional feedback for 30 days.</p></li>
+        <li><span>03</span><strong>Guard and rank</strong><p>Jev checks sensitive help-seeking text and ranks the three closest social reactions.</p></li>
+        <li><span>04</span><strong>Explain three</strong><p>Llama writes specific explanations and fit scores without changing the ranked IDs.</p></li>
       </ol>
     </section>
 
@@ -68,7 +68,7 @@
       <div class="implementation-grid">
         <article><span>Workers AI</span><h3>Meaning, not keywords</h3><p>The same embedding model converts catalogue records and incoming comments into comparable vectors.</p></article>
         <article><span>Vectorize</span><h3>A bounded shortlist</h3><p>The vector index returns 30 likely candidates from hundreds or thousands of records.</p></article>
-        <article><span>Structured reranker</span><h3>Tone and relationship</h3><p>The existing selector judges speaker, target, social dynamic, and whether a joke belongs.</p></article>
+        <article><span>Jev classifier</span><h3>Tone and relationship</h3><p>A fast classifier checks whether humour belongs and ranks candidates by social fit rather than keyword overlap.</p></article>
         <article><span>D1 feedback</span><h3>Evidence, not vibes</h3><p>Yes/no feedback is retained for evaluation; it does not silently retrain the live model.</p></article>
       </div>
     </section>
@@ -82,15 +82,15 @@
         <p id="expansion-progress"><span data-status="live_records">300</span> references are live in the personal tool. Evaluation now guides metadata cleanup and the next expansion.</p>
       </div>
       <div class="goal-meter" aria-label="Progress toward 3,000 live memes">
-        <div class="goal-meter-copy"><strong><span data-status="live_records">300</span> / <span data-status="ultimate_target">3,000</span> live</strong><span>“I love you 3,000” is the north star.</span></div>
+        <div class="goal-meter-copy"><strong><span data-status="live_records">1,000</span> / <span data-status="ultimate_target">3,000</span> live</strong><span>“I love you 3,000” is the north star.</span></div>
         <div class="goal-track" aria-hidden="true"><span id="ultimate-progress"></span></div>
         <small><span data-status="records_to_ultimate_target">2,700</span> memes remaining · <span data-status="ultimate_progress_percent">10</span>% complete</small>
       </div>
       <ol class="stage-list">
         <li class="stage-live"><span class="stage-number">30</span><div><strong>Seed control</strong><p>Curated metadata, direct all-candidate comparison, live public feedback.</p></div><em>LIVE</em></li>
         <li class="stage-live"><span class="stage-number">300</span><div><strong>Common reactions</strong><p>Semantic retrieval, scored multi-option results, searchable collection, and feedback.</p></div><em>LIVE</em></li>
-        <li class="stage-building"><span class="stage-number">1K</span><div><strong>Broader vocabulary</strong><p>A 1,000-record source pool is being reviewed for meaning, delivery fit, provenance, and media status.</p></div><em>BUILDING</em></li>
-        <li><span class="stage-number">3K</span><div><strong>I love you 3,000</strong><p>The meme milestone: broad, long-tail reactions without sacrificing relevance or latency.</p></div><em>NORTH STAR</em></li>
+        <li class="stage-live"><span class="stage-number">1K</span><div><strong>Broader vocabulary</strong><p>Seven hundred new records add long-tail reactions with searchable previews and meaning-specific metadata.</p></div><em>LIVE</em></li>
+        <li class="stage-building"><span class="stage-number">3K</span><div><strong>I love you 3,000</strong><p>The next 2,000 will expand the long tail while the same retrieval and safety gates protect relevance.</p></div><em>BUILDING</em></li>
         <li><span class="stage-number">30K</span><div><strong>Movie dialogue reactions</strong><p>Route to a separate dialogue corpus first, then retrieve and rank within it so memes do not crowd out the right line.</p></div><em>NEXT CORPUS</em></li>
       </ol>
     </section>
@@ -98,8 +98,8 @@
     <section class="eval-card" aria-labelledby="eval-title">
       <div>
         <p class="eyebrow">THE EVAL DATASET</p>
-        <h2 id="eval-title"><span data-status="eval_cases">50</span> held-out situations before the next jump.</h2>
-        <p>The control set contains <span data-status="eval_humour">20</span> humour and <span data-status="eval_no_meme">10</span> no-meme cases; a second set adds <span data-status="eval_expansion">20</span> expansion-only cases to prove the larger catalogue adds useful coverage.</p>
+        <h2 id="eval-title"><span data-status="eval_cases">110</span> held-out situations guide the next jump.</h2>
+        <p>The original and expansion sets cover 50 situations. The 1,000-meme set adds 60 cases: 45 humour and 15 no-meme prompts, with labels independently audited twice and still pending owner review.</p>
       </div>
       <ul>
         <li><strong>Top 1</strong><span>Did the first choice land?</span></li>
@@ -107,7 +107,7 @@
         <li><strong>Abstention</strong><span>Did it stay serious when humour did not belong?</span></li>
         <li><strong>Calibration</strong><span>Did low confidence actually mean weaker results?</span></li>
       </ul>
-      <p class="eval-note" id="eval-status"><strong>Latest draft:</strong> a meaning-specific metadata pilot reached 95% expansion-only retrieval and 80% top-three relevance. A classifier bake-off now guides the 3,000-to-30,000 pipeline. The personal tool is live; these labels guide continued tuning.</p>
+      <p class="eval-note" id="eval-status"><strong>Latest draft:</strong> the 1,000-meme path reached 96% retrieval, 87% top-one relevance, 96% top-three relevance, and 93% correct serious-content abstention. Labels remain pending owner review.</p>
     </section>
 
     <section class="honesty-card">
@@ -115,13 +115,13 @@
         <p class="eyebrow">THE EXPANSION RULE</p>
         <h2>Bigger is useful only if the results stay good.</h2>
       </div>
-      <p>The personal catalogue stays available while evaluation tracks top-three relevance, correct no-meme decisions, valid IDs, and latency. Weak metadata gets fixed from observed failures.</p>
+      <p>The personal catalogue stays available while evaluation tracks top-three relevance, correct no-meme decisions, valid IDs, and latency. Comments are processed by Cloudflare Workers AI and classifier.dev; previews load from their listed source hosts.</p>
     </section>
   </main>
 
   <footer>
-    <a href="/collection">Browse all 300 live memes</a>
-    <span>Current stage: 300 live · 1,000 building</span>
+    <a href="/collection">Browse all 1,000 live memes</a>
+    <span>Current stage: 1,000 live · 3,000 building</span>
   </footer>
   <script type="module" src="/how-it-works.js"></script>
 </body>

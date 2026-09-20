@@ -89,6 +89,36 @@ export function validateStageCoverageCases(cases,{allowedIds,excludedIds=[]}) {
   return {cases:cases.length,humour:cases.length,pending_owner_review:cases.length};
 }
 
+export function validateStage1000Cases(cases,{allowedIds}) {
+  if(cases.length!==60) throw new Error(`Stage-1000 evaluation must contain 60 cases; found ${cases.length}.`);
+  const ids=new Set();
+  const contexts=new Set();
+  const targetIds=new Set();
+  let humour=0;
+  let noMeme=0;
+  for(const row of cases) {
+    if(typeof row.id!=='string'||!/^eval-stage1000-\d{3}$/.test(row.id)||ids.has(row.id)) throw new Error(`Invalid or duplicate stage-1000 eval ID: ${row.id}.`);
+    ids.add(row.id);
+    if(typeof row.context!=='string'||row.context.trim().length<30||contexts.has(row.context.trim().toLowerCase())) throw new Error(`Invalid or duplicate stage-1000 context: ${row.id}.`);
+    contexts.add(row.context.trim().toLowerCase());
+    if(!['humour','no_meme'].includes(row.intent_label)) throw new Error(`Invalid stage-1000 intent label: ${row.id}.`);
+    if(!Array.isArray(row.acceptable_ids)||new Set(row.acceptable_ids).size!==row.acceptable_ids.length||row.acceptable_ids.some(id=>!allowedIds.has(id))) throw new Error(`Unknown or duplicate acceptable ID in ${row.id}.`);
+    if(row.intent_label==='humour') {
+      humour+=1;
+      if(row.acceptable_ids.length===0) throw new Error(`Humour case ${row.id} needs at least one acceptable meme.`);
+      row.acceptable_ids.forEach(id=>targetIds.add(id));
+    } else {
+      noMeme+=1;
+      if(row.acceptable_ids.length!==0) throw new Error(`No-meme case ${row.id} cannot have acceptable references.`);
+    }
+    if(row.review_status!=='pending_owner_review'||row.human_validated!==false) throw new Error(`${row.id} must remain explicitly unvalidated until owner review.`);
+    if(!Array.isArray(row.failure_modes)||row.failure_modes.length===0||row.failure_modes.some(mode=>typeof mode!=='string'||!mode.trim())) throw new Error(`${row.id} needs string failure modes.`);
+  }
+  if(humour!==45||noMeme!==15) throw new Error(`Stage-1000 evaluation must contain 45 humour and 15 no-meme cases; found ${humour}/${noMeme}.`);
+  if(targetIds.size<45) throw new Error(`Stage-1000 humour cases must cover at least 45 distinct new meme IDs; found ${targetIds.size}.`);
+  return {cases:cases.length,humour,no_meme:noMeme,distinct_target_ids:targetIds.size,pending_owner_review:cases.length};
+}
+
 export function validateCoverageMetadata(cases,records) {
   const byId=new Map(records.map(record=>[record.id,record]));
   const targetIds=new Set(cases.flatMap(row=>row.acceptable_ids));
@@ -103,6 +133,20 @@ export function validateCoverageMetadata(cases,records) {
     examples.add(example);
   }
   return {records:targetIds.size};
+}
+
+export function validateMeaningSpecificMetadata(records) {
+  const generic=/broadly relatable|situation calls for|recognizable visual contrast|without a long explanation|image frames a relationship|visible reaction or contrast|turns that relationship into the punchline|the visual makes that relationship explicit/i;
+  const valuesByField=new Map(['message','relational_pattern','example_context','near_miss_context'].map(field=>[field,new Set()]));
+  for(const record of records) {
+    for(const field of ['message','relational_pattern','example_context','near_miss_context']) {
+      if(generic.test(record[field])) throw new Error(`${record.id} still has placeholder ${field}.`);
+      const normalized=record[field].trim().toLowerCase();
+      if(valuesByField.get(field).has(normalized)) throw new Error(`${record.id} reuses another record's ${field}.`);
+      valuesByField.get(field).add(normalized);
+    }
+  }
+  return {records:records.length};
 }
 
 export function validateStages(manifest) {
@@ -137,5 +181,44 @@ export function expansionStatus({manifest,liveCount,candidateCount,reviewedExter
     latest_experiment:experimentSummary,
     latest_expansion_coverage_experiment:coverageExperimentSummary,
     stages:manifest.stages.map(({target_records,status,label})=>({target_records,status,label}))
+  };
+}
+
+export function withCandidatePool(status,{candidateCount,reviewedExternalCount,evalSummary}) {
+  const sourcedRecords=status.live_records+candidateCount;
+  return {
+    ...status,
+    candidate_records:candidateCount,
+    assistant_reviewed_external_records:reviewedExternalCount,
+    sourced_records:sourcedRecords,
+    records_to_source:Math.max(0,status.next_target-sourcedRecords),
+    records_to_ultimate_target:Math.max(0,status.ultimate_target-sourcedRecords),
+    ultimate_progress_percent:Math.round((sourcedRecords/status.ultimate_target)*100),
+    eval:{...status.eval,stage_1000_cases:evalSummary.cases,pending_owner_review_total:status.eval.cases+(status.eval.expansion_cases??0)+evalSummary.pending_owner_review}
+  };
+}
+
+export function promoteStage1000Status(status,{liveCount,reviewedExternalCount,evalSummary,baselineExperiment,gatedExperiment,jevExperiment}) {
+  return {
+    ...status,
+    live_records:liveCount,
+    candidate_records:0,
+    assistant_reviewed_external_records:reviewedExternalCount,
+    sourced_records:liveCount,
+    next_target:3000,
+    records_to_source:Math.max(0,3000-liveCount),
+    records_to_ultimate_target:Math.max(0,status.ultimate_target-liveCount),
+    ultimate_progress_percent:Math.round((liveCount/status.ultimate_target)*100),
+    retrieval:{live:'semantic_top_30_then_classify_top_3',expanded:'semantic_top_30_then_classify_top_3'},
+    eval:{...status.eval,stage_1000_cases:evalSummary.cases,pending_owner_review_total:status.eval.cases+(status.eval.expansion_cases??0)+evalSummary.pending_owner_review},
+    latest_stage_1000_experiment:{
+      created_at:jevExperiment.rescored_at??jevExperiment.created_at,
+      human_validated:false,
+      label_status:'twice_assistant_audited_pending_owner_review',
+      baseline:baselineExperiment.metrics,
+      serious_gate:gatedExperiment.metrics,
+      jev_ranking:jevExperiment.metrics,
+      production_path:'serious-content gate, vector top 30, Jev top 3, Llama explanations'
+    }
   };
 }

@@ -4,7 +4,7 @@ Read [PRD.md](PRD.md) for the product scope. This folder includes a runnable sta
 
 ## Live playground
 
-Paste one comment and get the best meme first at **https://meme-lab-play.sarthakagrawal927.workers.dev**. One-tap feedback is retained for 30 days so the ranking can improve. The public Worker uses the 30 reaction-reference catalogue and does not expose the local experiment history, holdout, or results.
+Paste one comment and get ranked meme options at **https://memes.significanthobbies.com**. One-tap feedback is retained for 30 days so the ranking can improve. The public Worker uses the 1,000-reference catalogue and does not expose the local experiment history, holdout, or results. The `workers.dev` route remains an equivalent preview URL.
 
 ## Open it locally
 
@@ -45,7 +45,7 @@ An existing **chat-completions-compatible** server can instead be configured wit
 
 Compatibility varies by provider. Set `MEME_JSON_MODE=false` only if your compatible endpoint rejects `response_format`; local validation still applies. A cloud endpoint requires HTTPS, the appropriate authorized API key, and `MEME_ALLOW_REMOTE=true`. The UI identifies a non-loopback endpoint. A loopback runtime can still invoke cloud models: use a genuinely local model for private conversations.
 
-Jev is **not** assumed to implement either route. Its documentation is preserved as a future-adapter lead, not a claimed working integration.
+Jev does **not** implement either local model route. The public Worker uses classifier.dev's Jev fast tier to rank a 30-item semantic shortlist and to guard serious help-seeking prompts; Cloudflare Workers AI generates the candidate explanations. If classifier.dev is unavailable, the existing structured Workers AI selector is the fallback.
 
 ## First run
 

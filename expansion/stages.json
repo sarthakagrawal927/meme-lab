@@ -1,6 +1,6 @@
 {
   "version": "catalogue-expansion-v1",
-  "current_live_stage": 300,
+  "current_live_stage": 1000,
   "principle": "All sourced memes are available in this personal tool; evaluation guides metadata improvements and future expansion.",
   "stages": [
     {
@@ -31,7 +31,7 @@
     {
       "label": "Broad internet vocabulary",
       "target_records": 1000,
-      "status": "building",
+      "status": "live",
       "retrieval": {"strategy": "semantic_shortlist_then_rerank", "shortlist_size": 30, "result_size": 3},
       "gates": {
         "top_three_sendability": {"minimum": 0.72},
@@ -44,7 +44,7 @@
     {
       "label": "Long-tail collection",
       "target_records": 3000,
-      "status": "planned",
+      "status": "building",
       "retrieval": {"strategy": "semantic_shortlist_then_rerank", "shortlist_size": 30, "result_size": 3},
       "gates": {
         "top_three_sendability": {"minimum": 0.75},

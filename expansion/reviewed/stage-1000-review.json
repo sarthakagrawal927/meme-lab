@@ -1,0 +1,39 @@
+{
+  "version": "stage-1000-assistant-review-v1",
+  "source_records": 1000,
+  "selected_records": 700,
+  "rejected_records": 300,
+  "batches": [
+    {
+      "file": "stage-1000-batch-a.jsonl",
+      "source_range": [
+        1,
+        334
+      ],
+      "selected": 234,
+      "rejected": 100
+    },
+    {
+      "file": "stage-1000-batch-b.jsonl",
+      "source_range": [
+        335,
+        667
+      ],
+      "selected": 233,
+      "rejected": 100
+    },
+    {
+      "file": "stage-1000-batch-c.jsonl",
+      "source_range": [
+        668,
+        1000
+      ],
+      "selected": 233,
+      "rejected": 100
+    }
+  ],
+  "repeated_source_images": [],
+  "human_validated": false,
+  "status": "needs_owner_metadata_asset_and_delivery_review",
+  "uncertainty": "Selection and semantic descriptions are assistant-authored. Media rights, delivery fitness, and relevance have not been human validated."
+}

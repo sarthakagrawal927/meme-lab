@@ -1,4 +1,4 @@
-import {catalogue} from './catalogue.stage300.generated.mjs';
+import {catalogue} from './catalogue.stage1000.generated.mjs';
 
 export const EMBEDDING_MODEL='@cf/baai/bge-base-en-v1.5';
 const byId=new Map(catalogue.map(record=>[record.id,record]));

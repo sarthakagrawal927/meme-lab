@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import worker from '../worker/src/index.mjs';
-import {MODEL,validateSelection,normalizeSelection,presentSelection} from '../worker/src/recommendation.mjs';
+import {humourBelongs,needsSeriousHandling,rankCandidates,requiresFactualAnswer} from '../worker/src/classification.mjs';
+import {MODEL,validateSelection,normalizeSelection,normalizeRankedSelection,validateRankedSelection,presentSelection} from '../worker/src/recommendation.mjs';
 import {EMBEDDING_MODEL} from '../worker/src/retrieval.mjs';
 
 const selection={decision:'meme',confidence:'high',none_reason:'',candidates:[{id:'waiting-skeleton',reason:'Waiting Skeleton turns the endless approval delay into the entire frustrating experience.',score:94}]};
@@ -15,6 +16,10 @@ const env={
     return{response:selection};
   }},
   MEME_INDEX:{query:async()=>({matches:[{id:'meme-0021',score:.92,metadata:{catalogue_id:'waiting-skeleton'}}]})},
+  CLASSIFIER_FETCH:async(_url,options)=>{
+    const {labels}=JSON.parse(options.body);
+    return Response.json({results:[{label:labels[0],scores:Object.fromEntries(labels.map((label,index)=>[label,index===0?1:0]))}]});
+  },
   ASSETS:{fetch:async()=>assetResponse.clone()},
   DB:{prepare:sql=>({bind:(...values)=>({
     run:async()=>{stored.push({sql,values});return{success:true,meta:{changes:1}};},
@@ -107,6 +112,50 @@ test('multiple meme options are ordered by fit score and keep their scores',()=>
   assert.deepEqual(presentSelection(validateSelection(normalized)).candidates.map(candidate=>candidate.score),[89,72]);
 });
 
+test('classifier gate only runs for high-precision serious cues',async()=>{
+  assert.equal(needsSeriousHandling('Please help me write a condolence message.'),true);
+  assert.equal(needsSeriousHandling('My build failed right before the demo.'),false);
+  assert.equal(requiresFactualAnswer('I need a plain factual explanation of these tax identification fields.'),true);
+  assert.equal(requiresFactualAnswer('The tax deadline is tomorrow and my receipts are in three bags.'),false);
+  const fetchImpl=async(_url,options)=>{
+    const {labels}=JSON.parse(options.body);
+    return Response.json({results:[{label:labels[1],scores:{[labels[0]]:.02,[labels[1]]:.98}}]});
+  };
+  assert.equal(await humourBelongs('Please help me after a loss.',{fetchImpl}),false);
+});
+
+test('public worker abstains directly on an explicit factual form request',async()=>{
+  const factualEnv={...env,CLASSIFIER_FETCH:async()=>{throw new Error('The classifier should not run for a deterministic factual request.');}};
+  const response=await worker.fetch(new Request('https://example.test/api/recommend',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({comment:'I am completing a tax residency form and need a plain factual explanation of what the identification fields mean.'})}),factualEnv);
+  assert.equal(response.status,200);
+  const body=await response.json();
+  assert.equal(body.decision,'none');
+  assert.equal(body.confidence,'low');
+  assert.deepEqual(body.candidates,[]);
+});
+
+test('classifier ranking is pinned while explanation scores stay descending',async()=>{
+  const candidates=[
+    {id:'waiting-skeleton',name:'Waiting Skeleton',message:'An absurdly long wait.',relational_pattern:'Someone is stuck waiting.'},
+    {id:'this-is-fine',name:'This Is Fine',message:'Calm amid chaos.',relational_pattern:'Someone minimizes visible trouble.'},
+    {id:'first-try',name:'First Try',message:'Success hides many attempts.',relational_pattern:'Someone presents effort as effortless.'}
+  ];
+  const fetchImpl=async(_url,options)=>{
+    const {labels}=JSON.parse(options.body);
+    return Response.json({results:[{label:labels[1],scores:{[labels[0]]:.1,[labels[1]]:.8,[labels[2]]:.3}}]});
+  };
+  const ranked=await rankCandidates('Everything is on fire but the owner says it is fine.',candidates,{fetchImpl});
+  assert.deepEqual(ranked.map(candidate=>candidate.id),['this-is-fine','first-try','waiting-skeleton']);
+  const normalized=normalizeRankedSelection({confidence:'high',candidates:[
+    {id:'waiting-skeleton',reason:'Waiting Skeleton makes the prolonged delay the entire joke in this social situation.',score:99},
+    {id:'this-is-fine',reason:'This Is Fine matches the owner calmly dismissing an obviously chaotic situation.',score:88},
+    {id:'first-try',reason:'First Try reflects a polished result that conceals all the difficult attempts.',score:90}
+  ]},ranked.map(candidate=>candidate.id));
+  assert.deepEqual(normalized.candidates.map(candidate=>candidate.id),['this-is-fine','first-try','waiting-skeleton']);
+  assert.deepEqual(normalized.candidates.map(candidate=>candidate.score),[88,87,86]);
+  assert.doesNotThrow(()=>validateRankedSelection(normalized,ranked.map(candidate=>candidate.id)));
+});
+
 test('static responses receive security and no-index headers',async()=>{
   const response=await worker.fetch(new Request('https://example.test/'),env);
   assert.equal(response.headers.get('x-frame-options'),'DENY');
@@ -116,5 +165,5 @@ test('static responses receive security and no-index headers',async()=>{
 
 test('health reports the full live catalogue',async()=>{
   const response=await worker.fetch(new Request('https://example.test/api/health'),env);
-  assert.deepEqual(await response.json(),{status:'ok',catalogue:300});
+  assert.deepEqual(await response.json(),{status:'ok',catalogue:1000});
 });

@@ -1,0 +1,18 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "meme-lab-catalogue-tool-stage-1000",
+  "main": "./catalogue-indexer.mjs",
+  "compatibility_date": "2026-09-19",
+  "ai": {
+    "binding": "AI"
+  },
+  "vars": {
+    "CATALOGUE_STAGE": "1000"
+  },
+  "vectorize": [
+    {
+      "binding": "MEME_INDEX",
+      "index_name": "meme-lab-catalogue-stage-1000"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "version": "stage-1000-stage-current-gated-draft-v1",
+  "created_at": "2026-09-20T09:19:01.440Z",
+  "input_hash": "ceafdd4207c9b7d9dcad19d4b0591d9d336ee7602d72458aeb25d2c1f0e9639d",
+  "labels": "assistant-authored_twice_audited_pending_owner_review",
+  "human_validated": false,
+  "cases": 60,
+  "arm": "stage-current-gated",
+  "metrics": {
+    "retrieval_at_30": 0.9555555555555556,
+    "top_1": 0.5333333333333333,
+    "top_3": 0.7333333333333333,
+    "top_3_given_retrieval": 0.7674418604651163,
+    "correct_abstention": 0.9333333333333333,
+    "inappropriate_joking": 0.06666666666666667,
+    "latency_ms": {
+      "p50": 3875,
+      "p95": 5710
+    }
+  },
+  "gates": {
+    "retrieval_at_30": true,
+    "top_3": true,
+    "correct_abstention": true,
+    "inappropriate_joking": true
+  },
+  "promotion_ready": false,
+  "rescored_at": "2026-09-20T09:27:44.744Z"
+}

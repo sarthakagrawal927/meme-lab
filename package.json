@@ -11,9 +11,10 @@
     "start": "node server.mjs",
     "build:public-catalogue": "node scripts/build-public-catalogue.mjs",
     "build:expansion": "node scripts/build-expansion.mjs",
+    "build:stage-1000": "node scripts/build-stage-1000.mjs",
     "acquire:stage-300": "node scripts/acquire-stage-300.mjs",
     "acquire:stage-1000": "node scripts/acquire-stage-1000.mjs",
-    "build:public": "npm run build:public-catalogue && npm run build:expansion",
+    "build:public": "npm run build:public-catalogue && npm run build:expansion && npm run build:stage-1000",
     "dev:public": "npm run build:public && wrangler dev",
     "deploy:public": "npm run build:public && wrangler deploy",
     "types:worker": "wrangler types worker-configuration.d.ts",
@@ -24,9 +25,15 @@
     "experiment:summarize": "node scripts/summarize-holdout.mjs",
     "experiment:retrieval": "node scripts/run-vector-retrieval.mjs",
     "experiment:bge-reranker": "node scripts/run-bge-reranker-eval.mjs",
+    "experiment:jev-reranker": "node scripts/run-jev-reranker-eval.mjs",
     "experiment:local-router": "node scripts/run-local-router-eval.mjs",
     "experiment:stage-300": "node scripts/run-stage-300-eval.mjs",
-    "experiment:stage-300-coverage": "node scripts/run-stage-300-coverage.mjs"
+    "experiment:stage-300-coverage": "node scripts/run-stage-300-coverage.mjs",
+    "experiment:jev-ensemble": "node scripts/run-stage-300-coverage.mjs http://127.0.0.1:8788 stage-300-jev",
+    "experiment:stage-1000": "node scripts/run-stage-1000-eval.mjs",
+    "experiment:stage-1000-retrieval": "node scripts/run-stage-1000-retrieval.mjs",
+    "experiment:stage-1000-jev": "node scripts/run-stage-1000-jev.mjs",
+    "experiment:stage-1000-rescore": "node scripts/rescore-stage-1000-results.mjs"
   },
   "devDependencies": {
     "wrangler": "^4.135.0"

@@ -1,4 +1,4 @@
-import {catalogue} from './catalogue.stage300.generated.mjs';
+import {catalogue} from './catalogue.stage1000.generated.mjs';
 
 export const MODEL='@cf/meta/llama-3.3-70b-instruct-fp8-fast';
 const allowedIds=new Set(catalogue.map(record=>record.id));
@@ -15,7 +15,8 @@ function hasCompleteExplanation(reason,candidateId) {
   const trimmed=reason.trim();
   const wordCount=trimmed.split(/\s+/u).filter(Boolean).length;
   const memeName=publicById.get(candidateId)?.name;
-  return wordCount>=8&&wordCount<=40&&/^[A-Z0-9]/u.test(trimmed)&&/[.!?]$/u.test(trimmed)&&typeof memeName==='string'&&comparable(trimmed).includes(comparable(memeName));
+  const generic=/^(generally|sometimes|rarely),|\b(?:represents|is used for)\b|\bsituation template\b/i;
+  return wordCount>=8&&wordCount<=40&&!generic.test(trimmed)&&/^[A-Z0-9]/u.test(trimmed)&&/[.!?]$/u.test(trimmed)&&typeof memeName==='string'&&comparable(trimmed).includes(comparable(memeName));
 }
 
 function normalizeExplanation(candidate) {
@@ -55,6 +56,31 @@ export function normalizeSelection(value) {
   const confidence=['high','medium','low'].includes(value.confidence)?value.confidence:'low';
   if(value.candidates.length>0) return {...value,decision:'meme',confidence,none_reason:'',candidates:value.candidates.map(normalizeExplanation).sort((a,b)=>(b.score??-1)-(a.score??-1))};
   return {...value,decision:'none',confidence:'low',none_reason:typeof value.none_reason==='string'&&value.none_reason.trim()?value.none_reason:'None of the current references is a natural fit.'};
+}
+
+export function normalizeRankedSelection(value,rankedIds) {
+  if(!value||typeof value!=='object'||Array.isArray(value)||!Array.isArray(value.candidates)) return value;
+  const byId=new Map(value.candidates.map(candidate=>[candidate?.id,normalizeExplanation(candidate)]));
+  const candidates=rankedIds.map(id=>byId.get(id)).filter(Boolean);
+  let previous=101;
+  for(const candidate of candidates) {
+    const proposed=Number.isInteger(candidate.score)?candidate.score:60;
+    candidate.score=Math.max(0,Math.min(100,proposed,previous-1));
+    previous=candidate.score;
+  }
+  return {
+    decision:'meme',
+    confidence:['high','medium','low'].includes(value.confidence)?value.confidence:'low',
+    none_reason:'',
+    candidates
+  };
+}
+
+export function validateRankedSelection(value,rankedIds) {
+  const selection=validateSelection(value);
+  if(selection.decision!=='meme'||selection.candidates.length!==rankedIds.length) throw new Error('The model did not explain every ranked candidate.');
+  if(selection.candidates.some((candidate,index)=>candidate.id!==rankedIds[index])) throw new Error('The model changed the classifier ranking.');
+  return selection;
 }
 
 export function presentSelection(selection) {

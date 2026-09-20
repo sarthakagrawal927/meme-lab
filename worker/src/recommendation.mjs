@@ -3,6 +3,7 @@ import {staticCandidateSignals} from './candidate-signals.mjs';
 
 export const MODEL='@cf/meta/llama-3.3-70b-instruct-fp8-fast';
 export const MINIMUM_VISIBLE_FIT=0.1;
+export const MINIMUM_VISIBLE_PERSPECTIVE_FIT=0.25;
 const allowedIds=new Set(catalogue.map(record=>record.id));
 const publicById=new Map(catalogue.map(record=>{
   const {meme_strength,asset_quality,signal_summary}=staticCandidateSignals(record);
@@ -92,11 +93,12 @@ export function validateRankedSelection(value,rankedIds) {
   return selection;
 }
 
-export function selectionFromRanking(ranked,{minimumVisibleFit=MINIMUM_VISIBLE_FIT}={}) {
+export function selectionFromRanking(ranked,{minimumVisibleFit=MINIMUM_VISIBLE_FIT,minimumVisiblePerspectiveFit=MINIMUM_VISIBLE_PERSPECTIVE_FIT}={}) {
   if(!Array.isArray(ranked)||ranked.length===0) throw new Error('A ranked selection needs at least one candidate.');
   if(!Number.isFinite(minimumVisibleFit)||minimumVisibleFit<0||minimumVisibleFit>1) throw new Error('The visible-fit threshold must be between zero and one.');
+  if(!Number.isFinite(minimumVisiblePerspectiveFit)||minimumVisiblePerspectiveFit<0||minimumVisiblePerspectiveFit>1) throw new Error('The perspective-fit threshold must be between zero and one.');
   const candidates=ranked
-    .filter((candidate,index)=>index===0||candidate.classifier_score>=minimumVisibleFit)
+    .filter((candidate,index)=>index===0||candidate.classifier_score>=(candidate.perspective?minimumVisiblePerspectiveFit:minimumVisibleFit))
     .map(candidate=>({id:candidate.id,score:Math.round(candidate.classifier_score*100)}));
   const bestScore=candidates[0].score;
   return {

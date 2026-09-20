@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import worker from '../worker/src/index.mjs';
 import {hasMultiplePerspectives,humourBelongs,needsSeriousHandling,PERSPECTIVES,rankCandidates,rankCandidatesByPerspective,requiresFactualAnswer} from '../worker/src/classification.mjs';
-import {MINIMUM_VISIBLE_FIT,MODEL,validateSelection,normalizeSelection,normalizeRankedSelection,validateRankedSelection,presentSelection,selectionFromRanking} from '../worker/src/recommendation.mjs';
+import {MINIMUM_VISIBLE_FIT,MINIMUM_VISIBLE_PERSPECTIVE_FIT,MODEL,validateSelection,normalizeSelection,normalizeRankedSelection,validateRankedSelection,presentSelection,selectionFromRanking} from '../worker/src/recommendation.mjs';
 import {CORE_RESERVE,EMBEDDING_MODEL,mergeWithReserve,retrieveCandidates} from '../worker/src/retrieval.mjs';
 import {reciprocalRankFuse} from '../worker/src/rank-fusion.mjs';
 import {rankRelevanceCandidates,staticCandidateSignals} from '../worker/src/candidate-signals.mjs';
@@ -186,6 +186,7 @@ test('classifier scores become the public fit scores and weak alternatives are n
     {id:'first-try',classifier_score:.01}
   ];
   assert.equal(MINIMUM_VISIBLE_FIT,.1);
+  assert.equal(MINIMUM_VISIBLE_PERSPECTIVE_FIT,.25);
   assert.deepEqual(selectionFromRanking(ranked),{
     decision:'meme',
     confidence:'high',
@@ -195,6 +196,12 @@ test('classifier scores become the public fit scores and weak alternatives are n
   const low=selectionFromRanking([{id:'waiting-skeleton',classifier_score:.08},{id:'this-is-fine',classifier_score:.04}]);
   assert.deepEqual(low.candidates,[{id:'waiting-skeleton',score:8}]);
   assert.equal(low.confidence,'low');
+  const perspectives=selectionFromRanking([
+    {id:'waiting-skeleton',classifier_score:.6,perspective:'self'},
+    {id:'this-is-fine',classifier_score:.24,perspective:'other'},
+    {id:'first-try',classifier_score:.25,perspective:'situation'}
+  ]);
+  assert.deepEqual(perspectives.candidates,[{id:'waiting-skeleton',score:60},{id:'first-try',score:25}]);
 });
 
 test('classifier gate only runs for high-precision serious cues',async()=>{
@@ -251,19 +258,39 @@ test('multi-person comments activate perspective ranking without changing single
   assert.equal(hasMultiplePerspectives('My sibling ate the leftovers with my name on them, then asked why I looked upset.'),true);
   assert.equal(hasMultiplePerspectives('My coworker scheduled another meeting after telling me the first could have been an email.'),true);
   assert.equal(hasMultiplePerspectives('They replied “k” to the six-paragraph message I spent an hour writing.'),true);
+  assert.equal(hasMultiplePerspectives('I warned them about the deadline, so I was not surprised when they missed it.'),true);
+  assert.equal(hasMultiplePerspectives('I saw them take my lunch and pretend nothing happened.'),true);
+  assert.equal(hasMultiplePerspectives('My manager said “I am fine” while I watched every dashboard flash red.'),true);
   assert.equal(hasMultiplePerspectives('I spent an hour looking for my phone while using its flashlight.'),false);
   assert.equal(hasMultiplePerspectives('The tests finally passed after another identical run.'),false);
+  assert.equal(hasMultiplePerspectives('The tests finally passed after I changed nothing and ran them again.'),false);
+  assert.equal(hasMultiplePerspectives('I restarted the containers and checked them again.'),false);
+  assert.equal(hasMultiplePerspectives('I sent them to staging and watched them fail again.'),false);
+  assert.equal(hasMultiplePerspectives('She said “I am fine” while every dashboard flashed red.'),false);
 });
 
-test('perspective routing eval stays unique, explicit, and pending owner validation',()=>{
+test('perspective instructions preserve actors, quoted speech, and explicit negation',()=>{
+  const self=PERSPECTIVES.find(record=>record.key==='self').instructions;
+  const other=PERSPECTIVES.find(record=>record.key==='other').instructions;
+  const situation=PERSPECTIVES.find(record=>record.key==='situation').instructions;
+  assert.match(self,/first-person narrator/i);
+  assert.match(self,/I ate someone else's labelled leftovers/i);
+  assert.match(self,/quoted/i);
+  assert.match(other,/performed each action/i);
+  assert.match(other,/do not reverse/i);
+  assert.match(situation,/negation/i);
+  assert.match(situation,/not happening/i);
+});
+
+test('perspective routing eval covers participant, inanimate, quote, and negation cases',()=>{
   const cases=readFileSync(new URL('../eval/perspective_v1.jsonl',import.meta.url),'utf8').trim().split('\n').map(line=>JSON.parse(line));
-  assert.equal(cases.length,8);
+  assert.equal(cases.length,14);
   assert.equal(new Set(cases.map(record=>record.id)).size,cases.length);
   for(const record of cases) {
-    assert.equal(record.expected_mode,'perspective');
-    assert.deepEqual(record.expected_perspectives,['self','other','situation']);
+    assert(['general','perspective'].includes(record.expected_mode));
+    assert.deepEqual(record.expected_perspectives,record.expected_mode==='perspective'?['self','other','situation']:[]);
     assert.equal(record.owner_validated,false);
-    assert.equal(hasMultiplePerspectives(record.comment),true);
+    assert.equal(hasMultiplePerspectives(record.comment),record.expected_mode==='perspective');
   }
 });
 
@@ -311,6 +338,26 @@ test('perspective ranking de-duplicates a shared winner and public output keeps 
   const mappedSelection={...selection,candidates:ranked.map((record,index)=>({id:record.id,reason:`${record.name} fits because this complete explanation maps the chosen viewpoint to the comment.`,score:90-index}))};
   const presented=presentSelection(mappedSelection,{perspectives});
   assert.deepEqual(new Set(presented.candidates.map(candidate=>candidate.perspective)),new Set(['self','other','situation']));
+});
+
+test('perspective ranking assigns a contested meme to the globally strongest lens',async()=>{
+  const candidates=[
+    {id:'shared',name:'Shared',message:'A shared reaction.',relational_pattern:'Could fit several viewpoints.'},
+    {id:'self-alternative',name:'Self Alternative',message:'The narrator reacts.',relational_pattern:'The narrator responds.'},
+    {id:'other-alternative',name:'Other Alternative',message:'The other person reacts.',relational_pattern:'The other participant responds.'}
+  ];
+  let call=0;
+  const scoreSets=[[.51,.23,.1],[.45,.1,.14],[.68,.07,.09]];
+  const fetchImpl=async(_url,options)=>{
+    const {labels}=JSON.parse(options.body);
+    const scores=scoreSets[call++];
+    return Response.json({results:[{label:labels[0],scores:Object.fromEntries(labels.map((label,index)=>[label,scores[index]]))}]});
+  };
+  const ranked=await rankCandidatesByPerspective('I ate my sibling\'s leftovers and they looked upset.',candidates,{fetchImpl});
+  assert.equal(ranked.find(candidate=>candidate.id==='shared').perspective,'situation');
+  assert.equal(ranked.find(candidate=>candidate.id==='self-alternative').perspective,'self');
+  assert.equal(ranked.find(candidate=>candidate.id==='other-alternative').perspective,'other');
+  assert.deepEqual(selectionFromRanking(ranked).candidates,[{id:'shared',score:68}]);
 });
 
 test('classifier ranking rejects missing or flat scores instead of silently pinning retrieval order',async()=>{

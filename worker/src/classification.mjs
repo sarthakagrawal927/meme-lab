@@ -9,26 +9,30 @@ export const PERSPECTIVES=[
   {
     key:'self',
     label:'My reaction',
-    instructions:'Rank the meme the narrator or sender would use to express their own reaction. Reward what I feel, think, say, or do in response to the other participant. Exclude memes that primarily embody the other person or merely restate the event.'
+    instructions:'Rank the meme from the first-person narrator\'s perspective (I, me, my, we, us, our), expressing only that narrator\'s reaction. Preserve who performed each action. If I ate someone else\'s labelled leftovers and they looked upset, a meme embodying the eater is my perspective; the victim\'s reaction is not. A quoted first-person statement spoken by someone else belongs to that speaker, not the narrator. Honor negation literally. Exclude memes that primarily embody the other participant or merely restate the event.'
   },
   {
     key:'other',
     label:'Their side',
-    instructions:'Rank the meme that embodies the other participant\'s attitude, reaction, motive, or behavior. Reward a natural view from their side without inventing details. Exclude memes that primarily express the narrator\'s reaction.'
+    instructions:'Rank the meme from the other participant\'s perspective, not the first-person narrator\'s. Identify who performed each action and who received it; do not reverse the actor and target. Treat quoted words as belonging to the named speaker. Honor negation literally and do not invent motives. Exclude memes that primarily express the narrator\'s reaction.'
   },
   {
     key:'situation',
     label:'The situation',
-    instructions:'Rank the meme that frames the action, event, or social dynamic itself as the joke. Reward a clear depiction of what happened between the people. Avoid generic emotion-only reactions.'
+    instructions:'Rank the meme that frames the action, event, or social dynamic itself as the joke. Preserve actor and target roles. Honor explicit negation: if the comment says something is not happening, exclude memes that require it to be happening. Reward a clear depiction of what happened between the people and avoid generic emotion-only reactions.'
   }
 ];
 
 export function hasMultiplePerspectives(comment) {
   if(typeof comment!=='string') return false;
-  const hasNarrator=/\b(?:i|me|my|mine|we|us|our|ours)\b/i.test(comment);
-  const hasOtherPronoun=/\b(?:they|them|their|theirs|he|him|his|she|her|hers|you|your|yours)\b/i.test(comment);
-  const hasOtherRole=/\b(?:my|our)\s+(?:sibling|brother|sister|friend|coworker|colleague|boss|manager|client|partner|roommate|parent|mother|father|mom|dad|child|kid|neighbor|neighbour|team|teammate|vendor)s?\b/i.test(comment);
-  return hasNarrator&&(hasOtherPronoun||hasOtherRole);
+  const outsideQuotes=comment.replace(/"[^"]*"|“[^”]*”|'[^']*'|‘[^’]*’/g,' ');
+  const hasNarrator=/\b(?:i|me|my|mine|we|us|our|ours)\b/i.test(outsideQuotes);
+  const hasDirectHumanPronoun=/\b(?:he|him|his|she|her|hers|you|your|yours)\b/i.test(outsideQuotes);
+  const hasAgentiveThey=/\bthey\s+(?:ask(?:ed|s)?|say|said|reply|replied|tell|told|eat|ate|take|took|schedule|scheduled|complain|complained|insist|insisted|admit|admitted|argue|argued|promise|promised|borrow|borrowed|return|returned|send|sent|text|texted|message|messaged|call|called|warn|warned|ignore|ignored|steal|stole|cancel|cancelled|forget|forgot|invite|invited|refuse|refused|laugh|laughed|pretend|pretended|claim|claimed|post|posted|write|wrote|look|looked|leave|left|arrive|arrived|think|thought|feel|felt|want|wanted|expect|expected|decide|decided|offer|offered|decline|declined|accept|accepted|delete|deleted|break|broke)\b/i.test(outsideQuotes);
+  const hasAgentiveThem=/\b(?:ask(?:ed|s)?|tell|told|warn|warned|text|texted|message|messaged|call|called|invite|invited|help|helped|thank|thanked|blame|blamed|forgive|forgave|trust|trusted|believe|believed)\s+them\b/i.test(outsideQuotes);
+  const hasObservedHumanAction=/\b(?:see|saw|find|found|catch|caught)\s+them\s+(?:\w+ing|take|took|eat|ate|steal|stole|leave|left|laugh|laughed|pretend|pretended)\b/i.test(outsideQuotes);
+  const hasOtherRole=/\b(?:my|our)\s+(?:sibling|brother|sister|friend|coworker|colleague|boss|manager|client|partner|roommate|parent|mother|father|mom|dad|child|kid|neighbor|neighbour|team|teammate|vendor)s?\b/i.test(outsideQuotes);
+  return hasNarrator&&(hasDirectHumanPronoun||hasAgentiveThey||hasAgentiveThem||hasObservedHumanAction||hasOtherRole);
 }
 
 export function needsSeriousHandling(comment) {
@@ -82,7 +86,7 @@ export async function rankCandidates(comment,candidates,{fetchImpl=fetch,timeout
   const result=await classify({
     comment,
     labels,
-    instructions:'Rank the existing meme reaction whose social meaning, emotional tone, speaker-target relationship, and sendability best match the situation. Do not choose by shared keywords alone.',
+    instructions:'Rank the existing meme reaction whose social meaning, emotional tone, speaker-target relationship, and sendability best match the situation. Preserve who performed each action and who received it. Honor quoted speakers and explicit negation literally; exclude memes that require a negated event to be happening. Do not choose by shared keywords alone.',
     fetchImpl,
     timeoutMs
   });
@@ -99,14 +103,29 @@ export async function rankCandidatesByPerspective(comment,candidates,{fetchImpl=
     return {perspective,ranked:rankRelevanceCandidates(scored,{limit:candidates.length})};
   }));
 
-  const selected=[];
-  const usedIds=new Set();
-  for(const {perspective,ranked} of results) {
-    const candidate=ranked.find(record=>!usedIds.has(record.id));
-    if(!candidate) continue;
-    usedIds.add(candidate.id);
-    selected.push({...candidate,perspective:perspective.key,perspective_label:perspective.label});
-  }
+  let bestAssignment;
+  const assign=(index,candidatesByLens,usedIds,total,participantSpecific)=>{
+    if(index===results.length) {
+      if(!bestAssignment||total>bestAssignment.total+0.03||(Math.abs(total-bestAssignment.total)<=0.03&&participantSpecific>bestAssignment.participantSpecific)) {
+        bestAssignment={candidatesByLens:[...candidatesByLens],total,participantSpecific};
+      }
+      return;
+    }
+    for(const candidate of results[index].ranked) {
+      if(usedIds.has(candidate.id)) continue;
+      usedIds.add(candidate.id);
+      candidatesByLens.push(candidate);
+      assign(index+1,candidatesByLens,usedIds,total+candidate.classifier_score,participantSpecific+(results[index].perspective.key==='situation'?0:candidate.classifier_score));
+      candidatesByLens.pop();
+      usedIds.delete(candidate.id);
+    }
+  };
+  assign(0,[],new Set(),0,0);
+  const selected=bestAssignment?.candidatesByLens.map((candidate,index)=>({
+    ...candidate,
+    perspective:results[index].perspective.key,
+    perspective_label:results[index].perspective.label
+  }))??[];
   if(selected.length<limit) throw new Error('Perspective ranking could not produce distinct candidates.');
   return selected.sort((left,right)=>right.classifier_score-left.classifier_score||left.perspective.localeCompare(right.perspective)).slice(0,limit);
 }

@@ -19,7 +19,7 @@
 - Exact URLs, perceptual hashes, normalized names, aliases, and local CLIP image embeddings check uniqueness. Six hard duplicates and ten near-copy embedding candidates are excluded.
 - Local quantized CLIP scores reaction usefulness, image quality, and embedding uniqueness. The final 2,000 additions are selected from the remaining buffer.
 - Local Qwen writes meaning-specific message, social-dynamic, example, near-miss, and tag metadata. These annotations are assistant-authored and remain pending owner feedback.
-- Production still uses bounded retrieval: two BGE embedding views return 30 candidates, with ten shortlist slots reserved for the original 1,000. Jev ranks ordinary comments once and multi-person comments through three parallel perspective lenses. Its scores return directly; alternatives below 10/100 are omitted. The 70B Workers AI selector runs only when classifier ranking fails.
+- Production still uses bounded retrieval: two BGE embedding views return 30 candidates, with ten shortlist slots reserved for the original 1,000. Jev ranks ordinary comments once and multi-person comments through three parallel perspective lenses. Its scores return directly; general alternatives below 10/100 and perspective alternatives below 25/100 are omitted. The 70B Workers AI selector runs only when classifier ranking fails.
 
 ## Evaluation
 
@@ -27,7 +27,7 @@
 - Stage 3,000 adds 40 long-tail cases for a 100-case suite: 30 humour and 10 no-meme cases.
 - On the assistant-authored labels, the final gate reached 72% retrieval-at-30, 67% top-one, 71% top-three, and 96% correct serious-content abstention. The fresh long-tail slice reached 93% retrieval and top-three; when an acceptable meme reached retrieval, reranking placed one in the top three 98% of the time.
 - Labels are assistant-authored and not human validated. Metrics are directional until owner feedback accumulates.
-- A focused perspective-routing set covers eight multi-person situations and asserts that all three viewpoint labels are returned without duplicate memes. These labels are also assistant-authored pending owner review.
+- A focused 14-case routing set now covers multi-person situations, quoted first-person speech, inanimate pronouns, and negation. It checks when perspective mode should and should not run; the labels remain assistant-authored pending owner review.
 - Release proof requires 3,000 catalogue records, 6,000 indexed vectors, passing package checks, a healthy public route, and browser verification.
 
 ## Next stage

@@ -43,7 +43,7 @@
       <ol class="pipeline" aria-label="Current recommendation pipeline">
         <li><span>01</span><strong>Validate</strong><p>Trim and bound the comment. Treat it as untrusted text.</p></li>
         <li><span>02</span><strong>Retrieve 30</strong><p>Search meaning and usage-example vectors separately, then fuse both ranked lists.</p></li>
-        <li><span>03</span><strong>Guard and rank</strong><p>Jev checks sensitive help-seeking text, then ranks once or through three explicit perspective lenses.</p></li>
+        <li><span>03</span><strong>Guard and rank</strong><p>Jev checks sensitive help-seeking text, then ranks once or through three explicit perspective lenses. Weak viewpoint alternatives are omitted instead of forced.</p></li>
         <li><span>04</span><strong>Return immediately</strong><p>Jev's scores become fit scores. Weak alternatives are omitted; the larger fallback model stays off the normal path.</p></li>
       </ol>
     </section>

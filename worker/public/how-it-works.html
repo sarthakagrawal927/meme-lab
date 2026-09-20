@@ -90,7 +90,7 @@
         <li class="stage-live"><span class="stage-number">30</span><div><strong>Seed control</strong><p>Curated metadata, direct all-candidate comparison, live public feedback.</p></div><em>LIVE</em></li>
         <li class="stage-live"><span class="stage-number">300</span><div><strong>Common reactions</strong><p>Semantic retrieval, scored multi-option results, searchable collection, and feedback.</p></div><em>LIVE</em></li>
         <li class="stage-live"><span class="stage-number">1K</span><div><strong>Broader vocabulary</strong><p>Seven hundred new records add long-tail reactions with searchable previews and meaning-specific metadata.</p></div><em>LIVE</em></li>
-        <li class="stage-building"><span class="stage-number">3K</span><div><strong>I love you 3,000</strong><p>The first 827 new source candidates are acquired for review; a second source is needed for the remaining 1,173.</p></div><em>BUILDING</em></li>
+        <li class="stage-building"><span class="stage-number">3K</span><div><strong>I love you 3,000</strong><p>The raw source gap is closed with 2,227 candidates from canonical memes and CC0 open originals. All images are fingerprinted; six exact duplicates are blocked and 87 fuzzy matches need review.</p></div><em>BUILDING</em></li>
         <li><span class="stage-number">30K</span><div><strong>Movie dialogue reactions</strong><p>Route to a separate dialogue corpus first, then retrieve and rank within it so memes do not crowd out the right line.</p></div><em>NEXT CORPUS</em></li>
       </ol>
     </section>
@@ -115,7 +115,7 @@
         <p class="eyebrow">THE EXPANSION RULE</p>
         <h2>Bigger is useful only if the results stay good.</h2>
       </div>
-      <p>The personal catalogue stays available while evaluation tracks top-three relevance, correct no-meme decisions, valid IDs, and latency. Comments are processed by Cloudflare Workers AI and classifier.dev; previews load from their listed source hosts.</p>
+      <p>Every expansion record must clear provider/source identity, canonical URL, exact-byte hash, perceptual-image, normalized-name, alias, and meaning checks. Exact duplicates are blocked automatically; fuzzy visual or semantic matches go to review. The personal catalogue stays available while evaluation tracks top-three relevance, correct no-meme decisions, valid IDs, and latency.</p>
     </section>
   </main>
 

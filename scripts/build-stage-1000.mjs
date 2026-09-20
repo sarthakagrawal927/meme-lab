@@ -81,16 +81,24 @@ const gatedExperiment=JSON.parse(await readFile(resolve(root,'eval/stage-1000-je
 const jevExperiment=JSON.parse(await readFile(resolve(root,'eval/stage-1000-jev-fast-summary.json'),'utf8'));
 const shadowRelevanceExperiment=JSON.parse(await readFile(resolve(root,'eval/stage-1000-shadow-jev-fast-summary.json'),'utf8'));
 const shadowSafetyExperiment=JSON.parse(await readFile(resolve(root,'eval/stage-1000-shadow-safety-gate-summary.json'),'utf8'));
-const stage3000Acquisition=JSON.parse(await readFile(resolve(root,'expansion/sources/stage-3000-acquisition-phase1.json'),'utf8'));
+const stage3000Acquisition=JSON.parse(await readFile(resolve(root,'expansion/sources/stage-3000-acquisition.json'),'utf8'));
+const stage3000Uniqueness=JSON.parse(await readFile(resolve(root,'expansion/sources/stage-3000-uniqueness-report.json'),'utf8'));
 const candidateStatus=withCandidatePool(publicStatus,{candidateCount:reviewed.length,reviewedExternalCount:stage300Review.selected_records+reviewed.length,evalSummary});
 const expandedStatus={
   ...promoteStage1000Status(candidateStatus,{liveCount:catalogue.length,reviewedExternalCount:stage300Review.selected_records+reviewed.length,evalSummary,baselineExperiment,gatedExperiment,jevExperiment,shadowRelevanceExperiment,shadowSafetyExperiment}),
   stage_3000_source:{
     status:'building',
-    raw_source_records:stage3000Acquisition.retained_candidates,
-    target_additions:stage3000Acquisition.target_gap,
-    remaining_source_gap:stage3000Acquisition.remaining_source_gap,
-    provider_total:stage3000Acquisition.provider_total,
+    raw_source_records:stage3000Acquisition.raw_source_records,
+    unique_after_hard_blocks:stage3000Uniqueness.summary.eligible_after_hard_blocks,
+    hard_duplicate_candidates:stage3000Uniqueness.summary.blocked_targets,
+    visual_review_candidates:stage3000Uniqueness.summary.review_only_targets,
+    target_additions:stage3000Acquisition.target_additions,
+    remaining_source_gap:Math.max(0,stage3000Acquisition.target_additions-stage3000Uniqueness.summary.eligible_after_hard_blocks),
+    curation_buffer_after_hard_blocks:Math.max(0,stage3000Uniqueness.summary.eligible_after_hard_blocks-stage3000Acquisition.target_additions),
+    post_visual_review_floor:stage3000Uniqueness.summary.eligible_after_hard_blocks-stage3000Uniqueness.summary.review_only_targets,
+    providers:stage3000Acquisition.providers,
+    image_fingerprint_coverage:stage3000Uniqueness.coverage.target_image_fingerprints,
+    semantic_metadata_coverage:stage3000Uniqueness.coverage.target_semantic_metadata,
     human_validated:false
   }
 };

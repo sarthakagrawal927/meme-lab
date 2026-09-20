@@ -182,10 +182,36 @@
   },
   "stage_3000_source": {
     "status": "building",
-    "raw_source_records": 827,
+    "raw_source_records": 2227,
+    "unique_after_hard_blocks": 2221,
+    "hard_duplicate_candidates": 6,
+    "visual_review_candidates": 87,
     "target_additions": 2000,
-    "remaining_source_gap": 1173,
-    "provider_total": 2303,
+    "remaining_source_gap": 0,
+    "curation_buffer_after_hard_blocks": 221,
+    "post_visual_review_floor": 2134,
+    "providers": [
+      {
+        "provider": "JustMeme.wtf",
+        "records": 827,
+        "backend": "documented_public_api",
+        "rights_status": "not_established"
+      },
+      {
+        "provider": "National Gallery of Art, Washington",
+        "records": 1400,
+        "backend": "official_downloadable_csv",
+        "rights_status": "cc0-public-domain"
+      }
+    ],
+    "image_fingerprint_coverage": {
+      "present": 2227,
+      "total": 2227
+    },
+    "semantic_metadata_coverage": {
+      "present": 0,
+      "total": 2227
+    },
     "human_validated": false
   }
 }

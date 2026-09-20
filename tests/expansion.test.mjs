@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {parseJsonl,validateSourceCandidates,validateExpansionRecords,validateEvalCases,validateStageCoverageCases,validateStage1000Cases,validateCoverageMetadata,validateMeaningSpecificMetadata,validateStages,expansionStatus,withCandidatePool} from '../src/expansion.mjs';
+import {parseJsonl,validateOpenSourceCandidates,validateSourceCandidates,validateExpansionRecords,validateEvalCases,validateStageCoverageCases,validateStage1000Cases,validateCoverageMetadata,validateMeaningSpecificMetadata,validateStages,expansionStatus,withCandidatePool} from '../src/expansion.mjs';
 
 const catalogue=JSON.parse(await readFile(new URL('../worker/public/catalogue.json',import.meta.url),'utf8'));
 const publicCollection=JSON.parse(await readFile(new URL('../worker/public/collection.json',import.meta.url),'utf8'));
@@ -9,8 +9,11 @@ const stage300Collection=publicCollection.slice(0,300);
 const candidates=parseJsonl(await readFile(new URL('../expansion/candidates/stage-300.jsonl',import.meta.url),'utf8'));
 const source=parseJsonl(await readFile(new URL('../expansion/sources/stage-300-source.jsonl',import.meta.url),'utf8'));
 const stage1000Source=parseJsonl(await readFile(new URL('../expansion/sources/stage-1000-source.jsonl',import.meta.url),'utf8'));
-const stage3000Source=parseJsonl(await readFile(new URL('../expansion/sources/stage-3000-source-phase1.jsonl',import.meta.url),'utf8'));
-const stage3000Acquisition=JSON.parse(await readFile(new URL('../expansion/sources/stage-3000-acquisition-phase1.json',import.meta.url),'utf8'));
+const stage3000Phase1Source=parseJsonl(await readFile(new URL('../expansion/sources/stage-3000-source-phase1.jsonl',import.meta.url),'utf8'));
+const stage3000NgaSource=parseJsonl(await readFile(new URL('../expansion/sources/stage-3000-source-nga.jsonl',import.meta.url),'utf8'));
+const stage3000Source=parseJsonl(await readFile(new URL('../expansion/sources/stage-3000-source.jsonl',import.meta.url),'utf8'));
+const stage3000Acquisition=JSON.parse(await readFile(new URL('../expansion/sources/stage-3000-acquisition.json',import.meta.url),'utf8'));
+const stage3000Uniqueness=JSON.parse(await readFile(new URL('../expansion/sources/stage-3000-uniqueness-report.json',import.meta.url),'utf8'));
 const stage1000Candidates=parseJsonl(await readFile(new URL('../expansion/candidates/stage-1000.jsonl',import.meta.url),'utf8'));
 const stage1000Cases=parseJsonl(await readFile(new URL('../eval/relevance_stage1000_v1.jsonl',import.meta.url),'utf8'));
 const cases=parseJsonl(await readFile(new URL('../eval/relevance_holdout_v1.jsonl',import.meta.url),'utf8'));
@@ -41,12 +44,19 @@ test('stage-1000 acquisition adds a bounded non-live source pool',()=>{
   assert(stage1000Source.every(record=>record.review_status==='needs_metadata_review'&&record.human_validated===false));
 });
 
-test('stage-3000 acquisition keeps only new provider records and records the remaining gap',()=>{
-  assert.equal(stage3000Source.length,827);
-  assert.equal(stage3000Acquisition.retained_candidates,827);
-  assert.equal(stage3000Acquisition.remaining_source_gap,1173);
-  assert.doesNotThrow(()=>validateSourceCandidates(stage3000Source,{knownNames:[...source,...stage1000Source].map(record=>record.name),minimum:800}));
-  assert.equal(new Set(stage3000Source.map(record=>record.proposed_id)).size,827);
+test('stage-3000 acquisition closes the raw source gap with unique fingerprint coverage',()=>{
+  assert.equal(stage3000Phase1Source.length,827);
+  assert.equal(stage3000NgaSource.length,1400);
+  assert.equal(stage3000Source.length,2227);
+  assert.equal(stage3000Acquisition.raw_source_records,2227);
+  assert.equal(stage3000Acquisition.remaining_raw_source_gap,0);
+  assert.doesNotThrow(()=>validateSourceCandidates(stage3000Phase1Source,{knownNames:[...source,...stage1000Source].map(record=>record.name),minimum:800}));
+  assert.doesNotThrow(()=>validateOpenSourceCandidates(stage3000NgaSource,{minimum:1200}));
+  assert.equal(new Set(stage3000Source.map(record=>record.proposed_id)).size,2227);
+  assert.equal(stage3000Uniqueness.coverage.target_image_fingerprints.present,2227);
+  assert.equal(stage3000Uniqueness.coverage.target_image_fingerprints.total,2227);
+  assert.equal(stage3000Uniqueness.summary.incomplete_fingerprint_coverage,false);
+  assert.equal(stage3000Uniqueness.summary.eligible_after_hard_blocks,2221);
 });
 
 test('stage-1000 candidate pool contains 700 specific records and a diverse held-out evaluation',()=>{

@@ -1,0 +1,2021 @@
+{
+  "version": "stage-3000-uniqueness-audit-v1",
+  "records": {
+    "targets": 2227,
+    "references": 1000
+  },
+  "thresholds": {
+    "semantic_jaccard": 0.82,
+    "perceptual_hamming_ratio": 0.08
+  },
+  "coverage": {
+    "target_images": {
+      "present": 2227,
+      "total": 2227
+    },
+    "target_image_fingerprints": {
+      "present": 2227,
+      "total": 2227
+    },
+    "target_semantic_metadata": {
+      "present": 0,
+      "total": 2227
+    }
+  },
+  "summary": {
+    "blocker_pairs": 10,
+    "blocked_targets": 6,
+    "review_pairs": 105,
+    "review_targets": 89,
+    "review_only_targets": 87,
+    "eligible_after_hard_blocks": 2221,
+    "blocked_target_ids": [
+      "136200496-i-wonder-what-hes-thinking",
+      "6232076-buzz-and-woody",
+      "helpful-tyler-durden",
+      "redneck-randal",
+      "rich-raven",
+      "socially-awkward-penguin"
+    ],
+    "review_only_target_ids": [
+      "10013392-happy-squirrel",
+      "111969997-pablo-escobar-waiting",
+      "117981773-boy-holding-his-breath",
+      "125256078-interrupting-bird",
+      "133365632-hey-you-going-to-sleep",
+      "13424299-yall-got-any-more-of",
+      "135426580-mind-blown-template",
+      "141485907-yugioh-card-draw",
+      "147957298-i-know-but-he-can",
+      "159708083-offering-the-sword",
+      "168457574-holding-hands",
+      "174192307-throw-out-of-the-window",
+      "178502888-gravity-falls-meme",
+      "18376423-praise-squirrel",
+      "187827563-king-ghidorah",
+      "224840324-panik-calm-panik",
+      "22962576-goodfellas-laugh",
+      "234244682-phoebe-teaching-joey-in-friends",
+      "248349105-willem-dafoe",
+      "249075000-lady-holding-dog-mouth-closed",
+      "258781014-a-ustedes-les-pagan",
+      "27325358-star-trek-kirk-khan",
+      "353517873-me-when-im-in-a-competition-and-my-opponent-is",
+      "363513540-mr-incredible-uncanny",
+      "480833361-1000-yard-stare",
+      "68235722-bycicle",
+      "70208307-if-i-had-one",
+      "78556652-trying-to-explain",
+      "83940526-one-does-not-simply-blank",
+      "9730667-stoned-guy",
+      "97554839-man-triggered-at-school",
+      "archer",
+      "awkward-awesome",
+      "bad",
+      "cake",
+      "cbb",
+      "center",
+      "dragon",
+      "ds",
+      "ermg",
+      "feelsgood",
+      "grumpy-cat-happy",
+      "icanhas",
+      "keep-calm-and-carry-on-aqua",
+      "keep-calm-and-carry-on-black",
+      "krusty-krab-vs-chum-bucket",
+      "krusty-krab-vs-chum-bucket-blank",
+      "laundry-viking",
+      "lrv",
+      "midwit",
+      "mordor",
+      "mouth",
+      "nga-10864-last-supper",
+      "nga-12057-descent-from-the-cross",
+      "nga-1372-judgment-of-paris",
+      "nga-3598-the-judgment-of-paris",
+      "nga-3733-the-head-of-christ",
+      "nga-3769-madonna-and-child-in-a-glory",
+      "nga-3777-the-madonna-and-child-in-a-rosary",
+      "nga-3779-madonna-and-child-in-a-rosary",
+      "nga-3917-madonna-and-child-in-glory",
+      "nga-4161-holy-family",
+      "nga-4393-head-of-christ",
+      "nga-5991-virgin-and-child",
+      "nga-601-the-last-supper",
+      "nga-717-the-descent-from-the-cross",
+      "nga-726-the-virgin-and-child-on-a-crescent",
+      "nga-8573-the-virgin-and-child-on-the-crescent",
+      "nga-8702-the-virgin-and-child",
+      "nga-9231-the-holy-family",
+      "nga-9322-francois-lotin",
+      "nga-9416-guy-chamillard",
+      "nga-9437-marc-bochart",
+      "nga-9440-francoise-blanchart",
+      "ptj",
+      "reveal",
+      "rollsafe",
+      "sk",
+      "soa",
+      "sohot",
+      "touch",
+      "vince",
+      "woman-cat",
+      "worst",
+      "yallgot",
+      "yodawg",
+      "yuno"
+    ],
+    "incomplete_fingerprint_coverage": false,
+    "incomplete_semantic_coverage": true
+  },
+  "conflicts": {
+    "provider_source_id": [],
+    "exact_image_url": [],
+    "canonical_image_url": [
+      {
+        "kind": "canonical_image_url",
+        "left": {
+          "id": "socially-awkward-penguin",
+          "name": "Socially Awkward Penguin",
+          "scope": "target"
+        },
+        "right": {
+          "id": "first-world-problems",
+          "name": "First World Problems",
+          "scope": "reference"
+        },
+        "key": "https://i.imgflip.com/1bh0.jpg"
+      },
+      {
+        "kind": "canonical_image_url",
+        "left": {
+          "id": "redneck-randal",
+          "name": "Redneck Randal",
+          "scope": "target"
+        },
+        "right": {
+          "id": "back-in-my-day",
+          "name": "Back In My Day",
+          "scope": "reference"
+        },
+        "key": "https://i.imgflip.com/1bhd.jpg"
+      },
+      {
+        "kind": "canonical_image_url",
+        "left": {
+          "id": "rich-raven",
+          "name": "Rich Raven",
+          "scope": "target"
+        },
+        "right": {
+          "id": "good-guy-greg",
+          "name": "Good Guy Greg",
+          "scope": "reference"
+        },
+        "key": "https://i.imgflip.com/1bi7.jpg"
+      },
+      {
+        "kind": "canonical_image_url",
+        "left": {
+          "id": "helpful-tyler-durden",
+          "name": "Helpful Tyler Durden",
+          "scope": "target"
+        },
+        "right": {
+          "id": "overly-attached-girlfriend",
+          "name": "Overly Attached Girlfriend",
+          "scope": "reference"
+        },
+        "key": "https://i.imgflip.com/1bhy.jpg"
+      }
+    ],
+    "normalized_name": [],
+    "alias_name": [
+      {
+        "kind": "alias_name",
+        "left": {
+          "id": "83940526-one-does-not-simply-blank",
+          "name": "One does not simply blank",
+          "scope": "target"
+        },
+        "right": {
+          "id": "one-does-not-simply",
+          "name": "One Does Not Simply",
+          "scope": "reference"
+        },
+        "key": "does not one simply"
+      },
+      {
+        "kind": "alias_name",
+        "left": {
+          "id": "135426580-mind-blown-template",
+          "name": "mind blown template",
+          "scope": "target"
+        },
+        "right": {
+          "id": "84756992-mind-blown",
+          "name": "Mind Blown",
+          "scope": "reference"
+        },
+        "key": "blown mind"
+      },
+      {
+        "kind": "alias_name",
+        "left": {
+          "id": "krusty-krab-vs-chum-bucket-blank",
+          "name": "Krusty Krab Vs Chum Bucket Blank",
+          "scope": "target"
+        },
+        "right": {
+          "id": "krusty-krab-vs-chum-bucket",
+          "name": "Krusty Krab Vs Chum Bucket",
+          "scope": "target"
+        },
+        "key": "bucket chum krab krusty vs"
+      },
+      {
+        "kind": "alias_name",
+        "left": {
+          "id": "awkward-awesome",
+          "name": "Socially Awkward Awesome Penguin",
+          "scope": "target"
+        },
+        "right": {
+          "id": "socially-awesome-awkward",
+          "name": "Socially Awesome Awkward Penguin",
+          "scope": "reference"
+        },
+        "key": "awesome awkward penguin socially"
+      },
+      {
+        "kind": "alias_name",
+        "left": {
+          "id": "cbb",
+          "name": "Communist Bugs Bunny",
+          "scope": "target"
+        },
+        "right": {
+          "id": "249257686-bugs-bunny-communist",
+          "name": "Bugs bunny communist",
+          "scope": "reference"
+        },
+        "key": "bugs bunny communist"
+      },
+      {
+        "kind": "alias_name",
+        "left": {
+          "id": "sk",
+          "name": "Skeptical Third World Kid",
+          "scope": "target"
+        },
+        "right": {
+          "id": "third-world-skeptical-kid",
+          "name": "Third World Skeptical Kid",
+          "scope": "reference"
+        },
+        "key": "kid skeptical third world"
+      },
+      {
+        "kind": "alias_name",
+        "left": {
+          "id": "vince",
+          "name": "Vince McMahon Reaction",
+          "scope": "target"
+        },
+        "right": {
+          "id": "131283297-vince-mcmahon",
+          "name": "Vince McMahon",
+          "scope": "reference"
+        },
+        "key": "mcmahon vince"
+      },
+      {
+        "kind": "alias_name",
+        "left": {
+          "id": "woman-cat",
+          "name": "Woman Yelling at a Cat",
+          "scope": "target"
+        },
+        "right": {
+          "id": "woman-yelling-cat",
+          "name": "Woman Yelling At Cat",
+          "scope": "reference"
+        },
+        "key": "at cat woman yelling"
+      },
+      {
+        "kind": "alias_name",
+        "left": {
+          "id": "nga-3598-the-judgment-of-paris",
+          "name": "The Judgment of Paris",
+          "scope": "target"
+        },
+        "right": {
+          "id": "nga-1372-judgment-of-paris",
+          "name": "Judgment of Paris",
+          "scope": "target"
+        },
+        "key": "judgment of paris"
+      },
+      {
+        "kind": "alias_name",
+        "left": {
+          "id": "nga-3779-madonna-and-child-in-a-rosary",
+          "name": "Madonna and Child in a Rosary",
+          "scope": "target"
+        },
+        "right": {
+          "id": "nga-3777-the-madonna-and-child-in-a-rosary",
+          "name": "The Madonna and Child in a Rosary",
+          "scope": "target"
+        },
+        "key": "and child in madonna rosary"
+      },
+      {
+        "kind": "alias_name",
+        "left": {
+          "id": "nga-3917-madonna-and-child-in-glory",
+          "name": "Madonna and Child in Glory",
+          "scope": "target"
+        },
+        "right": {
+          "id": "nga-3769-madonna-and-child-in-a-glory",
+          "name": "Madonna and Child in a Glory",
+          "scope": "target"
+        },
+        "key": "and child glory in madonna"
+      },
+      {
+        "kind": "alias_name",
+        "left": {
+          "id": "nga-4393-head-of-christ",
+          "name": "Head of Christ",
+          "scope": "target"
+        },
+        "right": {
+          "id": "nga-3733-the-head-of-christ",
+          "name": "The Head of Christ",
+          "scope": "target"
+        },
+        "key": "christ head of"
+      },
+      {
+        "kind": "alias_name",
+        "left": {
+          "id": "nga-8573-the-virgin-and-child-on-the-crescent",
+          "name": "The Virgin and Child on the Crescent",
+          "scope": "target"
+        },
+        "right": {
+          "id": "nga-726-the-virgin-and-child-on-a-crescent",
+          "name": "The Virgin and Child on a Crescent",
+          "scope": "target"
+        },
+        "key": "and child crescent on virgin"
+      },
+      {
+        "kind": "alias_name",
+        "left": {
+          "id": "nga-8702-the-virgin-and-child",
+          "name": "The Virgin and Child",
+          "scope": "target"
+        },
+        "right": {
+          "id": "nga-5991-virgin-and-child",
+          "name": "Virgin and Child",
+          "scope": "target"
+        },
+        "key": "and child virgin"
+      },
+      {
+        "kind": "alias_name",
+        "left": {
+          "id": "nga-9231-the-holy-family",
+          "name": "The Holy Family",
+          "scope": "target"
+        },
+        "right": {
+          "id": "nga-4161-holy-family",
+          "name": "Holy Family",
+          "scope": "target"
+        },
+        "key": "family holy"
+      },
+      {
+        "kind": "alias_name",
+        "left": {
+          "id": "nga-10864-last-supper",
+          "name": "Last Supper",
+          "scope": "target"
+        },
+        "right": {
+          "id": "nga-601-the-last-supper",
+          "name": "The Last Supper",
+          "scope": "target"
+        },
+        "key": "last supper"
+      },
+      {
+        "kind": "alias_name",
+        "left": {
+          "id": "nga-12057-descent-from-the-cross",
+          "name": "Descent from the Cross",
+          "scope": "target"
+        },
+        "right": {
+          "id": "nga-717-the-descent-from-the-cross",
+          "name": "The Descent from the Cross",
+          "scope": "target"
+        },
+        "key": "cross descent from"
+      }
+    ],
+    "exact_semantic_metadata": [],
+    "near_semantic_metadata": [],
+    "exact_image_content": [
+      {
+        "kind": "exact_image_content",
+        "left": {
+          "id": "first-world-problems",
+          "name": "First World Problems",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "socially-awkward-penguin",
+          "name": "Socially Awkward Penguin",
+          "scope": "target"
+        },
+        "key": "b17f29d04ef4c745e2e4d07e12c9ff3f59ee6a340522bac4076985f3cc273860"
+      },
+      {
+        "kind": "exact_image_content",
+        "left": {
+          "id": "overly-attached-girlfriend",
+          "name": "Overly Attached Girlfriend",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "helpful-tyler-durden",
+          "name": "Helpful Tyler Durden",
+          "scope": "target"
+        },
+        "key": "b8659877a37e46652fa901b8e8bb42b9188b2fc996bd5f30d530b2c58bb76dbb"
+      },
+      {
+        "kind": "exact_image_content",
+        "left": {
+          "id": "back-in-my-day",
+          "name": "Back In My Day",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "redneck-randal",
+          "name": "Redneck Randal",
+          "scope": "target"
+        },
+        "key": "fb296ff86e37d52daeef054baa09af5e1dcbaf0aed3cd8b464db9d0a09c2dffd"
+      },
+      {
+        "kind": "exact_image_content",
+        "left": {
+          "id": "good-guy-greg",
+          "name": "Good Guy Greg",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "rich-raven",
+          "name": "Rich Raven",
+          "scope": "target"
+        },
+        "key": "fafeedeaf106813d09edf4489872783cc4608138110713f1e0916be475bbc3b8"
+      },
+      {
+        "kind": "exact_image_content",
+        "left": {
+          "id": "13026863-toystory-everywhere",
+          "name": "TOYSTORY EVERYWHERE",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "6232076-buzz-and-woody",
+          "name": "Buzz And Woody",
+          "scope": "target"
+        },
+        "key": "7b801d0bba102c3206ed6830230946259a443034223bc9581821ee750d249e44"
+      },
+      {
+        "kind": "exact_image_content",
+        "left": {
+          "id": "112850636-hes-probably-thinking-about-girls",
+          "name": "He's Probably Thinking About Girls",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "136200496-i-wonder-what-hes-thinking",
+          "name": "I Wonder What He&#039;s Thinking",
+          "scope": "target"
+        },
+        "key": "02a5bcf8383068a36c566c9a9128cfe17b40b4f1d4ff4fce60c5f17a638f2e28"
+      }
+    ],
+    "perceptual_image": [
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "sad-pablo",
+          "name": "Sad Pablo Escobar",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "111969997-pablo-escobar-waiting",
+          "name": "Pablo Escobar Waiting",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "charlie-conspiracy",
+          "name": "Charlie Conspiracy",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "78556652-trying-to-explain",
+          "name": "Trying to explain",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 4,
+        "bits": 64,
+        "ratio": 0.0625
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "center-for-ants",
+          "name": "A Center for Ants?",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "center",
+          "name": "What is this, a Center for Ants?!",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 4,
+        "bits": 64,
+        "ratio": 0.0625
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "you-guys-getting-paid",
+          "name": "You Guys Are Getting Paid?",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "258781014-a-ustedes-les-pagan",
+          "name": "¿A ustedes les pagan?",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "two-buttons",
+          "name": "Two Buttons",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "ds",
+          "name": "Daily Struggle",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 2,
+        "bits": 64,
+        "ratio": 0.0313
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "bike-fall",
+          "name": "Bike Fall",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "68235722-bycicle",
+          "name": "Bycicle",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 2,
+        "bits": 64,
+        "ratio": 0.0313
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "roll-safe",
+          "name": "Roll Safe Think About It",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "rollsafe",
+          "name": "Roll Safe",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 4,
+        "bits": 64,
+        "ratio": 0.0625
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "x-everywhere",
+          "name": "X, X Everywhere",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "6232076-buzz-and-woody",
+          "name": "Buzz And Woody",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 4,
+        "bits": 64,
+        "ratio": 0.0625
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "woman-yelling-cat",
+          "name": "Woman Yelling At Cat",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "woman-cat",
+          "name": "Woman Yelling at a Cat",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "expanding-brain",
+          "name": "Expanding Brain",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "135426580-mind-blown-template",
+          "name": "mind blown template",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 4,
+        "bits": 64,
+        "ratio": 0.0625
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "boardroom-suggestion",
+          "name": "Boardroom Meeting Suggestion",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "174192307-throw-out-of-the-window",
+          "name": "throw out of the window",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 2,
+        "bits": 64,
+        "ratio": 0.0313
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "panik-kalm-panik",
+          "name": "Panik Kalm Panik",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "224840324-panik-calm-panik",
+          "name": "panik calm panik",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 2,
+        "bits": 64,
+        "ratio": 0.0313
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "missing-trophy",
+          "name": "This Is Where I'd Put My Trophy If I Had One",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "70208307-if-i-had-one",
+          "name": "If I Had One",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "one-does-not-simply",
+          "name": "One Does Not Simply",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "83940526-one-does-not-simply-blank",
+          "name": "One does not simply blank",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "one-does-not-simply",
+          "name": "One Does Not Simply",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "mordor",
+          "name": "One Does Not Simply Walk into Mordor",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "epic-handshake",
+          "name": "Epic Handshake",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "168457574-holding-hands",
+          "name": "Holding hands",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "grumpy-cat",
+          "name": "Grumpy Cat",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "grumpy-cat-happy",
+          "name": "Grumpy Cat Happy",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "am-i-a-joke-to-you",
+          "name": "Am I A Joke To You",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "258781014-a-ustedes-les-pagan",
+          "name": "¿A ustedes les pagan?",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "galaxy-brain",
+          "name": "Galaxy Brain",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "135426580-mind-blown-template",
+          "name": "mind blown template",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 4,
+        "bits": 64,
+        "ratio": 0.0625
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "spongebob-imagination",
+          "name": "SpongeBob Imagination",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "6232076-buzz-and-woody",
+          "name": "Buzz And Woody",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 4,
+        "bits": 64,
+        "ratio": 0.0625
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "kalm-panik",
+          "name": "Kalm Panik",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "224840324-panik-calm-panik",
+          "name": "panik calm panik",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 2,
+        "bits": 64,
+        "ratio": 0.0313
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "yall-got-any-more-of-that",
+          "name": "Y'all Got Any More Of That",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "13424299-yall-got-any-more-of",
+          "name": "Yall Got Any More Of",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "yall-got-any-more-of-that",
+          "name": "Y'all Got Any More Of That",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "yallgot",
+          "name": "Y'all Got Any More of Them",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "this-is-where-id-put-my-trophy-if-i-had-one",
+          "name": "This Is Where I'd Put My Trophy If I Had One",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "70208307-if-i-had-one",
+          "name": "If I Had One",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "i-bet-hes-thinking-about-other-women",
+          "name": "I Bet He's Thinking About Other Women",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "136200496-i-wonder-what-hes-thinking",
+          "name": "I Wonder What He&#039;s Thinking",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "533936279-bell-curve",
+          "name": "Bell Curve",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "midwit",
+          "name": "Midwit",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 4,
+        "bits": 64,
+        "ratio": 0.0625
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "187102311-three-headed-dragon",
+          "name": "Three-headed Dragon",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "187827563-king-ghidorah",
+          "name": "King Ghidorah",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "145139900-scooby-doo-mask-reveal",
+          "name": "Scooby doo mask reveal",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "reveal",
+          "name": "Scooby Doo Reveal",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "360597639-whe-im-in-a-competition-and-my-opponent-is",
+          "name": "whe i'm in a competition and my opponent is",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "353517873-me-when-im-in-a-competition-and-my-opponent-is",
+          "name": "Me when I&#039;m in a .... competition and my opponent is .....",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 4,
+        "bits": 64,
+        "ratio": 0.0625
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "92084495-charlie-conspiracy-always-sunny-in-philidelphia",
+          "name": "Charlie Conspiracy (Always Sunny in Philidelphia)",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "78556652-trying-to-explain",
+          "name": "Trying to explain",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 4,
+        "bits": 64,
+        "ratio": 0.0625
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "133946291-you-know-im-something-of-a-scientist-myself",
+          "name": "You know, I'm something of a scientist myself",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "248349105-willem-dafoe",
+          "name": "willem dafoe",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "41022477-hold-fart",
+          "name": "Hold fart",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "97554839-man-triggered-at-school",
+          "name": "Man triggered at school",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "41022477-hold-fart",
+          "name": "Hold fart",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "117981773-boy-holding-his-breath",
+          "name": "Boy holding his breath",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "mugatu-so-hot-right-now",
+          "name": "Mugatu So Hot Right Now",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "sohot",
+          "name": "So Hot Right Now",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "93160967-skinner-out-of-touch",
+          "name": "Skinner Out Of Touch",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "touch",
+          "name": "Principal Skinner",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 2,
+        "bits": 64,
+        "ratio": 0.0313
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "satisfied-seal",
+          "name": "Satisfied Seal",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "soa",
+          "name": "Seal of Approval",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 2,
+        "bits": 64,
+        "ratio": 0.0313
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "y-all-got-any-more-of-that",
+          "name": "Y'all Got Any More Of That",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "13424299-yall-got-any-more-of",
+          "name": "Yall Got Any More Of",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "y-all-got-any-more-of-that",
+          "name": "Y'all Got Any More Of That",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "yallgot",
+          "name": "Y'all Got Any More of Them",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "i-bet-he-s-thinking-about-other-women",
+          "name": "I Bet He's Thinking About Other Women",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "136200496-i-wonder-what-hes-thinking",
+          "name": "I Wonder What He&#039;s Thinking",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "you-know-i-m-something-of-a-scientist-myself",
+          "name": "You know, I'm something of a scientist myself",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "248349105-willem-dafoe",
+          "name": "willem dafoe",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "80964944-woody-and-buzz-lightyear-everywhere-widescreen",
+          "name": "Woody and Buzz Lightyear Everywhere Widescreen",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "6232076-buzz-and-woody",
+          "name": "Buzz And Woody",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 2,
+        "bits": 64,
+        "ratio": 0.0313
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "189601074-brain-before-sleep",
+          "name": "Brain Before Sleep",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "133365632-hey-you-going-to-sleep",
+          "name": "Hey you going to sleep?",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 4,
+        "bits": 64,
+        "ratio": 0.0625
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "good-fellas-hilarious",
+          "name": "Good Fellas Hilarious",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "22962576-goodfellas-laugh",
+          "name": "Goodfellas Laugh",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 2,
+        "bits": 64,
+        "ratio": 0.0313
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "131745903-simpsons-so-far",
+          "name": "Simpsons so far",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "worst",
+          "name": "The Worst Day Of Your Life So Far",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "249257686-bugs-bunny-communist",
+          "name": "Bugs bunny communist",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "cbb",
+          "name": "Communist Bugs Bunny",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 2,
+        "bits": 64,
+        "ratio": 0.0313
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "153452716-this-is-worthless",
+          "name": "This is Worthless",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "178502888-gravity-falls-meme",
+          "name": "Gravity Falls Meme",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "340157305-traumatized-mr-incredible",
+          "name": "Traumatized Mr. Incredible",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "363513540-mr-incredible-uncanny",
+          "name": "Mr Incredible Uncanny",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "231451789-phoebe-joey",
+          "name": "Phoebe Joey",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "234244682-phoebe-teaching-joey-in-friends",
+          "name": "Phoebe teaching Joey in Friends",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 2,
+        "bits": 64,
+        "ratio": 0.0313
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "92459171-charlie-day",
+          "name": "Charlie Day",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "78556652-trying-to-explain",
+          "name": "Trying to explain",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 4,
+        "bits": 64,
+        "ratio": 0.0625
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "484495066-thousand-yard-stare",
+          "name": "Thousand Yard Stare",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "480833361-1000-yard-stare",
+          "name": "1000 yard stare",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "158721148-man-giving-sword-to-larger-man",
+          "name": "Man giving sword to larger man",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "159708083-offering-the-sword",
+          "name": "Offering the Sword",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 2,
+        "bits": 64,
+        "ratio": 0.0313
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "187760713-three-dragons",
+          "name": "Three dragons",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "187827563-king-ghidorah",
+          "name": "King Ghidorah",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "33211581-i-can-has-cheezburger-cat",
+          "name": "I can has cheezburger cat",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "icanhas",
+          "name": "I Can Has Cheezburger?",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "100708178-captain-kirk-khan",
+          "name": "Captain Kirk Khan",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "27325358-star-trek-kirk-khan",
+          "name": "Star Trek Kirk Khan",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "148465772-arm-wrestling-meme-template",
+          "name": "Arm wrestling meme template",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "168457574-holding-hands",
+          "name": "Holding hands",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "146594491-you-cant-defeat-me",
+          "name": "You can't defeat me",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "147957298-i-know-but-he-can",
+          "name": "I know, but he can",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "10-guy",
+          "name": "10 Guy",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "9730667-stoned-guy",
+          "name": "stoned guy",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "142098540-annoyed-bird",
+          "name": "annoyed bird",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "125256078-interrupting-bird",
+          "name": "Interrupting bird",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 2,
+        "bits": 64,
+        "ratio": 0.0313
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "131283297-vince-mcmahon",
+          "name": "Vince McMahon",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "vince",
+          "name": "Vince McMahon Reaction",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "308356003-no-its-the-children-who-are-wrong",
+          "name": "No its the children who are wrong",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "touch",
+          "name": "Principal Skinner",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 2,
+        "bits": 64,
+        "ratio": 0.0313
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "19750160-feels-good-man",
+          "name": "Feels Good Man",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "feelsgood",
+          "name": "Feels Good",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 2,
+        "bits": 64,
+        "ratio": 0.0313
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "i-was-told-there-would-be",
+          "name": "I Was Told There Would Be",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "cake",
+          "name": "Office Space Milton",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "174628976-hand-clasping",
+          "name": "Hand clasping",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "168457574-holding-hands",
+          "name": "Holding hands",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "16354050-do-you-want-ants-archer",
+          "name": "Do you want ants archer",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "archer",
+          "name": "Archer",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "you-should-feel-bad-zoidberg",
+          "name": "You Should Feel Bad Zoidberg",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "bad",
+          "name": "You Should Feel Bad",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "ermahgerd-berks",
+          "name": "Ermahgerd Berks",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "ermg",
+          "name": "Ermahgerd",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "93228317-you-cant-if-you-dont",
+          "name": "You can't if you don't",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "rollsafe",
+          "name": "Roll Safe",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 4,
+        "bits": 64,
+        "ratio": 0.0625
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "5214848-why-you-no",
+          "name": "Why you no",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "yuno",
+          "name": "Y U NO Guy",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "74331809-pepe-silvia",
+          "name": "Pepe Silvia",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "78556652-trying-to-explain",
+          "name": "Trying to explain",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 2,
+        "bits": 64,
+        "ratio": 0.0313
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "120981297-forever-alone",
+          "name": "Forever alone",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "111969997-pablo-escobar-waiting",
+          "name": "Pablo Escobar Waiting",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 2,
+        "bits": 64,
+        "ratio": 0.0313
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "55694416-straining-kid",
+          "name": "Straining kid",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "97554839-man-triggered-at-school",
+          "name": "Man triggered at school",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "55694416-straining-kid",
+          "name": "Straining kid",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "117981773-boy-holding-his-breath",
+          "name": "Boy holding his breath",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "362153152-squidward-competition",
+          "name": "Squidward competition",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "353517873-me-when-im-in-a-competition-and-my-opponent-is",
+          "name": "Me when I&#039;m in a .... competition and my opponent is .....",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 2,
+        "bits": 64,
+        "ratio": 0.0313
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "242910872-joey-repeat-after-me",
+          "name": "Joey Repeat After Me",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "ptj",
+          "name": "Phoebe Teaching Joey",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "164580378-eddie-murphy-thinking",
+          "name": "Eddie Murphy thinking",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "rollsafe",
+          "name": "Roll Safe",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 4,
+        "bits": 64,
+        "ratio": 0.0625
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "139631868-yu-gi-oh",
+          "name": "Yu Gi Oh",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "141485907-yugioh-card-draw",
+          "name": "Yugioh card draw",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 2,
+        "bits": 64,
+        "ratio": 0.0313
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "156236331-for-christmas-i-want-a-dragon",
+          "name": "For Christmas I Want a Dragon",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "dragon",
+          "name": "What Color Do You Want Your Dragon",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 2,
+        "bits": 64,
+        "ratio": 0.0313
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "137479224-yo-dawg-i-heard-you-like",
+          "name": "yo dawg i heard you like",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "yodawg",
+          "name": "Xzibit Yo Dawg",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "56739340-satisfaction",
+          "name": "Satisfaction",
+          "scope": "reference"
+        },
+        "right": {
+          "id": "feelsgood",
+          "name": "Feels Good",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 2,
+        "bits": 64,
+        "ratio": 0.0313
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "83940526-one-does-not-simply-blank",
+          "name": "One does not simply blank",
+          "scope": "target"
+        },
+        "right": {
+          "id": "mordor",
+          "name": "One Does Not Simply Walk into Mordor",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "97554839-man-triggered-at-school",
+          "name": "Man triggered at school",
+          "scope": "target"
+        },
+        "right": {
+          "id": "117981773-boy-holding-his-breath",
+          "name": "Boy holding his breath",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "249075000-lady-holding-dog-mouth-closed",
+          "name": "Lady holding dog mouth closed",
+          "scope": "target"
+        },
+        "right": {
+          "id": "mouth",
+          "name": "Woman Holding Dog's Mouth",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 2,
+        "bits": 64,
+        "ratio": 0.0313
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "13424299-yall-got-any-more-of",
+          "name": "Yall Got Any More Of",
+          "scope": "target"
+        },
+        "right": {
+          "id": "yallgot",
+          "name": "Y'all Got Any More of Them",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "10013392-happy-squirrel",
+          "name": "Happy Squirrel",
+          "scope": "target"
+        },
+        "right": {
+          "id": "18376423-praise-squirrel",
+          "name": "Praise Squirrel",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 4,
+        "bits": 64,
+        "ratio": 0.0625
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "keep-calm-and-carry-on-black",
+          "name": "Keep Calm And Carry On Black",
+          "scope": "target"
+        },
+        "right": {
+          "id": "keep-calm-and-carry-on-aqua",
+          "name": "Keep Calm And Carry On Aqua",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "laundry-viking",
+          "name": "Laundry Viking",
+          "scope": "target"
+        },
+        "right": {
+          "id": "lrv",
+          "name": "Laundry Room Viking",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 0,
+        "bits": 64,
+        "ratio": 0
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "nga-9322-francois-lotin",
+          "name": "Francois Lotin",
+          "scope": "target"
+        },
+        "right": {
+          "id": "nga-9416-guy-chamillard",
+          "name": "Guy Chamillard",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 4,
+        "bits": 64,
+        "ratio": 0.0625
+      },
+      {
+        "kind": "perceptual_image",
+        "left": {
+          "id": "nga-9437-marc-bochart",
+          "name": "Marc Bochart",
+          "scope": "target"
+        },
+        "right": {
+          "id": "nga-9440-francoise-blanchart",
+          "name": "Francoise Blanchart",
+          "scope": "target"
+        },
+        "key": "",
+        "distance": 4,
+        "bits": 64,
+        "ratio": 0.0625
+      }
+    ]
+  }
+}

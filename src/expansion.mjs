@@ -20,6 +20,26 @@ export function validateSourceCandidates(records,{knownNames=[],minimum=240}={})
   return records;
 }
 
+export function validateOpenSourceCandidates(records,{minimum=1}={}) {
+  if(records.length<minimum) throw new Error(`Open sourcing needs at least ${minimum} candidates; found ${records.length}.`);
+  const ids=new Set();
+  const names=new Set();
+  for(const record of records) {
+    if(typeof record.proposed_id!=='string'||!/^nga-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(record.proposed_id)||ids.has(record.proposed_id)) throw new Error(`Invalid or duplicate open-source candidate ID: ${record.proposed_id}.`);
+    ids.add(record.proposed_id);
+    const name=record.name?.toLowerCase().replaceAll(/[^a-z0-9]+/g,' ').trim();
+    if(!name||names.has(name)) throw new Error(`Duplicate or invalid open-source candidate name: ${record.name}.`);
+    names.add(name);
+    if(record.provider!=='National Gallery of Art, Washington'||!record.source_url?.startsWith('https://www.nga.gov/artworks/')) throw new Error(`${record.proposed_id} has invalid NGA provenance.`);
+    if(!record.image_url?.startsWith('https://api.nga.gov/iiif/')) throw new Error(`${record.proposed_id} needs an NGA IIIF image URL.`);
+    if(!Array.isArray(record.categories)||!record.categories.includes('public-domain')||record.categories.length<3) throw new Error(`${record.proposed_id} needs open-source categories.`);
+    if(record.rights_status!=='cc0-public-domain'||record.license_url!=='https://creativecommons.org/publicdomain/zero/1.0/') throw new Error(`${record.proposed_id} needs explicit CC0 rights metadata.`);
+    if(record.provenance?.source_type!=='official_downloadable_csv'||record.provenance?.openaccess!==1||record.provenance?.viewtype!=='primary') throw new Error(`${record.proposed_id} has incomplete open-data provenance.`);
+    if(record.review_status!=='needs_meme_fit_review'||record.human_validated!==false) throw new Error(`${record.proposed_id} has an invalid review state.`);
+  }
+  return records;
+}
+
 export function parseJsonl(text,label='JSONL') {
   return text.trim().split('\n').filter(Boolean).map((line,index)=>{
     try { return JSON.parse(line); }

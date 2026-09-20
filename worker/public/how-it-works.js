@@ -23,7 +23,9 @@ try {
   if(progress) {
     const source=status.stage_3000_source;
     progress.textContent=source
-      ? `${status.live_records} references are live. ${source.raw_source_records} new source candidates are acquired for review; ${source.remaining_source_gap} more sources are still needed for the ${status.next_target}-reaction stage.`
+      ? source.remaining_source_gap===0
+        ? `${status.live_records} references are live. The raw source gap is closed: ${source.raw_source_records} candidates are acquired, ${source.unique_after_hard_blocks} survive hard duplicate checks, and ${source.visual_review_candidates} fuzzy matches need review before semantic curation.`
+        : `${status.live_records} references are live. ${source.raw_source_records} raw candidates are acquired: ${source.unique_after_hard_blocks} remain after hard duplicate checks, ${source.visual_review_candidates} need visual review, and ${source.remaining_source_gap} more unique sources are still needed for the ${status.next_target}-reaction stage.`
       : `${status.live_records} references are live in the personal tool. ${status.records_to_source} more sourced records would reach the ${status.next_target}-meme stage.`;
   }
   const evalStatus=document.querySelector('#eval-status');

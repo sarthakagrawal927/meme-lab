@@ -1,0 +1,24 @@
+{
+  "version": "stage-3000-acquisition-v1",
+  "observed_on": "2026-09-20",
+  "target_additions": 2000,
+  "raw_source_records": 2227,
+  "raw_source_buffer": 227,
+  "remaining_raw_source_gap": 0,
+  "providers": [
+    {
+      "provider": "JustMeme.wtf",
+      "records": 827,
+      "backend": "documented_public_api",
+      "rights_status": "not_established"
+    },
+    {
+      "provider": "National Gallery of Art, Washington",
+      "records": 1400,
+      "backend": "official_downloadable_csv",
+      "rights_status": "cc0-public-domain"
+    }
+  ],
+  "human_validated": false,
+  "uncertainty": "The raw sourcing gap is closed, not the promotion gap. Every record still needs duplicate adjudication, meme-fit review, meaning metadata, safety review, and evaluation before it can join the live catalogue."
+}

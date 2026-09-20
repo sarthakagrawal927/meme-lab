@@ -1,0 +1,96 @@
+{
+  "version": "stage-3000-acquisition-nga-v1",
+  "status": "complete",
+  "observed_on": "2026-09-20",
+  "backend": "official_downloadable_csv",
+  "provider": "National Gallery of Art, Washington",
+  "repository_url": "https://github.com/NationalGalleryOfArt/opendata",
+  "source_files": [
+    {
+      "url": "https://raw.githubusercontent.com/NationalGalleryOfArt/opendata/main/data/published_images.csv",
+      "final_url": "https://raw.githubusercontent.com/NationalGalleryOfArt/opendata/main/data/published_images.csv",
+      "etag": "W/\"bf6ca1e59acd7e1e2574489b7346176d87d6ecefb0065e3da6d3da11738515f9\"",
+      "last_modified": null,
+      "content_length": 26581692
+    },
+    {
+      "url": "https://raw.githubusercontent.com/NationalGalleryOfArt/opendata/main/data/objects.csv",
+      "final_url": "https://raw.githubusercontent.com/NationalGalleryOfArt/opendata/main/data/objects.csv",
+      "etag": "W/\"a29e37047b647da5e236a402c039ac6862ef40b73f641bdbeb77f0cf23c84265\"",
+      "last_modified": null,
+      "content_length": 16474875
+    }
+  ],
+  "image_policy_url": "https://www.nga.gov/terms-and-notices",
+  "license": "CC0 1.0 Universal",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "target_candidates": 1400,
+  "retained_candidates": 1400,
+  "shortfall": 0,
+  "max_image_rows": 150000,
+  "object_rows_read": 31317,
+  "buffered_reaction_images": 11200,
+  "image_buffer_target": 11200,
+  "image_rows_read": 81950,
+  "image_rejections": {
+    "no_reaction_signal": 26251,
+    "not_open_access": 38001,
+    "not_primary_view": 3464,
+    "sensitive_metadata": 1931,
+    "missing_useful_assistive_text": 1090,
+    "duplicate_source_identity": 12
+  },
+  "object_rejections": {
+    "sensitive_metadata": 197,
+    "duplicate_title": 175,
+    "unsupported_classification": 1548,
+    "unhelpful_title": 7
+  },
+  "existing_names_checked": 2198,
+  "existing_image_urls_checked": 2098,
+  "existing_nga_source_ids_checked": 0,
+  "uniqueness_checks": [
+    "NGA object ID plus published image UUID",
+    "normalized title against current and staged catalogues",
+    "exact derived IIIF image URL against current and staged catalogues",
+    "one primary image per NGA object"
+  ],
+  "filters": [
+    "object must be accessioned and non-virtual",
+    "classification must be drawing, painting, photograph, print, sculpture, or decorative art",
+    "published image openaccess must equal 1",
+    "viewtype must equal primary",
+    "both image dimensions must be at least 400 pixels",
+    "title and assistive text must pass a conservative explicit-sensitivity filter",
+    "assistive text must be at least 60 characters and contain a person, animal, action, emotion, or social-interaction signal"
+  ],
+  "output_schema": [
+    "proposed_id",
+    "source_id",
+    "name",
+    "title",
+    "categories",
+    "image_url",
+    "image_width",
+    "image_height",
+    "assistive_text",
+    "creator",
+    "object_date",
+    "medium",
+    "classification",
+    "credit_line",
+    "object_url",
+    "provider",
+    "source_url",
+    "catalogue_url",
+    "observed_on",
+    "rights_status",
+    "license",
+    "license_url",
+    "credit",
+    "provenance",
+    "review_status",
+    "human_validated"
+  ],
+  "uncertainty": "These are licensed source candidates, not live meme records. The metadata filters reduce obvious sensitivity and low-context images, but meme meaning, delivery fitness, perceptual duplicates, cultural context, and audience suitability still require human review."
+}

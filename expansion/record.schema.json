@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "meme-lab-expansion-record-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "message", "relational_pattern", "example_context", "near_miss_context", "tags", "provenance", "media", "review"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+    "name": {"type": "string", "minLength": 1},
+    "message": {"type": "string", "minLength": 1},
+    "relational_pattern": {"type": "string", "minLength": 1},
+    "example_context": {"type": "string", "minLength": 1},
+    "near_miss_context": {"type": "string", "minLength": 1},
+    "tags": {"type": "array", "minItems": 2, "items": {"type": "string", "minLength": 1}},
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provider", "provider_id", "source_url", "observed_on"],
+      "properties": {
+        "provider": {"type": "string"},
+        "provider_id": {"type": ["string", "null"]},
+        "source_url": {"type": "string", "format": "uri"},
+        "observed_on": {"type": "string", "format": "date"}
+      }
+    },
+    "media": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["image_url", "rights_status"],
+      "properties": {
+        "image_url": {"type": ["string", "null"]},
+        "rights_status": {"enum": ["established", "not_established", "unavailable"]}
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "human_validated"],
+      "properties": {
+        "status": {"enum": ["needs_metadata_review", "needs_asset_and_delivery_review", "approved"]},
+        "human_validated": {"const": false}
+      }
+    }
+  }
+}

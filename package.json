@@ -10,11 +10,13 @@
   "scripts": {
     "start": "node server.mjs",
     "build:public-catalogue": "node scripts/build-public-catalogue.mjs",
-    "dev:public": "npm run build:public-catalogue && wrangler dev",
-    "deploy:public": "npm run build:public-catalogue && wrangler deploy",
+    "build:expansion": "node scripts/build-expansion.mjs",
+    "build:public": "npm run build:public-catalogue && npm run build:expansion",
+    "dev:public": "npm run build:public && wrangler dev",
+    "deploy:public": "npm run build:public && wrangler deploy",
     "types:worker": "wrangler types worker-configuration.d.ts",
     "test": "node --test tests/*.test.mjs",
-    "check": "node scripts/check-package.mjs",
+    "check": "node scripts/check-package.mjs && node scripts/check-expansion.mjs",
     "experiment:holdout": "node scripts/run-holdout.mjs",
     "experiment:review": "node scripts/review-holdout.mjs",
     "experiment:summarize": "node scripts/summarize-holdout.mjs"

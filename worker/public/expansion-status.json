@@ -1,0 +1,39 @@
+{
+  "version": "catalogue-expansion-v1",
+  "live_records": 30,
+  "sourced_records": 60,
+  "next_target": 300,
+  "records_to_source": 240,
+  "retrieval": {
+    "live": "direct_all_candidates",
+    "expanded": "semantic_top_30_then_rerank_top_3"
+  },
+  "eval": {
+    "cases": 30,
+    "humour": 20,
+    "no_meme": 10,
+    "pending_owner_review": 30
+  },
+  "stages": [
+    {
+      "target_records": 30,
+      "status": "live",
+      "label": "Seed control"
+    },
+    {
+      "target_records": 300,
+      "status": "building",
+      "label": "Common reactions"
+    },
+    {
+      "target_records": 1000,
+      "status": "planned",
+      "label": "Broad internet vocabulary"
+    },
+    {
+      "target_records": 3000,
+      "status": "planned",
+      "label": "Long-tail collection"
+    }
+  ]
+}

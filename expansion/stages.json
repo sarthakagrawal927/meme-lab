@@ -1,0 +1,58 @@
+{
+  "version": "catalogue-expansion-v1",
+  "current_live_stage": 30,
+  "principle": "A larger catalogue ships only when held-out relevance and abstention stay at or above the seed baseline.",
+  "stages": [
+    {
+      "label": "Seed control",
+      "target_records": 30,
+      "status": "live",
+      "retrieval": {"strategy": "direct_all_candidates", "shortlist_size": 30, "result_size": 3},
+      "gates": {
+        "top_three_sendability": {"minimum": 0.7},
+        "correct_abstention": {"minimum": 0.8},
+        "inappropriate_joking": {"maximum": 0.2},
+        "unknown_ids": {"maximum": 0}
+      }
+    },
+    {
+      "label": "Common reactions",
+      "target_records": 300,
+      "status": "building",
+      "retrieval": {"strategy": "semantic_shortlist_then_rerank", "shortlist_size": 30, "result_size": 3},
+      "gates": {
+        "top_three_sendability": {"minimum": 0.7},
+        "correct_abstention": {"minimum": 0.8},
+        "inappropriate_joking": {"maximum": 0.2},
+        "unknown_ids": {"maximum": 0},
+        "owner_confirmed_eval_cases": {"minimum": 30}
+      }
+    },
+    {
+      "label": "Broad internet vocabulary",
+      "target_records": 1000,
+      "status": "planned",
+      "retrieval": {"strategy": "semantic_shortlist_then_rerank", "shortlist_size": 30, "result_size": 3},
+      "gates": {
+        "top_three_sendability": {"minimum": 0.72},
+        "correct_abstention": {"minimum": 0.82},
+        "inappropriate_joking": {"maximum": 0.18},
+        "unknown_ids": {"maximum": 0},
+        "owner_confirmed_eval_cases": {"minimum": 60}
+      }
+    },
+    {
+      "label": "Long-tail collection",
+      "target_records": 3000,
+      "status": "planned",
+      "retrieval": {"strategy": "semantic_shortlist_then_rerank", "shortlist_size": 30, "result_size": 3},
+      "gates": {
+        "top_three_sendability": {"minimum": 0.75},
+        "correct_abstention": {"minimum": 0.85},
+        "inappropriate_joking": {"maximum": 0.15},
+        "unknown_ids": {"maximum": 0},
+        "owner_confirmed_eval_cases": {"minimum": 100}
+      }
+    }
+  ]
+}

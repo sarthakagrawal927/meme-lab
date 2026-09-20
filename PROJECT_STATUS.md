@@ -5,7 +5,7 @@
 
 ## Live product
 
-- Paste one comment and receive the best meme first, up to two alternatives, a fit score, a short explanation, and confidence.
+- Paste one complete comment or situation and receive the best meme first, up to two alternatives, a Jev fit score, and confidence.
 - Multi-person comments now return distinct viewpoints where available: **My reaction**, **Their side**, and **The situation**.
 - Browse and search 3,000 live references in a paginated collection.
 - See meme strength and image quality separately from contextual fit. Relevance chooses the eligible three; static scores only break close calls.
@@ -19,7 +19,7 @@
 - Exact URLs, perceptual hashes, normalized names, aliases, and local CLIP image embeddings check uniqueness. Six hard duplicates and ten near-copy embedding candidates are excluded.
 - Local quantized CLIP scores reaction usefulness, image quality, and embedding uniqueness. The final 2,000 additions are selected from the remaining buffer.
 - Local Qwen writes meaning-specific message, social-dynamic, example, near-miss, and tag metadata. These annotations are assistant-authored and remain pending owner feedback.
-- Production still uses bounded retrieval: two BGE embedding views return 30 candidates, with ten shortlist slots reserved for the original 1,000. Jev ranks ordinary comments once and multi-person comments through three parallel perspective lenses; Workers AI then writes full-sentence explanations without changing the selected IDs or viewpoints.
+- Production still uses bounded retrieval: two BGE embedding views return 30 candidates, with ten shortlist slots reserved for the original 1,000. Jev ranks ordinary comments once and multi-person comments through three parallel perspective lenses. Its scores return directly; alternatives below 10/100 are omitted. The 70B Workers AI selector runs only when classifier ranking fails.
 
 ## Evaluation
 

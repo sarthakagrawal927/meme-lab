@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import worker from '../worker/src/index.mjs';
 import {hasMultiplePerspectives,humourBelongs,needsSeriousHandling,PERSPECTIVES,rankCandidates,rankCandidatesByPerspective,requiresFactualAnswer} from '../worker/src/classification.mjs';
-import {MODEL,validateSelection,normalizeSelection,normalizeRankedSelection,validateRankedSelection,presentSelection} from '../worker/src/recommendation.mjs';
+import {MINIMUM_VISIBLE_FIT,MODEL,validateSelection,normalizeSelection,normalizeRankedSelection,validateRankedSelection,presentSelection,selectionFromRanking} from '../worker/src/recommendation.mjs';
 import {CORE_RESERVE,EMBEDDING_MODEL,mergeWithReserve,retrieveCandidates} from '../worker/src/retrieval.mjs';
 import {reciprocalRankFuse} from '../worker/src/rank-fusion.mjs';
 import {rankRelevanceCandidates,staticCandidateSignals} from '../worker/src/candidate-signals.mjs';
@@ -36,13 +36,15 @@ test('public worker returns a validated known meme without exposing prompt data'
   const body=await response.json();
   assert.equal(body.candidates[0].id,'waiting-skeleton');
   assert.equal(body.candidates[0].rank,1);
-  assert.equal(body.candidates[0].score,94);
+  assert.equal(body.candidates[0].score,100);
+  assert.equal('reason' in body.candidates[0],false);
   assert.equal(body.candidates[0].meme_strength,61);
   assert.equal(body.candidates[0].asset_quality,50);
   assert.match(body.candidates[0].signal_summary,/meme strength at 61\/100 and image quality at 50\/100/);
   assert.equal(body.confidence,'high');
   assert.equal(body.feedback_enabled,true);
   assert(!JSON.stringify(body).includes('CATALOGUE_JSON'));
+  assert.equal(stored.find(entry=>entry.sql.includes('INSERT INTO recommendations'))?.values[4],'classifier.dev/jev-fast');
 });
 
 test('static prior only breaks close calls after relevance chooses the eligible candidates',()=>{
@@ -175,6 +177,24 @@ test('multiple meme options are ordered by fit score and keep their scores',()=>
   });
   assert.deepEqual(normalized.candidates.map(candidate=>candidate.id),['this-is-fine','waiting-skeleton']);
   assert.deepEqual(presentSelection(validateSelection(normalized)).candidates.map(candidate=>candidate.score),[89,72]);
+});
+
+test('classifier scores become the public fit scores and weak alternatives are not padded in',()=>{
+  const ranked=[
+    {id:'waiting-skeleton',classifier_score:.78},
+    {id:'this-is-fine',classifier_score:.21},
+    {id:'first-try',classifier_score:.01}
+  ];
+  assert.equal(MINIMUM_VISIBLE_FIT,.1);
+  assert.deepEqual(selectionFromRanking(ranked),{
+    decision:'meme',
+    confidence:'high',
+    none_reason:'',
+    candidates:[{id:'waiting-skeleton',score:78},{id:'this-is-fine',score:21}]
+  });
+  const low=selectionFromRanking([{id:'waiting-skeleton',classifier_score:.08},{id:'this-is-fine',classifier_score:.04}]);
+  assert.deepEqual(low.candidates,[{id:'waiting-skeleton',score:8}]);
+  assert.equal(low.confidence,'low');
 });
 
 test('classifier gate only runs for high-precision serious cues',async()=>{
@@ -342,7 +362,7 @@ test('a failed perspective lens falls back to general ranking without invented p
   const body=await response.json();
   assert.equal(classifierInstructions.length,4);
   assert.equal(classifierInstructions.some(instructions=>instructions.startsWith('Rank the existing meme reaction')),true);
-  assert.deepEqual(body.candidates.map(candidate=>candidate.perspective),['best_match','best_match','best_match']);
+  assert.deepEqual(body.candidates.map(candidate=>candidate.perspective),['best_match','best_match']);
 });
 
 test('static responses receive security and no-index headers',async()=>{

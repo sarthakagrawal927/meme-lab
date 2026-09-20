@@ -42,11 +42,10 @@ function renderBest(candidate) {
   const matchLabel=perspectiveAware?candidate.perspective_label.toUpperCase():'BEST MATCH';
   const rank=Object.assign(document.createElement('span'),{className:`rank${lowConfidence?' low-confidence':''}`,textContent:`${lowConfidence?'LOW CONFIDENCE · ':''}${matchLabel} · FIT ${candidate.score}/100`});
   const title=Object.assign(document.createElement('h2'),{textContent:candidate.name});
-  const reason=Object.assign(document.createElement('p'),{textContent:candidate.reason});
   const signals=Object.assign(document.createElement('p'),{className:'signal-note',textContent:candidate.signal_summary});
   const sourceText=candidate.license_url?'Open original · CC0 public domain':candidate.media_status==='approved'?'Approved image':'Source preview · media rights not established';
   const source=Object.assign(document.createElement('p'),{className:'source-note',textContent:sourceText});
-  copy.append(rank,title,reason,signals,source);
+  copy.append(rank,title,signals,source);
   host.append(media(candidate,'hero-media'),copy);
 }
 
@@ -65,7 +64,6 @@ function renderAlternatives(candidates) {
     copy.append(
       Object.assign(document.createElement('span'),{textContent:`${candidate.perspective&&candidate.perspective!=='best_match'?candidate.perspective_label.toUpperCase():`#${candidate.rank}`} · FIT ${candidate.score}/100`}),
       Object.assign(document.createElement('h3'),{textContent:candidate.name}),
-      Object.assign(document.createElement('p'),{textContent:candidate.reason}),
       Object.assign(document.createElement('p'),{className:'signal-note',textContent:candidate.signal_summary})
     );
     card.append(media(candidate,'alternative-media'),copy);

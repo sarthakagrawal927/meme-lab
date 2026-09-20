@@ -17,8 +17,8 @@ Meme Lab uses the owner-selected **Clean Canvas** system: a crisp white workspac
 ## Interaction rules
 
 - Load image previews automatically from allowlisted providers and fall back to the reference name without blocking the result.
-- Preserve sentence-based explanations that name the meme and map it to a concrete detail in the comment.
-- Keep each explanation faithful to its displayed perspective: narrator reaction, other participant, or situation.
+- Keep the input examples as complete, natural sentences so people understand they can describe the whole situation.
+- Keep result cards immediate and scannable: image, meme name, perspective, fit score, and quiet catalogue signals without generated reasoning.
 - Never pad the alternatives list with misleading options.
 - Keep one-tap feedback close to the result and state its 30-day retention.
 - Keep all 3,000 references searchable and paginated; no experimental/live filtering exists in the personal tool.

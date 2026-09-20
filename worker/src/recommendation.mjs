@@ -2,6 +2,7 @@ import {catalogue} from './catalogue.stage3000.generated.mjs';
 import {staticCandidateSignals} from './candidate-signals.mjs';
 
 export const MODEL='@cf/meta/llama-3.3-70b-instruct-fp8-fast';
+export const MINIMUM_VISIBLE_FIT=0.1;
 const allowedIds=new Set(catalogue.map(record=>record.id));
 const publicById=new Map(catalogue.map(record=>{
   const {meme_strength,asset_quality,signal_summary}=staticCandidateSignals(record);
@@ -91,6 +92,21 @@ export function validateRankedSelection(value,rankedIds) {
   return selection;
 }
 
+export function selectionFromRanking(ranked,{minimumVisibleFit=MINIMUM_VISIBLE_FIT}={}) {
+  if(!Array.isArray(ranked)||ranked.length===0) throw new Error('A ranked selection needs at least one candidate.');
+  if(!Number.isFinite(minimumVisibleFit)||minimumVisibleFit<0||minimumVisibleFit>1) throw new Error('The visible-fit threshold must be between zero and one.');
+  const candidates=ranked
+    .filter((candidate,index)=>index===0||candidate.classifier_score>=minimumVisibleFit)
+    .map(candidate=>({id:candidate.id,score:Math.round(candidate.classifier_score*100)}));
+  const bestScore=candidates[0].score;
+  return {
+    decision:'meme',
+    confidence:bestScore>=50?'high':bestScore>=20?'medium':'low',
+    none_reason:'',
+    candidates
+  };
+}
+
 export function presentSelection(selection,{perspectives=new Map()}={}) {
   return {
     request_id:crypto.randomUUID(),
@@ -102,7 +118,7 @@ export function presentSelection(selection,{perspectives=new Map()}={}) {
       return {
         ...publicById.get(candidate.id),
         rank:rank+1,
-        reason:candidate.reason,
+        ...(candidate.reason?{reason:candidate.reason}:{}),
         score:candidate.score,
         perspective:perspective?.perspective??'best_match',
         perspective_label:perspective?.perspective_label??'Best match'

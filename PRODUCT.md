@@ -13,10 +13,10 @@ The live catalogue contains 3,000 searchable references. Every reference has a s
 Runtime ranking is deliberately bounded:
 
 1. Two semantic searches retrieve 30 likely references.
-2. A classifier chooses the three most relevant candidates. Multi-person comments are ranked through three explicit lenses: **My reaction**, **Their side**, and **The situation**.
+2. A classifier chooses up to three relevant candidates. Multi-person comments are ranked through three explicit lenses: **My reaction**, **Their side**, and **The situation**.
 3. Static strength and image quality may reorder only candidates within a narrow relevance margin.
-4. A language model writes a short, comment-specific explanation and fit score.
-5. Feedback records whether the recommendation landed or missed.
+4. Jev's ranking score becomes the displayed fit score; alternatives below 10/100 are omitted instead of padded in.
+5. Feedback records whether the recommendation landed or missed. The larger language model runs only if classifier ranking fails.
 
 ## Evidence boundary
 

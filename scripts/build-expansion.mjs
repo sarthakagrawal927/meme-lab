@@ -33,7 +33,9 @@ const normalizedLive=live.map(record=>({
   relational_pattern:record.interpretation.relational_pattern,
   example_context:record.interpretation.example_context,
   near_miss_context:record.interpretation.near_miss_context,
-  tags:record.interpretation.tags
+  tags:record.interpretation.tags,
+  image_url:record.asset?.url??null,
+  availability:'live'
 }));
 
 validateExpansionRecords(queued,{knownIds:live.map(record=>record.id)});
@@ -51,6 +53,20 @@ for(const record of reviewed) {
 }
 const candidates=[...queued,...reviewed];
 validateExpansionRecords(candidates,{knownIds:live.map(record=>record.id)});
+const publicCollection=[
+  ...normalizedLive,
+  ...candidates.map(record=>({
+    id:record.id,
+    name:record.name,
+    message:record.message,
+    relational_pattern:record.relational_pattern,
+    example_context:record.example_context,
+    near_miss_context:record.near_miss_context,
+    tags:record.tags,
+    image_url:record.media.image_url,
+    availability:'experimental'
+  }))
+];
 const manifest=JSON.parse(await readFile(resolve(root,'expansion/stages.json'),'utf8'));
 validateStages(manifest);
 const evalCases=parseJsonl(await readFile(resolve(root,'eval/relevance_holdout_v1.jsonl'),'utf8'),'relevance holdout');
@@ -76,6 +92,7 @@ await mkdir(resolve(root,'expansion/candidates'),{recursive:true});
 await Promise.all([
   writeFile(resolve(root,'expansion/candidates/stage-300-seed.jsonl'),`${queued.map(record=>JSON.stringify(record)).join('\n')}\n`),
   writeFile(resolve(root,'expansion/candidates/stage-300.jsonl'),`${candidates.map(record=>JSON.stringify(record)).join('\n')}\n`),
+  writeFile(resolve(root,'worker/public/collection.json'),`${JSON.stringify(publicCollection,null,2)}\n`),
   writeFile(resolve(root,'worker/tools/stage-300-catalogue.json'),`${JSON.stringify([...normalizedLive,...candidates].map(({id,name,message,relational_pattern,example_context,near_miss_context,tags})=>({id,name,message,relational_pattern,example_context,near_miss_context,tags})),null,2)}\n`),
   writeFile(resolve(root,'expansion/reviewed/stage-300-review.json'),`${JSON.stringify({
     version:'stage-300-assistant-review-v1',

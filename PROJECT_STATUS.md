@@ -6,7 +6,7 @@
 ## Shipped
 
 - Public comment-to-meme picker with automatic previews, up to three ranked options, confidence, abstention, and 30-day feedback retention.
-- Searchable collection of 30 live reaction references.
+- Searchable collection of all 300 sourced references, clearly split into 30 live and 270 experimental candidates.
 - Technical How it works page covering the live selector, planned semantic retrieval, evaluation, and the 30 → 300 → 1,000 → 3,000 promotion path.
 
 ## Expansion state

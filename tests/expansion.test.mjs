@@ -4,6 +4,7 @@ import {readFile} from 'node:fs/promises';
 import {parseJsonl,validateExpansionRecords,validateEvalCases,validateStageCoverageCases,validateCoverageMetadata,validateStages,expansionStatus} from '../src/expansion.mjs';
 
 const catalogue=JSON.parse(await readFile(new URL('../worker/public/catalogue.json',import.meta.url),'utf8'));
+const publicCollection=JSON.parse(await readFile(new URL('../worker/public/collection.json',import.meta.url),'utf8'));
 const candidates=parseJsonl(await readFile(new URL('../expansion/candidates/stage-300.jsonl',import.meta.url),'utf8'));
 const source=parseJsonl(await readFile(new URL('../expansion/sources/stage-300-source.jsonl',import.meta.url),'utf8'));
 const cases=parseJsonl(await readFile(new URL('../eval/relevance_holdout_v1.jsonl',import.meta.url),'utf8'));
@@ -18,6 +19,14 @@ test('stage-300 pool adds 270 non-live candidates without ID collisions',()=>{
   assert.doesNotThrow(()=>validateExpansionRecords(candidates,{knownIds:catalogue.map(record=>record.id)}));
   assert(candidates.every(record=>record.review.status==='needs_asset_and_delivery_review'));
   assert(candidates.every(record=>record.media.rights_status==='not_established'));
+});
+
+test('public collection exposes all sourced records with honest availability labels',()=>{
+  assert.equal(publicCollection.length,300);
+  assert.equal(publicCollection.filter(record=>record.availability==='live').length,30);
+  assert.equal(publicCollection.filter(record=>record.availability==='experimental').length,270);
+  assert.equal(new Set(publicCollection.map(record=>record.id)).size,300);
+  assert(publicCollection.every(record=>['live','experimental'].includes(record.availability)));
 });
 
 test('relevance holdout has 20 humour and 10 no-meme cases pending owner review',()=>{

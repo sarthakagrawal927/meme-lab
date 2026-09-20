@@ -89,6 +89,22 @@ export function validateStageCoverageCases(cases,{allowedIds,excludedIds=[]}) {
   return {cases:cases.length,humour:cases.length,pending_owner_review:cases.length};
 }
 
+export function validateCoverageMetadata(cases,records) {
+  const byId=new Map(records.map(record=>[record.id,record]));
+  const targetIds=new Set(cases.flatMap(row=>row.acceptable_ids));
+  const generic=/broadly relatable reaction|situation calls for|visible reaction or contrast|unexpectedly complicated request|makes the reaction immediately legible|framing it with a recognizable visual contrast|image frames a relationship or contrast/i;
+  const examples=new Set();
+  for(const id of targetIds) {
+    const record=byId.get(id);
+    if(!record) throw new Error(`Coverage target ${id} is missing from the candidate catalogue.`);
+    for(const field of ['message','relational_pattern','example_context','near_miss_context']) if(generic.test(record[field])) throw new Error(`Coverage target ${id} still has placeholder ${field}.`);
+    const example=record.example_context.trim().toLowerCase();
+    if(examples.has(example)) throw new Error(`Coverage target ${id} reuses another target's example context.`);
+    examples.add(example);
+  }
+  return {records:targetIds.size};
+}
+
 export function validateStages(manifest) {
   const targets=manifest?.stages?.map(stage=>stage.target_records);
   if(JSON.stringify(targets)!==JSON.stringify([30,300,1000,3000])) throw new Error('Expansion stages must be 30, 300, 1000, and 3000 in order.');

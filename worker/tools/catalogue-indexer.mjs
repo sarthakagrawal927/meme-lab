@@ -22,10 +22,12 @@ async function embed(env,texts) {
   return response.data;
 }
 
-async function retrieve(env,text,topK=30,{controlReserve=0}={}) {
+async function retrieve(env,text,topK=30,{controlReserve=0,filter}={}) {
   const [vector]=await embed(env,[text]);
+  const queryOptions={topK,returnMetadata:'all'};
+  if(filter) queryOptions.filter=filter;
   const [allResult,controlResult]=await Promise.all([
-    env.MEME_INDEX.query(vector,{topK,returnMetadata:'all'}),
+    env.MEME_INDEX.query(vector,queryOptions),
     controlReserve>0?env.MEME_INDEX.query(vector,{topK:controlReserve,filter:{control:true},returnMetadata:'all'}):Promise.resolve({matches:[]})
   ]);
   const broadSlots=Math.max(0,topK-controlReserve);
@@ -107,8 +109,12 @@ export default {
         const body=await request.json();
         const comment=typeof body?.comment==='string'?body.comment.trim():'';
         const arm=body?.arm;
-        if(!comment||!['control-30','stage-300'].includes(arm)) return Response.json({error:'comment and a valid arm are required'},{status:400});
-        const matches=arm==='stage-300'?await retrieve(env,comment,50,{controlReserve:30}):catalogue.slice(0,30).map(record=>({id:record.id,score:null}));
+        if(!comment||!['control-30','stage-300','stage-300-expansion'].includes(arm)) return Response.json({error:'comment and a valid arm are required'},{status:400});
+        const matches=arm==='stage-300'
+          ? await retrieve(env,comment,50,{controlReserve:30})
+          : arm==='stage-300-expansion'
+            ? await retrieve(env,comment,30,{filter:{control:false}})
+            : catalogue.slice(0,30).map(record=>({id:record.id,score:null}));
         const candidates=matches.map(match=>byId.get(match.id)).filter(Boolean);
         const selection=await rerank(env,comment,candidates);
         return Response.json({arm,retrieved_ids:matches.map(match=>match.id),selection});

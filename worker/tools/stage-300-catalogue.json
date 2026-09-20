@@ -902,14 +902,14 @@
   {
     "id": "they-are-the-same-picture",
     "name": "They Are The Same Picture",
-    "message": "Use when a situation calls for a they are the same picture reaction.",
-    "relational_pattern": "React to a situation by framing it with a recognizable visual contrast or emotional response.",
-    "example_context": "A broadly relatable moment where the speaker wants to signal they are the same picture without a long explanation.",
-    "near_miss_context": "Avoid when the situation does not clearly support the they are the same picture reaction or requires a specific caption to make sense.",
+    "message": "Use to declare that two supposedly different options, labels, or explanations are effectively identical.",
+    "relational_pattern": "Equivalence: two distinct-looking choices collapse into the same outcome.",
+    "example_context": "“Empowered delivery sync” is the same meeting as “status meeting,” just renamed.",
+    "near_miss_context": "Avoid when the two subjects are merely similar rather than interchangeable.",
     "tags": [
       "comparison",
-      "reaction",
-      "trending"
+      "equivalence",
+      "workplace"
     ]
   },
   {
@@ -1535,16 +1535,14 @@
   {
     "id": "drakeposting",
     "name": "Drakeposting",
-    "message": "Use when a situation calls for a drakeposting reaction.",
-    "relational_pattern": "React to a situation by framing it with a recognizable visual contrast or emotional response.",
-    "example_context": "A broadly relatable moment where the speaker wants to signal drakeposting without a long explanation.",
-    "near_miss_context": "Avoid when the situation does not clearly support the drakeposting reaction or requires a specific caption to make sense.",
+    "message": "Use to contrast a rejected option with a preferred alternative.",
+    "relational_pattern": "Preference contrast: one panel rejects the first choice and approves the second.",
+    "example_context": "“Manual spreadsheet updates” gets a no; “automated report” gets an enthusiastic yes.",
+    "near_miss_context": "Avoid when there is no clear two-way preference.",
     "tags": [
-      "comparison",
-      "approval",
-      "drake-format",
-      "trending",
-      "reaction"
+      "preference",
+      "contrast",
+      "choice"
     ]
   },
   {
@@ -1802,14 +1800,14 @@
   {
     "id": "309668311-two-paths",
     "name": "Two Paths",
-    "message": "Use Two Paths for a broadly relatable reaction to a situation that matches the visual contrast.",
-    "relational_pattern": "The image frames a relationship or contrast between an expectation and the observed reaction: two paths.",
-    "example_context": "A team receives an unexpectedly complicated request after agreeing to a simple plan; this template communicates the shared reaction.",
-    "near_miss_context": "Do not use when the joke depends on knowing the original show, celebrity, or a specific caption; the surrounding text must explain the situation.",
+    "message": "Use when someone must choose between two difficult, undesirable, or competing paths.",
+    "relational_pattern": "Forced choice: two options lead to different costs, with neither being easy.",
+    "example_context": "A release manager must choose between delaying launch or shipping a known minor bug.",
+    "near_miss_context": "Avoid when there is a clearly good option or more than two meaningful choices.",
     "tags": [
-      "reaction",
-      "relatable",
-      "surprise"
+      "choice",
+      "tradeoff",
+      "dilemma"
     ]
   },
   {
@@ -1828,27 +1826,27 @@
   {
     "id": "110133729-spiderman-pointing-at-spiderman",
     "name": "spiderman pointing at spiderman",
-    "message": "Use spiderman pointing at spiderman for a broadly relatable reaction to a situation that matches the visual contrast.",
-    "relational_pattern": "The image frames a relationship or contrast between an expectation and the observed reaction: spiderman pointing at spiderman.",
-    "example_context": "A team receives an unexpectedly complicated request after agreeing to a simple plan; this template communicates the shared reaction.",
-    "near_miss_context": "Do not use when the joke depends on knowing the original show, celebrity, or a specific caption; the surrounding text must explain the situation.",
+    "message": "Use when two people, teams, or systems accuse each other of the same behavior.",
+    "relational_pattern": "Mutual blame: identical actors point at one another while sharing responsibility.",
+    "example_context": "Two services each report that the other service caused the outage.",
+    "near_miss_context": "Avoid when only one side is responsible or the actors are not meaningfully alike.",
     "tags": [
-      "reaction",
-      "relatable",
-      "contrast"
+      "blame",
+      "duplication",
+      "conflict"
     ]
   },
   {
     "id": "look-at-me",
     "name": "Look At Me",
-    "message": "Use Look At Me for a broadly relatable reaction to a situation that matches the visual contrast.",
-    "relational_pattern": "The image frames a relationship or contrast between an expectation and the observed reaction: look at me.",
-    "example_context": "A team receives an unexpectedly complicated request after agreeing to a simple plan; this template communicates the shared reaction.",
-    "near_miss_context": "Do not use when the joke depends on knowing the original show, celebrity, or a specific caption; the surrounding text must explain the situation.",
+    "message": "Use when a person or project demands attention despite the surrounding situation.",
+    "relational_pattern": "Attention seeking: the subject insists on being noticed or centered.",
+    "example_context": "A minor feature interrupts every dashboard panel with a bright “look at me” badge.",
+    "near_miss_context": "Avoid when attention is requested for a legitimate urgent warning.",
     "tags": [
-      "reaction",
-      "relatable",
-      "surprise"
+      "attention",
+      "interruption",
+      "ego"
     ]
   },
   {
@@ -1867,14 +1865,14 @@
   {
     "id": "american-chopper-argument",
     "name": "American Chopper Argument",
-    "message": "Use American Chopper Argument for a broadly relatable reaction to a situation that matches the visual contrast.",
-    "relational_pattern": "The image frames a relationship or contrast between an expectation and the observed reaction: american chopper argument.",
-    "example_context": "A team receives an unexpectedly complicated request after agreeing to a simple plan; this template communicates the shared reaction.",
-    "near_miss_context": "Do not use when the joke depends on knowing the original show, celebrity, or a specific caption; the surrounding text must explain the situation.",
+    "message": "Use for an escalating argument in which each side presents increasingly heated reasons.",
+    "relational_pattern": "Escalating debate: a disagreement grows across successive rebuttals.",
+    "example_context": "A design review turns into four rounds of increasingly loud arguments about one button.",
+    "near_miss_context": "Avoid for a calm disagreement or a single isolated objection.",
     "tags": [
-      "reaction",
-      "relatable",
-      "contrast"
+      "argument",
+      "escalation",
+      "debate"
     ]
   },
   {
@@ -1958,40 +1956,40 @@
   {
     "id": "92084495-charlie-conspiracy-always-sunny-in-philidelphia",
     "name": "Charlie Conspiracy (Always Sunny in Philidelphia)",
-    "message": "Use Charlie Conspiracy (Always Sunny in Philidelphia) for a broadly relatable reaction to a situation that matches the visual contrast.",
-    "relational_pattern": "The image frames a relationship or contrast between an expectation and the observed reaction: charlie conspiracy (always sunny in philidelphia).",
-    "example_context": "A team receives an unexpectedly complicated request after agreeing to a simple plan; this template communicates the shared reaction.",
-    "near_miss_context": "Do not use when the joke depends on knowing the original show, celebrity, or a specific caption; the surrounding text must explain the situation.",
+    "message": "Use when someone builds an elaborate, frantic theory from scattered clues.",
+    "relational_pattern": "Conspiracy reasoning: disconnected evidence is connected into an overconfident explanation.",
+    "example_context": "An engineer maps three unrelated log messages and concludes they explain every incident.",
+    "near_miss_context": "Avoid when the explanation is calm, well-supported, or genuinely evidence-based.",
     "tags": [
-      "reaction",
-      "relatable",
-      "surprise"
+      "conspiracy",
+      "overthinking",
+      "theory"
     ]
   },
   {
     "id": "im-the-captain-now",
     "name": "I'm The Captain Now",
-    "message": "Use I'm The Captain Now for a broadly relatable reaction to a situation that matches the visual contrast.",
-    "relational_pattern": "The image frames a relationship or contrast between an expectation and the observed reaction: i'm the captain now.",
-    "example_context": "A team receives an unexpectedly complicated request after agreeing to a simple plan; this template communicates the shared reaction.",
-    "near_miss_context": "Do not use when the joke depends on knowing the original show, celebrity, or a specific caption; the surrounding text must explain the situation.",
+    "message": "Use when a person unexpectedly assumes control of a situation.",
+    "relational_pattern": "Sudden leadership: a new actor presents themselves as the decision-maker.",
+    "example_context": "The newest team member ends up running the meeting when everyone else drops off.",
+    "near_miss_context": "Avoid for routine leadership or a situation with no change in control.",
     "tags": [
-      "reaction",
-      "relatable",
-      "confusion"
+      "leadership",
+      "surprise",
+      "takeover"
     ]
   },
   {
     "id": "104893621-grim-reaper-knocking-door",
     "name": "Grim Reaper Knocking Door",
-    "message": "Use Grim Reaper Knocking Door for a broadly relatable reaction to a situation that matches the visual contrast.",
-    "relational_pattern": "The image frames a relationship or contrast between an expectation and the observed reaction: grim reaper knocking door.",
-    "example_context": "A team receives an unexpectedly complicated request after agreeing to a simple plan; this template communicates the shared reaction.",
-    "near_miss_context": "Do not use when the joke depends on knowing the original show, celebrity, or a specific caption; the surrounding text must explain the situation.",
+    "message": "Use for a sequence where resolving one problem reveals or triggers the next problem.",
+    "relational_pattern": "Cascading issues: successive doors represent recurring consequences.",
+    "example_context": "Fixing one production alert reveals another alert waiting behind it.",
+    "near_miss_context": "Avoid for a single problem without a chain of follow-on failures.",
     "tags": [
-      "reaction",
-      "relatable",
-      "contrast"
+      "cascading",
+      "problems",
+      "sequence"
     ]
   },
   {
@@ -2023,14 +2021,14 @@
   {
     "id": "133946291-you-know-im-something-of-a-scientist-myself",
     "name": "You know, I'm something of a scientist myself",
-    "message": "Use You know, I'm something of a scientist myself for a broadly relatable reaction to a situation that matches the visual contrast.",
-    "relational_pattern": "The image frames a relationship or contrast between an expectation and the observed reaction: you know, i'm something of a scientist myself.",
-    "example_context": "A team receives an unexpectedly complicated request after agreeing to a simple plan; this template communicates the shared reaction.",
-    "near_miss_context": "Do not use when the joke depends on knowing the original show, celebrity, or a specific caption; the surrounding text must explain the situation.",
+    "message": "Use for mock expertise or overconfident self-identification in a technical domain.",
+    "relational_pattern": "Self-appointed expertise: a speaker claims credibility with playful understatement.",
+    "example_context": "Someone changes one config value and immediately calls themselves a distributed-systems expert.",
+    "near_miss_context": "Avoid when the speaker is genuinely qualified or the joke is not about claimed expertise.",
     "tags": [
-      "reaction",
-      "relatable",
-      "contrast"
+      "expertise",
+      "irony",
+      "technical"
     ]
   },
   {
@@ -2049,27 +2047,27 @@
   {
     "id": "91998305-drake-blank",
     "name": "Drake Blank",
-    "message": "Use Drake Blank for a broadly relatable reaction to a situation that matches the visual contrast.",
-    "relational_pattern": "The image frames a relationship or contrast between an expectation and the observed reaction: drake blank.",
-    "example_context": "A team receives an unexpectedly complicated request after agreeing to a simple plan; this template communicates the shared reaction.",
-    "near_miss_context": "Do not use when the joke depends on knowing the original show, celebrity, or a specific caption; the surrounding text must explain the situation.",
+    "message": "Use as a blank Drake-style preference template when the two captions need to be supplied by the user.",
+    "relational_pattern": "Preference contrast: the upper choice is rejected while the lower choice is endorsed.",
+    "example_context": "Use “copying production data” above “using a safe fixture” to show the preferred practice.",
+    "near_miss_context": "Avoid if the image would need more than two options or a non-preference joke.",
     "tags": [
-      "reaction",
-      "relatable",
-      "confusion"
+      "preference",
+      "contrast",
+      "blank-template"
     ]
   },
   {
     "id": "20007896-cmon-do-something",
     "name": "c'mon do something",
-    "message": "Use c'mon do something for a broadly relatable reaction to a situation that matches the visual contrast.",
-    "relational_pattern": "The image frames a relationship or contrast between an expectation and the observed reaction: c'mon do something.",
-    "example_context": "A team receives an unexpectedly complicated request after agreeing to a simple plan; this template communicates the shared reaction.",
-    "near_miss_context": "Do not use when the joke depends on knowing the original show, celebrity, or a specific caption; the surrounding text must explain the situation.",
+    "message": "Use when a passive observer is impatiently urging a person or system to act.",
+    "relational_pattern": "Impatient prompting: visible waiting turns into a demand for action.",
+    "example_context": "The test suite has been stuck at 99% for ten minutes: “C’mon, do something.”",
+    "near_miss_context": "Avoid when action is already underway or patience is the intended tone.",
     "tags": [
-      "reaction",
-      "relatable",
-      "contrast"
+      "urgency",
+      "waiting",
+      "prompting"
     ]
   },
   {
@@ -2127,14 +2125,14 @@
   {
     "id": "153695877-the-office-congratulations",
     "name": "the office congratulations",
-    "message": "Use the office congratulations for a broadly relatable reaction to a situation that matches the visual contrast.",
-    "relational_pattern": "The image frames a relationship or contrast between an expectation and the observed reaction: the office congratulations.",
-    "example_context": "A team receives an unexpectedly complicated request after agreeing to a simple plan; this template communicates the shared reaction.",
-    "near_miss_context": "Do not use when the joke depends on knowing the original show, celebrity, or a specific caption; the surrounding text must explain the situation.",
+    "message": "Use for exaggerated, performative congratulations that feel insincere or pointed.",
+    "relational_pattern": "Sarcastic praise: celebratory wording contrasts with an awkward or undeserved outcome.",
+    "example_context": "The team congratulates a project for meeting its deadline after quietly dropping half its scope.",
+    "near_miss_context": "Avoid when the congratulations are genuinely warm and straightforward.",
     "tags": [
-      "reaction",
-      "relatable",
-      "confusion"
+      "sarcasm",
+      "praise",
+      "workplace"
     ]
   },
   {
@@ -2257,27 +2255,27 @@
   {
     "id": "304768047-talking-to-wall",
     "name": "talking to wall",
-    "message": "Use talking to wall for a broadly relatable reaction to a situation that matches the visual contrast.",
-    "relational_pattern": "The image frames a relationship or contrast between an expectation and the observed reaction: talking to wall.",
-    "example_context": "A team receives an unexpectedly complicated request after agreeing to a simple plan; this template communicates the shared reaction.",
-    "near_miss_context": "Do not use when the joke depends on knowing the original show, celebrity, or a specific caption; the surrounding text must explain the situation.",
+    "message": "Use when repeated explanations or requests receive no response or change.",
+    "relational_pattern": "Ignored communication: the speaker talks at an unresponsive audience.",
+    "example_context": "The incident channel has five careful updates, but nobody acknowledges or acts on them.",
+    "near_miss_context": "Avoid when the listener responds, even if they disagree.",
     "tags": [
-      "reaction",
-      "relatable",
-      "contrast"
+      "ignored",
+      "communication",
+      "frustration"
     ]
   },
   {
     "id": "139971723-spongebob-burning-paper",
     "name": "Spongebob Burning Paper",
-    "message": "Use Spongebob Burning Paper for a broadly relatable reaction to a situation that matches the visual contrast.",
-    "relational_pattern": "The image frames a relationship or contrast between an expectation and the observed reaction: spongebob burning paper.",
-    "example_context": "A team receives an unexpectedly complicated request after agreeing to a simple plan; this template communicates the shared reaction.",
-    "near_miss_context": "Do not use when the joke depends on knowing the original show, celebrity, or a specific caption; the surrounding text must explain the situation.",
+    "message": "Use when someone is frantically writing or documenting an overwhelming amount of material.",
+    "relational_pattern": "Urgent note-taking: frantic writing stands in for an information overload response.",
+    "example_context": "During the incident review, one person tries to record every log line and side conversation.",
+    "near_miss_context": "Avoid when writing is calm, sparse, or unrelated to overload.",
     "tags": [
-      "reaction",
-      "relatable",
-      "surprise"
+      "writing",
+      "overload",
+      "frantic"
     ]
   },
   {
@@ -2309,14 +2307,14 @@
   {
     "id": "511357979-confused-monkey",
     "name": "Confused Monkey",
-    "message": "Use Confused Monkey for a broadly relatable reaction to a situation that matches the visual contrast.",
-    "relational_pattern": "The image frames a relationship or contrast between an expectation and the observed reaction: confused monkey.",
-    "example_context": "A team receives an unexpectedly complicated request after agreeing to a simple plan; this template communicates the shared reaction.",
-    "near_miss_context": "Do not use when the joke depends on knowing the original show, celebrity, or a specific caption; the surrounding text must explain the situation.",
+    "message": "Use for visible confusion when an unfamiliar process, interface, or explanation makes no sense.",
+    "relational_pattern": "Confusion: the subject searches for an understandable interpretation and finds none.",
+    "example_context": "A new settings page uses three labels for the same permission and leaves everyone confused.",
+    "near_miss_context": "Avoid when the reaction is anger, sadness, or deliberate uncertainty rather than confusion.",
     "tags": [
-      "reaction",
-      "relatable",
-      "surprise"
+      "confusion",
+      "interface",
+      "uncertainty"
     ]
   },
   {
@@ -2387,14 +2385,14 @@
   {
     "id": "286646496-both-buttons-pressed",
     "name": "Both Buttons Pressed",
-    "message": "Use Both Buttons Pressed for a broadly relatable reaction to a situation that matches the visual contrast.",
-    "relational_pattern": "The image frames a relationship or contrast between an expectation and the observed reaction: both buttons pressed.",
-    "example_context": "A team receives an unexpectedly complicated request after agreeing to a simple plan; this template communicates the shared reaction.",
-    "near_miss_context": "Do not use when the joke depends on knowing the original show, celebrity, or a specific caption; the surrounding text must explain the situation.",
+    "message": "Use when someone is simultaneously trying to satisfy two incompatible demands.",
+    "relational_pattern": "Conflicting goals: one anxious character strains to press both options at once.",
+    "example_context": "A user wants zero overnight notifications and instant alerts for every change.",
+    "near_miss_context": "Avoid when the goals can comfortably coexist or only one priority matters.",
     "tags": [
-      "reaction",
-      "relatable",
-      "surprise"
+      "conflict",
+      "priorities",
+      "workplace"
     ]
   },
   {
@@ -2530,14 +2528,14 @@
   {
     "id": "aaaaand-its-gone",
     "name": "Aaaaand Its Gone",
-    "message": "Use Aaaaand Its Gone for a broadly relatable reaction to a situation that matches the visual contrast.",
-    "relational_pattern": "The image frames a relationship or contrast between an expectation and the observed reaction: aaaaand its gone.",
-    "example_context": "A team receives an unexpectedly complicated request after agreeing to a simple plan; this template communicates the shared reaction.",
-    "near_miss_context": "Do not use when the joke depends on knowing the original show, celebrity, or a specific caption; the surrounding text must explain the situation.",
+    "message": "Use when a benefit, opportunity, or resource disappears immediately after being announced.",
+    "relational_pattern": "Sudden loss: a hoped-for thing vanishes before anyone can use it.",
+    "example_context": "The discount expires the moment the checkout page finally loads.",
+    "near_miss_context": "Avoid when the item remains available or the loss is gradual.",
     "tags": [
-      "reaction",
-      "relatable",
-      "contrast"
+      "loss",
+      "disappointment",
+      "timing"
     ]
   },
   {
@@ -2595,14 +2593,14 @@
   {
     "id": "car-salesman-slaps-roof-of-car",
     "name": "Car Salesman Slaps Roof Of Car",
-    "message": "Use Car Salesman Slaps Roof Of Car for a broadly relatable reaction to a situation that matches the visual contrast.",
-    "relational_pattern": "The image frames a relationship or contrast between an expectation and the observed reaction: car salesman slaps roof of car.",
-    "example_context": "A team receives an unexpectedly complicated request after agreeing to a simple plan; this template communicates the shared reaction.",
-    "near_miss_context": "Do not use when the joke depends on knowing the original show, celebrity, or a specific caption; the surrounding text must explain the situation.",
+    "message": "Use for enthusiastically presenting a product or system with a confident claim about its capacity.",
+    "relational_pattern": "Sales pitch: a demonstrator pats the subject and promises it can handle a specified load.",
+    "example_context": "“This dashboard can fit so many metrics,” said immediately before adding another chart.",
+    "near_miss_context": "Avoid when there is no exaggerated claim or the subject is not being pitched.",
     "tags": [
-      "reaction",
-      "relatable",
-      "confusion"
+      "sales-pitch",
+      "capacity",
+      "exaggeration"
     ]
   },
   {
@@ -2634,14 +2632,14 @@
   {
     "id": "193286698-empty-stonks",
     "name": "Empty Stonks",
-    "message": "Use Empty Stonks for a broadly relatable reaction to a situation that matches the visual contrast.",
-    "relational_pattern": "The image frames a relationship or contrast between an expectation and the observed reaction: empty stonks.",
-    "example_context": "A team receives an unexpectedly complicated request after agreeing to a simple plan; this template communicates the shared reaction.",
-    "near_miss_context": "Do not use when the joke depends on knowing the original show, celebrity, or a specific caption; the surrounding text must explain the situation.",
+    "message": "Use for a failed financial or optimization decision that leaves no gain at all.",
+    "relational_pattern": "No upside: the visual contrasts “stonks” optimism with an empty result.",
+    "example_context": "The team spent a week optimizing a query and the benchmark did not improve by one millisecond.",
+    "near_miss_context": "Avoid for genuine gains, losses that are not outcome-related, or purely emotional disappointment.",
     "tags": [
-      "reaction",
-      "relatable",
-      "confusion"
+      "failure",
+      "optimization",
+      "money"
     ]
   },
   {
@@ -2712,14 +2710,14 @@
   {
     "id": "123104217-mr-bean-waiting",
     "name": "Mr bean waiting",
-    "message": "Use Mr bean waiting for a broadly relatable reaction to a situation that matches the visual contrast.",
-    "relational_pattern": "The image frames a relationship or contrast between an expectation and the observed reaction: mr bean waiting.",
-    "example_context": "A team receives an unexpectedly complicated request after agreeing to a simple plan; this template communicates the shared reaction.",
-    "near_miss_context": "Do not use when the joke depends on knowing the original show, celebrity, or a specific caption; the surrounding text must explain the situation.",
+    "message": "Use when someone is waiting awkwardly or indefinitely for a promised event.",
+    "relational_pattern": "Patient waiting: prolonged anticipation becomes the visible punchline.",
+    "example_context": "The deployment has been “five minutes away” for an hour, and the team is still waiting.",
+    "near_miss_context": "Avoid when the event is not delayed or the reaction is active rather than waiting.",
     "tags": [
-      "reaction",
-      "relatable",
-      "confusion"
+      "waiting",
+      "delay",
+      "anticipation"
     ]
   },
   {
@@ -2738,14 +2736,14 @@
   {
     "id": "who-would-win",
     "name": "Who Would Win?",
-    "message": "Use Who Would Win? for a broadly relatable reaction to a situation that matches the visual contrast.",
-    "relational_pattern": "The image frames a relationship or contrast between an expectation and the observed reaction: who would win?.",
-    "example_context": "A team receives an unexpectedly complicated request after agreeing to a simple plan; this template communicates the shared reaction.",
-    "near_miss_context": "Do not use when the joke depends on knowing the original show, celebrity, or a specific caption; the surrounding text must explain the situation.",
+    "message": "Use to compare two contenders, approaches, or forces in a playful versus matchup.",
+    "relational_pattern": "Comparative matchup: two candidates are framed as opponents whose relative strength is the joke.",
+    "example_context": "“Who would win: one carefully tested script or one heroic all-nighter?”",
+    "near_miss_context": "Avoid when the comparison has no two clear contenders.",
     "tags": [
-      "reaction",
-      "relatable",
-      "surprise"
+      "comparison",
+      "versus",
+      "competition"
     ]
   },
   {
@@ -2803,14 +2801,14 @@
   {
     "id": "see-nobody-cares",
     "name": "See Nobody Cares",
-    "message": "Use See Nobody Cares for a broadly relatable reaction to a situation that matches the visual contrast.",
-    "relational_pattern": "The image frames a relationship or contrast between an expectation and the observed reaction: see nobody cares.",
-    "example_context": "A team receives an unexpectedly complicated request after agreeing to a simple plan; this template communicates the shared reaction.",
-    "near_miss_context": "Do not use when the joke depends on knowing the original show, celebrity, or a specific caption; the surrounding text must explain the situation.",
+    "message": "Use as a blunt reaction to an announcement, complaint, or detail that receives no interest.",
+    "relational_pattern": "Dismissal: the speaker signals that the subject has no audience or relevance.",
+    "example_context": "A teammate posts a fifth update about an abandoned experiment and gets no engagement.",
+    "near_miss_context": "Avoid for sensitive disclosures or situations where someone actually needs support.",
     "tags": [
-      "reaction",
-      "relatable",
-      "contrast"
+      "dismissal",
+      "apathy",
+      "reaction"
     ]
   },
   {
@@ -2842,27 +2840,27 @@
   {
     "id": "235033561-doof-if-i-had-a-nickel",
     "name": "Doof If I had a Nickel",
-    "message": "A reaction for doof if i had a nickel situations.",
-    "relational_pattern": "Use when the situation matches the template's visible reaction or contrast.",
-    "example_context": "When the situation calls for doof if i had a nickel, this template makes the reaction immediately legible.",
-    "near_miss_context": "Do not use when the reaction is unrelated to the pictured situation or requires specific fandom knowledge.",
+    "message": "Use when a repeated event would earn a nickel each time, emphasizing how often it has happened.",
+    "relational_pattern": "Repetition-for-reward: the pictured character imagines accumulating nickels from recurring events.",
+    "example_context": "A service has timed out every Friday this month: “If I had a nickel for every outage, I would have four nickels.”",
+    "near_miss_context": "Avoid for a one-off event or when no repeated pattern is present.",
     "tags": [
-      "reaction",
-      "relatable",
-      "internet-culture"
+      "repetition",
+      "frequency",
+      "deadpan"
     ]
   },
   {
     "id": "captain-phillips-im-the-captain-now",
     "name": "Captain Phillips - I'm The Captain Now",
-    "message": "A reaction for captain phillips - i'm the captain now situations.",
-    "relational_pattern": "Use when the situation matches the template's visible reaction or contrast.",
-    "example_context": "When the situation calls for captain phillips - i'm the captain now, this template makes the reaction immediately legible.",
-    "near_miss_context": "Do not use when the reaction is unrelated to the pictured situation or requires specific fandom knowledge.",
+    "message": "Use when control or authority abruptly shifts to a new person or group.",
+    "relational_pattern": "Power transfer: the formerly subordinate actor claims command.",
+    "example_context": "After the incident lead steps away, the on-call engineer takes command of the response.",
+    "near_miss_context": "Avoid when authority has not actually changed or the joke depends on the film reference.",
     "tags": [
-      "reaction",
-      "relatable",
-      "internet-culture"
+      "authority",
+      "takeover",
+      "transition"
     ]
   },
   {

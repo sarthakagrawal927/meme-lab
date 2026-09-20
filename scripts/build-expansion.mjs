@@ -1,7 +1,7 @@
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {resolve,dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {parseJsonl,validateSourceCandidates,validateExpansionRecords,validateEvalCases,validateStageCoverageCases,validateStages,expansionStatus} from '../src/expansion.mjs';
+import {parseJsonl,validateSourceCandidates,validateExpansionRecords,validateEvalCases,validateStageCoverageCases,validateCoverageMetadata,validateStages,expansionStatus} from '../src/expansion.mjs';
 
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const original=JSON.parse(await readFile(resolve(root,'original/meme_references_v1/memes.json'),'utf8'));
@@ -56,7 +56,8 @@ validateStages(manifest);
 const evalCases=parseJsonl(await readFile(resolve(root,'eval/relevance_holdout_v1.jsonl'),'utf8'),'relevance holdout');
 const evalSummary=validateEvalCases(evalCases,{allowedIds:new Set(live.map(record=>record.id))});
 const coverageCases=parseJsonl(await readFile(resolve(root,'eval/relevance_stage300_v1.jsonl'),'utf8'),'stage-300 coverage holdout');
-const coverageEvalSummary=validateStageCoverageCases(coverageCases,{allowedIds:new Set(candidates.map(record=>record.id)),excludedIds:original.map(record=>record.id)});
+const coverageEvalSummary=validateStageCoverageCases(coverageCases,{allowedIds:new Set(candidates.map(record=>record.id)),excludedIds:live.map(record=>record.id)});
+validateCoverageMetadata(coverageCases,candidates);
 const experiment=JSON.parse(await readFile(resolve(root,'eval/stage-300-summary.json'),'utf8'));
 const coverageExperiment=JSON.parse(await readFile(resolve(root,'eval/stage-300-coverage-summary.json'),'utf8'));
 const experimentSummary={

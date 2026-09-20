@@ -1,4 +1,5 @@
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
 import {resolve,dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {parseJsonl,validateStageCoverageCases} from '../src/expansion.mjs';
@@ -6,8 +7,10 @@ import {parseJsonl,validateStageCoverageCases} from '../src/expansion.mjs';
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const endpoint=(process.argv[2]??'http://127.0.0.1:8788').replace(/\/$/,'');
 const live=JSON.parse(await readFile(resolve(root,'worker/public/catalogue.json'),'utf8'));
-const candidates=parseJsonl(await readFile(resolve(root,'expansion/candidates/stage-300.jsonl'),'utf8'),'stage-300 candidates');
-const cases=parseJsonl(await readFile(resolve(root,'eval/relevance_stage300_v1.jsonl'),'utf8'),'stage-300 coverage holdout');
+const candidatesText=await readFile(resolve(root,'expansion/candidates/stage-300.jsonl'),'utf8');
+const casesText=await readFile(resolve(root,'eval/relevance_stage300_v1.jsonl'),'utf8');
+const candidates=parseJsonl(candidatesText,'stage-300 candidates');
+const cases=parseJsonl(casesText,'stage-300 coverage holdout');
 validateStageCoverageCases(cases,{allowedIds:new Set(candidates.map(record=>record.id)),excludedIds:live.map(record=>record.id)});
 const rows=[];
 
@@ -16,7 +19,7 @@ for(const testCase of cases) {
   const response=await fetch(`${endpoint}/recommend`,{
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({arm:'stage-300',comment:testCase.context})
+    body:JSON.stringify({arm:'stage-300-expansion',comment:testCase.context})
   });
   if(!response.ok) throw new Error(`${testCase.id} failed with HTTP ${response.status}: ${await response.text()}`);
   const payload=await response.json();
@@ -41,13 +44,19 @@ for(const testCase of cases) {
 const rate=key=>rows.filter(row=>row[key]).length/rows.length;
 const ordered=rows.map(row=>row.duration_ms).sort((a,b)=>a-b);
 const percentile=fraction=>ordered[Math.min(ordered.length-1,Math.ceil(ordered.length*fraction)-1)];
+const retrievalHits=rows.filter(row=>row.retrieval_hit);
+const conditionalTop3=retrievalHits.length?retrievalHits.filter(row=>row.top_3_correct).length/retrievalHits.length:0;
+const metrics={retrieval_at_30:rate('retrieval_hit'),top_1:rate('top_1_correct'),top_3:rate('top_3_correct'),top_3_given_retrieval:conditionalTop3,latency_ms:{p50:percentile(0.5),p95:percentile(0.95)}};
 const report={
   version:'stage-300-expansion-coverage-draft-v1',
   created_at:new Date().toISOString(),
+  input_hash:createHash('sha256').update(candidatesText).update(casesText).digest('hex'),
   labels:'assistant-authored_pending_owner_review',
   human_validated:false,
   cases:rows.length,
-  metrics:{retrieval_at_50:rate('retrieval_hit'),top_1:rate('top_1_correct'),top_3:rate('top_3_correct'),latency_ms:{p50:percentile(0.5),p95:percentile(0.95)}},
+  retrieval:'expansion_candidates_only_semantic_top_30',
+  metrics,
+  gates:{retrieval_at_30:metrics.retrieval_at_30>=0.7,top_3:metrics.top_3>=0.7},
   promotion_ready:false,
   rows
 };

@@ -8,13 +8,14 @@ const publicById=new Map(catalogue.map(record=>[record.id,{
   image_url:record.image_url,
   media_status:record.media_status
 }]));
+const comparable=value=>value.toLocaleLowerCase().replaceAll(/[^\p{L}\p{N}]+/gu,' ').trim();
 
 function hasCompleteExplanation(reason,candidateId) {
   if(typeof reason!=='string') return false;
   const trimmed=reason.trim();
   const wordCount=trimmed.split(/\s+/u).filter(Boolean).length;
   const memeName=publicById.get(candidateId)?.name;
-  return wordCount>=8&&wordCount<=40&&/^[A-Z0-9]/u.test(trimmed)&&/[.!?]$/u.test(trimmed)&&typeof memeName==='string'&&trimmed.toLocaleLowerCase().includes(memeName.toLocaleLowerCase());
+  return wordCount>=8&&wordCount<=40&&/^[A-Z0-9]/u.test(trimmed)&&/[.!?]$/u.test(trimmed)&&typeof memeName==='string'&&comparable(trimmed).includes(comparable(memeName));
 }
 
 function normalizeExplanation(candidate) {
@@ -22,7 +23,7 @@ function normalizeExplanation(candidate) {
   const memeName=publicById.get(candidate.id)?.name;
   let reason=candidate.reason.trim();
   if(!memeName||!reason) return {...candidate,reason};
-  if(!reason.toLocaleLowerCase().includes(memeName.toLocaleLowerCase())) {
+  if(!comparable(reason).includes(comparable(memeName))) {
     const explanation=reason.replace(/[.!?]+$/u,'');
     reason=`${memeName} fits because ${explanation.charAt(0).toLocaleLowerCase()}${explanation.slice(1)}`;
   }

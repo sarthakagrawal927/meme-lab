@@ -82,6 +82,15 @@ test('normalization repairs explanation formatting without changing the model me
   });
   assert.equal(normalized.candidates[0].reason,'Waiting Skeleton fits because the promised reply has become an absurdly long wait.');
   assert.doesNotThrow(()=>validateSelection(normalized));
+
+  const punctuationVariant=normalizeSelection({
+    decision:'meme',
+    confidence:'high',
+    none_reason:'',
+    candidates:[{id:'first-try',reason:'First Try fits because the successful ending hides every failed attempt.',score:95}]
+  });
+  assert.equal(punctuationVariant.candidates[0].reason,'First Try fits because the successful ending hides every failed attempt.');
+  assert.doesNotThrow(()=>validateSelection(punctuationVariant));
 });
 
 test('multiple meme options are ordered by fit score and keep their scores',()=>{

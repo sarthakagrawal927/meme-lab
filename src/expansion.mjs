@@ -119,14 +119,19 @@ export function validateStages(manifest) {
 
 export function expansionStatus({manifest,liveCount,candidateCount,reviewedExternalCount=0,evalSummary,coverageEvalSummary=null,experimentSummary=null,coverageExperimentSummary=null}) {
   const next=manifest.stages.find(stage=>stage.status==='building')??manifest.stages.find(stage=>stage.status==='planned');
+  const ultimateTarget=manifest.stages.at(-1).target_records;
+  const sourcedRecords=liveCount+candidateCount;
   return {
     version:manifest.version,
     live_records:liveCount,
     candidate_records:candidateCount,
     assistant_reviewed_external_records:reviewedExternalCount,
-    sourced_records:liveCount+candidateCount,
+    sourced_records:sourcedRecords,
     next_target:next?.target_records??liveCount,
-    records_to_source:Math.max(0,(next?.target_records??liveCount)-liveCount-candidateCount),
+    records_to_source:Math.max(0,(next?.target_records??liveCount)-sourcedRecords),
+    ultimate_target:ultimateTarget,
+    records_to_ultimate_target:Math.max(0,ultimateTarget-sourcedRecords),
+    ultimate_progress_percent:Math.round((sourcedRecords/ultimateTarget)*100),
     retrieval:{live:liveCount>30?'semantic_top_30_then_rerank_top_3':'direct_all_candidates',expanded:'semantic_top_30_then_rerank_top_3'},
     eval:{...evalSummary,expansion_cases:coverageEvalSummary?.cases??0,pending_owner_review_total:evalSummary.pending_owner_review+(coverageEvalSummary?.pending_owner_review??0)},
     latest_experiment:experimentSummary,

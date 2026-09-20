@@ -12,6 +12,7 @@
 ## Expansion state
 
 - **300 live:** the personal tool retrieves a semantic top 30, then returns up to three reranked memes with 0–100 fit scores.
+- **3,000 north star:** 300 / 3,000 are live (10%); 2,700 remain. “I love you 3,000” is the memorable product milestone.
 - **Catalogue provenance:** 30 seed reactions, 30 former caption-template records, and 240 assistant-selected public templates. Media rights are not established and are disclosed on the result surface.
 - **50-case eval draft:** 20 seed humour, 10 no-meme, and 20 expansion-only humour cases, all pending owner review before they can count as human-validated evidence.
 - **Vectorize trial:** a 300-record index is provisioned with BGE Base 1.5 embeddings and a top-30 semantic shortlist.

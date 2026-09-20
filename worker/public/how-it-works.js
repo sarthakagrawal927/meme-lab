@@ -9,11 +9,16 @@ try {
     eval_cases:status.eval.cases+(status.eval.expansion_cases??0),
     eval_humour:status.eval.humour,
     eval_no_meme:status.eval.no_meme,
-    eval_expansion:status.eval.expansion_cases??0
+    eval_expansion:status.eval.expansion_cases??0,
+    ultimate_target:status.ultimate_target.toLocaleString('en-US'),
+    records_to_ultimate_target:status.records_to_ultimate_target.toLocaleString('en-US'),
+    ultimate_progress_percent:status.ultimate_progress_percent
   };
   for(const [name,value] of Object.entries(values)) {
     for(const element of document.querySelectorAll(`[data-status="${name}"]`)) element.textContent=String(value);
   }
+  const ultimateProgress=document.querySelector('#ultimate-progress');
+  if(ultimateProgress) ultimateProgress.style.width=`${status.ultimate_progress_percent}%`;
   const progress=document.querySelector('#expansion-progress');
   if(progress) {
     progress.textContent=`${status.live_records} references are live in the personal tool. ${status.records_to_source} more sourced records would reach the ${status.next_target}-meme stage.`;

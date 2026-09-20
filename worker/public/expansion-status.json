@@ -6,6 +6,9 @@
   "sourced_records": 300,
   "next_target": 1000,
   "records_to_source": 700,
+  "ultimate_target": 3000,
+  "records_to_ultimate_target": 2700,
+  "ultimate_progress_percent": 10,
   "retrieval": {
     "live": "semantic_top_30_then_rerank_top_3",
     "expanded": "semantic_top_30_then_rerank_top_3"

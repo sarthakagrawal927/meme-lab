@@ -45,6 +45,9 @@ test('expansion stages preserve direct control and bounded retrieval',()=>{
   assert.equal(status.assistant_reviewed_external_records,240);
   assert.equal(status.next_target,1000);
   assert.equal(status.records_to_source,700);
+  assert.equal(status.ultimate_target,3000);
+  assert.equal(status.records_to_ultimate_target,2700);
+  assert.equal(status.ultimate_progress_percent,10);
   assert.equal(status.retrieval.live,'semantic_top_30_then_rerank_top_3');
 });
 

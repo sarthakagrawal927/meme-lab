@@ -2,6 +2,15 @@ import {rankRelevanceCandidates} from './candidate-signals.mjs';
 
 export const JEV_ENDPOINT='https://classifier.dev/v1/classify';
 
+export const FIT_LABELS=[
+  {key:'wrong',label:'0 | wrong: unrelated, misleading, reverses the roles, or socially inappropriate'},
+  {key:'weak',label:'1 | weak: shares a surface theme but would feel forced or confusing'},
+  {key:'plausible',label:'2 | plausible: communicates a relevant general reaction but misses important specificity'},
+  {key:'strong',label:'3 | strong: naturally sendable and matches the central social dynamic and tone'},
+  {key:'exact',label:'4 | exact: captures the specific relationship, action, viewpoint, and comic beat'}
+];
+const FIT_INSTRUCTIONS='Judge each comment-and-candidate pair independently. Rate whether this specific meme would be a natural, accurate, sendable reaction to the comment. Preserve actor and target roles, quoted speakers, negation, social dynamic, and emotional tone. Shared keywords or a recognizable image are not enough.';
+
 const HUMOUR_LABEL='meme-ready humour or a playful reaction belongs';
 const SERIOUS_LABEL='serious help, safety, care, grief, apology, factual guidance, or support where no meme belongs';
 
@@ -62,6 +71,42 @@ async function classify({comment,labels,instructions,fetchImpl,timeoutMs}) {
   return result;
 }
 
+async function classifyMany({inputs,labels,instructions,fetchImpl,timeoutMs}) {
+  const response=await fetchImpl(JEV_ENDPOINT,{
+    method:'POST',
+    headers:{'content-type':'application/json'},
+    signal:AbortSignal.timeout(timeoutMs),
+    body:JSON.stringify({inputs,labels,tier:'fast',instructions})
+  });
+  if(!response.ok) throw new Error(`Classifier returned HTTP ${response.status}.`);
+  const results=(await response.json())?.results;
+  if(!Array.isArray(results)||results.length!==inputs.length) throw new Error('Classifier returned an unexpected result count.');
+  return results;
+}
+
+function candidateInput(comment,record) {
+  return `COMMENT: ${comment}\nCANDIDATE: ${record.name}. Meaning: ${record.message} Social dynamic: ${record.relational_pattern} Example: ${record.example_context} Avoid: ${record.near_miss_context}`;
+}
+
+function ordinalScore(result) {
+  const scores=FIT_LABELS.map(({label})=>Number(result?.scores?.[label]));
+  if(scores.some(score=>!Number.isFinite(score)||score<0||score>1)) throw new Error('Classifier returned incomplete ordinal scores.');
+  const labelIndex=FIT_LABELS.findIndex(({label})=>label===result.label);
+  if(labelIndex<0) throw new Error('Classifier returned an unknown fit label.');
+  return {
+    classifier_score:scores.reduce((total,score,index)=>total+score*index,0)/4,
+    fit_label:FIT_LABELS[labelIndex].key
+  };
+}
+
+async function scoreOrdinalCandidates(comment,candidates,{fetchImpl,timeoutMs,instructions=FIT_INSTRUCTIONS,inputFor=candidateInput}={}) {
+  const labels=FIT_LABELS.map(({label})=>label);
+  const results=await classifyMany({inputs:candidates.map(record=>inputFor(comment,record)),labels,instructions,fetchImpl,timeoutMs});
+  const scored=candidates.map((record,index)=>({...record,...ordinalScore(results[index]),retrieval_rank:index+1}));
+  if(scored.length>1&&scored.every(record=>record.classifier_score===scored[0].classifier_score)) throw new Error('Classifier returned flat ordinal scores.');
+  return scored;
+}
+
 function scoreCandidates(candidates,labels,result) {
   const scores=labels.map(label=>Number(result.scores[label]));
   if(scores.some(score=>!Number.isFinite(score)||score<0||score>1)) throw new Error('Classifier returned incomplete candidate scores.');
@@ -80,21 +125,13 @@ export async function humourBelongs(comment,{fetchImpl=fetch,timeoutMs=3000}={})
   return result.label===HUMOUR_LABEL;
 }
 
-export async function rankCandidates(comment,candidates,{fetchImpl=fetch,timeoutMs=3000,limit=3}={}) {
+export async function rankCandidates(comment,candidates,{fetchImpl=fetch,timeoutMs=5000,limit=3}={}) {
   if(!Array.isArray(candidates)||candidates.length<limit) throw new Error('Classifier needs enough candidates to rank.');
-  const labels=candidates.map(record=>`${record.id} | ${record.name}: ${record.message} Social dynamic: ${record.relational_pattern}`);
-  const result=await classify({
-    comment,
-    labels,
-    instructions:'Rank the existing meme reaction whose social meaning, emotional tone, speaker-target relationship, and sendability best match the situation. Preserve who performed each action and who received it. Honor quoted speakers and explicit negation literally; exclude memes that require a negated event to be happening. Do not choose by shared keywords alone.',
-    fetchImpl,
-    timeoutMs
-  });
-  const scored=scoreCandidates(candidates,labels,result);
-  return rankRelevanceCandidates(scored,{limit});
+  const scored=await scoreOrdinalCandidates(comment,candidates,{fetchImpl,timeoutMs});
+  return scored.sort((left,right)=>right.classifier_score-left.classifier_score||left.retrieval_rank-right.retrieval_rank||left.id.localeCompare(right.id)).slice(0,limit);
 }
 
-export async function rankCandidatesByPerspective(comment,candidates,{fetchImpl=fetch,timeoutMs=3000,limit=3}={}) {
+export async function rankCandidatesByPerspective(comment,candidates,{fetchImpl=fetch,timeoutMs=5000,limit=3}={}) {
   if(!Array.isArray(candidates)||candidates.length<limit) throw new Error('Perspective ranking needs enough candidates to rank.');
   const labels=candidates.map(record=>`${record.id} | ${record.name}: ${record.message} Social dynamic: ${record.relational_pattern}`);
   const results=await Promise.all(PERSPECTIVES.slice(0,limit).map(async perspective=>{
@@ -139,5 +176,10 @@ export async function rankCandidatesByPerspective(comment,candidates,{fetchImpl=
     selected.push(candidate);
   }
   if(selected.length<limit) throw new Error('Perspective ranking could not produce distinct candidates.');
-  return selected.sort((left,right)=>right.classifier_score-left.classifier_score||left.perspective.localeCompare(right.perspective)).slice(0,limit);
+  const rescored=await scoreOrdinalCandidates(comment,selected.slice(0,limit),{
+    fetchImpl,timeoutMs,
+    instructions:`${FIT_INSTRUCTIONS} The input declares the intended viewpoint. Judge the candidate only for that viewpoint; do not silently switch to another participant or to the event itself.`,
+    inputFor:(text,record)=>`COMMENT: ${text}\nVIEWPOINT: ${record.perspective_label}\nCANDIDATE: ${record.name}. Meaning: ${record.message} Social dynamic: ${record.relational_pattern} Example: ${record.example_context} Avoid: ${record.near_miss_context}`
+  });
+  return rescored.sort((left,right)=>right.classifier_score-left.classifier_score||left.perspective.localeCompare(right.perspective));
 }

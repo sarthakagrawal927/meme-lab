@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import worker from '../worker/src/index.mjs';
-import {hasMultiplePerspectives,humourBelongs,needsSeriousHandling,PERSPECTIVES,rankCandidates,rankCandidatesByPerspective,requiresFactualAnswer} from '../worker/src/classification.mjs';
+import {FIT_LABELS,hasMultiplePerspectives,humourBelongs,needsSeriousHandling,PERSPECTIVES,rankCandidates,rankCandidatesByPerspective,requiresFactualAnswer} from '../worker/src/classification.mjs';
 import {MINIMUM_VISIBLE_FIT,MINIMUM_VISIBLE_PERSPECTIVE_FIT,MODEL,validateSelection,normalizeSelection,normalizeRankedSelection,validateRankedSelection,presentSelection,selectionFromRanking} from '../worker/src/recommendation.mjs';
 import {CORE_RESERVE,EMBEDDING_MODEL,mergeWithReserve,retrieveCandidates} from '../worker/src/retrieval.mjs';
 import {reciprocalRankFuse} from '../worker/src/rank-fusion.mjs';
@@ -11,6 +11,8 @@ import {rankRelevanceCandidates,staticCandidateSignals} from '../worker/src/cand
 const selection={decision:'meme',confidence:'high',none_reason:'',candidates:[{id:'waiting-skeleton',reason:'Waiting Skeleton turns the endless approval delay into the entire frustrating experience.',score:94}]};
 const assetResponse=new Response('<h1>ok</h1>',{headers:{'Content-Type':'text/html'}});
 const stored=[];
+const oneHot=(labels,index)=>({label:labels[index],scores:Object.fromEntries(labels.map((label,labelIndex)=>[label,labelIndex===index?1:0]))});
+const ordinalBatch=body=>({results:body.inputs.map((_,index)=>oneHot(body.labels,Math.max(1,4-index)))});
 const env={
   AI:{run:async(model,input)=>{
     if(model===EMBEDDING_MODEL) return {data:[[1,0,0]]};
@@ -20,8 +22,9 @@ const env={
   }},
   MEME_INDEX:{query:async()=>({matches:[{id:'meme-0021',score:.92,metadata:{catalogue_id:'waiting-skeleton'}}]})},
   CLASSIFIER_FETCH:async(_url,options)=>{
-    const {labels}=JSON.parse(options.body);
-    return Response.json({results:[{label:labels[0],scores:Object.fromEntries(labels.map((label,index)=>[label,index===0?1:0]))}]});
+    const body=JSON.parse(options.body);
+    if(body.labels[0]===FIT_LABELS[0].label) return Response.json(ordinalBatch(body));
+    return Response.json({results:[oneHot(body.labels,0)]});
   },
   ASSETS:{fetch:async()=>assetResponse.clone()},
   DB:{prepare:sql=>({bind:(...values)=>({
@@ -37,6 +40,7 @@ test('public worker returns a validated known meme without exposing prompt data'
   assert.equal(body.candidates[0].id,'waiting-skeleton');
   assert.equal(body.candidates[0].rank,1);
   assert.equal(body.candidates[0].score,100);
+  assert.equal(body.candidates[0].fit_label,'exact');
   assert.equal('reason' in body.candidates[0],false);
   assert.equal(body.candidates[0].meme_strength,61);
   assert.equal(body.candidates[0].asset_quality,50);
@@ -191,7 +195,7 @@ test('selection validation accepts one primary result and four distinct backups'
   assert.throws(()=>validateSelection({decision:'meme',confidence:'high',none_reason:'',candidates:[...candidates,{...candidates[0],id:'drake-hotline-bling'}]}),/too many candidates/);
 });
 
-test('classifier scores become public fit scores and all ranked backups remain visible',()=>{
+test('ordinal classifier levels become public fit labels and all ranked backups remain visible',()=>{
   const ranked=[
     {id:'waiting-skeleton',classifier_score:.78},
     {id:'this-is-fine',classifier_score:.21},
@@ -203,17 +207,20 @@ test('classifier scores become public fit scores and all ranked backups remain v
     decision:'meme',
     confidence:'high',
     none_reason:'',
-    candidates:[{id:'waiting-skeleton',score:78},{id:'this-is-fine',score:21},{id:'first-try',score:1}]
+    candidates:[{id:'waiting-skeleton',score:78,fit_label:'strong'},{id:'this-is-fine',score:21,fit_label:'weak'},{id:'first-try',score:1,fit_label:'weak'}]
   });
   const low=selectionFromRanking([{id:'waiting-skeleton',classifier_score:.08},{id:'this-is-fine',classifier_score:.04}]);
-  assert.deepEqual(low.candidates,[{id:'waiting-skeleton',score:8},{id:'this-is-fine',score:4}]);
+  assert.deepEqual(low.candidates,[{id:'waiting-skeleton',score:8,fit_label:'weak'},{id:'this-is-fine',score:4,fit_label:'weak'}]);
   assert.equal(low.confidence,'low');
+  const wrong=selectionFromRanking([{id:'waiting-skeleton',classifier_score:.42,fit_label:'wrong'}]);
+  assert.deepEqual(wrong.candidates,[{id:'waiting-skeleton',score:42,fit_label:'weak'}]);
+  assert.equal(wrong.confidence,'low');
   const perspectives=selectionFromRanking([
     {id:'waiting-skeleton',classifier_score:.6,perspective:'self'},
     {id:'this-is-fine',classifier_score:.24,perspective:'other'},
     {id:'first-try',classifier_score:.25,perspective:'situation'}
   ]);
-  assert.deepEqual(perspectives.candidates,[{id:'waiting-skeleton',score:60},{id:'this-is-fine',score:24},{id:'first-try',score:25}]);
+  assert.deepEqual(perspectives.candidates,[{id:'waiting-skeleton',score:60,fit_label:'plausible'},{id:'this-is-fine',score:24,fit_label:'weak'},{id:'first-try',score:25,fit_label:'weak'}]);
 });
 
 test('classifier gate only runs for high-precision serious cues',async()=>{
@@ -251,8 +258,8 @@ test('classifier ranking is pinned while explanation scores stay descending',asy
     {id:'first-try',name:'First Try',message:'Success hides many attempts.',relational_pattern:'Someone presents effort as effortless.'}
   ];
   const fetchImpl=async(_url,options)=>{
-    const {labels}=JSON.parse(options.body);
-    return Response.json({results:[{label:labels[1],scores:{[labels[0]]:.1,[labels[1]]:.8,[labels[2]]:.3}}]});
+    const body=JSON.parse(options.body);
+    return Response.json({results:[oneHot(body.labels,1),oneHot(body.labels,4),oneHot(body.labels,3)]});
   };
   const ranked=await rankCandidates('Everything is on fire but the owner says it is fine.',candidates,{fetchImpl});
   assert.deepEqual(ranked.map(candidate=>candidate.id),['this-is-fine','first-try','waiting-skeleton']);
@@ -320,6 +327,7 @@ test('perspective ranking returns one distinct candidate for each explicit lens'
   };
   const fetchImpl=async(_url,options)=>{
     const body=JSON.parse(options.body);
+    if(body.labels[0]===FIT_LABELS[0].label) return Response.json(ordinalBatch(body));
     const perspective=PERSPECTIVES.find(record=>record.instructions===body.instructions);
     calls.push(perspective.key);
     return Response.json({results:[{label:body.labels[scoreSets[perspective.key].indexOf(Math.max(...scoreSets[perspective.key]))],scores:Object.fromEntries(body.labels.map((label,index)=>[label,scoreSets[perspective.key][index]]))}]});
@@ -341,6 +349,7 @@ test('perspective ranking de-duplicates a shared winner and public output keeps 
   const scoreSets=[[.9,.08,.02],[.88,.1,.02],[.86,.03,.11]];
   const fetchImpl=async(_url,options)=>{
     const body=JSON.parse(options.body);
+    if(body.labels[0]===FIT_LABELS[0].label) return Response.json(ordinalBatch(body));
     const scores=scoreSets[call++];
     return Response.json({results:[{label:body.labels[0],scores:Object.fromEntries(body.labels.map((label,index)=>[label,scores[index]]))}]});
   };
@@ -361,7 +370,9 @@ test('perspective ranking assigns a contested meme to the globally strongest len
   let call=0;
   const scoreSets=[[.51,.23,.1],[.45,.1,.14],[.68,.07,.09]];
   const fetchImpl=async(_url,options)=>{
-    const {labels}=JSON.parse(options.body);
+    const body=JSON.parse(options.body);
+    const {labels}=body;
+    if(labels[0]===FIT_LABELS[0].label) return Response.json(ordinalBatch(body));
     const scores=scoreSets[call++];
     return Response.json({results:[{label:labels[0],scores:Object.fromEntries(labels.map((label,index)=>[label,scores[index]]))}]});
   };
@@ -369,7 +380,11 @@ test('perspective ranking assigns a contested meme to the globally strongest len
   assert.equal(ranked.find(candidate=>candidate.id==='shared').perspective,'situation');
   assert.equal(ranked.find(candidate=>candidate.id==='self-alternative').perspective,'self');
   assert.equal(ranked.find(candidate=>candidate.id==='other-alternative').perspective,'other');
-  assert.deepEqual(selectionFromRanking(ranked).candidates,[{id:'shared',score:68},{id:'self-alternative',score:23},{id:'other-alternative',score:14}]);
+  assert.deepEqual(selectionFromRanking(ranked).candidates,[
+    {id:'self-alternative',score:100,fit_label:'exact'},
+    {id:'other-alternative',score:75,fit_label:'strong'},
+    {id:'shared',score:50,fit_label:'plausible'}
+  ]);
 });
 
 test('perspective ranking can return three viewpoint winners plus two distinct backups',async()=>{
@@ -383,6 +398,7 @@ test('perspective ranking can return three viewpoint winners plus two distinct b
   const scoreSets={self:[.9,.02,.01,.4,.3],other:[.03,.88,.02,.38,.35],situation:[.02,.03,.86,.37,.36]};
   const fetchImpl=async(_url,options)=>{
     const body=JSON.parse(options.body);
+    if(body.labels[0]===FIT_LABELS[0].label) return Response.json(ordinalBatch(body));
     const perspective=PERSPECTIVES.find(record=>record.instructions===body.instructions);
     const scores=scoreSets[perspective.key];
     return Response.json({results:[{label:body.labels[scores.indexOf(Math.max(...scores))],scores:Object.fromEntries(body.labels.map((label,index)=>[label,scores[index]]))}]});
@@ -400,15 +416,15 @@ test('classifier ranking rejects missing or flat scores instead of silently pinn
     {id:'three',name:'Three',message:'Three message.',relational_pattern:'Three pattern.'}
   ];
   const incomplete=async(_url,options)=>{
-    const {labels}=JSON.parse(options.body);
-    return Response.json({results:[{label:labels[0],scores:{[labels[0]]:1}}]});
+    const {inputs,labels}=JSON.parse(options.body);
+    return Response.json({results:inputs.map(()=>({label:labels[0],scores:{[labels[0]]:1}}))});
   };
   const flat=async(_url,options)=>{
-    const {labels}=JSON.parse(options.body);
-    return Response.json({results:[{label:labels[0],scores:Object.fromEntries(labels.map(label=>[label,1/3]))}]});
+    const {inputs,labels}=JSON.parse(options.body);
+    return Response.json({results:inputs.map(()=>oneHot(labels,2))});
   };
-  await assert.rejects(rankCandidates('A comment.',candidates,{fetchImpl:incomplete}),/incomplete candidate scores/);
-  await assert.rejects(rankCandidates('A comment.',candidates,{fetchImpl:flat}),/flat candidate scores/);
+  await assert.rejects(rankCandidates('A comment.',candidates,{fetchImpl:incomplete}),/incomplete ordinal scores/);
+  await assert.rejects(rankCandidates('A comment.',candidates,{fetchImpl:flat}),/flat ordinal scores/);
 });
 
 test('a failed perspective lens falls back to general ranking without invented perspective labels',async()=>{
@@ -433,6 +449,7 @@ test('a failed perspective lens falls back to general ranking without invented p
       const body=JSON.parse(options.body);
       classifierInstructions.push(body.instructions);
       if(body.instructions===PERSPECTIVES.find(record=>record.key==='other').instructions) throw new Error('Perspective classifier unavailable.');
+      if(body.labels[0]===FIT_LABELS[0].label) return Response.json(ordinalBatch(body));
       const scores=Object.fromEntries(body.labels.map((label,index)=>[label,[.8,.15,.05][index]??0]));
       return Response.json({results:[{label:body.labels[0],scores}]});
     }
@@ -441,7 +458,7 @@ test('a failed perspective lens falls back to general ranking without invented p
   assert.equal(response.status,200);
   const body=await response.json();
   assert.equal(classifierInstructions.length,4);
-  assert.equal(classifierInstructions.some(instructions=>instructions.startsWith('Rank the existing meme reaction')),true);
+  assert.equal(classifierInstructions.some(instructions=>instructions.startsWith('Judge each comment-and-candidate pair independently')),true);
   assert.deepEqual(body.candidates.map(candidate=>candidate.perspective),['best_match','best_match','best_match']);
 });
 

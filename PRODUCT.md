@@ -13,10 +13,10 @@ The live catalogue contains 3,000 searchable references. Every reference has a s
 Runtime ranking is deliberately bounded:
 
 1. Two semantic searches retrieve 30 likely references.
-2. A classifier chooses up to five relevant candidates. Multi-person comments include three explicit lenses—**My reaction**, **Their side**, and **The situation**—plus the strongest distinct backups.
-3. Static strength and image quality may reorder only candidates within a narrow relevance margin.
-4. Jev's ranking score becomes the displayed fit score. The ranked backups remain visible even when their scores are low, so the user can compare all five options.
-5. Feedback records whether the recommendation landed or missed. The larger language model runs only if classifier ranking fails.
+2. Jev independently rates all 30 candidates as wrong, weak, plausible, strong, or exact. Multi-person comments first select distinct candidates through three explicit lenses—**My reaction**, **Their side**, and **The situation**—then rate the selected five on the same ordinal scale.
+3. Static meme strength and image quality remain separate catalogue signals; they are not presented as contextual relevance.
+4. The primary result and four ranked backups remain visible even when some options are weak. The UI shows ordinal fit labels rather than presenting Jev's competitive score as a probability.
+5. Feedback records whether the recommendation landed or missed. There is no generated explanation step on the normal path; the larger language model runs only if classifier ranking fails.
 
 ## Evidence boundary
 

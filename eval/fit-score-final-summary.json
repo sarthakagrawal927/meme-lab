@@ -1,0 +1,59 @@
+{
+  "version": "fit-score-corrected-finalists-v1",
+  "cases": 12,
+  "candidate_union_pairs": 101,
+  "repeats": 2,
+  "labels": "independent_model_blind_review_pending_owner_review",
+  "human_validated": false,
+  "dataset_correction": "eval-stage3000-006 now says the refrigerator uses none of its features except the clock and shopping list.",
+  "winner": "ordinal_jev_fast_full30",
+  "recommendation": "Replace the 30-way competitive score with one batched five-level ordinal score for each of the 30 retrieved candidates, then return the best five and display ordinal labels rather than probabilities.",
+  "arms": {
+    "raw_30way_jev_fast": {
+      "first_exact": 0.5833333333333334,
+      "first_sendable": 0.75,
+      "first_mean_rating": 3.25,
+      "top_one_best_within_returned_five": 0.5833333333333334,
+      "ndcg_at_5": 0.8953907713345575,
+      "ordinal_mae": 42.05,
+      "latency_p95_ms": 1270
+    },
+    "ordinal_jev_fast_compact": {
+      "first_exact": 0.6666666666666666,
+      "first_sendable": 0.8333333333333334,
+      "first_mean_rating": 3.5,
+      "top_one_best_within_returned_five": 0.75,
+      "ndcg_at_5": 0.9301510968141118,
+      "ordinal_mae": 20.4,
+      "latency_p95_ms": 712
+    },
+    "ordinal_jev_fast_full30": {
+      "first_exact": 0.75,
+      "first_sendable": 0.8333333333333334,
+      "first_mean_rating": 3.5833333333333335,
+      "top_one_best_within_returned_five": 0.8333333333333334,
+      "ndcg_at_5": 0.9504049493443554,
+      "ordinal_mae": 22.666666666666668,
+      "latency_p95_ms": 1600
+    },
+    "ordinal_jev_fast_full30_compact": {
+      "first_exact": 0.75,
+      "first_sendable": 0.8333333333333334,
+      "first_mean_rating": 3.5833333333333335,
+      "top_one_best_within_returned_five": 0.75,
+      "ndcg_at_5": 0.9403113657249967,
+      "ordinal_mae": 21.833333333333332,
+      "latency_p95_ms": 1196
+    },
+    "ordinal_jev_fast_full30_specific": {
+      "first_exact": 0.75,
+      "first_sendable": 0.8333333333333334,
+      "first_mean_rating": 3.5833333333333335,
+      "top_one_best_within_returned_five": 0.75,
+      "ndcg_at_5": 0.9251916752167583,
+      "ordinal_mae": 22.5,
+      "latency_p95_ms": 1775
+    }
+  },
+  "caveat": "The blind reviewer is independent of scorer output but is not a human ground truth. Owner review is required before treating fit levels as calibrated quality."
+}

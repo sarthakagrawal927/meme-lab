@@ -39,7 +39,7 @@ try {
     const stage=experiment.stage_300;
     const coverage=status.latest_expansion_coverage_experiment;
     evalStatus.innerHTML=stage3000
-      ? `<strong>Current 100-case set:</strong> retrieval reached ${percent(stage3000.relevance.retrieval_at_30)} at 30, ${percent(stage3000.relevance.top_1)} top-one relevance, and ${percent(stage3000.relevance.top_3)} top-three relevance. The serious-content gate reached ${percent(stage3000.safety.correct_abstention)} correct abstention. The prior-shadow and new long-tail slices remain visible separately; all labels still need owner review.`
+      ? `<strong>Pre-ordinal 100-case snapshot:</strong> retrieval reached ${percent(stage3000.relevance.retrieval_at_30)} at 30, ${percent(stage3000.relevance.top_1)} top-one relevance, and ${percent(stage3000.relevance.top_3)} top-three relevance. The serious-content gate reached ${percent(stage3000.safety.correct_abstention)} correct abstention. The newer ordinal ranking is reported separately below; all labels still need owner review.`
       : stage1000
       ? `<strong>Fresh shadow set:</strong> dual-view retrieval reached ${percent(stage1000.shadow_relevance.retrieval_at_30)} retrieval, ${percent(stage1000.shadow_relevance.top_1)} top-one relevance, ${percent(stage1000.shadow_relevance.top_3)} top-three relevance, and ${percent(stage1000.shadow_safety.correct_abstention)} correct serious-content abstention. The separate tuned regression set remains at ${percent(stage1000.tuned_regression.top_3)} top-three. All assistant-authored labels still need owner review.`
       : coverage

@@ -5,6 +5,7 @@ import {parseJsonl,validateOpenSourceCandidates,validateSourceCandidates,validat
 
 const catalogue=JSON.parse(await readFile(new URL('../worker/public/catalogue.json',import.meta.url),'utf8'));
 const publicCollection=JSON.parse(await readFile(new URL('../worker/public/collection.json',import.meta.url),'utf8'));
+const howItWorks=await readFile(new URL('../worker/public/how-it-works.html',import.meta.url),'utf8');
 const stage300Collection=publicCollection.slice(0,300);
 const candidates=parseJsonl(await readFile(new URL('../expansion/candidates/stage-300.jsonl',import.meta.url),'utf8'));
 const source=parseJsonl(await readFile(new URL('../expansion/sources/stage-300-source.jsonl',import.meta.url),'utf8'));
@@ -40,6 +41,22 @@ test('public collection exposes the full live stage-3000 catalogue with previews
   assert(publicCollection.every(record=>typeof record.image_url==='string'&&record.image_url.startsWith('https://')));
   assert(publicCollection.every(record=>Number.isFinite(record.meme_strength)&&Number.isFinite(record.asset_quality)));
   assert(publicCollection.some(record=>record.license_url==='https://creativecommons.org/publicdomain/zero/1.0/'));
+});
+
+test('How It Works documents the complete 30-to-30000 journey and evidence boundaries',()=>{
+  for(const required of [
+    '30 useful reactions',
+    '300 common references',
+    '1,000 broader references',
+    '3,000 live references',
+    '6,000 stored vectors',
+    'THE MODEL BAKE-OFF',
+    'SPEED RIGHT NOW',
+    'STORAGE, MEDIA, AND COST',
+    'Memes plus movie dialogue',
+    'not human ground truth'
+  ]) assert.match(howItWorks,new RegExp(required.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')));
+  assert.doesNotMatch(howItWorks,/Best 3|Jev fit scores|generated explanation step on the normal path/);
 });
 
 test('stage-1000 acquisition adds a bounded non-live source pool',()=>{

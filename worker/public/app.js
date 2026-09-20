@@ -7,6 +7,15 @@ const loading=$('#loading');
 const result=$('#result');
 const noMatch=$('#no-match');
 let currentRecommendation=null;
+const fitText=candidate=>`${candidate.fit_label||'weak'}`.toUpperCase()+' FIT';
+const displayText=value=>String(value??'')
+  .replace(/&#(\d+);/g,(_,code)=>String.fromCodePoint(Number(code)))
+  .replace(/&#x([\da-f]+);/gi,(_,code)=>String.fromCodePoint(Number.parseInt(code,16)))
+  .replaceAll('&quot;','"')
+  .replaceAll('&apos;',"'")
+  .replaceAll('&amp;','&')
+  .replaceAll('&lt;','<')
+  .replaceAll('&gt;','>');
 
 function showOnly(target) {
   loading.hidden=target!=='loading';
@@ -22,7 +31,7 @@ function media(candidate,className) {
     return wrap;
   }
   const image=document.createElement('img');
-  image.alt=`Meme preview: ${candidate.name}`;
+  image.alt=`Meme preview: ${displayText(candidate.name)}`;
   image.referrerPolicy='no-referrer';
   image.loading='eager';
   image.decoding='async';
@@ -40,8 +49,8 @@ function renderBest(candidate) {
   const lowConfidence=currentRecommendation?.confidence==='low';
   const perspectiveAware=candidate.perspective&&candidate.perspective!=='best_match';
   const matchLabel=perspectiveAware?candidate.perspective_label.toUpperCase():'BEST MATCH';
-  const rank=Object.assign(document.createElement('span'),{className:`rank${lowConfidence?' low-confidence':''}`,textContent:`${lowConfidence?'LOW CONFIDENCE · ':''}${matchLabel} · FIT ${candidate.score}/100`});
-  const title=Object.assign(document.createElement('h2'),{textContent:candidate.name});
+  const rank=Object.assign(document.createElement('span'),{className:`rank${lowConfidence?' low-confidence':''}`,textContent:`${lowConfidence?'LOW CONFIDENCE · ':''}${matchLabel} · ${fitText(candidate)}`});
+  const title=Object.assign(document.createElement('h2'),{textContent:displayText(candidate.name)});
   const signals=Object.assign(document.createElement('p'),{className:'signal-note',textContent:candidate.signal_summary});
   const sourceText=candidate.license_url?'Open original · CC0 public domain':candidate.media_status==='approved'?'Approved image':'Source preview · media rights not established';
   const source=Object.assign(document.createElement('p'),{className:'source-note',textContent:sourceText});
@@ -62,8 +71,8 @@ function renderAlternatives(candidates) {
     const copy=document.createElement('div');
     copy.className='alternative-copy';
     copy.append(
-      Object.assign(document.createElement('span'),{textContent:`${candidate.perspective&&candidate.perspective!=='best_match'?candidate.perspective_label.toUpperCase():`#${candidate.rank}`} · FIT ${candidate.score}/100`}),
-      Object.assign(document.createElement('h3'),{textContent:candidate.name}),
+      Object.assign(document.createElement('span'),{textContent:`${candidate.perspective&&candidate.perspective!=='best_match'?candidate.perspective_label.toUpperCase():`#${candidate.rank}`} · ${fitText(candidate)}`}),
+      Object.assign(document.createElement('h3'),{textContent:displayText(candidate.name)}),
       Object.assign(document.createElement('p'),{className:'signal-note',textContent:candidate.signal_summary})
     );
     card.append(media(candidate,'alternative-media'),copy);

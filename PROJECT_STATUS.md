@@ -5,10 +5,10 @@
 
 ## Live product
 
-- Paste one complete comment or situation and receive the best meme first, up to four backups, Jev fit scores, and confidence.
+- Paste one complete comment or situation and receive the best meme first, four backups, ordinal fit labels, and honest confidence.
 - Multi-person comments now return distinct viewpoints where available: **My reaction**, **Their side**, and **The situation**.
 - Browse and search 3,000 live references in a paginated collection.
-- See meme strength and image quality separately from contextual fit. Relevance chooses the eligible three; static scores only break close calls.
+- See meme strength and image quality separately from contextual fit. Popularity and asset quality do not masquerade as relevance.
 - Serious help, safety, care, grief, apology, and factual-guidance requests are guarded before humour is considered.
 - One-tap feedback is retained for 30 days.
 
@@ -19,7 +19,7 @@
 - Exact URLs, perceptual hashes, normalized names, aliases, and local CLIP image embeddings check uniqueness. Six hard duplicates and ten near-copy embedding candidates are excluded.
 - Local quantized CLIP scores reaction usefulness, image quality, and embedding uniqueness. The final 2,000 additions are selected from the remaining buffer.
 - Local Qwen writes meaning-specific message, social-dynamic, example, near-miss, and tag metadata. These annotations are assistant-authored and remain pending owner feedback.
-- Production still uses bounded retrieval: two BGE embedding views return 30 candidates, with ten shortlist slots reserved for the original 1,000. Jev returns five distinct results; multi-person comments use three parallel perspective lenses and fill remaining slots with the strongest unused lens matches. Its scores return directly, including honestly low scores on weaker backups. The 70B Workers AI selector runs only when classifier ranking fails.
+- Production still uses bounded retrieval: two BGE embedding views return 30 candidates, with ten shortlist slots reserved for the original 1,000. Jev independently rates all 30 with five ordered fit levels and returns five distinct results. Multi-person comments use three parallel perspective lenses, fill remaining slots with the strongest unused matches, and receive one final ordinal rescore. The UI shows fit labels rather than probabilities. The 70B Workers AI selector runs only when classifier ranking fails.
 
 ## Evaluation
 
@@ -28,6 +28,7 @@
 - On the assistant-authored labels, the final gate reached 72% retrieval-at-30, 67% top-one, 71% top-three, and 96% correct serious-content abstention. The fresh long-tail slice reached 93% retrieval and top-three; when an acceptable meme reached retrieval, reranking placed one in the top three 98% of the time.
 - Labels are assistant-authored and not human validated. Metrics are directional until owner feedback accumulates.
 - A focused 14-case routing set now covers multi-person situations, quoted first-person speech, inanimate pronouns, and negation. It checks when perspective mode should and should not run; the labels remain assistant-authored pending owner review.
+- A corrected 12-case hard-ranking set compares five scoring strategies across 101 unique candidate pairs. Blind model review selected rich ordinal Jev: exact first choices improved from 7/12 to 9/12 and the best returned candidate ranked first on 10/12 rather than 7/12. This evidence is independent of scorer output but is not human ground truth.
 - Release proof requires 3,000 catalogue records, 6,000 indexed vectors, passing package checks, a healthy public route, and browser verification.
 
 ## Next stage

@@ -1,11 +1,11 @@
 # Meme Lab model bake-off
 
 **Run:** 20 September 2026  
-**Status:** exploratory; the evaluation labels are assistant-authored and still need owner review.
+**Status:** exploratory; the fit-score candidates were rated by independent models blind to scorer output and still need owner review.
 
 ## Decision
 
-Keep vector retrieval for candidate discovery. Trial Jev fast as the shortlist scorer, keep the current generative model for sentence explanations and low-confidence fallback, and use GLiNER only to enrich safety, tone, and social-dynamic metadata.
+Keep vector retrieval for candidate discovery and use Jev fast as the live shortlist scorer. Remove generated sentence explanations from the normal interaction path, retain the generative model only as a structural fallback, and use GLiNER only as a possible safety, tone, and social-dynamic feature extractor.
 
 For 30,000 references, route the comment to `meme`, `movie_dialogue`, or `none` before searching. Meme and dialogue records stay in separate corpora, each with its own retrieval and evaluation slice.
 
@@ -13,7 +13,7 @@ For 30,000 references, route the comment to `meme`, `movie_dialogue`, or `none` 
 
 | Arm | Task | Result | Latency | Disposition |
 |---|---|---:|---:|---|
-| Current Llama 3.3 70B | 300-catalogue relevance | 80% top-three on 20 expansion-only cases | 3.85s p95 | Keep for explanations and fallback |
+| Current Llama 3.3 70B | 300-catalogue relevance | 80% top-three on 20 expansion-only cases | 3.85s p95 | Keep only as structural fallback |
 | Dual-view vector top 30 + Jev fast | Fresh 1,000-catalogue shadow relevance | 55.6% top-one; 64.4% top-three; 100% top-three given retrieval | Classifier stage only | Best generalization signal; retrieval remains the bottleneck |
 | Dual-view vector top 30 + Jev fast | Tuned 1,000-catalogue regression | 84.4% top-one; 95.6% top-three; 97.7% top-three given retrieval | Classifier stage only | Regression coverage, not an unbiased quality estimate |
 | Serious cue + Jev gate | Fresh 1,000-catalogue shadow safety | 100% correct abstention; 0% inappropriate joking; 0% false abstention | Classifier runs on 20% of cases | Live safety path with deterministic factual-request guards |
@@ -41,10 +41,28 @@ For 30,000 references, route the comment to `meme`, `movie_dialogue`, or `none` 
 - Laya and the local Qwen models were heavily biased toward abstaining. They may improve with supervised examples, but they are not promotion candidates from this run.
 - Gemini was not called because no experiment-only Gemini client or credential is configured in the project. The harness should be added only when a bounded credential is deliberately provided.
 
+## Fit-score experiment
+
+The current percentage is Jev's probability within a 30-candidate competition. It is useful for ordering that shortlist, but it is not the probability that a meme is a good reply.
+
+Twelve fixed humour cases were replayed twice. The first audit found and corrected a contradictory evaluation sentence: an expensive refrigerator was described as using “every feature except” the clock when the intended scenario was using no features except the clock. After rebuilding retrieval, five finalist systems produced a 101-pair union. A fresh independent model rated that union from 0 to 4 without seeing arm identity or scorer output.
+
+| Arm | Exact first | Sendable first | Mean first rating | Best returned candidate ranked first | NDCG@5 | Ordinal error | p95 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Current raw 30-way Jev | 7/12 | 9/12 | 3.25 / 4 | 7/12 | 0.895 | 42.1 | 1,270ms |
+| Compact ordinal on current five | 8/12 | 10/12 | 3.50 / 4 | 9/12 | 0.930 | 20.4 | 712ms |
+| Rich ordinal across all 30 | 9/12 | 10/12 | 3.58 / 4 | 10/12 | 0.950 | 22.7 | 1,600ms |
+| Compact ordinal across all 30 | 9/12 | 10/12 | 3.58 / 4 | 9/12 | 0.940 | 21.8 | 1,196ms |
+| Specificity-biased ordinal across all 30 | 9/12 | 10/12 | 3.58 / 4 | 9/12 | 0.925 | 22.5 | 1,775ms |
+
+The quality winner is one Jev fast call that independently gives all 30 retrieved candidates one of five ordered fit levels using the full candidate metadata, then returns the best five. It replaces the existing 30-way competition rather than adding another serial model call. Compact metadata is the lower-latency fallback. Balanced pairwise comparisons, calibration examples, extra specificity wording, Qwen 3 4B, and Jev smart did not win; Jev smart alone took 10.2–14.0 seconds.
+
+Do not display any value as a probability yet. The product-safe output is an ordinal phrase such as `weak`, `plausible`, `strong`, or `exact` until owner-reviewed five-level labels support calibration.
+
 ## Recommended staged architecture
 
-1. **1,000 → 3,000 memes:** store separate meaning and usage-example vectors, fuse both retrieval lists, score 30 candidates with Jev fast, then use the generative model to produce complete sentence explanations without changing the ranked IDs.
-2. **3,000 → 30,000 reactions:** add `corpus_type`, route to meme/dialogue/none, retrieve within the chosen corpus, then run the same scoring and explanation stages.
+1. **1,000 → 3,000 memes:** store separate meaning and usage-example vectors, fuse both retrieval lists, independently score all 30 candidates with Jev fast's five ordered fit labels, and return the best five directly. Do not add a generative explanation step to the interactive path.
+2. **3,000 → 30,000 reactions:** add `corpus_type`, route to meme/dialogue/none, retrieve within the chosen corpus, then run the same ordinal scoring stage without adding generated explanations to the interactive path.
 3. **Evaluation:** maintain balanced owner-reviewed cases for meme, dialogue, ambiguous, and none; report per-corpus top-one, top-three, abstention, calibration, and latency.
 4. **Copyright boundary:** store short reaction lines, scene/source metadata, and permitted preview assets rather than bulk movie scripts or unlicensed media.
 

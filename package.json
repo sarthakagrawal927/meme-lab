@@ -52,7 +52,10 @@
     "experiment:stage-1000-rescore": "node scripts/rescore-stage-1000-results.mjs",
     "experiment:stage-1000-shadow-rescore": "node scripts/rescore-stage-1000-results.mjs shadow",
     "experiment:stage-3000": "node scripts/run-stage-3000-jev.mjs",
-    "experiment:stage-3000-safety": "node scripts/run-stage-3000-safety-eval.mjs"
+    "experiment:stage-3000-safety": "node scripts/run-stage-3000-safety-eval.mjs",
+    "eval:fit-score:build": "node scripts/build-fit-score-eval.mjs",
+    "eval:fit-score": "node scripts/run-fit-score-eval.mjs",
+    "eval:fit-score:finalists": "FIT_SCORE_RATINGS=fit_score_blind_ratings_v2.jsonl FIT_SCORE_REPORT=fit-score-corrected-finalists-v1 FIT_SCORE_ARMS=raw_30way_jev_fast,ordinal_jev_fast_compact,ordinal_jev_fast_full30,ordinal_jev_fast_full30_compact,ordinal_jev_fast_full30_specific node scripts/run-fit-score-eval.mjs"
   },
   "devDependencies": {
     "@huggingface/transformers": "^4.3.0",

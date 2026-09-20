@@ -100,11 +100,15 @@ export function selectionFromRanking(ranked,{minimumVisibleFit=MINIMUM_VISIBLE_F
   if(!Number.isFinite(minimumVisiblePerspectiveFit)||minimumVisiblePerspectiveFit<0||minimumVisiblePerspectiveFit>1) throw new Error('The perspective-fit threshold must be between zero and one.');
   const candidates=ranked
     .filter((candidate,index)=>index===0||candidate.classifier_score>=(candidate.perspective?minimumVisiblePerspectiveFit:minimumVisibleFit))
-    .map(candidate=>({id:candidate.id,score:Math.round(candidate.classifier_score*100)}));
-  const bestScore=candidates[0].score;
+    .map(candidate=>({
+      id:candidate.id,
+      score:Math.round(candidate.classifier_score*100),
+      fit_label:candidate.fit_label==='wrong'?'weak':candidate.fit_label??(candidate.classifier_score>=.9?'exact':candidate.classifier_score>=.75?'strong':candidate.classifier_score>=.6?'plausible':'weak')
+    }));
+  const bestFit=candidates[0].fit_label;
   return {
     decision:'meme',
-    confidence:bestScore>=50?'high':bestScore>=20?'medium':'low',
+    confidence:bestFit==='exact'||bestFit==='strong'?'high':bestFit==='plausible'?'medium':'low',
     none_reason:'',
     candidates
   };
@@ -123,6 +127,7 @@ export function presentSelection(selection,{perspectives=new Map()}={}) {
         rank:rank+1,
         ...(candidate.reason?{reason:candidate.reason}:{}),
         score:candidate.score,
+        fit_label:candidate.fit_label??(candidate.score>=90?'exact':candidate.score>=75?'strong':candidate.score>=60?'plausible':'weak'),
         perspective:perspective?.perspective??'best_match',
         perspective_label:perspective?.perspective_label??'Best match'
       };

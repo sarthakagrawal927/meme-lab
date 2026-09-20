@@ -74,7 +74,7 @@ async function persistRecommendation(env,recommendation,comment,model=MODEL) {
   await env.DB.prepare(`INSERT INTO recommendations
     (id, comment_text, decision, candidates_json, model, created_at, expires_at)
     VALUES (?, ?, ?, ?, ?, ?, ?)`)
-    .bind(recommendation.request_id,comment,recommendation.decision,JSON.stringify(recommendation.candidates.map(({id,rank,score,perspective})=>({id,rank,score,perspective}))),model,createdAt.toISOString(),expiresAt.toISOString())
+    .bind(recommendation.request_id,comment,recommendation.decision,JSON.stringify(recommendation.candidates.map(({id,rank,score,fit_label,perspective})=>({id,rank,score,fit_label,perspective}))),model,createdAt.toISOString(),expiresAt.toISOString())
     .run();
 }
 

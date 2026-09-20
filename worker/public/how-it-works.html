@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="See how Meme Lab retrieves and scores matches from a live 3,000-meme collection.">
+  <meta name="description" content="The complete Meme Lab journey: from a 30-reaction control to 3,000 searchable references, five ranked options, perspective matching, evaluation, and the path to 30,000.">
   <title>Meme Lab — How it works</title>
   <link rel="stylesheet" href="/app.css">
 </head>
@@ -20,31 +20,78 @@
 
   <main class="page-main how-main">
     <section class="page-intro how-intro">
-      <p class="eyebrow">PRODUCT + IMPLEMENTATION</p>
-      <h1>How one comment<br>becomes the best options.</h1>
-      <p class="intro">The live product compares meaning, real-world usage, social dynamics, tone, and viewpoint—not just words. It retrieves 30 likely matches from 3,000 memes, then returns one primary choice and up to four scored backups.</p>
-      <a class="primary page-cta" href="/">Try a comment <span aria-hidden="true">→</span></a>
+      <p class="eyebrow">THE COMPLETE PROJECT</p>
+      <h1>From 30 reactions<br>to “I love you 3,000.”</h1>
+      <p class="intro">Meme Lab started as a controlled question: can a system understand a complete social situation well enough to choose the meme a person would actually send? This is the full journey—from the first dataset and failed approaches to the current retrieval, perspective, evaluation, and speed work.</p>
+      <a class="primary page-cta" href="/">Try the current version <span aria-hidden="true">→</span></a>
     </section>
 
     <section class="live-strip" aria-label="Current implementation status">
       <span class="status-dot" aria-hidden="true"></span>
-      <div><strong>Live now: <span data-status="live_records">3,000</span> reactions</strong><span>Semantic retrieval · five scored options · serious-content guard · feedback</span></div>
+      <div><strong>Live now: <span data-status="live_records">3,000</span> references · 6,000 vectors · five options</strong><span>Full-sentence input · perspective matching · honest fit labels · serious-content guard</span></div>
       <span class="live-pill">PERSONAL TOOL</span>
+    </section>
+
+    <nav class="journey-nav" aria-label="How it works sections">
+      <a href="#journey">Journey</a>
+      <a href="#live-system-title">Live system</a>
+      <a href="#catalogue-pipeline">Catalogue</a>
+      <a href="#experiments">Experiments</a>
+      <a href="#eval-title">Evaluation</a>
+      <a href="#speed">Speed</a>
+      <a href="#boundaries">Storage</a>
+      <a href="#next">Next</a>
+    </nav>
+
+    <section class="technical-section" id="journey" aria-labelledby="journey-title">
+      <div class="technical-heading">
+        <div>
+          <p class="eyebrow">THE JOURNEY</p>
+          <h2 id="journey-title">Each scale jump solved a different problem.</h2>
+        </div>
+        <p>The catalogue did not jump straight to 3,000. Each stage stayed live, exposed a limitation, and supplied the evidence for the next stage.</p>
+      </div>
+      <div class="journey-grid">
+        <article class="journey-card journey-blue"><span>01 · CONTROL</span><strong>30 useful reactions</strong><p>The original release held 60 records: 30 reaction candidates and 30 caption templates. The picker deliberately used the 30 reactions as a small all-candidate control so every model choice could be inspected.</p></article>
+        <article class="journey-card journey-mint"><span>02 · COVERAGE</span><strong>300 common references</strong><p>Two hundred and forty reviewed external records expanded the vocabulary. Vector retrieval replaced direct comparison, the collection became searchable, and the first public feedback loop went live.</p></article>
+        <article class="journey-card journey-yellow"><span>03 · GENERALIZATION</span><strong>1,000 broader references</strong><p>Seven hundred long-tail records forced dual-view retrieval, a fresh 60-case shadow set, a serious-content gate, and the first classifier bake-off. This is where Jev beat embedding-only ranking.</p></article>
+        <article class="journey-card journey-rose"><span>04 · SCALE</span><strong>3,000 live references</strong><p>A 2,227-record source pool produced 2,000 additions after provenance, exact-copy, perceptual, alias, and CLIP checks. The live index now stores a meaning vector and a usage-example vector for every reference.</p></article>
+        <article class="journey-card journey-white"><span>05 · QUALITY</span><strong>Five options, real viewpoints</strong><p>Complete sentence examples revealed that one situation can support the narrator’s reaction, the other person’s side, and the event itself. The UI now returns one primary choice and four visible backups across those angles.</p></article>
+        <article class="journey-card journey-white"><span>06 · CALIBRATION</span><strong>Labels instead of fake probability</strong><p>Jev’s old competitive score looked like a probability but was not one. A blind hard-case evaluation selected independent ordinal ratings, so the product now says weak, plausible, strong, or exact.</p></article>
+      </div>
+    </section>
+
+    <section class="technical-section decision-section" aria-labelledby="decisions-title">
+      <div class="technical-heading">
+        <div>
+          <p class="eyebrow">WHAT REAL USE CHANGED</p>
+          <h2 id="decisions-title">The product became simpler while the ranking became deeper.</h2>
+        </div>
+        <p>The interface is intentionally one action: paste a complete comment and get a meme. The technical complexity stays behind that action.</p>
+      </div>
+      <div class="implementation-grid decision-grid">
+        <article><span>Input</span><h3>Full sentences, not keywords</h3><p>Examples describe the whole situation so actor roles, quoted speech, negation, relationship, and emotional tone survive retrieval.</p></article>
+        <article><span>Output</span><h3>One best choice plus four backups</h3><p>The best result remains visually dominant. Four lower-ranked options stay visible because humour is subjective and several reactions can be valid.</p></article>
+        <article><span>Viewpoint</span><h3>My reaction, their side, the situation</h3><p>Multi-person comments deliberately search all three angles instead of assuming every meme must speak only for the person who typed the comment.</p></article>
+        <article><span>Confidence</span><h3>Weak is shown honestly</h3><p>A weak but usable option is labelled weak. The system abstains only when humour would be insensitive or every candidate would misrepresent the situation.</p></article>
+        <article><span>Interaction</span><h3>No generated explanation step</h3><p>The user asked for a meme, not a paragraph. Removing live reasoning reduced latency and stopped plausible-sounding prose from disguising a mediocre match.</p></article>
+        <article><span>Feedback</span><h3>A small yes or no loop</h3><p>One-tap feedback is retained for 30 days for evaluation. It does not silently retrain or overwrite the catalogue.</p></article>
+      </div>
     </section>
 
     <section class="technical-section" aria-labelledby="live-system-title">
       <div class="technical-heading">
         <div>
           <p class="eyebrow">THE LIVE 3,000</p>
-          <h2 id="live-system-title">Retrieve. Classify. Explain.</h2>
+          <h2 id="live-system-title">Retrieve. Compare. Return.</h2>
         </div>
-        <p>Each reference has a name, meaning, relational pattern, example, provenance, media status, meme-strength score, and image-quality score. Two semantic views narrow 3,000 records to 30. If more than one person is involved, the classifier deliberately chooses distinct memes for my reaction, their side, and the situation.</p>
+        <p>Every reference has a name, meaning, relational pattern, full-sentence example, near-miss, tags, provenance, media state, meme-strength score, and image-quality score. Runtime work stays bounded even as the catalogue grows.</p>
       </div>
       <ol class="pipeline" aria-label="Current recommendation pipeline">
-        <li><span>01</span><strong>Validate</strong><p>Trim and bound the comment. Treat it as untrusted text.</p></li>
-        <li><span>02</span><strong>Retrieve 30</strong><p>Search meaning and usage-example vectors separately, then fuse both ranked lists.</p></li>
-        <li><span>03</span><strong>Guard and rank</strong><p>Jev checks sensitive help-seeking text, then ranks once or through three explicit perspective lenses.</p></li>
-        <li><span>04</span><strong>Return immediately</strong><p>Jev's scores become fit scores for one primary result and four backups, including honestly low scores. The larger fallback model stays off the normal path.</p></li>
+        <li><span>01</span><strong>Validate and guard</strong><p>Trim and bound the comment, treat it as untrusted text, and catch clear factual or serious help requests before joking.</p></li>
+        <li><span>02</span><strong>Retrieve 30</strong><p>Embed the full comment, search meaning and usage-example vectors separately, then fuse both ranked lists.</p></li>
+        <li><span>03</span><strong>Compare by fit</strong><p>Jev independently rates all 30 candidates. Multi-person comments also preserve explicit narrator, other-person, and situation lenses.</p></li>
+        <li><span>04</span><strong>Return five</strong><p>Show one primary result and four backups labelled weak, plausible, strong, or exact. Persist only the bounded evaluation record.</p></li>
       </ol>
     </section>
 
@@ -52,70 +99,209 @@
       <div class="technical-heading">
         <div>
           <p class="eyebrow">THE RETRIEVAL SYSTEM</p>
-          <h2 id="retrieval-title">The path scales to 30,000.</h2>
+          <h2 id="retrieval-title">3,000 records never enter one prompt.</h2>
         </div>
-        <p>At 3,000, retrieval keeps the prompt bounded. Relevance chooses the eligible three first; static meme strength and image quality only reorder genuinely close calls. At 30,000, a router will choose meme, movie dialogue, or no reaction before searching the matching corpus.</p>
+        <p>Vector search exists to find the plausible neighbourhood; the classifier decides which candidate is socially sendable. Meme strength and image quality remain separate so popularity never masquerades as contextual relevance.</p>
       </div>
-      <div class="flow-line" role="img" aria-label="Comment becomes an embedding, dual-view semantic search returns 30 candidates, and the reranker returns up to five options">
-        <div><span>COMMENT</span><strong>What happened</strong></div>
+      <div class="flow-line" role="img" aria-label="Comment becomes two semantic searches, which fuse into 30 candidates and return five ranked options">
+        <div><span>COMMENT</span><strong>Full situation</strong></div>
         <b aria-hidden="true">→</b>
-        <div><span>EMBED</span><strong>Meaning + usage</strong></div>
+        <div><span>2 SEARCHES</span><strong>Meaning + usage</strong></div>
         <b aria-hidden="true">→</b>
-        <div><span>RETRIEVE</span><strong>Top 30</strong></div>
+        <div><span>FUSE</span><strong>Top 30</strong></div>
         <b aria-hidden="true">→</b>
-        <div><span>RERANK</span><strong>Best 3</strong></div>
+        <div><span>COMPARE</span><strong>Best 5</strong></div>
       </div>
       <div class="implementation-grid">
-        <article><span>Workers AI</span><h3>Two views, one comment</h3><p>Every reference gets one vector for meaning and another for concrete usage examples.</p></article>
-        <article><span>Vectorize</span><h3>A fused shortlist</h3><p>Separate meaning and usage searches are combined with reciprocal-rank fusion, then capped at 30 candidates.</p></article>
-        <article><span>Jev classifier</span><h3>Tone, relationship, viewpoint</h3><p>A fast classifier checks whether humour belongs and ranks by social fit. Multi-person comments get one distinct result for the narrator, the other person, and the event.</p></article>
-        <article><span>D1 feedback</span><h3>Evidence, not vibes</h3><p>Yes/no feedback is retained for evaluation; it does not silently retrain the live model.</p></article>
+        <article><span>Workers AI</span><h3>One comment embedding</h3><p>The same complete sentence queries two separately indexed views so abstract meaning and concrete usage can retrieve different useful candidates.</p></article>
+        <article><span>Vectorize</span><h3>6,000 stored vectors</h3><p>Three thousand references each contribute one meaning vector and one example vector. Reciprocal-rank fusion produces a unique shortlist of 30.</p></article>
+        <article><span>Core reserve</span><h3>Known-good coverage survives</h3><p>Twenty shortlist slots search the full catalogue; ten reserve candidates from the original 1,000 so noisy expansion records cannot erase the stronger base.</p></article>
+        <article><span>Jev fast</span><h3>Social fit beats keyword overlap</h3><p>Full metadata lets the classifier judge actors, target, tone, viewpoint, example, and near-miss rather than choosing the most familiar shared word.</p></article>
+        <article><span>Perspective mode</span><h3>Parallel lenses, then one scale</h3><p>Three lens passes select distinct viewpoint candidates. A final batch rates the selected five on the same ordinal scale before the UI orders them.</p></article>
+        <article><span>Fallback</span><h3>The larger model is exceptional</h3><p>The structured 70B selector runs only if classifier ranking fails. It is resilience, not an explanation step on every request.</p></article>
       </div>
     </section>
 
-    <section class="scale-section" aria-labelledby="scale-title">
+    <section class="technical-section" id="catalogue-pipeline" aria-labelledby="catalogue-title">
+      <div class="technical-heading">
+        <div>
+          <p class="eyebrow">HOW 3,000 WAS BUILT</p>
+          <h2 id="catalogue-title">Acquisition was easy. Uniqueness was the work.</h2>
+        </div>
+        <p>The stage-3,000 pool combined canonical meme sources with public-domain art. Automated checks block exact copies and surface fuzzy lookalikes without pretending semantic similarity always means duplication.</p>
+      </div>
+      <div class="metric-grid" aria-label="Stage 3,000 catalogue facts">
+        <article><strong>2,227</strong><span>raw candidates</span></article>
+        <article><strong>2,000</strong><span>selected additions</span></article>
+        <article><strong>221</strong><span>rejected records</span></article>
+        <article><strong>811</strong><span>selected meme templates</span></article>
+        <article><strong>1,189</strong><span>selected CC0 artworks</span></article>
+        <article><strong>100%</strong><span>fingerprint + metadata coverage</span></article>
+      </div>
+      <ol class="evidence-list">
+        <li><span>01</span><div><strong>Identify the source</strong><p>Keep provider, canonical source URL, media URL, licence URL when available, and an explicit preview-rights state.</p></div></li>
+        <li><span>02</span><div><strong>Block hard duplicates</strong><p>Compare canonical URLs, exact bytes, normalized names, and conservative aliases before a record can enter selection.</p></div></li>
+        <li><span>03</span><div><strong>Detect visual near-copies</strong><p>Perceptual hashes flag resized or transformed versions of the same image. Ten embedding-near candidates were separately surfaced for review.</p></div></li>
+        <li><span>04</span><div><strong>Measure embedding uniqueness</strong><p>A local quantized CLIP model checks visual neighbourhoods. Similar meaning can remain if the actual reaction and image are usefully distinct.</p></div></li>
+        <li><span>05</span><div><strong>Score the collection—not relevance</strong><p>Selection used 62% meme strength, 18% asset quality, and 20% embedding uniqueness. These values never claim that a meme fits a new comment.</p></div></li>
+        <li><span>06</span><div><strong>Write specific metadata locally</strong><p>Local Qwen generated complete meaning, social-dynamic, example, near-miss, and tag sentences. They remain assistant-authored pending owner feedback.</p></div></li>
+      </ol>
+    </section>
+
+    <section class="technical-section" id="experiments" aria-labelledby="experiments-title">
+      <div class="technical-heading">
+        <div>
+          <p class="eyebrow">THE MODEL BAKE-OFF</p>
+          <h2 id="experiments-title">We tried fast models, local models, and smarter models.</h2>
+        </div>
+        <p>No single model does everything. Embeddings discover candidates; Jev judges sendability; deterministic rules protect obvious serious cases; local models handled catalogue construction.</p>
+      </div>
+      <div class="table-shell" tabindex="0" aria-label="Model experiment results; scroll horizontally on narrow screens">
+        <table class="experiment-table">
+          <thead><tr><th>Approach</th><th>Observed result</th><th>Speed</th><th>Decision</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Jev fast + full metadata</strong></td><td>19/20 top-one in the enriched shortlist trial; strongest direct fit signal.</td><td>~1.27s p95 on retrieved top 30</td><td><span class="decision-pill decision-live">LIVE</span></td></tr>
+            <tr><td><strong>Rich ordinal Jev</strong></td><td>9/12 exact first and 10/12 best-returned-first on the corrected hard set.</td><td>1.60s p95 classifier stage</td><td><span class="decision-pill decision-live">QUALITY WINNER</span></td></tr>
+            <tr><td><strong>Compact ordinal Jev</strong></td><td>Same 9/12 exact first, but the best returned candidate ranked first on 9/12 instead of 10/12.</td><td>1.20s p95</td><td><span class="decision-pill decision-next">SPEED FALLBACK</span></td></tr>
+            <tr><td><strong>Llama 3.3 70B</strong></td><td>80% top-three on 20 expansion cases; useful structure but unnecessary prose and slower responses.</td><td>3.85s p95</td><td><span class="decision-pill">FALLBACK ONLY</span></td></tr>
+            <tr><td><strong>BGE reranker</strong></td><td>20% top-one and 45% top-three. It recognized topic similarity better than social sendability.</td><td>1.83s p95</td><td><span class="decision-pill">NOT FINAL JUDGE</span></td></tr>
+            <tr><td><strong>GLiNER 2.5</strong></td><td>8/12 on meme-versus-none routing. Useful at extracting grief, emergency, authority, and tone features.</td><td>52ms mean</td><td><span class="decision-pill decision-next">FEATURE CANDIDATE</span></td></tr>
+            <tr><td><strong>Laya</strong></td><td>8/12 overall but 0/4 on meme cases. It routed too aggressively away from humour.</td><td>~60ms median</td><td><span class="decision-pill">RESEARCH ONLY</span></td></tr>
+            <tr><td><strong>Qwen 3 4B local</strong></td><td>66.7% routing accuracy and only 50% humour recall. Too conservative without tuning.</td><td>2.45s p95</td><td><span class="decision-pill">NOT PROMOTED</span></td></tr>
+            <tr><td><strong>Qwen 2.5 3B local</strong></td><td>53.3% routing accuracy and 30% humour recall. Faster, but the quality loss was material.</td><td>1.53s p95</td><td><span class="decision-pill">NOT PROMOTED</span></td></tr>
+            <tr><td><strong>Jev smart</strong></td><td>No quality win over the fast ordinal approach.</td><td>10.2–14.0s</td><td><span class="decision-pill decision-stop">TOO SLOW</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="experiment-notes">
+        <article><strong>Also tested</strong><p>Pairwise tournaments, calibration anchors, specificity-heavy prompts, a second-stage rerank of the first five, names-only metadata, and single-view retrieval.</p></article>
+        <article><strong>Not run</strong><p>Gemini structured output was not called because the repository has no bounded experiment credential. No result is claimed for it.</p></article>
+        <article><strong>The lesson</strong><p>More reasoning was not automatically better. Rich, specific candidate data plus an independently judged ordinal task was the strongest quality/cost combination.</p></article>
+      </div>
+    </section>
+
+    <section class="eval-card" aria-labelledby="eval-title">
+      <div>
+        <p class="eyebrow">THE EVALUATION LADDER</p>
+        <h2 id="eval-title">One hundred broad cases plus twelve hard ranking cases.</h2>
+        <p>The 100-case suite measures retrieval, ranking, and serious-content behavior across 75 humour and 25 no-meme situations. A separate 12-case hard set isolates the fit-score problem across 101 unique comment-and-candidate pairs.</p>
+      </div>
+      <ul>
+        <li><strong>Retrieval</strong><span>Did an acceptable reference enter the top 30?</span></li>
+        <li><strong>Top one / top three</strong><span>Did ranking put a sendable choice near the front?</span></li>
+        <li><strong>Abstention</strong><span>Did serious requests avoid an inappropriate joke?</span></li>
+        <li><strong>Calibration</strong><span>Do weak, plausible, strong, and exact mean something consistent?</span></li>
+      </ul>
+      <p class="eval-note" id="eval-status"><strong>Pre-ordinal 100-case snapshot:</strong> retrieval reached 72% at 30, 67% top-one relevance, 71% top-three relevance, and 96% correct serious-content abstention. All labels remain pending owner review.</p>
+    </section>
+
+    <section class="technical-section fit-eval-section" aria-labelledby="fit-eval-title">
+      <div class="technical-heading">
+        <div>
+          <p class="eyebrow">THE LATEST QUALITY DECISION</p>
+          <h2 id="fit-eval-title">Independent labels beat competitive probability.</h2>
+        </div>
+        <p>The original Jev number was a probability inside a 30-way competition, not “the chance this meme is good.” We corrected a contradictory refrigerator fixture, rebuilt every arm, formed a 101-pair union, and had a fresh model rate the pairs blind to arm identity and scorer output.</p>
+      </div>
+      <div class="comparison-grid">
+        <article><span>OLD · RAW 30-WAY</span><strong>7 / 12</strong><p>Exact first choice</p><strong>7 / 12</strong><p>Best returned candidate ranked first</p><small>NDCG@5 0.895 · 1.27s p95</small></article>
+        <div class="comparison-arrow" aria-hidden="true">→</div>
+        <article class="comparison-winner"><span>LIVE · RICH ORDINAL</span><strong>9 / 12</strong><p>Exact first choice</p><strong>10 / 12</strong><p>Best returned candidate ranked first</p><small>NDCG@5 0.950 · 1.60s p95</small></article>
+      </div>
+      <p class="evidence-caveat"><strong>Evidence boundary:</strong> the blind rater was independent of the scoring outputs, but it was still a model—not human ground truth. These results justify the current engineering choice; owner feedback is still required before calling the labels calibrated.</p>
+    </section>
+
+    <section class="technical-section" id="speed" aria-labelledby="speed-title">
+      <div class="technical-heading">
+        <div>
+          <p class="eyebrow">SPEED RIGHT NOW</p>
+          <h2 id="speed-title">Normal comments are near one to two seconds. Perspectives cost more.</h2>
+        </div>
+        <p>Quality came first. These timings are observed remote-development requests from 21 September 2026, not a production SLA or a large benchmark.</p>
+      </div>
+      <div class="speed-grid">
+        <article><span>SINGLE VIEW</span><strong>0.98s</strong><p>“The tests finally passed after I changed nothing.”</p></article>
+        <article><span>SINGLE VIEW</span><strong>1.88s</strong><p>“I looked for my phone while using its flashlight.”</p></article>
+        <article class="speed-slow"><span>THREE PERSPECTIVES</span><strong>3.99s</strong><p>“My sibling ate the leftovers, then asked why I was upset.”</p></article>
+      </div>
+      <div class="speed-explanation">
+        <div><strong>The largest remaining slowdown</strong><p>Multi-person mode performs three perspective-specific classifier passes and one final ordinal rescore. Remote embedding, Vectorize, classifier networking, and D1 persistence add smaller fixed costs.</p></div>
+        <div><strong>The safe optimization order</strong><p>First lock owner-reviewed quality. Then test one structured batched perspective call, compact metadata, and production p50/p95 tracing against the same cases. Do not trade the recovered viewpoints away for a synthetic speed win.</p></div>
+      </div>
+    </section>
+
+    <section class="technical-section" id="boundaries" aria-labelledby="boundaries-title">
+      <div class="technical-heading">
+        <div>
+          <p class="eyebrow">STORAGE, MEDIA, AND COST</p>
+          <h2 id="boundaries-title">The catalogue is stored. Most image files are not.</h2>
+        </div>
+        <p>The build pipeline is mostly local, but the live runtime is not yet completely local or free: it currently uses Cloudflare Workers AI, Vectorize, D1, and classifier.dev.</p>
+      </div>
+      <div class="boundary-grid">
+        <article><span>CATALOGUE</span><h3>Versioned JSON and generated modules</h3><p>Names, meanings, examples, near-misses, provenance, quality signals, and source URLs live with the project and generate the public collection.</p></article>
+        <article><span>SEMANTIC INDEX</span><h3>6,000 vectors in Vectorize</h3><p>Meaning and usage vectors are stored remotely so every request searches a bounded index instead of loading all 3,000 records.</p></article>
+        <article><span>IMAGES</span><h3>Provider-hosted previews</h3><p>Imgflip, Memegen, and National Gallery images load from their source URLs. Meme Lab does not silently rebundle media or imply redistribution rights.</p></article>
+        <article><span>RIGHTS</span><h3>CC0 and source previews stay distinct</h3><p>National Gallery CC0 originals link to their licence. Other source previews remain labelled “media rights not established.”</p></article>
+        <article><span>FEEDBACK</span><h3>Bounded D1 records</h3><p>The comment, returned candidate IDs, decision, labels, and yes/no feedback support evaluation and receive a 30-day expiry.</p></article>
+        <article><span>LOCAL WORK</span><h3>CLIP and Qwen built the collection</h3><p>Uniqueness signals and long-form metadata were generated locally. The fastest local routing models tested so far were not accurate enough for the live decision.</p></article>
+      </div>
+    </section>
+
+    <section class="technical-section" aria-labelledby="failures-title">
+      <div class="technical-heading">
+        <div>
+          <p class="eyebrow">WHAT WE STOPPED DOING</p>
+          <h2 id="failures-title">The discarded ideas matter too.</h2>
+        </div>
+        <p>This history prevents the project from repeating attractive experiments that already failed the quality, speed, or honesty bar.</p>
+      </div>
+      <ul class="failure-list">
+        <li><strong>Embeddings alone:</strong> good for neighbourhoods, weak at deciding whether a reaction is socially sendable.</li>
+        <li><strong>Generated reasoning on every result:</strong> slower and unnecessary; fluent prose could make a poor selection sound convincing.</li>
+        <li><strong>Raw Jev probability in the UI:</strong> useful for competition ordering, misleading as user-facing confidence.</li>
+        <li><strong>One perspective for every sentence:</strong> lost valid reactions from the other participant or the situation itself.</li>
+        <li><strong>Static meme strength as relevance:</strong> a famous or high-quality image can still be the wrong response.</li>
+        <li><strong>Jev smart and serial ensembles:</strong> 5–14 second paths were too slow without a matching quality gain.</li>
+        <li><strong>Current small local routers:</strong> cheap and private, but too eager to abstain from genuine humour.</li>
+        <li><strong>Claiming model labels as truth:</strong> every metric remains visibly marked pending owner review.</li>
+      </ul>
+    </section>
+
+    <section class="scale-section" id="next" aria-labelledby="scale-title">
       <div class="technical-heading">
         <div>
           <p class="eyebrow">THE EXPANSION PLAN</p>
           <h2 id="scale-title">30 → 300 → 1,000 → 3,000 → 30,000</h2>
         </div>
-        <p id="expansion-progress"><span data-status="live_records">300</span> references are live in the personal tool. Evaluation now guides metadata cleanup and the next expansion.</p>
+        <p id="expansion-progress"><span data-status="live_records">3,000</span> references are live. Quality work now closes retrieval and perspective gaps before movie dialogue becomes a separate routed corpus.</p>
       </div>
       <div class="goal-meter" aria-label="Progress toward 3,000 live memes">
         <div class="goal-meter-copy"><strong><span data-status="live_records">3,000</span> / <span data-status="ultimate_target">3,000</span> live</strong><span>“I love you 3,000” is live.</span></div>
         <div class="goal-track" aria-hidden="true"><span id="ultimate-progress"></span></div>
-        <small><span data-status="records_to_ultimate_target">2,700</span> memes remaining · <span data-status="ultimate_progress_percent">10</span>% complete</small>
+        <small><span data-status="records_to_ultimate_target">0</span> memes remaining · <span data-status="ultimate_progress_percent">100</span>% complete</small>
       </div>
       <ol class="stage-list">
-        <li class="stage-live"><span class="stage-number">30</span><div><strong>Seed control</strong><p>Curated metadata, direct all-candidate comparison, live public feedback.</p></div><em>LIVE</em></li>
-        <li class="stage-live"><span class="stage-number">300</span><div><strong>Common reactions</strong><p>Semantic retrieval, scored multi-option results, searchable collection, and feedback.</p></div><em>LIVE</em></li>
-        <li class="stage-live"><span class="stage-number">1K</span><div><strong>Broader vocabulary</strong><p>Seven hundred new records add long-tail reactions with searchable previews and meaning-specific metadata.</p></div><em>LIVE</em></li>
-        <li class="stage-live"><span class="stage-number">3K</span><div><strong>I love you 3,000</strong><p>Two thousand additions were promoted from 2,227 candidates after exact-image, perceptual-hash, alias, and local CLIP embedding checks. Local Qwen generated specific sentence metadata; every result now reports strength and image quality separately from fit.</p></div><em>LIVE</em></li>
-        <li><span class="stage-number">30K</span><div><strong>Movie dialogue reactions</strong><p>Route to a separate dialogue corpus first, then retrieve and rank within it so memes do not crowd out the right line.</p></div><em>NEXT CORPUS</em></li>
+        <li class="stage-live"><span class="stage-number">30</span><div><strong>Seed control</strong><p>Inspectable all-candidate comparison and the first structured local experiment.</p></div><em>LIVE</em></li>
+        <li class="stage-live"><span class="stage-number">300</span><div><strong>Common reactions</strong><p>Semantic retrieval, searchable collection, public feedback, and multi-option output.</p></div><em>LIVE</em></li>
+        <li class="stage-live"><span class="stage-number">1K</span><div><strong>Broader vocabulary</strong><p>Dual-view retrieval, classifier ranking, serious-content safety, and a fresh shadow evaluation.</p></div><em>LIVE</em></li>
+        <li class="stage-live"><span class="stage-number">3K</span><div><strong>I love you 3,000</strong><p>Uniqueness-gated acquisition, two vectors per record, five ordinal options, and explicit viewpoint coverage.</p></div><em>LIVE</em></li>
+        <li><span class="stage-number">30K</span><div><strong>Memes plus movie dialogue</strong><p>Route the input to meme, dialogue, or none before corpus-specific retrieval. Keep evaluation and rights boundaries separate for each corpus.</p></div><em>NEXT CORPUS</em></li>
       </ol>
-    </section>
-
-    <section class="eval-card" aria-labelledby="eval-title">
-      <div>
-        <p class="eyebrow">THE EVAL DATASET</p>
-        <h2 id="eval-title"><span data-status="eval_cases">100</span> labelled situations guide the next jump.</h2>
-        <p>The original and expansion sets cover 50 situations. The 1,000-meme work added a 60-case tuned regression set and a fresh 60-case shadow set. The 3,000-meme gate keeps that independent shadow set and adds 40 long-tail cases, for 100 cases total. Labels remain pending owner review.</p>
+      <div class="next-gates">
+        <article><strong>1. Owner-label the hard set</strong><p>Confirm the ordinal winner and calibrate what weak, plausible, strong, and exact actually mean.</p></article>
+        <article><strong>2. Close retrieval misses</strong><p>The stage-3,000 snapshot found a usable candidate in the retrieved 30 on 72% of broad cases. Ranking cannot rescue a candidate it never sees.</p></article>
+        <article><strong>3. Compress perspective latency</strong><p>Replace four classifier interactions only after a one-call design proves equal viewpoint coverage on replayable cases.</p></article>
+        <article><strong>4. Add the 30,000 router</strong><p>Evaluate meme, dialogue, ambiguous, and none slices independently before combining their output in one product.</p></article>
       </div>
-      <ul>
-        <li><strong>Top 1</strong><span>Did the first choice land?</span></li>
-        <li><strong>Top 3</strong><span>Was any shown option sendable?</span></li>
-        <li><strong>Abstention</strong><span>Did it stay serious when humour did not belong?</span></li>
-        <li><strong>Calibration</strong><span>Did low confidence actually mean weaker results?</span></li>
-      </ul>
-      <p class="eval-note" id="eval-status"><strong>Current 100-case set:</strong> retrieval reached 72% at 30, 67% top-one relevance, 71% top-three relevance, and 96% correct serious-content abstention. The fresh long-tail slice reached 93% retrieval and top-three. Labels remain pending owner review.</p>
     </section>
 
     <section class="honesty-card">
       <div>
-        <p class="eyebrow">THE EXPANSION RULE</p>
-        <h2>Bigger is useful only if the results stay good.</h2>
+        <p class="eyebrow">THE RULE THAT SURVIVED EVERY STAGE</p>
+        <h2>Bigger is useful only if the results stay honest.</h2>
       </div>
-      <p>Every expansion record must clear provider/source identity, canonical URL, exact-byte hash, perceptual-image, normalized-name, alias, and meaning checks. Exact duplicates are blocked automatically; fuzzy visual or semantic matches go to review. The personal catalogue stays available while evaluation tracks top-three relevance, correct no-meme decisions, valid IDs, and latency.</p>
+      <p>Three thousand is live, not “finished.” The collection is machine-curated, evaluation labels are not yet human ground truth, source previews do not imply media rights, and a weak match stays visibly weak. The next improvement comes from owner feedback and replayable evidence—not a more impressive model name.</p>
     </section>
   </main>
 

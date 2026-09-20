@@ -1,8 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import worker,{MODEL,validateSelection,presentSelection} from '../worker/src/index.mjs';
+import worker from '../worker/src/index.mjs';
+import {MODEL,validateSelection,normalizeSelection,presentSelection} from '../worker/src/recommendation.mjs';
 
-const selection={decision:'meme',none_reason:'',candidates:[{id:'waiting-skeleton',reason:'The wait became the whole experience.'}]};
+const selection={decision:'meme',confidence:'high',none_reason:'',candidates:[{id:'waiting-skeleton',reason:'The wait became the whole experience.'}]};
 const assetResponse=new Response('<h1>ok</h1>',{headers:{'Content-Type':'text/html'}});
 const stored=[];
 const env={
@@ -20,6 +21,7 @@ test('public worker returns a validated known meme without exposing prompt data'
   const body=await response.json();
   assert.equal(body.candidates[0].id,'waiting-skeleton');
   assert.equal(body.candidates[0].rank,1);
+  assert.equal(body.confidence,'high');
   assert.equal(body.feedback_enabled,true);
   assert(!JSON.stringify(body).includes('CATALOGUE_JSON'));
 });
@@ -44,10 +46,20 @@ test('public worker rejects empty, oversized, cross-origin, and unknown API requ
 });
 
 test('selection validation rejects unknown, duplicate, and contradictory results',()=>{
-  assert.throws(()=>validateSelection({decision:'meme',none_reason:'',candidates:[{id:'unknown',reason:'x'}]}),/unknown/);
-  assert.throws(()=>validateSelection({decision:'meme',none_reason:'',candidates:[selection.candidates[0],selection.candidates[0]]}),/duplicate/);
-  assert.throws(()=>validateSelection({decision:'none',none_reason:'No fit.',candidates:selection.candidates}),/contradictory/);
+  assert.throws(()=>validateSelection({decision:'meme',confidence:'high',none_reason:'',candidates:[{id:'unknown',reason:'x'}]}),/unknown/);
+  assert.throws(()=>validateSelection({...selection,candidates:[selection.candidates[0],selection.candidates[0]]}),/duplicate/);
+  assert.throws(()=>validateSelection({decision:'none',confidence:'low',none_reason:'No fit.',candidates:selection.candidates}),/contradictory/);
+  assert.throws(()=>validateSelection({decision:'none',confidence:'high',none_reason:'No fit.',candidates:[]}),/contradictory confidence/);
   assert.equal(presentSelection(selection).candidates[0].name,'Waiting Skeleton');
+});
+
+test('missing confidence downgrades safely and low-confidence memes remain visible',()=>{
+  const missing=normalizeSelection({decision:'meme',none_reason:'',candidates:selection.candidates});
+  assert.equal(missing.confidence,'low');
+  assert.equal(validateSelection(missing).decision,'meme');
+  assert.equal(presentSelection(missing).candidates[0].id,'waiting-skeleton');
+  const none=normalizeSelection({decision:'meme',confidence:'high',none_reason:'',candidates:[]});
+  assert.deepEqual({decision:none.decision,confidence:none.confidence,reason:none.none_reason},{decision:'none',confidence:'low',reason:'None of the current references is a natural fit.'});
 });
 
 test('static responses receive security and no-index headers',async()=>{

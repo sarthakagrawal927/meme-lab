@@ -10,6 +10,11 @@
 <body>
   <header class="topbar">
     <a class="brand" href="/" aria-label="Meme Lab home"><span>meme</span>lab</a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a class="active" href="/" aria-current="page">Try it</a>
+      <a href="/collection">Collection</a>
+      <a href="/how-it-works">How it works</a>
+    </nav>
     <span class="beta">PLAYGROUND</span>
   </header>
 
@@ -48,7 +53,7 @@
       <div id="feedback" class="feedback" hidden>
         <div>
           <strong>Did it land?</strong>
-          <span>Stored for 30 days to improve the next pick.</span>
+          <span>Stored for 30 days for evaluation.</span>
         </div>
         <div class="feedback-actions">
           <button type="button" data-verdict="landed">Yes, that fits</button>
@@ -69,7 +74,7 @@
   </main>
 
   <footer>
-    <span>30 reaction references</span>
+    <a href="/collection">30 reaction references</a>
     <span>Sometimes no meme is the right meme.</span>
   </footer>
   <script type="module" src="/app.js"></script>

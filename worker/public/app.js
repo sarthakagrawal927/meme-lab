@@ -37,7 +37,8 @@ function renderBest(candidate) {
   host.replaceChildren();
   const copy=document.createElement('div');
   copy.className='result-copy';
-  const rank=Object.assign(document.createElement('span'),{className:'rank',textContent:'BEST MATCH'});
+  const lowConfidence=currentRecommendation?.confidence==='low';
+  const rank=Object.assign(document.createElement('span'),{className:`rank${lowConfidence?' low-confidence':''}`,textContent:lowConfidence?'LOW CONFIDENCE':'BEST MATCH'});
   const title=Object.assign(document.createElement('h2'),{textContent:candidate.name});
   const reason=Object.assign(document.createElement('p'),{textContent:candidate.reason});
   const source=Object.assign(document.createElement('p'),{className:'source-note',textContent:'Source preview · media rights not established'});

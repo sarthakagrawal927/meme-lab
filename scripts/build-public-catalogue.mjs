@@ -19,7 +19,12 @@ const records=source
   }));
 
 if(records.length!==30) throw new Error(`Expected 30 reaction candidates, found ${records.length}.`);
-const destination=resolve(root,'worker/src/catalogue.generated.mjs');
-await mkdir(dirname(destination),{recursive:true});
-await writeFile(destination,`// Generated from the canonical catalogue. Do not edit.\nexport const catalogue=${JSON.stringify(records,null,2)};\n`);
-console.log(`Generated ${records.length} public catalogue records.`);
+const moduleDestination=resolve(root,'worker/src/catalogue.generated.mjs');
+const jsonDestination=resolve(root,'worker/public/catalogue.json');
+await mkdir(dirname(moduleDestination),{recursive:true});
+await mkdir(dirname(jsonDestination),{recursive:true});
+await Promise.all([
+  writeFile(moduleDestination,`// Generated from the canonical catalogue. Do not edit.\nexport const catalogue=${JSON.stringify(records,null,2)};\n`),
+  writeFile(jsonDestination,`${JSON.stringify(records.map(({id,name,message,relational_pattern,tags,image_url,media_status})=>({id,name,message,relational_pattern,tags,image_url,media_status})),null,2)}\n`)
+]);
+console.log(`Generated ${records.length} Worker and browser catalogue records.`);

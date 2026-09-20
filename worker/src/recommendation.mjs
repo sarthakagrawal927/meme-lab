@@ -9,13 +9,22 @@ const publicById=new Map(catalogue.map(record=>[record.id,{
   media_status:record.media_status
 }]));
 
+function hasCompleteExplanation(reason,candidateId) {
+  if(typeof reason!=='string') return false;
+  const trimmed=reason.trim();
+  const wordCount=trimmed.split(/\s+/u).filter(Boolean).length;
+  const memeName=publicById.get(candidateId)?.name;
+  return wordCount>=8&&wordCount<=28&&/^[A-Z0-9]/u.test(trimmed)&&/[.!?]$/u.test(trimmed)&&typeof memeName==='string'&&trimmed.toLocaleLowerCase().includes(memeName.toLocaleLowerCase());
+}
+
 export function validateSelection(value) {
   if(!value||typeof value!=='object'||Array.isArray(value)) throw new Error('The model returned an invalid result.');
   if(!['meme','none'].includes(value.decision)||!['high','medium','low'].includes(value.confidence)||typeof value.none_reason!=='string'||!Array.isArray(value.candidates)) throw new Error('The model returned an invalid result.');
   if(value.candidates.length>3) throw new Error('The model returned too many candidates.');
   const seen=new Set();
   for(const candidate of value.candidates) {
-    if(!candidate||typeof candidate!=='object'||Array.isArray(candidate)||!allowedIds.has(candidate.id)||typeof candidate.reason!=='string'||!candidate.reason.trim()||candidate.reason.length>300) throw new Error('The model returned an unknown candidate.');
+    if(!candidate||typeof candidate!=='object'||Array.isArray(candidate)||!allowedIds.has(candidate.id)) throw new Error('The model returned an unknown candidate.');
+    if(!hasCompleteExplanation(candidate.reason,candidate.id)) throw new Error('The model returned an incomplete explanation.');
     if(!Number.isInteger(candidate.score)||candidate.score<0||candidate.score>100) throw new Error('The model returned an invalid fit score.');
     if(seen.has(candidate.id)) throw new Error('The model returned a duplicate candidate.');
     seen.add(candidate.id);
@@ -29,7 +38,7 @@ export function validateSelection(value) {
 export function normalizeSelection(value) {
   if(!value||typeof value!=='object'||Array.isArray(value)||!Array.isArray(value.candidates)) return value;
   const confidence=['high','medium','low'].includes(value.confidence)?value.confidence:'low';
-  if(value.candidates.length>0) return {...value,decision:'meme',confidence,none_reason:'',candidates:[...value.candidates].sort((a,b)=>(b.score??-1)-(a.score??-1))};
+  if(value.candidates.length>0) return {...value,decision:'meme',confidence,none_reason:'',candidates:value.candidates.map(candidate=>({...candidate,reason:typeof candidate?.reason==='string'?candidate.reason.trim():candidate?.reason})).sort((a,b)=>(b.score??-1)-(a.score??-1))};
   return {...value,decision:'none',confidence:'low',none_reason:typeof value.none_reason==='string'&&value.none_reason.trim()?value.none_reason:'None of the current references is a natural fit.'};
 }
 

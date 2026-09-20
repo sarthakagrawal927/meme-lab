@@ -52,9 +52,9 @@
       <div class="technical-heading">
         <div>
           <p class="eyebrow">THE RETRIEVAL SYSTEM</p>
-          <h2 id="retrieval-title">The same path scales beyond 300.</h2>
+          <h2 id="retrieval-title">The path scales to 30,000.</h2>
         </div>
-        <p>Putting hundreds or thousands of records into every prompt would be slower and harder to evaluate. Semantic retrieval keeps the prompt bounded while the reranker preserves judgment.</p>
+        <p>At 3,000, retrieval keeps the prompt bounded. At 30,000, a first routing decision chooses meme, movie dialogue, or no reaction before searching the matching corpus.</p>
       </div>
       <div class="flow-line" role="img" aria-label="Comment becomes an embedding, semantic search returns 30 candidates, and the reranker returns three options">
         <div><span>COMMENT</span><strong>What happened</strong></div>
@@ -77,7 +77,7 @@
       <div class="technical-heading">
         <div>
           <p class="eyebrow">THE EXPANSION PLAN</p>
-          <h2 id="scale-title">30 → 300 → 1,000 → 3,000</h2>
+          <h2 id="scale-title">30 → 300 → 1,000 → 3,000 → 30,000</h2>
         </div>
         <p id="expansion-progress"><span data-status="live_records">300</span> references are live in the personal tool. Evaluation now guides metadata cleanup and the next expansion.</p>
       </div>
@@ -90,7 +90,8 @@
         <li class="stage-live"><span class="stage-number">30</span><div><strong>Seed control</strong><p>Curated metadata, direct all-candidate comparison, live public feedback.</p></div><em>LIVE</em></li>
         <li class="stage-live"><span class="stage-number">300</span><div><strong>Common reactions</strong><p>Semantic retrieval, scored multi-option results, searchable collection, and feedback.</p></div><em>LIVE</em></li>
         <li><span class="stage-number">1K</span><div><strong>Broader vocabulary</strong><p>Add missing families from real failures, expand the held-out set, and recheck confidence.</p></div><em>PLANNED</em></li>
-        <li><span class="stage-number">3K</span><div><strong>I love you 3,000</strong><p>The memorable finish line: broad, long-tail reactions without sacrificing relevance or latency.</p></div><em>NORTH STAR</em></li>
+        <li><span class="stage-number">3K</span><div><strong>I love you 3,000</strong><p>The meme milestone: broad, long-tail reactions without sacrificing relevance or latency.</p></div><em>NORTH STAR</em></li>
+        <li><span class="stage-number">30K</span><div><strong>Movie dialogue reactions</strong><p>Route to a separate dialogue corpus first, then retrieve and rank within it so memes do not crowd out the right line.</p></div><em>NEXT CORPUS</em></li>
       </ol>
     </section>
 
@@ -106,7 +107,7 @@
         <li><strong>Abstention</strong><span>Did it stay serious when humour did not belong?</span></li>
         <li><strong>Calibration</strong><span>Did low confidence actually mean weaker results?</span></li>
       </ul>
-      <p class="eval-note" id="eval-status"><strong>Latest draft:</strong> a meaning-specific metadata pilot reached 95% expansion-only retrieval and 80% top-three relevance. The personal tool is live; these labels guide continued tuning.</p>
+      <p class="eval-note" id="eval-status"><strong>Latest draft:</strong> a meaning-specific metadata pilot reached 95% expansion-only retrieval and 80% top-three relevance. A classifier bake-off now guides the 3,000-to-30,000 pipeline. The personal tool is live; these labels guide continued tuning.</p>
     </section>
 
     <section class="honesty-card">

@@ -30,7 +30,7 @@ try {
     const stage=experiment.stage_300;
     const coverage=status.latest_expansion_coverage_experiment;
     evalStatus.innerHTML=coverage
-      ? `<strong>Latest draft:</strong> the 300 path reached ${percent(stage.top_3)} top-three relevance and ${percent(stage.correct_abstention)} correct abstention on the original cases. A meaning-specific metadata pilot reached ${percent(coverage.metrics.retrieval_at_30)} expansion-only retrieval and ${percent(coverage.metrics.top_3)} top-three relevance. The personal tool is live; these assistant-authored labels guide continued tuning.`
+      ? `<strong>Latest draft:</strong> the 300 path reached ${percent(stage.top_3)} top-three relevance and ${percent(stage.correct_abstention)} correct abstention on the original cases. A meaning-specific metadata pilot reached ${percent(coverage.metrics.retrieval_at_30)} expansion-only retrieval and ${percent(coverage.metrics.top_3)} top-three relevance. A classifier bake-off now guides the 3,000-to-30,000 pipeline. The personal tool is live; these assistant-authored labels guide continued tuning.`
       : `<strong>Latest draft:</strong> the 300 path reached ${percent(stage.top_3)} top-three relevance and ${percent(stage.correct_abstention)} correct abstention on assistant-authored labels. The personal tool remains live while evaluation improves it.`;
   }
 } catch(error) {

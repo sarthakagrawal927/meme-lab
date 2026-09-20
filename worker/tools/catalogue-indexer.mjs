@@ -3,6 +3,7 @@ import catalogue from './stage-300-catalogue.json';
 const EMBEDDING_MODEL='@cf/baai/bge-base-en-v1.5';
 const EMBEDDING_POOLING='cls';
 const RERANK_MODEL='@cf/meta/llama-3.3-70b-instruct-fp8-fast';
+const BGE_RERANK_MODEL='@cf/baai/bge-reranker-base';
 const BATCH_SIZE=50;
 const byId=new Map(catalogue.map(record=>[record.id,record]));
 
@@ -77,6 +78,14 @@ async function rerank(env,comment,candidates) {
   return selection;
 }
 
+async function rerankWithBge(env,comment,candidates) {
+  return env.AI.run(BGE_RERANK_MODEL,{
+    query:comment,
+    contexts:candidates.map(record=>({text:semanticText(record)})),
+    top_k:3
+  });
+}
+
 export default {
   async fetch(request,env) {
     const url=new URL(request.url);
@@ -118,6 +127,15 @@ export default {
         const candidates=matches.map(match=>byId.get(match.id)).filter(Boolean);
         const selection=await rerank(env,comment,candidates);
         return Response.json({arm,retrieved_ids:matches.map(match=>match.id),selection});
+      }
+      if(url.pathname==='/bge-rerank'&&request.method==='POST') {
+        const body=await request.json();
+        const comment=typeof body?.comment==='string'?body.comment.trim():'';
+        if(!comment) return Response.json({error:'comment is required'},{status:400});
+        const matches=await retrieve(env,comment,30);
+        const candidates=matches.map(match=>byId.get(match.id)).filter(Boolean);
+        const result=await rerankWithBge(env,comment,candidates);
+        return Response.json({model:BGE_RERANK_MODEL,retrieved_ids:matches.map(match=>match.id),result});
       }
       return Response.json({status:'ready',records:catalogue.length,model:EMBEDDING_MODEL,pooling:EMBEDDING_POOLING});
     } catch(error) {

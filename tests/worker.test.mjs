@@ -4,7 +4,7 @@ import worker from '../worker/src/index.mjs';
 import {MODEL,validateSelection,normalizeSelection,presentSelection} from '../worker/src/recommendation.mjs';
 import {EMBEDDING_MODEL} from '../worker/src/retrieval.mjs';
 
-const selection={decision:'meme',confidence:'high',none_reason:'',candidates:[{id:'waiting-skeleton',reason:'The wait became the whole experience.',score:94}]};
+const selection={decision:'meme',confidence:'high',none_reason:'',candidates:[{id:'waiting-skeleton',reason:'Waiting Skeleton turns the endless approval delay into the entire frustrating experience.',score:94}]};
 const assetResponse=new Response('<h1>ok</h1>',{headers:{'Content-Type':'text/html'}});
 const stored=[];
 const env={
@@ -55,6 +55,8 @@ test('public worker rejects empty, oversized, cross-origin, and unknown API requ
 
 test('selection validation rejects unknown, duplicate, and contradictory results',()=>{
   assert.throws(()=>validateSelection({decision:'meme',confidence:'high',none_reason:'',candidates:[{id:'unknown',reason:'x'}]}),/unknown/);
+  assert.throws(()=>validateSelection({...selection,candidates:[{...selection.candidates[0],reason:'Predictable consequence of ignoring warnings'}]}),/incomplete explanation/);
+  assert.throws(()=>validateSelection({...selection,candidates:[{...selection.candidates[0],reason:'The endless approval delay makes waiting itself the central frustration.'}]}),/incomplete explanation/);
   assert.throws(()=>validateSelection({...selection,candidates:[{...selection.candidates[0],score:101}]}),/fit score/);
   assert.throws(()=>validateSelection({...selection,candidates:[selection.candidates[0],selection.candidates[0]]}),/duplicate/);
   assert.throws(()=>validateSelection({decision:'none',confidence:'low',none_reason:'No fit.',candidates:selection.candidates}),/contradictory/);
@@ -77,8 +79,8 @@ test('multiple meme options are ordered by fit score and keep their scores',()=>
     confidence:'medium',
     none_reason:'',
     candidates:[
-      {id:'waiting-skeleton',reason:'The long delay is the defining part of this situation.',score:72},
-      {id:'this-is-fine',reason:'Visible chaos clashes directly with the speaker claiming calm.',score:89}
+      {id:'waiting-skeleton',reason:'Waiting Skeleton makes the long delay the defining frustration in this situation.',score:72},
+      {id:'this-is-fine',reason:'This Is Fine captures the clash between visible chaos and the speaker claiming calm.',score:89}
     ]
   });
   assert.deepEqual(normalized.candidates.map(candidate=>candidate.id),['this-is-fine','waiting-skeleton']);

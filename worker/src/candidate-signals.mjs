@@ -31,6 +31,7 @@ function assetLabel(score) {
   if(score>=86) return 'reviewed image';
   if(score>=72) return 'direct source preview';
   if(score>=50) return 'source preview needing review';
+  if(score>0) return 'lower-quality source preview';
   return 'no usable preview';
 }
 

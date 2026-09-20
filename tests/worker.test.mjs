@@ -59,6 +59,7 @@ test('static signals stay deterministic and describe both public scores',()=>{
   const signals=staticCandidateSignals({id:'waiting-skeleton',image_url:'https://i.imgflip.com/2fm6x.jpg',media_status:'source-preview'});
   assert.deepEqual({meme_strength:signals.meme_strength,asset_quality:signals.asset_quality,static_prior:signals.static_prior},{meme_strength:90,asset_quality:78,static_prior:86});
   assert.match(signals.signal_summary,/^Static signals rate meme strength at 90\/100 and image quality at 78\/100 \(direct source preview\)\.$/);
+  assert.match(staticCandidateSignals({id:'low-quality',meme_strength:60,asset_quality:43,image_url:'https://example.com/image.jpg',media_status:'source-preview'}).signal_summary,/\(lower-quality source preview\)\.$/);
 });
 
 test('semantic retrieval fuses meaning and example ranks without duplicate memes',()=>{

@@ -1,5 +1,6 @@
 import stage300Catalogue from './stage-300-catalogue.json';
 import stage1000Catalogue from './stage-1000-catalogue.json';
+import {reciprocalRankFuse} from '../src/retrieval.mjs';
 
 const EMBEDDING_MODEL='@cf/baai/bge-base-en-v1.5';
 const EMBEDDING_POOLING='cls';
@@ -27,29 +28,46 @@ function semanticText(record) {
   ].filter(Boolean).join('\n');
 }
 
+function exampleText(record) {
+  return [
+    `Meme: ${record.name}`,
+    `Send it when: ${record.example_context}`,
+    `Underlying pattern: ${record.relational_pattern}`
+  ].join('\n');
+}
+
 async function embed(env,texts) {
   const response=await env.AI.run(EMBEDDING_MODEL,{text:texts,pooling:EMBEDDING_POOLING});
   if(!Array.isArray(response?.data)||response.data.length!==texts.length) throw new Error('Workers AI returned an unexpected embedding batch.');
   return response.data;
 }
 
+async function retrieveViewPair(env,vector,topK,filter={}) {
+  const perViewTopK=Math.min(50,Math.max(topK,30));
+  const [meaningResult,exampleResult]=await Promise.all([
+    env.MEME_INDEX.query(vector,{topK:perViewTopK,filter:{...filter,view:'meaning'},returnMetadata:'all'}),
+    env.MEME_INDEX.query(vector,{topK:perViewTopK,filter:{...filter,view:'example'},returnMetadata:'all'})
+  ]);
+  return reciprocalRankFuse([meaningResult?.matches,exampleResult?.matches],{limit:topK}).map(match=>({
+    id:match.catalogue_id,
+    vector_id:match.best_vector_id,
+    score:match.score,
+    rrf_score:match.rrf_score,
+    metadata:match.best_metadata
+  }));
+}
+
 async function retrieve(env,text,topK=30,{controlReserve=0,filter}={}) {
   const [vector]=await embed(env,[text]);
-  const queryOptions={topK,returnMetadata:'all'};
-  if(filter) queryOptions.filter=filter;
-  const [allResult,controlResult]=await Promise.all([
-    env.MEME_INDEX.query(vector,queryOptions),
-    controlReserve>0?env.MEME_INDEX.query(vector,{topK:controlReserve,filter:{control:true},returnMetadata:'all'}):Promise.resolve({matches:[]})
+  if(controlReserve===0) return retrieveViewPair(env,vector,topK,filter);
+  const [broadMatches,controlMatches]=await Promise.all([
+    retrieveViewPair(env,vector,topK),
+    retrieveViewPair(env,vector,controlReserve,{control:true})
   ]);
   const broadSlots=Math.max(0,topK-controlReserve);
-  const ordered=[...allResult.matches.slice(0,broadSlots),...controlResult.matches,...allResult.matches.slice(broadSlots)];
+  const ordered=[...broadMatches.slice(0,broadSlots),...controlMatches,...broadMatches.slice(broadSlots)];
   const seen=new Set();
-  return ordered.map(match=>({
-    id:match.metadata?.catalogue_id??match.id,
-    vector_id:match.id,
-    score:match.score,
-    metadata:match.metadata
-  })).filter(match=>!seen.has(match.id)&&seen.add(match.id)).slice(0,topK);
+  return ordered.filter(match=>!seen.has(match.id)&&seen.add(match.id)).slice(0,topK);
 }
 
 function normalizeSelection(value) {
@@ -151,19 +169,28 @@ export default {
     try {
       if(url.pathname==='/seed'&&request.method==='POST') {
         const legacyIds=catalogue.map(record=>record.id).filter(id=>new TextEncoder().encode(id).length<=64);
-        for(let start=0;start<legacyIds.length;start+=100) await env.MEME_INDEX.deleteByIds(legacyIds.slice(start,start+100));
+        const generatedIds=catalogue.flatMap((_,index)=>{
+          const base=`meme-${String(index+1).padStart(4,'0')}`;
+          return [base,`${base}-meaning`,`${base}-example`];
+        });
+        for(const ids of [legacyIds,generatedIds]) for(let start=0;start<ids.length;start+=100) await env.MEME_INDEX.deleteByIds(ids.slice(start,start+100));
         let upserted=0;
         for(let start=0;start<catalogue.length;start+=BATCH_SIZE) {
           const batch=catalogue.slice(start,start+BATCH_SIZE);
-          const vectors=await embed(env,batch.map(semanticText));
-          const mutation=await env.MEME_INDEX.upsert(batch.map((record,index)=>({
-            id:`meme-${String(start+index+1).padStart(4,'0')}`,
-            values:vectors[index],
-            metadata:{catalogue_id:record.id,name:record.name,stage,control:start+index<30}
-          })));
-          upserted+=mutation.count??batch.length;
+          const texts=batch.flatMap(record=>[semanticText(record),exampleText(record)]);
+          const vectors=await embed(env,texts);
+          const entries=batch.flatMap((record,index)=>{
+            const base=`meme-${String(start+index+1).padStart(4,'0')}`;
+            const metadata={catalogue_id:record.id,name:record.name,stage,control:start+index<30};
+            return [
+              {id:`${base}-meaning`,values:vectors[index*2],metadata:{...metadata,view:'meaning'}},
+              {id:`${base}-example`,values:vectors[index*2+1],metadata:{...metadata,view:'example'}}
+            ];
+          });
+          const mutation=await env.MEME_INDEX.upsert(entries);
+          upserted+=mutation.count??entries.length;
         }
-        return Response.json({status:'seeded',model:EMBEDDING_MODEL,pooling:EMBEDDING_POOLING,records:catalogue.length,upserted});
+        return Response.json({status:'seeded',model:EMBEDDING_MODEL,pooling:EMBEDDING_POOLING,records:catalogue.length,vectors_per_record:2,upserted});
       }
       if(url.pathname==='/query'&&request.method==='GET') {
         const text=url.searchParams.get('q')?.trim();

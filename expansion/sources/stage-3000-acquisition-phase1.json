@@ -1,0 +1,144 @@
+{
+  "version": "stage-3000-acquisition-phase1-v1",
+  "observed_on": "2026-09-20",
+  "backend": "documented_public_api",
+  "provider": "JustMeme.wtf",
+  "provider_total": 2303,
+  "pages_attempted": 24,
+  "pages_succeeded": 24,
+  "pages_failed": 0,
+  "per_page": [
+    {
+      "page": 1,
+      "url": "https://justmeme.wtf/api/v1/templates?limit=100&page=1",
+      "count": 100
+    },
+    {
+      "page": 2,
+      "url": "https://justmeme.wtf/api/v1/templates?limit=100&page=2",
+      "count": 100
+    },
+    {
+      "page": 3,
+      "url": "https://justmeme.wtf/api/v1/templates?limit=100&page=3",
+      "count": 100
+    },
+    {
+      "page": 4,
+      "url": "https://justmeme.wtf/api/v1/templates?limit=100&page=4",
+      "count": 100
+    },
+    {
+      "page": 5,
+      "url": "https://justmeme.wtf/api/v1/templates?limit=100&page=5",
+      "count": 100
+    },
+    {
+      "page": 6,
+      "url": "https://justmeme.wtf/api/v1/templates?limit=100&page=6",
+      "count": 100
+    },
+    {
+      "page": 7,
+      "url": "https://justmeme.wtf/api/v1/templates?limit=100&page=7",
+      "count": 100
+    },
+    {
+      "page": 8,
+      "url": "https://justmeme.wtf/api/v1/templates?limit=100&page=8",
+      "count": 100
+    },
+    {
+      "page": 9,
+      "url": "https://justmeme.wtf/api/v1/templates?limit=100&page=9",
+      "count": 100
+    },
+    {
+      "page": 10,
+      "url": "https://justmeme.wtf/api/v1/templates?limit=100&page=10",
+      "count": 100
+    },
+    {
+      "page": 11,
+      "url": "https://justmeme.wtf/api/v1/templates?limit=100&page=11",
+      "count": 100
+    },
+    {
+      "page": 12,
+      "url": "https://justmeme.wtf/api/v1/templates?limit=100&page=12",
+      "count": 100
+    },
+    {
+      "page": 13,
+      "url": "https://justmeme.wtf/api/v1/templates?limit=100&page=13",
+      "count": 100
+    },
+    {
+      "page": 14,
+      "url": "https://justmeme.wtf/api/v1/templates?limit=100&page=14",
+      "count": 100
+    },
+    {
+      "page": 15,
+      "url": "https://justmeme.wtf/api/v1/templates?limit=100&page=15",
+      "count": 100
+    },
+    {
+      "page": 16,
+      "url": "https://justmeme.wtf/api/v1/templates?limit=100&page=16",
+      "count": 100
+    },
+    {
+      "page": 17,
+      "url": "https://justmeme.wtf/api/v1/templates?limit=100&page=17",
+      "count": 100
+    },
+    {
+      "page": 18,
+      "url": "https://justmeme.wtf/api/v1/templates?limit=100&page=18",
+      "count": 100
+    },
+    {
+      "page": 19,
+      "url": "https://justmeme.wtf/api/v1/templates?limit=100&page=19",
+      "count": 100
+    },
+    {
+      "page": 20,
+      "url": "https://justmeme.wtf/api/v1/templates?limit=100&page=20",
+      "count": 100
+    },
+    {
+      "page": 21,
+      "url": "https://justmeme.wtf/api/v1/templates?limit=100&page=21",
+      "count": 100
+    },
+    {
+      "page": 22,
+      "url": "https://justmeme.wtf/api/v1/templates?limit=100&page=22",
+      "count": 100
+    },
+    {
+      "page": 23,
+      "url": "https://justmeme.wtf/api/v1/templates?limit=100&page=23",
+      "count": 100
+    },
+    {
+      "page": 24,
+      "url": "https://justmeme.wtf/api/v1/templates?limit=100&page=24",
+      "count": 3
+    }
+  ],
+  "retained_candidates": 827,
+  "live_records_excluded": 1000,
+  "prior_source_records_excluded": 1300,
+  "target_gap": 2000,
+  "remaining_source_gap": 1173,
+  "filters": [
+    "exclude all live names and IDs",
+    "exclude every previously reviewed source record",
+    "deduplicate normalized names and IDs",
+    "metadata only; no image downloads"
+  ],
+  "uncertainty": "Raw source templates are not live records. Meaning, delivery fitness, audience suitability, duplicate images, and media rights require separate review."
+}

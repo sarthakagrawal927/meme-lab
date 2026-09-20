@@ -6,10 +6,12 @@ import {parseJsonl} from '../src/expansion.mjs';
 
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const endpoint=(process.argv[2]??'http://127.0.0.1:8789').replace(/\/$/,'');
+const dataset=process.argv[3]??'primary';
+if(!['primary','shadow'].includes(dataset)) throw new Error(`Unsupported stage-1000 dataset: ${dataset}.`);
 const catalogueText=await readFile(resolve(root,'worker/tools/stage-1000-catalogue.json'),'utf8');
 const catalogue=JSON.parse(catalogueText);
 const byId=new Map(catalogue.map(record=>[record.id,record]));
-const casesText=await readFile(resolve(root,'eval/relevance_stage1000_v1.jsonl'),'utf8');
+const casesText=await readFile(resolve(root,`eval/relevance_stage1000${dataset==='shadow'?'_shadow':''}_v1.jsonl`),'utf8');
 const cases=parseJsonl(casesText).filter(row=>row.intent_label==='humour');
 const rows=[];
 for(const testCase of cases) {
@@ -33,7 +35,8 @@ for(const testCase of cases) {
 const rate=key=>rows.filter(row=>row[key]).length/rows.length;
 const hits=rows.filter(row=>row.retrieval_hit);
 const metrics={retrieval_at_30:rate('retrieval_hit'),top_1:rate('top_1_correct'),top_3:rate('top_3_correct'),top_3_given_retrieval:hits.filter(row=>row.top_3_correct).length/hits.length};
-const report={version:'stage-1000-jev-fast-v1',created_at:new Date().toISOString(),input_hash:createHash('sha256').update(catalogueText).update(casesText).digest('hex'),human_validated:false,cases:rows.length,metrics,rows};
-await writeFile(resolve(root,'eval/results/stage-1000-jev-fast.json'),`${JSON.stringify(report,null,2)}\n`);
-await writeFile(resolve(root,'eval/stage-1000-jev-fast-summary.json'),`${JSON.stringify({...report,rows:undefined},null,2)}\n`);
+const suffix=dataset==='shadow'?'shadow-jev-fast':'jev-fast';
+const report={version:`stage-1000-${suffix}-v1`,created_at:new Date().toISOString(),input_hash:createHash('sha256').update(catalogueText).update(casesText).digest('hex'),labels:'assistant-authored_pending_owner_review',human_validated:false,cases:rows.length,metrics,rows};
+await writeFile(resolve(root,`eval/results/stage-1000-${suffix}.json`),`${JSON.stringify(report,null,2)}\n`);
+await writeFile(resolve(root,`eval/stage-1000-${suffix}-summary.json`),`${JSON.stringify({...report,rows:undefined},null,2)}\n`);
 console.log(JSON.stringify(metrics,null,2));

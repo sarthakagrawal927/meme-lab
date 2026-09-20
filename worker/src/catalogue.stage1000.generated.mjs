@@ -6386,13 +6386,15 @@ export const catalogue=[
   {
     "id": "328965799-xkcd-dependency",
     "name": "XKCD \"Dependency\"",
-    "message": "Use XKCD \"Dependency\" when attention or resources are distributed unfairly while a critical need is ignored.",
-    "relational_pattern": "Neglect and dependency: the towering software stack balanced on one neglected maintainer represents a moment where attention or resources are distributed unfairly while a critical need is ignored.",
-    "example_context": "For example, the redesign gets funding while the broken login waits; the visual analogy is the towering software stack balanced on one neglected maintainer, signaling that attention or resources are distributed unfairly while a critical need is ignored.",
-    "near_miss_context": "Avoid when the important need is already properly supported; the towering software stack balanced on one neglected maintainer would incorrectly signal that attention or resources are distributed unfairly while a critical need is ignored.",
+    "message": "Use when a sprawling system or large group quietly depends on one overlooked person doing the load-bearing work.",
+    "relational_pattern": "Many people assume the operation sustains itself, while one under-supported contributor actually keeps every dependent part functioning.",
+    "example_context": "Thirty people attend the launch, but one coordinator handles every booking, reminder, access request, and last-minute rescue alone.",
+    "near_miss_context": "Avoid when responsibility is genuinely distributed across several supported owners rather than resting on one hidden dependency.",
     "tags": [
-      "neglect",
-      "resources"
+      "single point of failure",
+      "hidden dependency",
+      "one person carries everything",
+      "under-supported maintainer"
     ],
     "image_url": "https://i.imgflip.com/4/5fuvmv.jpg",
     "media_status": "source-preview",
@@ -6626,13 +6628,15 @@ export const catalogue=[
   {
     "id": "161188607-atlas-holding-earth",
     "name": "Atlas holding Earth",
-    "message": "Use Atlas holding Earth when attention or resources are distributed unfairly while a critical need is ignored.",
-    "relational_pattern": "Neglect and dependency: Atlas visibly carrying a world-sized burden alone represents a moment where attention or resources are distributed unfairly while a critical need is ignored.",
-    "example_context": "For example, the redesign gets funding while the broken login waits; the visual analogy is Atlas visibly carrying a world-sized burden alone, signaling that attention or resources are distributed unfairly while a critical need is ignored.",
-    "near_miss_context": "Avoid when the important need is already properly supported; Atlas visibly carrying a world-sized burden alone would incorrectly signal that attention or resources are distributed unfairly while a critical need is ignored.",
+    "message": "Use when one person carries an entire group’s logistical or emotional burden while everyone else takes the result for granted.",
+    "relational_pattern": "A lone organizer supports a world-sized responsibility for many beneficiaries who assume the work simply happens.",
+    "example_context": "The family reunion looks effortless only because one aunt booked every room, meal, pickup, and accessibility request herself.",
+    "near_miss_context": "Avoid when the burden is shared fairly or the speaker merely has one difficult personal task.",
     "tags": [
-      "neglect",
-      "resources"
+      "carrying the group",
+      "sole organizer",
+      "invisible labour",
+      "overwhelming responsibility"
     ],
     "image_url": "https://i.imgflip.com/4/2nytxb.jpg",
     "media_status": "source-preview",
@@ -10248,14 +10252,15 @@ export const catalogue=[
   {
     "id": "24165732-needs-more-cowbell",
     "name": "Needs More Cowbell",
-    "message": "Use when the same solution is repeatedly prescribed without addressing the root cause",
-    "relational_pattern": "The same fix is suggested over and over despite the actual problem changing",
-    "example_context": "A parent insists on adding more cowbell to a child's meal after multiple failed attempts to stop the eating",
-    "near_miss_context": "Avoid when a solution is temporarily effective but the problem persists",
+    "message": "Use when every review demands one more addition, as though endlessly increasing the same ingredient will perfect the result.",
+    "relational_pattern": "An authority keeps prescribing more of one visible feature instead of accepting limits or addressing the underlying need.",
+    "example_context": "A simple dashboard gains another chart, filter, forecast, and summary page after each leadership review.",
+    "near_miss_context": "Avoid when one measured addition genuinely resolves the problem and nobody keeps escalating the request.",
     "tags": [
-      "repetition",
-      "solution",
-      "root cause"
+      "one more thing",
+      "scope creep",
+      "repeated additions",
+      "feature demand"
     ],
     "image_url": "https://i.imgflip.com/4/edyec.jpg",
     "media_status": "source-preview",
@@ -12094,15 +12099,15 @@ export const catalogue=[
   {
     "id": "101164230-expectation-vs-reality",
     "name": "Expectation vs Reality",
-    "message": "Use to contrast an idealized promise or mental picture with the disappointing, awkward, or ordinary result.",
-    "relational_pattern": "An anticipated version is placed against the materially different outcome that actually occurred.",
-    "example_context": "After your friend posts a glamorous apartment listing and then shows the cramped room they moved into, send this with the two versions labeled.",
-    "near_miss_context": "A colleague predicted a two-hour task and it took exactly two hours, so there is no expectation-reality gap to expose.",
+    "message": "Use when an advertisement, listing, photo, or confident promise creates an ideal picture that the disappointing real result immediately contradicts.",
+    "relational_pattern": "A polished advertised version is compared with the cramped, shabby, awkward, or ordinary thing someone actually receives.",
+    "example_context": "The rental listing shows a huge bright kitchen, but arrival reveals one dim room, a hot plate, and a parking-lot window.",
+    "near_miss_context": "Avoid when the delivered place or result substantially matches what the photos and promise showed.",
     "tags": [
-      "expectation versus reality",
-      "disappointment",
-      "contrast",
-      "outcome gap"
+      "misleading listing",
+      "advertised versus actual",
+      "rental disappointment",
+      "expectation reality gap"
     ],
     "image_url": "https://i.imgflip.com/4/1o8ati.jpg",
     "media_status": "source-preview",
@@ -12247,15 +12252,15 @@ export const catalogue=[
   {
     "id": "214097341-kylo-ren-more",
     "name": "Kylo Ren MORE",
-    "message": "Use to demand more of something with escalating intensity, whether that means volume, effort, drama, or quantity.",
-    "relational_pattern": "An already substantial amount is treated as insufficient and the speaker insists on amplification.",
-    "example_context": "The group chat begins sharing increasingly ridiculous edits of the same photo, and you post this to request another round.",
-    "near_miss_context": "A teammate is visibly overwhelmed and asks to reduce their workload; demanding escalation would invert the supportive context.",
+    "message": "Use when someone treats an already substantial result as insufficient and keeps demanding additional quantity, intensity, or features.",
+    "relational_pattern": "A decision-maker repeatedly expands the request—another chart, another filter, another revision—without acknowledging the work already delivered.",
+    "example_context": "Leadership reviews a complete report and responds by demanding another dashboard to summarize the first dashboard.",
+    "near_miss_context": "Avoid when the first result is genuinely incomplete and one bounded revision would satisfy the original request.",
     "tags": [
       "more",
-      "escalation",
-      "demand",
-      "intensity"
+      "scope creep",
+      "endless requests",
+      "feature escalation"
     ],
     "image_url": "https://i.imgflip.com/4/3jgukd.jpg",
     "media_status": "source-preview",

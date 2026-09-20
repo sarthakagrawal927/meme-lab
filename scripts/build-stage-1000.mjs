@@ -79,8 +79,21 @@ const stage300Review=JSON.parse(await readFile(resolve(root,'expansion/reviewed/
 const baselineExperiment=JSON.parse(await readFile(resolve(root,'eval/stage-1000-baseline-summary.json'),'utf8'));
 const gatedExperiment=JSON.parse(await readFile(resolve(root,'eval/stage-1000-jev-gated-summary.json'),'utf8'));
 const jevExperiment=JSON.parse(await readFile(resolve(root,'eval/stage-1000-jev-fast-summary.json'),'utf8'));
+const shadowRelevanceExperiment=JSON.parse(await readFile(resolve(root,'eval/stage-1000-shadow-jev-fast-summary.json'),'utf8'));
+const shadowSafetyExperiment=JSON.parse(await readFile(resolve(root,'eval/stage-1000-shadow-safety-gate-summary.json'),'utf8'));
+const stage3000Acquisition=JSON.parse(await readFile(resolve(root,'expansion/sources/stage-3000-acquisition-phase1.json'),'utf8'));
 const candidateStatus=withCandidatePool(publicStatus,{candidateCount:reviewed.length,reviewedExternalCount:stage300Review.selected_records+reviewed.length,evalSummary});
-const expandedStatus=promoteStage1000Status(candidateStatus,{liveCount:catalogue.length,reviewedExternalCount:stage300Review.selected_records+reviewed.length,evalSummary,baselineExperiment,gatedExperiment,jevExperiment});
+const expandedStatus={
+  ...promoteStage1000Status(candidateStatus,{liveCount:catalogue.length,reviewedExternalCount:stage300Review.selected_records+reviewed.length,evalSummary,baselineExperiment,gatedExperiment,jevExperiment,shadowRelevanceExperiment,shadowSafetyExperiment}),
+  stage_3000_source:{
+    status:'building',
+    raw_source_records:stage3000Acquisition.retained_candidates,
+    target_additions:stage3000Acquisition.target_gap,
+    remaining_source_gap:stage3000Acquisition.remaining_source_gap,
+    provider_total:stage3000Acquisition.provider_total,
+    human_validated:false
+  }
+};
 
 await mkdir(resolve(root,'expansion/candidates'),{recursive:true});
 await Promise.all([

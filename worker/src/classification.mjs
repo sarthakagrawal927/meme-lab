@@ -5,13 +5,15 @@ const SERIOUS_LABEL='serious help, safety, care, grief, apology, factual guidanc
 
 export function needsSeriousHandling(comment) {
   const helpSeeking=/\b(help me|please help|i need|we need|tell me|give me|what can i say|what should i|how (?:do|can|should) i|want to (?:send|write|say)|guidance|steps to take)\b/i;
-  const highRisk=/\b(hurt (?:myself|themselves|himself|herself)|suicid|died|death|funeral|chest pain|trouble breathing|prescription|medication|unsafe (?:home|partner)|sexual (?:message|harassment)|panic attack|allergic reaction|anaphyla|missing child|lost their baby|miscarriage)\b/i;
-  return helpSeeking.test(comment)||highRisk.test(comment);
+  const highRisk=/(?:\b(?:my|our|their|his|her) [a-z]+ (?:has )?died\b|\b(?:someone|person|friend|relative|parent|child|baby|pet|dog|cat|he|she|they) (?:has )?died\b|\b(?:hurt (?:myself|themselves|himself|herself)|suicid|death|funeral|chest pain|trouble breathing|prescription|medication|unsafe (?:home|partner)|sexual (?:message|harassment)|panic attack|allergic reaction|anaphyla|missing child|lost their baby|miscarriage)\b)/i;
+  const supportRequest=/\b(?:ask(?:ed|s)?|need(?:ed|s)?|want(?:ed|s)?|looking|seek(?:ing)?)\b.{0,120}\b(?:help|guidance|support|listen|apolog(?:y|ize|ise)?|respond|report|deadline|official|document|fee|steps|service|contact|explanation|take responsibility|stay with)\b/i;
+  const seriousTopic=/\b(sexual assault|assaulted|pregnan|fertility treatment|poison(?:ed|ing)?|dishwasher capsule|gas smell|carbon monoxide|harassment|locks changed|put down (?:a |the |their )?(?:dog|cat|pet)|passport|payroll deduction|scholarship deadline|emergency service)\b/i;
+  return helpSeeking.test(comment)||highRisk.test(comment)||supportRequest.test(comment)||seriousTopic.test(comment);
 }
 
 export function requiresFactualAnswer(comment) {
-  const factualRequest=/\b(factual explanation|plain factual|what (?:the )?.+ (?:field|fields|term|terms) mean|which (?:tax|visa|legal|medical) (?:form|document)|how (?:do|should) i (?:file|complete|fill|submit))\b/i;
-  const factualDomain=/\b(tax|residency|visa|legal|medical|prescription|identification|government form)\b/i;
+  const factualRequest=/\b(factual explanation|plain factual|what (?:the )?.+ (?:field|fields|term|terms) mean|which .+ (?:form|document)|how (?:do|should) i (?:file|complete|fill|submit)|current documents|expected processing time|confirmed .+ deadline|official submission page|correct .+ contact|written explanation)\b/i;
+  const factualDomain=/\b(tax|residency|visa|legal|medical|prescription|identification|government form|passport|payroll|payslip|scholarship|application)\b/i;
   return factualRequest.test(comment)&&factualDomain.test(comment);
 }
 

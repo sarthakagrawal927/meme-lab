@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import worker from '../worker/src/index.mjs';
 import {humourBelongs,needsSeriousHandling,rankCandidates,requiresFactualAnswer} from '../worker/src/classification.mjs';
 import {MODEL,validateSelection,normalizeSelection,normalizeRankedSelection,validateRankedSelection,presentSelection} from '../worker/src/recommendation.mjs';
-import {EMBEDDING_MODEL} from '../worker/src/retrieval.mjs';
+import {EMBEDDING_MODEL,reciprocalRankFuse,retrieveCandidates} from '../worker/src/retrieval.mjs';
 
 const selection={decision:'meme',confidence:'high',none_reason:'',candidates:[{id:'waiting-skeleton',reason:'Waiting Skeleton turns the endless approval delay into the entire frustrating experience.',score:94}]};
 const assetResponse=new Response('<h1>ok</h1>',{headers:{'Content-Type':'text/html'}});
@@ -37,6 +37,36 @@ test('public worker returns a validated known meme without exposing prompt data'
   assert.equal(body.confidence,'high');
   assert.equal(body.feedback_enabled,true);
   assert(!JSON.stringify(body).includes('CATALOGUE_JSON'));
+});
+
+test('semantic retrieval fuses meaning and example ranks without duplicate memes',()=>{
+  const meaning=[
+    {id:'meme-a-meaning',score:.9,metadata:{catalogue_id:'a'}},
+    {id:'meme-b-meaning',score:.8,metadata:{catalogue_id:'b'}}
+  ];
+  const examples=[
+    {id:'meme-b-example',score:.95,metadata:{catalogue_id:'b'}},
+    {id:'meme-c-example',score:.85,metadata:{catalogue_id:'c'}}
+  ];
+  const fused=reciprocalRankFuse([meaning,examples],{limit:3});
+  assert.deepEqual(fused.map(match=>match.catalogue_id),['b','a','c']);
+  assert.equal(fused.filter(match=>match.catalogue_id==='b').length,1);
+});
+
+test('production retrieval queries both indexed views and returns unique catalogue records',async()=>{
+  const filters=[];
+  const retrievalEnv={
+    AI:{run:async()=>({data:[[1,0,0]]})},
+    MEME_INDEX:{query:async(_vector,options)=>{
+      filters.push(options.filter);
+      return options.filter.view==='meaning'
+        ? {matches:[{id:'meme-meaning-a',score:.9,metadata:{catalogue_id:'waiting-skeleton',view:'meaning'}},{id:'meme-meaning-b',score:.8,metadata:{catalogue_id:'this-is-fine',view:'meaning'}}]}
+        : {matches:[{id:'meme-example-b',score:.95,metadata:{catalogue_id:'this-is-fine',view:'example'}},{id:'meme-example-c',score:.85,metadata:{catalogue_id:'first-try',view:'example'}}]};
+    }}
+  };
+  const records=await retrieveCandidates(retrievalEnv,'A situation worth testing.',3);
+  assert.deepEqual(filters,[{view:'meaning'},{view:'example'}]);
+  assert.deepEqual(records.map(record=>record.id),['this-is-fine','waiting-skeleton','first-try']);
 });
 
 test('public worker saves one-tap feedback for an existing recommendation',async()=>{
@@ -115,7 +145,13 @@ test('multiple meme options are ordered by fit score and keep their scores',()=>
 test('classifier gate only runs for high-precision serious cues',async()=>{
   assert.equal(needsSeriousHandling('Please help me write a condolence message.'),true);
   assert.equal(needsSeriousHandling('My build failed right before the demo.'),false);
+  assert.equal(needsSeriousHandling('A friend was assaulted and asked me to listen while they consider support.'),true);
+  assert.equal(needsSeriousHandling('A colleague wants confidential reporting options for repeated harassment.'),true);
+  assert.equal(needsSeriousHandling('I want to apologize without making excuses.'),true);
+  assert.equal(needsSeriousHandling('The booking display died and delayed both presentations.'),false);
   assert.equal(requiresFactualAnswer('I need a plain factual explanation of these tax identification fields.'),true);
+  assert.equal(requiresFactualAnswer('I need the current documents and expected processing time for a passport.'),true);
+  assert.equal(requiresFactualAnswer('A student needs the confirmed scholarship deadline and official submission page.'),true);
   assert.equal(requiresFactualAnswer('The tax deadline is tomorrow and my receipts are in three bags.'),false);
   const fetchImpl=async(_url,options)=>{
     const {labels}=JSON.parse(options.body);

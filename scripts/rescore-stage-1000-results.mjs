@@ -5,8 +5,10 @@ import {fileURLToPath} from 'node:url';
 import {parseJsonl} from '../src/expansion.mjs';
 
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
+const dataset=process.argv[2]??'primary';
+if(!['primary','shadow'].includes(dataset)) throw new Error(`Unsupported stage-1000 rescore dataset: ${dataset}.`);
 const catalogueText=await readFile(resolve(root,'worker/tools/stage-1000-catalogue.json'),'utf8');
-const casesText=await readFile(resolve(root,'eval/relevance_stage1000_v1.jsonl'),'utf8');
+const casesText=await readFile(resolve(root,`eval/relevance_stage1000${dataset==='shadow'?'_shadow':''}_v1.jsonl`),'utf8');
 const cases=parseJsonl(casesText);
 const byId=new Map(cases.map(row=>[row.id,row]));
 const inputHash=createHash('sha256').update(catalogueText).update(casesText).digest('hex');
@@ -15,7 +17,8 @@ function rate(rows,key) {
   return rows.length?rows.filter(row=>row[key]).length/rows.length:0;
 }
 
-for(const name of ['stage-1000-baseline','stage-1000-jev-gated','stage-1000-jev-fast']) {
+const names=dataset==='shadow'?['stage-1000-shadow-jev-fast']:['stage-1000-baseline','stage-1000-jev-gated','stage-1000-jev-fast'];
+for(const name of names) {
   const path=resolve(root,`eval/results/${name}.json`);
   const report=JSON.parse(await readFile(path,'utf8'));
   const rows=report.rows.map(row=>{
@@ -48,7 +51,7 @@ for(const name of ['stage-1000-baseline','stage-1000-jev-gated','stage-1000-jev-
     top_3:metrics.top_3>=0.72,
     ...(noMeme.length?{correct_abstention:metrics.correct_abstention>=0.82,inappropriate_joking:metrics.inappropriate_joking<=0.18}:{})
   };
-  const rescored={...report,input_hash:inputHash,labels:'assistant-authored_twice_audited_pending_owner_review',metrics,gates,rows,rescored_at:new Date().toISOString()};
+  const rescored={...report,input_hash:inputHash,labels:dataset==='shadow'?'assistant-authored_cross_audited_pending_owner_review':'assistant-authored_twice_audited_pending_owner_review',metrics,gates,rows,rescored_at:new Date().toISOString()};
   const summary={...rescored};
   delete summary.rows;
   await Promise.all([

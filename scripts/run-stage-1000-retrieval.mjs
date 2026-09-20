@@ -16,5 +16,5 @@ for(const testCase of cases) {
 }
 const recallAt=limit=>rows.filter(row=>row.rank&&row.rank<=limit).length/rows.length;
 const metrics={recall_at_10:recallAt(10),recall_at_30:recallAt(30),recall_at_50:recallAt(50)};
-await writeFile(resolve(root,'eval/stage-1000-retrieval-summary.json'),`${JSON.stringify({version:'stage-1000-single-vector-retrieval-v1',created_at:new Date().toISOString(),human_validated:false,cases:rows.length,metrics,misses_at_50:rows.filter(row=>!row.rank).map(row=>row.id)},null,2)}\n`);
+await writeFile(resolve(root,'eval/stage-1000-retrieval-summary.json'),`${JSON.stringify({version:'stage-1000-single-vector-retrieval-v1',created_at:new Date().toISOString(),human_validated:false,cases:rows.length,metrics,misses_at_10:rows.filter(row=>!row.rank||row.rank>10).map(({id,rank})=>({id,rank})),misses_at_30:rows.filter(row=>!row.rank||row.rank>30).map(({id,rank})=>({id,rank})),misses_at_50:rows.filter(row=>!row.rank).map(({id,rank})=>({id,rank}))},null,2)}\n`);
 console.log(JSON.stringify(metrics,null,2));

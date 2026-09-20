@@ -1,0 +1,16 @@
+{
+  "version": "stage-1000-shadow-v1",
+  "labels": "assistant-authored_pending_owner_review",
+  "human_validated": false,
+  "batches": [
+    "relevance_stage1000_shadow_batch_a.jsonl",
+    "relevance_stage1000_shadow_batch_b.jsonl",
+    "relevance_stage1000_shadow_batch_c.jsonl"
+  ],
+  "excluded_prior_cases": 60,
+  "cases": 60,
+  "humour": 45,
+  "no_meme": 15,
+  "distinct_target_ids": 76,
+  "pending_owner_review": 60
+}

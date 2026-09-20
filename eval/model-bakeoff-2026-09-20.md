@@ -14,8 +14,9 @@ For 30,000 references, route the comment to `meme`, `movie_dialogue`, or `none` 
 | Arm | Task | Result | Latency | Disposition |
 |---|---|---:|---:|---|
 | Current Llama 3.3 70B | 300-catalogue relevance | 80% top-three on 20 expansion-only cases | 3.85s p95 | Keep for explanations and fallback |
-| Vector top 30 + Jev fast | 1,000-catalogue relevance | 88.9% top-one; 95.6% top-three; 100% top-three given retrieval | Classifier stage only | Live ranking path; labels pending owner review |
-| Serious cue + Jev gate | 1,000-catalogue abstention | 93.3% correct abstention; 6.7% inappropriate joking | Included in gated run | Live safety path with a deterministic factual-request guard |
+| Dual-view vector top 30 + Jev fast | Fresh 1,000-catalogue shadow relevance | 55.6% top-one; 64.4% top-three; 100% top-three given retrieval | Classifier stage only | Best generalization signal; retrieval remains the bottleneck |
+| Dual-view vector top 30 + Jev fast | Tuned 1,000-catalogue regression | 84.4% top-one; 95.6% top-three; 97.7% top-three given retrieval | Classifier stage only | Regression coverage, not an unbiased quality estimate |
+| Serious cue + Jev gate | Fresh 1,000-catalogue shadow safety | 100% correct abstention; 0% inappropriate joking; 0% false abstention | Classifier runs on 20% of cases | Live safety path with deterministic factual-request guards |
 | Jev 1.13 fast via classifier.dev | Enriched shortlist relevance | 19/20 top-one; repeated run 19/20 top-three | 1.19s wall for 20 inputs | Best candidate for the scoring stage |
 | Jev 1.13 fast on real retrieved top 30 | Expansion-only relevance | 70% top-one; 90% top-three; 94.7% top-three given retrieval | 923ms p50, 1.27s p95 | Strong shortlist signal; not the final judge |
 | Jev top 12 then current Llama | Expansion-only relevance | 80% top-one; 80% top-three | 3.53s p50, 4.48s p95 | Improves first choice, but pruning loses alternative coverage |
@@ -29,7 +30,10 @@ For 30,000 references, route the comment to `meme`, `movie_dialogue`, or `none` 
 ## What the numbers mean
 
 - Jev was the strongest direct classifier. Metadata mattered: its fast arm improved from 16/20 with names alone to 19/20 with name plus meaning metadata.
-- On the 60-case stage-1,000 set, vector retrieval found an acceptable meme for 43 of 45 humour cases. Jev put an acceptable result first for 40 of 45 and in the first three for all 43 retrieved cases. The labels were independently audited twice by assistants and remain pending owner review.
+- The original stage-1,000 set was used to repair metadata, so its 97.8% top-three result is now a regression score, not a clean estimate of generalization.
+- On the independently drafted and cross-audited shadow set, the old single-view retriever reached 57.8% retrieval, 51.1% top-one, and 55.6% top-three. Dual-view retrieval raised those to 64.4%, 55.6%, and 64.4% without changing the classifier. The labels remain pending owner review.
+- Jev placed an acceptable meme in the first three for every shadow case where retrieval found one. That makes retrieval coverage—not shortlist ranking—the clearest current accuracy bottleneck.
+- The shadow safety set had 15 serious prompts and 45 humour prompts. The current gate abstained on all 15 serious prompts and allowed all 45 humour prompts, but this is still a small assistant-authored set.
 - On the harder end-to-end run, Jev saw the actual vector-retrieved top 30 rather than hand-picked options. It improved top-three coverage from 80% to 90%, while the Jev-to-Llama ensemble improved top one from 75% to 80% but did not improve top three. This supports using Jev as a feature or candidate injection, not pruning the shortlist blindly.
 - Jev cannot replace retrieval. The tested API accepts at most 100 labels, so 3,000 or 30,000 records still need vector search first.
 - The BGE cross-encoder is cheap and useful for literal semantic relevance, but it does not understand whether humour belongs and cannot write explanations.
@@ -39,7 +43,7 @@ For 30,000 references, route the comment to `meme`, `movie_dialogue`, or `none` 
 
 ## Recommended staged architecture
 
-1. **1,000 → 3,000 memes:** enrich metadata, retrieve 30, score with Jev fast, then use the generative model to produce complete sentence explanations without changing the ranked IDs.
+1. **1,000 → 3,000 memes:** store separate meaning and usage-example vectors, fuse both retrieval lists, score 30 candidates with Jev fast, then use the generative model to produce complete sentence explanations without changing the ranked IDs.
 2. **3,000 → 30,000 reactions:** add `corpus_type`, route to meme/dialogue/none, retrieve within the chosen corpus, then run the same scoring and explanation stages.
 3. **Evaluation:** maintain balanced owner-reviewed cases for meme, dialogue, ambiguous, and none; report per-corpus top-one, top-three, abstention, calibration, and latency.
 4. **Copyright boundary:** store short reaction lines, scene/source metadata, and permitted preview assets rather than bulk movie scripts or unlicensed media.

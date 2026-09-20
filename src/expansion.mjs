@@ -119,6 +119,38 @@ export function validateStage1000Cases(cases,{allowedIds}) {
   return {cases:cases.length,humour,no_meme:noMeme,distinct_target_ids:targetIds.size,pending_owner_review:cases.length};
 }
 
+export function validateStage1000ShadowCases(cases,{allowedIds,excludedContexts=[]}) {
+  if(cases.length!==60) throw new Error(`Stage-1000 shadow evaluation must contain 60 cases; found ${cases.length}.`);
+  const ids=new Set();
+  const contexts=new Set(excludedContexts.map(context=>context.trim().toLowerCase()));
+  const targetIds=new Set();
+  let humour=0;
+  let noMeme=0;
+  for(const [index,row] of cases.entries()) {
+    const expectedId=`eval-shadow1000-${String(index+1).padStart(3,'0')}`;
+    if(row.id!==expectedId||ids.has(row.id)) throw new Error(`Invalid or out-of-order shadow eval ID: ${row.id}.`);
+    ids.add(row.id);
+    const context=row.context?.trim().toLowerCase();
+    if(typeof row.context!=='string'||row.context.trim().length<30||contexts.has(context)) throw new Error(`Invalid, duplicate, or previously used shadow context: ${row.id}.`);
+    contexts.add(context);
+    if(!['humour','no_meme'].includes(row.intent_label)) throw new Error(`Invalid shadow intent label: ${row.id}.`);
+    if(!Array.isArray(row.acceptable_ids)||new Set(row.acceptable_ids).size!==row.acceptable_ids.length||row.acceptable_ids.some(id=>!allowedIds.has(id))) throw new Error(`Unknown or duplicate acceptable ID in ${row.id}.`);
+    if(row.intent_label==='humour') {
+      humour+=1;
+      if(row.acceptable_ids.length<1||row.acceptable_ids.length>4) throw new Error(`Humour shadow case ${row.id} needs one to four acceptable memes.`);
+      row.acceptable_ids.forEach(id=>targetIds.add(id));
+    } else {
+      noMeme+=1;
+      if(row.acceptable_ids.length!==0) throw new Error(`No-meme shadow case ${row.id} cannot have acceptable references.`);
+    }
+    if(row.review_status!=='pending_owner_review'||row.human_validated!==false) throw new Error(`${row.id} must remain explicitly unvalidated until owner review.`);
+    if(!Array.isArray(row.failure_modes)||row.failure_modes.length===0||row.failure_modes.some(mode=>typeof mode!=='string'||!mode.trim())) throw new Error(`${row.id} needs string failure modes.`);
+  }
+  if(humour!==45||noMeme!==15) throw new Error(`Stage-1000 shadow evaluation must contain 45 humour and 15 no-meme cases; found ${humour}/${noMeme}.`);
+  if(targetIds.size<45) throw new Error(`Stage-1000 shadow cases must cover at least 45 distinct meme IDs; found ${targetIds.size}.`);
+  return {cases:cases.length,humour,no_meme:noMeme,distinct_target_ids:targetIds.size,pending_owner_review:cases.length};
+}
+
 export function validateCoverageMetadata(cases,records) {
   const byId=new Map(records.map(record=>[record.id,record]));
   const targetIds=new Set(cases.flatMap(row=>row.acceptable_ids));
@@ -198,7 +230,7 @@ export function withCandidatePool(status,{candidateCount,reviewedExternalCount,e
   };
 }
 
-export function promoteStage1000Status(status,{liveCount,reviewedExternalCount,evalSummary,baselineExperiment,gatedExperiment,jevExperiment}) {
+export function promoteStage1000Status(status,{liveCount,reviewedExternalCount,evalSummary,baselineExperiment,gatedExperiment,jevExperiment,shadowRelevanceExperiment,shadowSafetyExperiment}) {
   return {
     ...status,
     live_records:liveCount,
@@ -209,16 +241,24 @@ export function promoteStage1000Status(status,{liveCount,reviewedExternalCount,e
     records_to_source:Math.max(0,3000-liveCount),
     records_to_ultimate_target:Math.max(0,status.ultimate_target-liveCount),
     ultimate_progress_percent:Math.round((liveCount/status.ultimate_target)*100),
-    retrieval:{live:'semantic_top_30_then_classify_top_3',expanded:'semantic_top_30_then_classify_top_3'},
-    eval:{...status.eval,stage_1000_cases:evalSummary.cases,pending_owner_review_total:status.eval.cases+(status.eval.expansion_cases??0)+evalSummary.pending_owner_review},
+    retrieval:{live:'dual_view_semantic_top_30_then_classify_top_3',expanded:'dual_view_semantic_top_30_then_classify_top_3'},
+    eval:{
+      ...status.eval,
+      stage_1000_cases:evalSummary.cases,
+      stage_1000_shadow_cases:shadowSafetyExperiment.cases,
+      pending_owner_review_total:status.eval.cases+(status.eval.expansion_cases??0)+evalSummary.pending_owner_review+shadowSafetyExperiment.cases
+    },
     latest_stage_1000_experiment:{
-      created_at:jevExperiment.rescored_at??jevExperiment.created_at,
+      created_at:shadowRelevanceExperiment.created_at,
       human_validated:false,
-      label_status:'twice_assistant_audited_pending_owner_review',
+      label_status:'independently_assistant_cross_audited_pending_owner_review',
       baseline:baselineExperiment.metrics,
       serious_gate:gatedExperiment.metrics,
       jev_ranking:jevExperiment.metrics,
-      production_path:'serious-content gate, vector top 30, Jev top 3, Llama explanations'
+      tuned_regression:jevExperiment.metrics,
+      shadow_relevance:shadowRelevanceExperiment.metrics,
+      shadow_safety:shadowSafetyExperiment.metrics,
+      production_path:'serious-content gate, dual-view vector retrieval with reciprocal-rank fusion, Jev top 3, Llama explanations'
     }
   };
 }

@@ -47,6 +47,8 @@ Compatibility varies by provider. Set `MEME_JSON_MODE=false` only if your compat
 
 Jev does **not** implement either local model route. The public Worker uses classifier.dev's Jev fast tier to rank a 30-item semantic shortlist and to guard serious help-seeking prompts; Cloudflare Workers AI generates the candidate explanations. If classifier.dev is unavailable, the existing structured Workers AI selector is the fallback.
 
+The 1,000-record remote index stores separate `meaning` and `example` vectors. Before seeding a new Vectorize index, create string metadata indexing for `view` and boolean metadata indexing for `control`, wait for both mutations to finish, then run the tool's `/seed` endpoint. Vectorize does not retroactively index metadata on vectors inserted before a metadata index exists. Keep reseeding on the experiment Worker because delete/upsert processing is asynchronous; verify `vectorCount` and a filtered query before deploying production code that depends on the new vectors.
+
 ## First run
 
 Load a smoke situation or paste your own. Start with the 30 reaction candidates and enriched descriptions. Compare **Choose with model** against names-only and the lexical control. Load a source image explicitly when needed. Add an optional replacement/note, then choose a verdict. “No meme belongs here” and “a better match exists” mean different things; the app keeps them separate.

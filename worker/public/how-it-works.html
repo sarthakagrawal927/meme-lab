@@ -92,8 +92,8 @@
     <section class="eval-card" aria-labelledby="eval-title">
       <div>
         <p class="eyebrow">THE EVAL DATASET</p>
-        <h2 id="eval-title"><span data-status="eval_cases">30</span> held-out situations before the next jump.</h2>
-        <p>The first set contains <span data-status="eval_humour">20</span> humour cases and <span data-status="eval_no_meme">10</span> no-meme cases, including perspective errors, literal wording, sensitive moments, and multiple acceptable reactions.</p>
+        <h2 id="eval-title"><span data-status="eval_cases">50</span> held-out situations before the next jump.</h2>
+        <p>The control set contains <span data-status="eval_humour">20</span> humour and <span data-status="eval_no_meme">10</span> no-meme cases; a second set adds <span data-status="eval_expansion">20</span> expansion-only cases to prove the larger catalogue adds useful coverage.</p>
       </div>
       <ul>
         <li><strong>Top 1</strong><span>Did the first choice land?</span></li>
@@ -101,7 +101,7 @@
         <li><strong>Abstention</strong><span>Did it stay serious when humour did not belong?</span></li>
         <li><strong>Calibration</strong><span>Did low confidence actually mean weaker results?</span></li>
       </ul>
-      <p class="eval-note" id="eval-status"><strong>Latest draft:</strong> the 300 path reached 90% top-three relevance and 80% correct abstention on assistant-authored labels. It remains behind the 30-record control and is not promoted.</p>
+      <p class="eval-note" id="eval-status"><strong>Latest draft:</strong> the 300 path preserved the original cases, but failed the expansion-only coverage set. The new metadata needs repair before promotion.</p>
     </section>
 
     <section class="honesty-card">

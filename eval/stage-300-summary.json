@@ -1,32 +1,58 @@
 {
   "version": "stage-300-reranker-draft-v1",
-  "created_at": "2026-09-20T05:39:00.514Z",
+  "created_at": "2026-09-20T05:51:04.229Z",
   "labels": "assistant-authored_pending_owner_review",
   "human_validated": false,
+  "stage_300_retrieval": "semantic_top_20_plus_all_30_live_controls",
   "cases": 30,
   "metrics": {
     "control-30": {
       "top_1": 0.85,
       "top_3": 0.95,
-      "correct_abstention": 0.9,
-      "inappropriate_joking": 0.1,
-      "unknown_ids": 0,
-      "latency_ms": {"p50": 2590, "p95": 4513},
-      "confidence_counts": {"high": 9, "medium": 11, "low": 10}
-    },
-    "stage-300": {
-      "top_1": 0.8,
-      "top_3": 0.9,
       "correct_abstention": 0.8,
       "inappropriate_joking": 0.2,
       "unknown_ids": 0,
-      "latency_ms": {"p50": 2754, "p95": 4213},
-      "confidence_counts": {"high": 15, "medium": 7, "low": 8}
+      "latency_ms": {
+        "p50": 2718,
+        "p95": 4116
+      },
+      "confidence_counts": {
+        "high": 9,
+        "medium": 11,
+        "low": 10
+      }
+    },
+    "stage-300": {
+      "top_1": 0.95,
+      "top_3": 1,
+      "correct_abstention": 0.8,
+      "inappropriate_joking": 0.2,
+      "unknown_ids": 0,
+      "latency_ms": {
+        "p50": 3913,
+        "p95": 4916
+      },
+      "confidence_counts": {
+        "high": 14,
+        "medium": 8,
+        "low": 8
+      }
     }
   },
   "gates": {
-    "absolute_stage_300": {"top_3": true, "correct_abstention": true, "inappropriate_joking": true, "unknown_ids": true, "passed": true},
-    "control_parity": {"top_3": false, "correct_abstention": false, "latency_p95": true, "passed": false},
+    "absolute_stage_300": {
+      "top_3": true,
+      "correct_abstention": true,
+      "inappropriate_joking": true,
+      "unknown_ids": true,
+      "passed": true
+    },
+    "control_parity": {
+      "top_3": true,
+      "correct_abstention": true,
+      "latency_p95": false,
+      "passed": false
+    },
     "owner_confirmed_eval": false
   },
   "promotion_ready": false

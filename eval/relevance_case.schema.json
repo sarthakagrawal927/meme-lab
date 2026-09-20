@@ -5,7 +5,7 @@
   "additionalProperties": false,
   "required": ["id", "title", "context", "intent_label", "acceptable_ids", "failure_modes", "review_status", "human_validated"],
   "properties": {
-    "id": {"type": "string", "pattern": "^eval-v1-[0-9]{3}$"},
+    "id": {"type": "string", "pattern": "^eval-(?:v1|stage300)-[0-9]{3}$"},
     "title": {"type": "string", "minLength": 1},
     "context": {"type": "string", "minLength": 30},
     "intent_label": {"enum": ["humour", "no_meme"]},

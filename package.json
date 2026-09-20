@@ -22,7 +22,8 @@
     "experiment:review": "node scripts/review-holdout.mjs",
     "experiment:summarize": "node scripts/summarize-holdout.mjs",
     "experiment:retrieval": "node scripts/run-vector-retrieval.mjs",
-    "experiment:stage-300": "node scripts/run-stage-300-eval.mjs"
+    "experiment:stage-300": "node scripts/run-stage-300-eval.mjs",
+    "experiment:stage-300-coverage": "node scripts/run-stage-300-coverage.mjs"
   },
   "devDependencies": {
     "wrangler": "^4.135.0"

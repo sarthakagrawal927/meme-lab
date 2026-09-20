@@ -22,15 +22,21 @@ async function embed(env,texts) {
   return response.data;
 }
 
-async function retrieve(env,text,topK=30) {
+async function retrieve(env,text,topK=30,{controlReserve=0}={}) {
   const [vector]=await embed(env,[text]);
-  const result=await env.MEME_INDEX.query(vector,{topK,returnMetadata:'all'});
-  return result.matches.map(match=>({
+  const [allResult,controlResult]=await Promise.all([
+    env.MEME_INDEX.query(vector,{topK,returnMetadata:'all'}),
+    controlReserve>0?env.MEME_INDEX.query(vector,{topK:controlReserve,filter:{control:true},returnMetadata:'all'}):Promise.resolve({matches:[]})
+  ]);
+  const broadSlots=Math.max(0,topK-controlReserve);
+  const ordered=[...allResult.matches.slice(0,broadSlots),...controlResult.matches,...allResult.matches.slice(broadSlots)];
+  const seen=new Set();
+  return ordered.map(match=>({
     id:match.metadata?.catalogue_id??match.id,
     vector_id:match.id,
     score:match.score,
     metadata:match.metadata
-  }));
+  })).filter(match=>!seen.has(match.id)&&seen.add(match.id)).slice(0,topK);
 }
 
 function normalizeSelection(value) {
@@ -83,7 +89,7 @@ export default {
           const mutation=await env.MEME_INDEX.upsert(batch.map((record,index)=>({
             id:`meme-${String(start+index+1).padStart(4,'0')}`,
             values:vectors[index],
-            metadata:{catalogue_id:record.id,name:record.name,stage:300}
+            metadata:{catalogue_id:record.id,name:record.name,stage:300,control:start+index<30}
           })));
           upserted+=mutation.count??batch.length;
         }
@@ -93,15 +99,16 @@ export default {
         const text=url.searchParams.get('q')?.trim();
         const topK=Math.min(30,Math.max(1,Number.parseInt(url.searchParams.get('topK')??'30',10)||30));
         if(!text) return Response.json({error:'q is required'},{status:400});
-        const matches=await retrieve(env,text,topK);
-        return Response.json({query:text,model:EMBEDDING_MODEL,pooling:EMBEDDING_POOLING,matches});
+        const controlReserve=url.searchParams.get('hybrid')==='1'?10:0;
+        const matches=await retrieve(env,text,topK,{controlReserve});
+        return Response.json({query:text,model:EMBEDDING_MODEL,pooling:EMBEDDING_POOLING,control_reserve:controlReserve,matches});
       }
       if(url.pathname==='/recommend'&&request.method==='POST') {
         const body=await request.json();
         const comment=typeof body?.comment==='string'?body.comment.trim():'';
         const arm=body?.arm;
         if(!comment||!['control-30','stage-300'].includes(arm)) return Response.json({error:'comment and a valid arm are required'},{status:400});
-        const matches=arm==='stage-300'?await retrieve(env,comment,30):catalogue.slice(0,30).map(record=>({id:record.id,score:null}));
+        const matches=arm==='stage-300'?await retrieve(env,comment,50,{controlReserve:30}):catalogue.slice(0,30).map(record=>({id:record.id,score:null}));
         const candidates=matches.map(match=>byId.get(match.id)).filter(Boolean);
         const selection=await rerank(env,comment,candidates);
         return Response.json({arm,retrieved_ids:matches.map(match=>match.id),selection});

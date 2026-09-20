@@ -1,14 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {parseJsonl,validateExpansionRecords,validateEvalCases,validateStages,expansionStatus} from '../src/expansion.mjs';
+import {parseJsonl,validateExpansionRecords,validateEvalCases,validateStageCoverageCases,validateStages,expansionStatus} from '../src/expansion.mjs';
 
 const catalogue=JSON.parse(await readFile(new URL('../worker/public/catalogue.json',import.meta.url),'utf8'));
 const candidates=parseJsonl(await readFile(new URL('../expansion/candidates/stage-300.jsonl',import.meta.url),'utf8'));
 const source=parseJsonl(await readFile(new URL('../expansion/sources/stage-300-source.jsonl',import.meta.url),'utf8'));
 const cases=parseJsonl(await readFile(new URL('../eval/relevance_holdout_v1.jsonl',import.meta.url),'utf8'));
+const coverageCases=parseJsonl(await readFile(new URL('../eval/relevance_stage300_v1.jsonl',import.meta.url),'utf8'));
 const manifest=JSON.parse(await readFile(new URL('../expansion/stages.json',import.meta.url),'utf8'));
 const stageReport=JSON.parse(await readFile(new URL('../eval/stage-300-summary.json',import.meta.url),'utf8'));
+const coverageReport=JSON.parse(await readFile(new URL('../eval/stage-300-coverage-summary.json',import.meta.url),'utf8'));
 
 test('stage-300 pool adds 270 non-live candidates without ID collisions',()=>{
   assert.equal(candidates.length,270);
@@ -48,4 +50,13 @@ test('stage-300 draft clears absolute gates but does not claim control parity or
   assert.equal(stageReport.gates.control_parity.passed,false);
   assert.equal(stageReport.gates.owner_confirmed_eval,false);
   assert.equal(stageReport.promotion_ready,false);
+});
+
+test('stage-300 expansion coverage stays explicitly unvalidated and failed',()=>{
+  const summary=validateStageCoverageCases(coverageCases,{allowedIds:new Set(candidates.map(record=>record.id)),excludedIds:[...catalogue,...candidates.slice(0,30)].map(record=>record.id)});
+  assert.deepEqual(summary,{cases:20,humour:20,pending_owner_review:20});
+  assert.equal(coverageReport.human_validated,false);
+  assert.equal(coverageReport.metrics.retrieval_at_50,0.25);
+  assert.equal(coverageReport.metrics.top_3,0);
+  assert.equal(coverageReport.promotion_ready,false);
 });

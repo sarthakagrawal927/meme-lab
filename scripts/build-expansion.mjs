@@ -1,7 +1,7 @@
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {resolve,dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {parseJsonl,validateSourceCandidates,validateExpansionRecords,validateEvalCases,validateStages,expansionStatus} from '../src/expansion.mjs';
+import {parseJsonl,validateSourceCandidates,validateExpansionRecords,validateEvalCases,validateStageCoverageCases,validateStages,expansionStatus} from '../src/expansion.mjs';
 
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const original=JSON.parse(await readFile(resolve(root,'original/meme_references_v1/memes.json'),'utf8'));
@@ -55,17 +55,21 @@ const manifest=JSON.parse(await readFile(resolve(root,'expansion/stages.json'),'
 validateStages(manifest);
 const evalCases=parseJsonl(await readFile(resolve(root,'eval/relevance_holdout_v1.jsonl'),'utf8'),'relevance holdout');
 const evalSummary=validateEvalCases(evalCases,{allowedIds:new Set(live.map(record=>record.id))});
+const coverageCases=parseJsonl(await readFile(resolve(root,'eval/relevance_stage300_v1.jsonl'),'utf8'),'stage-300 coverage holdout');
+const coverageEvalSummary=validateStageCoverageCases(coverageCases,{allowedIds:new Set(candidates.map(record=>record.id)),excludedIds:original.map(record=>record.id)});
 const experiment=JSON.parse(await readFile(resolve(root,'eval/stage-300-summary.json'),'utf8'));
+const coverageExperiment=JSON.parse(await readFile(resolve(root,'eval/stage-300-coverage-summary.json'),'utf8'));
 const experimentSummary={
   created_at:experiment.created_at,
   human_validated:experiment.human_validated,
   labels:experiment.labels,
+  stage_300_retrieval:experiment.stage_300_retrieval,
   control_30:experiment.metrics['control-30'],
   stage_300:experiment.metrics['stage-300'],
   gates:experiment.gates,
   promotion_ready:experiment.promotion_ready
 };
-const status=expansionStatus({manifest,liveCount:live.length,candidateCount:candidates.length,reviewedExternalCount:reviewed.length,evalSummary,experimentSummary});
+const status=expansionStatus({manifest,liveCount:live.length,candidateCount:candidates.length,reviewedExternalCount:reviewed.length,evalSummary,coverageEvalSummary,experimentSummary,coverageExperimentSummary:coverageExperiment});
 
 await mkdir(resolve(root,'expansion/candidates'),{recursive:true});
 await Promise.all([

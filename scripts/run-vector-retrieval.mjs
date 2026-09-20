@@ -9,7 +9,7 @@ const cases=parseJsonl(await readFile(resolve(root,'eval/relevance_holdout_v1.js
 const rows=[];
 
 for(const testCase of cases) {
-  const response=await fetch(`${endpoint}/query?q=${encodeURIComponent(testCase.context)}&topK=30`);
+  const response=await fetch(`${endpoint}/query?q=${encodeURIComponent(testCase.context)}&topK=30&hybrid=1`);
   if(!response.ok) throw new Error(`${testCase.id} query failed with HTTP ${response.status}.`);
   const payload=await response.json();
   const ids=payload.matches.map(match=>match.id);
@@ -36,6 +36,7 @@ const report={
   catalogue_records:300,
   embedding_model:'@cf/baai/bge-base-en-v1.5',
   pooling:'cls',
+  retrieval:'semantic_top_20_plus_control_top_10',
   cases:rows.length,
   labels:'assistant-authored_pending_owner_review',
   retrieval_only:true,

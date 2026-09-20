@@ -14,9 +14,10 @@
 - **30 live:** direct all-candidate control.
 - **270 candidates:** 30 existing caption-template records plus 240 assistant-selected public templates. Metadata, media rights, and delivery review are still required; none are presented as human-approved.
 - **300 sourced:** the first-stage pool is full (30 live + 270 candidates), so sourcing is no longer the stage-300 blocker.
-- **30-case eval draft:** 20 humour and 10 no-meme cases, all pending owner review before they can count as human-validated evidence.
+- **50-case eval draft:** 20 seed humour, 10 no-meme, and 20 expansion-only humour cases, all pending owner review before they can count as human-validated evidence.
 - **Vectorize trial:** a 300-record index is provisioned with BGE Base 1.5 embeddings and a top-30 semantic shortlist.
-- **Latest assistant-labelled run:** stage 300 reached 90% top-three relevance and 80% correct abstention; the 30-record control reached 95% and 90%. Stage 300 therefore remains experimental even though it meets the absolute draft thresholds.
-- **Next implementation:** owner-confirm the eval labels, improve the candidate metadata and two retrieval misses, then rerun parity before promotion.
+- **Control-preservation run:** a 50-candidate probe (all 30 live controls plus 20 retrieved expansion records) reached 100% top-three relevance and 80% correct abstention on the original 30 cases, but p95 latency rose to 4.9 seconds.
+- **Expansion-only run:** retrieval found an acceptable new candidate in 25% of 20 assistant-labelled cases and the reranker selected one in 0%. This is a failed stage, not promotion evidence.
+- **Next implementation:** replace generic candidate descriptions with meaning-specific metadata, owner-confirm the eval labels, then rerun expansion coverage, safety, and latency.
 
 Tracking: [public beta #1](https://github.com/sarthakagrawal927/meme-lab/issues/1), [catalogue expansion #2](https://github.com/sarthakagrawal927/meme-lab/issues/2).

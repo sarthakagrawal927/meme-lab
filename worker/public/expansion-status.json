@@ -14,21 +14,24 @@
     "cases": 30,
     "humour": 20,
     "no_meme": 10,
-    "pending_owner_review": 30
+    "pending_owner_review": 30,
+    "expansion_cases": 20,
+    "pending_owner_review_total": 50
   },
   "latest_experiment": {
-    "created_at": "2026-09-20T05:39:00.514Z",
+    "created_at": "2026-09-20T05:51:04.229Z",
     "human_validated": false,
     "labels": "assistant-authored_pending_owner_review",
+    "stage_300_retrieval": "semantic_top_20_plus_all_30_live_controls",
     "control_30": {
       "top_1": 0.85,
       "top_3": 0.95,
-      "correct_abstention": 0.9,
-      "inappropriate_joking": 0.1,
+      "correct_abstention": 0.8,
+      "inappropriate_joking": 0.2,
       "unknown_ids": 0,
       "latency_ms": {
-        "p50": 2590,
-        "p95": 4513
+        "p50": 2718,
+        "p95": 4116
       },
       "confidence_counts": {
         "high": 9,
@@ -37,18 +40,18 @@
       }
     },
     "stage_300": {
-      "top_1": 0.8,
-      "top_3": 0.9,
+      "top_1": 0.95,
+      "top_3": 1,
       "correct_abstention": 0.8,
       "inappropriate_joking": 0.2,
       "unknown_ids": 0,
       "latency_ms": {
-        "p50": 2754,
-        "p95": 4213
+        "p50": 3913,
+        "p95": 4916
       },
       "confidence_counts": {
-        "high": 15,
-        "medium": 7,
+        "high": 14,
+        "medium": 8,
         "low": 8
       }
     },
@@ -61,12 +64,29 @@
         "passed": true
       },
       "control_parity": {
-        "top_3": false,
-        "correct_abstention": false,
-        "latency_p95": true,
+        "top_3": true,
+        "correct_abstention": true,
+        "latency_p95": false,
         "passed": false
       },
       "owner_confirmed_eval": false
+    },
+    "promotion_ready": false
+  },
+  "latest_expansion_coverage_experiment": {
+    "version": "stage-300-expansion-coverage-draft-v1",
+    "created_at": "2026-09-20T05:56:31.444Z",
+    "labels": "assistant-authored_pending_owner_review",
+    "human_validated": false,
+    "cases": 20,
+    "metrics": {
+      "retrieval_at_50": 0.25,
+      "top_1": 0,
+      "top_3": 0,
+      "latency_ms": {
+        "p50": 4275,
+        "p95": 5438
+      }
     },
     "promotion_ready": false
   },

@@ -1,13 +1,13 @@
 {
   "version": "catalogue-expansion-v1",
-  "live_records": 30,
-  "candidate_records": 270,
+  "live_records": 300,
+  "candidate_records": 0,
   "assistant_reviewed_external_records": 240,
   "sourced_records": 300,
-  "next_target": 300,
-  "records_to_source": 0,
+  "next_target": 1000,
+  "records_to_source": 700,
   "retrieval": {
-    "live": "direct_all_candidates",
+    "live": "semantic_top_30_then_rerank_top_3",
     "expanded": "semantic_top_30_then_rerank_top_3"
   },
   "eval": {
@@ -105,7 +105,7 @@
     },
     {
       "target_records": 300,
-      "status": "building",
+      "status": "live",
       "label": "Common reactions"
     },
     {

@@ -2,12 +2,19 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import worker from '../worker/src/index.mjs';
 import {MODEL,validateSelection,normalizeSelection,presentSelection} from '../worker/src/recommendation.mjs';
+import {EMBEDDING_MODEL} from '../worker/src/retrieval.mjs';
 
-const selection={decision:'meme',confidence:'high',none_reason:'',candidates:[{id:'waiting-skeleton',reason:'The wait became the whole experience.'}]};
+const selection={decision:'meme',confidence:'high',none_reason:'',candidates:[{id:'waiting-skeleton',reason:'The wait became the whole experience.',score:94}]};
 const assetResponse=new Response('<h1>ok</h1>',{headers:{'Content-Type':'text/html'}});
 const stored=[];
 const env={
-  AI:{run:async(model,input)=>{assert.equal(model,MODEL);assert.equal(input.response_format.type,'json_schema');return{response:selection};}},
+  AI:{run:async(model,input)=>{
+    if(model===EMBEDDING_MODEL) return {data:[[1,0,0]]};
+    assert.equal(model,MODEL);
+    assert.equal(input.response_format.type,'json_schema');
+    return{response:selection};
+  }},
+  MEME_INDEX:{query:async()=>({matches:[{id:'meme-0021',score:.92,metadata:{catalogue_id:'waiting-skeleton'}}]})},
   ASSETS:{fetch:async()=>assetResponse.clone()},
   DB:{prepare:sql=>({bind:(...values)=>({
     run:async()=>{stored.push({sql,values});return{success:true,meta:{changes:1}};},
@@ -21,6 +28,7 @@ test('public worker returns a validated known meme without exposing prompt data'
   const body=await response.json();
   assert.equal(body.candidates[0].id,'waiting-skeleton');
   assert.equal(body.candidates[0].rank,1);
+  assert.equal(body.candidates[0].score,94);
   assert.equal(body.confidence,'high');
   assert.equal(body.feedback_enabled,true);
   assert(!JSON.stringify(body).includes('CATALOGUE_JSON'));
@@ -47,6 +55,7 @@ test('public worker rejects empty, oversized, cross-origin, and unknown API requ
 
 test('selection validation rejects unknown, duplicate, and contradictory results',()=>{
   assert.throws(()=>validateSelection({decision:'meme',confidence:'high',none_reason:'',candidates:[{id:'unknown',reason:'x'}]}),/unknown/);
+  assert.throws(()=>validateSelection({...selection,candidates:[{...selection.candidates[0],score:101}]}),/fit score/);
   assert.throws(()=>validateSelection({...selection,candidates:[selection.candidates[0],selection.candidates[0]]}),/duplicate/);
   assert.throws(()=>validateSelection({decision:'none',confidence:'low',none_reason:'No fit.',candidates:selection.candidates}),/contradictory/);
   assert.throws(()=>validateSelection({decision:'none',confidence:'high',none_reason:'No fit.',candidates:[]}),/contradictory confidence/);
@@ -62,9 +71,28 @@ test('missing confidence downgrades safely and low-confidence memes remain visib
   assert.deepEqual({decision:none.decision,confidence:none.confidence,reason:none.none_reason},{decision:'none',confidence:'low',reason:'None of the current references is a natural fit.'});
 });
 
+test('multiple meme options are ordered by fit score and keep their scores',()=>{
+  const normalized=normalizeSelection({
+    decision:'meme',
+    confidence:'medium',
+    none_reason:'',
+    candidates:[
+      {id:'waiting-skeleton',reason:'The long delay is the defining part of this situation.',score:72},
+      {id:'this-is-fine',reason:'Visible chaos clashes directly with the speaker claiming calm.',score:89}
+    ]
+  });
+  assert.deepEqual(normalized.candidates.map(candidate=>candidate.id),['this-is-fine','waiting-skeleton']);
+  assert.deepEqual(presentSelection(validateSelection(normalized)).candidates.map(candidate=>candidate.score),[89,72]);
+});
+
 test('static responses receive security and no-index headers',async()=>{
   const response=await worker.fetch(new Request('https://example.test/'),env);
   assert.equal(response.headers.get('x-frame-options'),'DENY');
   assert.match(response.headers.get('content-security-policy'),/frame-ancestors 'none'/);
   assert.equal(response.headers.get('x-robots-tag'),'noindex, nofollow');
+});
+
+test('health reports the full live catalogue',async()=>{
+  const response=await worker.fetch(new Request('https://example.test/api/health'),env);
+  assert.deepEqual(await response.json(),{status:'ok',catalogue:300});
 });

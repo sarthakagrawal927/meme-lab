@@ -23,10 +23,9 @@ test('stage-300 pool adds 270 non-live candidates without ID collisions',()=>{
 
 test('public collection exposes all sourced records with honest availability labels',()=>{
   assert.equal(publicCollection.length,300);
-  assert.equal(publicCollection.filter(record=>record.availability==='live').length,30);
-  assert.equal(publicCollection.filter(record=>record.availability==='experimental').length,270);
+  assert.equal(publicCollection.filter(record=>record.availability==='live').length,300);
   assert.equal(new Set(publicCollection.map(record=>record.id)).size,300);
-  assert(publicCollection.every(record=>['live','experimental'].includes(record.availability)));
+  assert(publicCollection.every(record=>record.availability==='live'));
 });
 
 test('relevance holdout has 20 humour and 10 no-meme cases pending owner review',()=>{
@@ -39,11 +38,14 @@ test('expansion stages preserve direct control and bounded retrieval',()=>{
   const stages=validateStages(manifest);
   assert.equal(stages[0].retrieval.strategy,'direct_all_candidates');
   assert(stages.slice(1).every(stage=>stage.retrieval.shortlist_size===30&&stage.retrieval.result_size===3));
-  const status=expansionStatus({manifest,liveCount:catalogue.length,candidateCount:candidates.length,reviewedExternalCount:240,evalSummary:{cases:30,humour:20,no_meme:10,pending_owner_review:30}});
+  const status=expansionStatus({manifest,liveCount:catalogue.length+candidates.length,candidateCount:0,reviewedExternalCount:240,evalSummary:{cases:30,humour:20,no_meme:10,pending_owner_review:30}});
   assert.equal(status.sourced_records,300);
-  assert.equal(status.candidate_records,270);
+  assert.equal(status.live_records,300);
+  assert.equal(status.candidate_records,0);
   assert.equal(status.assistant_reviewed_external_records,240);
-  assert.equal(status.records_to_source,0);
+  assert.equal(status.next_target,1000);
+  assert.equal(status.records_to_source,700);
+  assert.equal(status.retrieval.live,'semantic_top_30_then_rerank_top_3');
 });
 
 test('validators reject duplicate expansion IDs and accidental holdout approval',()=>{

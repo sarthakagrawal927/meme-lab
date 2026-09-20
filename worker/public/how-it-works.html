@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="See the product and technical system behind Meme Lab, from 30 curated reactions to a tested 3,000-meme collection.">
+  <meta name="description" content="See how Meme Lab retrieves and scores matches from a live 300-meme collection.">
   <title>Meme Lab — How it works</title>
   <link rel="stylesheet" href="/app.css">
 </head>
@@ -22,39 +22,39 @@
     <section class="page-intro how-intro">
       <p class="eyebrow">PRODUCT + IMPLEMENTATION</p>
       <h1>How one comment<br>becomes the best options.</h1>
-      <p class="intro">The live product compares meaning, social dynamics, and tone—not just words. We started with 30 carefully described reactions and are expanding only when the larger collection performs better on held-out examples.</p>
+      <p class="intro">The live product compares meaning, social dynamics, and tone—not just words. It retrieves a focused shortlist from 300 memes, then returns up to three scored options.</p>
       <a class="primary page-cta" href="/">Try a comment <span aria-hidden="true">→</span></a>
     </section>
 
     <section class="live-strip" aria-label="Current implementation status">
       <span class="status-dot" aria-hidden="true"></span>
-      <div><strong>Live now: <span data-status="live_records">30</span> reactions</strong><span>Direct comparison · up to three ranked options · confidence · feedback</span></div>
-      <span class="live-pill">CONTROL STAGE</span>
+      <div><strong>Live now: <span data-status="live_records">300</span> reactions</strong><span>Semantic retrieval · up to three scored options · confidence · feedback</span></div>
+      <span class="live-pill">PERSONAL TOOL</span>
     </section>
 
     <section class="technical-section" aria-labelledby="live-system-title">
       <div class="technical-heading">
         <div>
-          <p class="eyebrow">THE LIVE 30</p>
-          <h2 id="live-system-title">Small enough to compare everything.</h2>
+          <p class="eyebrow">THE LIVE 300</p>
+          <h2 id="live-system-title">Retrieve first. Rank second.</h2>
         </div>
-        <p>Each reference has a name, meaning, relational pattern, good example, near-miss example, tags, provenance, and media status. The whole set fits in one bounded model request.</p>
+        <p>Each reference has a name, meaning, relational pattern, example, tags, provenance, and media status. Vector search narrows 300 records to the 30 most relevant before reranking.</p>
       </div>
       <ol class="pipeline" aria-label="Current recommendation pipeline">
         <li><span>01</span><strong>Validate</strong><p>Trim and bound the comment. Treat it as untrusted text.</p></li>
-        <li><span>02</span><strong>Compare all 30</strong><p>Send every enriched reference to Llama 3.3 through Workers AI.</p></li>
-        <li><span>03</span><strong>Rank and check</strong><p>Accept only known, distinct IDs with structured reasons and confidence.</p></li>
-        <li><span>04</span><strong>Show up to three</strong><p>Load every plausible preview, best first, and store optional feedback for 30 days.</p></li>
+        <li><span>02</span><strong>Retrieve 30</strong><p>Use BGE embeddings and Vectorize to find the closest semantic matches.</p></li>
+        <li><span>03</span><strong>Rank and score</strong><p>Llama judges tone and social fit, then returns known IDs with 0–100 scores.</p></li>
+        <li><span>04</span><strong>Show up to three</strong><p>Load the plausible previews, best first, and store optional feedback for 30 days.</p></li>
       </ol>
     </section>
 
     <section class="technical-section retrieval-section" aria-labelledby="retrieval-title">
       <div class="technical-heading">
         <div>
-          <p class="eyebrow">THE EXPANDED SYSTEM</p>
-          <h2 id="retrieval-title">At 3,000, retrieve first. Rank second.</h2>
+          <p class="eyebrow">THE RETRIEVAL SYSTEM</p>
+          <h2 id="retrieval-title">The same path scales beyond 300.</h2>
         </div>
-        <p>Putting thousands of records into every prompt would be slower, costlier, and harder to evaluate. The expanded system uses semantic retrieval to preserve speed while the same reranker preserves taste.</p>
+        <p>Putting hundreds or thousands of records into every prompt would be slower and harder to evaluate. Semantic retrieval keeps the prompt bounded while the reranker preserves judgment.</p>
       </div>
       <div class="flow-line" role="img" aria-label="Comment becomes an embedding, semantic search returns 30 candidates, and the reranker returns three options">
         <div><span>COMMENT</span><strong>What happened</strong></div>
@@ -79,11 +79,11 @@
           <p class="eyebrow">THE EXPANSION PLAN</p>
           <h2 id="scale-title">30 → 300 → 1,000 → 3,000</h2>
         </div>
-        <p id="expansion-progress"><span data-status="sourced_records">300</span> references are sourced: 30 live and 270 candidates pending metadata, media, and delivery review. The pool is full; promotion now depends on evaluation.</p>
+        <p id="expansion-progress"><span data-status="live_records">300</span> references are live in the personal tool. Evaluation now guides metadata cleanup and the next expansion.</p>
       </div>
       <ol class="stage-list">
         <li class="stage-live"><span class="stage-number">30</span><div><strong>Seed control</strong><p>Curated metadata, direct all-candidate comparison, live public feedback.</p></div><em>LIVE</em></li>
-        <li class="stage-building"><span class="stage-number">300</span><div><strong>Common reactions</strong><p>Normalize sources, review media, seed semantic retrieval, and beat the 30-record baseline.</p></div><em>BUILDING</em></li>
+        <li class="stage-live"><span class="stage-number">300</span><div><strong>Common reactions</strong><p>Semantic retrieval, scored multi-option results, searchable collection, and feedback.</p></div><em>LIVE</em></li>
         <li><span class="stage-number">1K</span><div><strong>Broader vocabulary</strong><p>Add missing families from real failures, expand the held-out set, and recheck confidence.</p></div><em>PLANNED</em></li>
         <li><span class="stage-number">3K</span><div><strong>Long-tail collection</strong><p>Cover niche reactions without sacrificing top-three relevance, abstention, or latency.</p></div><em>TARGET</em></li>
       </ol>
@@ -101,21 +101,21 @@
         <li><strong>Abstention</strong><span>Did it stay serious when humour did not belong?</span></li>
         <li><strong>Calibration</strong><span>Did low confidence actually mean weaker results?</span></li>
       </ul>
-      <p class="eval-note" id="eval-status"><strong>Latest draft:</strong> a meaning-specific metadata pilot reached 95% expansion-only retrieval and 80% top-three relevance. Labels and the remaining catalogue still need review before promotion.</p>
+      <p class="eval-note" id="eval-status"><strong>Latest draft:</strong> a meaning-specific metadata pilot reached 95% expansion-only retrieval and 80% top-three relevance. The personal tool is live; these labels guide continued tuning.</p>
     </section>
 
     <section class="honesty-card">
       <div>
-        <p class="eyebrow">THE PROMOTION RULE</p>
+        <p class="eyebrow">THE EXPANSION RULE</p>
         <h2>Bigger is useful only if the results stay good.</h2>
       </div>
-      <p>Every stage must preserve top-three relevance, correct no-meme decisions, valid IDs, and acceptable latency. If a larger catalogue fails, the live collection stays on the last passing stage.</p>
+      <p>The personal catalogue stays available while evaluation tracks top-three relevance, correct no-meme decisions, valid IDs, and latency. Weak metadata gets fixed from observed failures.</p>
     </section>
   </main>
 
   <footer>
-    <a href="/collection">Browse the live 30</a>
-    <span>Current stage: 30 live · 300 building</span>
+    <a href="/collection">Browse all 300 live memes</a>
+    <span>Current stage: 300 live · 1,000 planned</span>
   </footer>
   <script type="module" src="/how-it-works.js"></script>
 </body>

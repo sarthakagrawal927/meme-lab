@@ -1,4 +1,4 @@
-import {catalogue} from './catalogue.generated.mjs';
+import {catalogue} from './catalogue.stage300.generated.mjs';
 
 export const MODEL='@cf/meta/llama-3.3-70b-instruct-fp8-fast';
 const allowedIds=new Set(catalogue.map(record=>record.id));
@@ -16,6 +16,7 @@ export function validateSelection(value) {
   const seen=new Set();
   for(const candidate of value.candidates) {
     if(!candidate||typeof candidate!=='object'||Array.isArray(candidate)||!allowedIds.has(candidate.id)||typeof candidate.reason!=='string'||!candidate.reason.trim()||candidate.reason.length>300) throw new Error('The model returned an unknown candidate.');
+    if(!Number.isInteger(candidate.score)||candidate.score<0||candidate.score>100) throw new Error('The model returned an invalid fit score.');
     if(seen.has(candidate.id)) throw new Error('The model returned a duplicate candidate.');
     seen.add(candidate.id);
   }
@@ -28,7 +29,7 @@ export function validateSelection(value) {
 export function normalizeSelection(value) {
   if(!value||typeof value!=='object'||Array.isArray(value)||!Array.isArray(value.candidates)) return value;
   const confidence=['high','medium','low'].includes(value.confidence)?value.confidence:'low';
-  if(value.candidates.length>0) return {...value,decision:'meme',confidence,none_reason:''};
+  if(value.candidates.length>0) return {...value,decision:'meme',confidence,none_reason:'',candidates:[...value.candidates].sort((a,b)=>(b.score??-1)-(a.score??-1))};
   return {...value,decision:'none',confidence:'low',none_reason:typeof value.none_reason==='string'&&value.none_reason.trim()?value.none_reason:'None of the current references is a natural fit.'};
 }
 
@@ -41,7 +42,8 @@ export function presentSelection(selection) {
     candidates:selection.candidates.map((candidate,rank)=>({
       ...publicById.get(candidate.id),
       rank:rank+1,
-      reason:candidate.reason
+      reason:candidate.reason,
+      score:candidate.score
     }))
   };
 }

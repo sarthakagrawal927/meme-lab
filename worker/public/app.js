@@ -38,7 +38,7 @@ function renderBest(candidate) {
   const copy=document.createElement('div');
   copy.className='result-copy';
   const lowConfidence=currentRecommendation?.confidence==='low';
-  const rank=Object.assign(document.createElement('span'),{className:`rank${lowConfidence?' low-confidence':''}`,textContent:lowConfidence?'LOW CONFIDENCE':'BEST MATCH'});
+  const rank=Object.assign(document.createElement('span'),{className:`rank${lowConfidence?' low-confidence':''}`,textContent:`${lowConfidence?'LOW CONFIDENCE':'BEST MATCH'} · FIT ${candidate.score}/100`});
   const title=Object.assign(document.createElement('h2'),{textContent:candidate.name});
   const reason=Object.assign(document.createElement('p'),{textContent:candidate.reason});
   const source=Object.assign(document.createElement('p'),{className:'source-note',textContent:'Source preview · media rights not established'});
@@ -56,7 +56,7 @@ function renderAlternatives(candidates) {
     const copy=document.createElement('div');
     copy.className='alternative-copy';
     copy.append(
-      Object.assign(document.createElement('span'),{textContent:`#${candidate.rank}`}),
+      Object.assign(document.createElement('span'),{textContent:`#${candidate.rank} · FIT ${candidate.score}/100`}),
       Object.assign(document.createElement('h3'),{textContent:candidate.name}),
       Object.assign(document.createElement('p'),{textContent:candidate.reason})
     );

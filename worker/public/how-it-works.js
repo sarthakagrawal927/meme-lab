@@ -16,10 +16,7 @@ try {
   }
   const progress=document.querySelector('#expansion-progress');
   if(progress) {
-    const pending=status.candidate_records??Math.max(0,status.sourced_records-status.live_records);
-    progress.textContent=status.records_to_source===0
-      ? `${status.sourced_records} references are sourced: ${status.live_records} live and ${pending} candidates pending metadata, media, and delivery review. The pool is full; promotion now depends on evaluation.`
-      : `${status.sourced_records} references are sourced. ${status.records_to_source} more quality records are needed for the ${status.next_target}-reference trial.`;
+    progress.textContent=`${status.live_records} references are live in the personal tool. ${status.records_to_source} more sourced records would reach the ${status.next_target}-meme stage.`;
   }
   const evalStatus=document.querySelector('#eval-status');
   const experiment=status.latest_experiment;
@@ -28,8 +25,8 @@ try {
     const stage=experiment.stage_300;
     const coverage=status.latest_expansion_coverage_experiment;
     evalStatus.innerHTML=coverage
-      ? `<strong>Latest draft:</strong> the 300 path reached ${percent(stage.top_3)} top-three relevance and ${percent(stage.correct_abstention)} correct abstention on the original cases. A meaning-specific metadata pilot reached ${percent(coverage.metrics.retrieval_at_30)} expansion-only retrieval and ${percent(coverage.metrics.top_3)} top-three relevance. Labels and the remaining catalogue still need review, so it is not promoted.`
-      : `<strong>Latest draft:</strong> the 300 path reached ${percent(stage.top_3)} top-three relevance and ${percent(stage.correct_abstention)} correct abstention on assistant-authored labels. It is not promoted.`;
+      ? `<strong>Latest draft:</strong> the 300 path reached ${percent(stage.top_3)} top-three relevance and ${percent(stage.correct_abstention)} correct abstention on the original cases. A meaning-specific metadata pilot reached ${percent(coverage.metrics.retrieval_at_30)} expansion-only retrieval and ${percent(coverage.metrics.top_3)} top-three relevance. The personal tool is live; these assistant-authored labels guide continued tuning.`
+      : `<strong>Latest draft:</strong> the 300 path reached ${percent(stage.top_3)} top-three relevance and ${percent(stage.correct_abstention)} correct abstention on assistant-authored labels. The personal tool remains live while evaluation improves it.`;
   }
 } catch(error) {
   console.warn(error.message);

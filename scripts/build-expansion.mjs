@@ -35,6 +35,7 @@ const normalizedLive=live.map(record=>({
   near_miss_context:record.interpretation.near_miss_context,
   tags:record.interpretation.tags,
   image_url:record.asset?.url??null,
+  media_status:record.asset?.redistribution_permission==='established'?'approved':'source-preview',
   availability:'live'
 }));
 
@@ -64,7 +65,8 @@ const publicCollection=[
     near_miss_context:record.near_miss_context,
     tags:record.tags,
     image_url:record.media.image_url,
-    availability:'experimental'
+    media_status:record.media.rights_status==='established'?'approved':'source-preview',
+    availability:'live'
   }))
 ];
 const manifest=JSON.parse(await readFile(resolve(root,'expansion/stages.json'),'utf8'));
@@ -86,13 +88,14 @@ const experimentSummary={
   gates:experiment.gates,
   promotion_ready:experiment.promotion_ready
 };
-const status=expansionStatus({manifest,liveCount:live.length,candidateCount:candidates.length,reviewedExternalCount:reviewed.length,evalSummary,coverageEvalSummary,experimentSummary,coverageExperimentSummary:coverageExperiment});
+const status=expansionStatus({manifest,liveCount:publicCollection.length,candidateCount:0,reviewedExternalCount:reviewed.length,evalSummary,coverageEvalSummary,experimentSummary,coverageExperimentSummary:coverageExperiment});
 
 await mkdir(resolve(root,'expansion/candidates'),{recursive:true});
 await Promise.all([
   writeFile(resolve(root,'expansion/candidates/stage-300-seed.jsonl'),`${queued.map(record=>JSON.stringify(record)).join('\n')}\n`),
   writeFile(resolve(root,'expansion/candidates/stage-300.jsonl'),`${candidates.map(record=>JSON.stringify(record)).join('\n')}\n`),
   writeFile(resolve(root,'worker/public/collection.json'),`${JSON.stringify(publicCollection,null,2)}\n`),
+  writeFile(resolve(root,'worker/src/catalogue.stage300.generated.mjs'),`// Generated from the live 300-record catalogue. Do not edit.\nexport const catalogue=${JSON.stringify(publicCollection,null,2)};\n`),
   writeFile(resolve(root,'worker/tools/stage-300-catalogue.json'),`${JSON.stringify([...normalizedLive,...candidates].map(({id,name,message,relational_pattern,example_context,near_miss_context,tags})=>({id,name,message,relational_pattern,example_context,near_miss_context,tags})),null,2)}\n`),
   writeFile(resolve(root,'expansion/reviewed/stage-300-review.json'),`${JSON.stringify({
     version:'stage-300-assistant-review-v1',
@@ -106,4 +109,4 @@ await Promise.all([
   },null,2)}\n`),
   writeFile(resolve(root,'worker/public/expansion-status.json'),`${JSON.stringify(status,null,2)}\n`)
 ]);
-console.log(JSON.stringify({status:'built',live_records:live.length,candidate_records:candidates.length,assistant_reviewed_external_records:reviewed.length,next_target:status.next_target,records_to_source:status.records_to_source,eval_cases:evalCases.length},null,2));
+console.log(JSON.stringify({status:'built',live_records:publicCollection.length,candidate_records:0,assistant_reviewed_external_records:reviewed.length,next_target:status.next_target,records_to_source:status.records_to_source,eval_cases:evalCases.length},null,2));

@@ -2,9 +2,14 @@ const grid=document.querySelector('#collection-grid');
 const search=document.querySelector('#catalogue-search');
 const count=document.querySelector('#collection-count');
 const empty=document.querySelector('#collection-empty');
-const filters=[...document.querySelectorAll('[data-collection-filter]')];
+const pagination=document.querySelector('#collection-pagination');
+const pageLabel=document.querySelector('#collection-page-label');
+const previous=document.querySelector('#collection-previous');
+const next=document.querySelector('#collection-next');
 let catalogue=[];
-let activeFilter='all';
+let filtered=[];
+let page=1;
+const pageSize=24;
 
 function imageFor(meme,index) {
   const frame=document.createElement('div');
@@ -24,7 +29,11 @@ function imageFor(meme,index) {
   return frame;
 }
 
-function render(items) {
+function render() {
+  const pages=Math.max(1,Math.ceil(filtered.length/pageSize));
+  page=Math.min(page,pages);
+  const start=(page-1)*pageSize;
+  const items=filtered.slice(start,start+pageSize);
   grid.replaceChildren();
   const fragment=document.createDocumentFragment();
   for(const [index,meme] of items.entries()) {
@@ -46,28 +55,29 @@ function render(items) {
   }
   grid.append(fragment);
   empty.hidden=items.length!==0;
-  const scopeTotal=activeFilter==='all'?catalogue.length:catalogue.filter(meme=>meme.availability===activeFilter).length;
-  count.textContent=`${items.length} of ${scopeTotal} ${activeFilter==='all'?'sourced':activeFilter} memes`;
+  count.textContent=filtered.length===0?'0 memes':`Showing ${start+1}–${start+items.length} of ${filtered.length} memes`;
+  pagination.hidden=filtered.length<=pageSize;
+  pageLabel.textContent=`Page ${page} of ${pages}`;
+  previous.disabled=page===1;
+  next.disabled=page===pages;
 }
 
 function filterCollection() {
   const query=search.value.trim().toLocaleLowerCase();
-  const scoped=activeFilter==='all'?catalogue:catalogue.filter(meme=>meme.availability===activeFilter);
-  if(!query) return render(scoped);
-  render(scoped.filter(meme=>[meme.name,meme.message,meme.relational_pattern,...meme.tags].join(' ').toLocaleLowerCase().includes(query)));
+  filtered=query?catalogue.filter(meme=>[meme.name,meme.message,meme.relational_pattern,...meme.tags].join(' ').toLocaleLowerCase().includes(query)):catalogue;
+  page=1;
+  render();
 }
 
 try {
   const response=await fetch('/collection.json');
   if(!response.ok) throw new Error('Could not load the collection.');
   catalogue=await response.json();
-  render(catalogue);
+  filtered=catalogue;
+  render();
   search.addEventListener('input',filterCollection);
-  for(const filter of filters) filter.addEventListener('click',()=>{
-    activeFilter=filter.dataset.collectionFilter;
-    for(const button of filters) button.setAttribute('aria-pressed',String(button===filter));
-    filterCollection();
-  });
+  previous.addEventListener('click',()=>{page-=1;render();grid.scrollIntoView({behavior:'smooth',block:'start'});});
+  next.addEventListener('click',()=>{page+=1;render();grid.scrollIntoView({behavior:'smooth',block:'start'});});
 } catch(error) {
   count.textContent=error.message;
   empty.hidden=false;

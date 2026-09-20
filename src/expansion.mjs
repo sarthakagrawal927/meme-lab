@@ -108,7 +108,8 @@ export function validateCoverageMetadata(cases,records) {
 export function validateStages(manifest) {
   const targets=manifest?.stages?.map(stage=>stage.target_records);
   if(JSON.stringify(targets)!==JSON.stringify([30,300,1000,3000])) throw new Error('Expansion stages must be 30, 300, 1000, and 3000 in order.');
-  if(manifest.stages[0].status!=='live'||manifest.stages.slice(1).some(stage=>!['building','planned'].includes(stage.status))) throw new Error('Expansion stage statuses are invalid.');
+  if(!targets.includes(manifest.current_live_stage)) throw new Error('Current live stage must match a declared expansion stage.');
+  if(manifest.stages.some(stage=>stage.target_records<=manifest.current_live_stage?stage.status!=='live':!['building','planned'].includes(stage.status))) throw new Error('Expansion stage statuses are invalid.');
   for(const stage of manifest.stages) {
     if(stage.target_records>30&&stage.retrieval.strategy!=='semantic_shortlist_then_rerank') throw new Error(`Stage ${stage.target_records} needs bounded semantic retrieval.`);
     if(stage.gates.top_three_sendability.minimum<0.7||stage.gates.correct_abstention.minimum<0.8) throw new Error(`Stage ${stage.target_records} weakens the baseline quality gates.`);
@@ -126,7 +127,7 @@ export function expansionStatus({manifest,liveCount,candidateCount,reviewedExter
     sourced_records:liveCount+candidateCount,
     next_target:next?.target_records??liveCount,
     records_to_source:Math.max(0,(next?.target_records??liveCount)-liveCount-candidateCount),
-    retrieval:{live:'direct_all_candidates',expanded:'semantic_top_30_then_rerank_top_3'},
+    retrieval:{live:liveCount>30?'semantic_top_30_then_rerank_top_3':'direct_all_candidates',expanded:'semantic_top_30_then_rerank_top_3'},
     eval:{...evalSummary,expansion_cases:coverageEvalSummary?.cases??0,pending_owner_review_total:evalSummary.pending_owner_review+(coverageEvalSummary?.pending_owner_review??0)},
     latest_experiment:experimentSummary,
     latest_expansion_coverage_experiment:coverageExperimentSummary,

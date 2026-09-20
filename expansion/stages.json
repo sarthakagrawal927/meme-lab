@@ -1,7 +1,7 @@
 {
   "version": "catalogue-expansion-v1",
-  "current_live_stage": 30,
-  "principle": "A larger catalogue ships only when held-out relevance and abstention stay at or above the seed baseline.",
+  "current_live_stage": 300,
+  "principle": "All sourced memes are available in this personal tool; evaluation guides metadata improvements and future expansion.",
   "stages": [
     {
       "label": "Seed control",
@@ -18,7 +18,7 @@
     {
       "label": "Common reactions",
       "target_records": 300,
-      "status": "building",
+      "status": "live",
       "retrieval": {"strategy": "semantic_shortlist_then_rerank", "shortlist_size": 30, "result_size": 3},
       "gates": {
         "top_three_sendability": {"minimum": 0.7},

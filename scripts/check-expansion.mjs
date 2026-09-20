@@ -23,7 +23,7 @@ const evalSummary=validateEvalCases(cases,{allowedIds:new Set(catalogue.map(reco
 const coverageEvalSummary=validateStageCoverageCases(coverageCases,{allowedIds:new Set(candidates.map(record=>record.id)),excludedIds:catalogue.map(record=>record.id)});
 validateCoverageMetadata(coverageCases,candidates);
 const experimentSummary={created_at:experiment.created_at,human_validated:experiment.human_validated,labels:experiment.labels,stage_300_retrieval:experiment.stage_300_retrieval,control_30:experiment.metrics['control-30'],stage_300:experiment.metrics['stage-300'],gates:experiment.gates,promotion_ready:experiment.promotion_ready};
-const status=expansionStatus({manifest,liveCount:catalogue.length,candidateCount:candidates.length,reviewedExternalCount:240,evalSummary,coverageEvalSummary,experimentSummary,coverageExperimentSummary:coverageExperiment});
+const status=expansionStatus({manifest,liveCount:catalogue.length+candidates.length,candidateCount:0,reviewedExternalCount:240,evalSummary,coverageEvalSummary,experimentSummary,coverageExperimentSummary:coverageExperiment});
 const generated=JSON.parse(await readFile(resolve(root,'worker/public/expansion-status.json'),'utf8'));
 if(JSON.stringify(status)!==JSON.stringify(generated)) throw new Error('Generated public expansion status is stale. Run npm run build:expansion.');
 

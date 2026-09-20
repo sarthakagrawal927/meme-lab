@@ -31,7 +31,7 @@
     {
       "label": "Broad internet vocabulary",
       "target_records": 1000,
-      "status": "planned",
+      "status": "building",
       "retrieval": {"strategy": "semantic_shortlist_then_rerank", "shortlist_size": 30, "result_size": 3},
       "gates": {
         "top_three_sendability": {"minimum": 0.72},

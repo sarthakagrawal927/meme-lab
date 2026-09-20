@@ -1,12 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {parseJsonl,validateExpansionRecords,validateEvalCases,validateStageCoverageCases,validateCoverageMetadata,validateStages,expansionStatus} from '../src/expansion.mjs';
+import {parseJsonl,validateSourceCandidates,validateExpansionRecords,validateEvalCases,validateStageCoverageCases,validateCoverageMetadata,validateStages,expansionStatus} from '../src/expansion.mjs';
 
 const catalogue=JSON.parse(await readFile(new URL('../worker/public/catalogue.json',import.meta.url),'utf8'));
 const publicCollection=JSON.parse(await readFile(new URL('../worker/public/collection.json',import.meta.url),'utf8'));
 const candidates=parseJsonl(await readFile(new URL('../expansion/candidates/stage-300.jsonl',import.meta.url),'utf8'));
 const source=parseJsonl(await readFile(new URL('../expansion/sources/stage-300-source.jsonl',import.meta.url),'utf8'));
+const stage1000Source=parseJsonl(await readFile(new URL('../expansion/sources/stage-1000-source.jsonl',import.meta.url),'utf8'));
 const cases=parseJsonl(await readFile(new URL('../eval/relevance_holdout_v1.jsonl',import.meta.url),'utf8'));
 const coverageCases=parseJsonl(await readFile(new URL('../eval/relevance_stage300_v1.jsonl',import.meta.url),'utf8'));
 const manifest=JSON.parse(await readFile(new URL('../expansion/stages.json',import.meta.url),'utf8'));
@@ -26,6 +27,12 @@ test('public collection exposes all sourced records with honest availability lab
   assert.equal(publicCollection.filter(record=>record.availability==='live').length,300);
   assert.equal(new Set(publicCollection.map(record=>record.id)).size,300);
   assert(publicCollection.every(record=>record.availability==='live'));
+});
+
+test('stage-1000 acquisition adds a bounded non-live source pool',()=>{
+  assert.equal(stage1000Source.length,1000);
+  assert.doesNotThrow(()=>validateSourceCandidates(stage1000Source,{knownNames:publicCollection.map(record=>record.name),minimum:1000}));
+  assert(stage1000Source.every(record=>record.review_status==='needs_metadata_review'&&record.human_validated===false));
 });
 
 test('relevance holdout has 20 humour and 10 no-meme cases pending owner review',()=>{

@@ -12,6 +12,7 @@
     "build:public-catalogue": "node scripts/build-public-catalogue.mjs",
     "build:expansion": "node scripts/build-expansion.mjs",
     "acquire:stage-300": "node scripts/acquire-stage-300.mjs",
+    "acquire:stage-1000": "node scripts/acquire-stage-1000.mjs",
     "build:public": "npm run build:public-catalogue && npm run build:expansion",
     "dev:public": "npm run build:public && wrangler dev",
     "deploy:public": "npm run build:public && wrangler deploy",

@@ -2,8 +2,8 @@ const REQUIRED_RECORD_FIELDS=['id','name','message','relational_pattern','exampl
 const VALID_RIGHTS=['established','not_established','unavailable'];
 const VALID_REVIEW=['needs_metadata_review','needs_asset_and_delivery_review','approved'];
 
-export function validateSourceCandidates(records,{knownNames=[]}={}) {
-  if(records.length<240) throw new Error(`Stage-300 sourcing needs at least 240 candidates; found ${records.length}.`);
+export function validateSourceCandidates(records,{knownNames=[],minimum=240}={}) {
+  if(records.length<minimum) throw new Error(`Sourcing needs at least ${minimum} candidates; found ${records.length}.`);
   const ids=new Set();
   const names=new Set(knownNames.map(name=>name.toLowerCase().replaceAll(/[^a-z0-9]+/g,' ').trim()));
   for(const record of records) {

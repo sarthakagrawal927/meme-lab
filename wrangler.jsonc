@@ -3,6 +3,12 @@
   "name": "meme-lab-play",
   "main": "worker/src/index.mjs",
   "compatibility_date": "2026-09-19",
+  "routes": [
+    {
+      "pattern": "memes.significanthobbies.com",
+      "custom_domain": true
+    }
+  ],
   "assets": {
     "directory": "./worker/public",
     "binding": "ASSETS",

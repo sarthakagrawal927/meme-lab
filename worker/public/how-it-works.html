@@ -116,8 +116,8 @@
         <article><span>Workers AI</span><h3>One comment embedding</h3><p>The same complete sentence queries two separately indexed views so abstract meaning and concrete usage can retrieve different useful candidates.</p></article>
         <article><span>Vectorize</span><h3>6,000 stored vectors</h3><p>Three thousand references each contribute one meaning vector and one example vector. Reciprocal-rank fusion produces a unique shortlist of 30.</p></article>
         <article><span>Core reserve</span><h3>Known-good coverage survives</h3><p>Twenty shortlist slots search the full catalogue; ten reserve candidates from the original 1,000 so noisy expansion records cannot erase the stronger base.</p></article>
-        <article><span>Jev fast</span><h3>Social fit beats keyword overlap</h3><p>Full metadata lets the classifier judge actors, target, tone, viewpoint, example, and near-miss rather than choosing the most familiar shared word.</p></article>
-        <article><span>Perspective mode</span><h3>Parallel lenses, then one scale</h3><p>Three lens passes select distinct viewpoint candidates. A final batch rates the selected five on the same ordinal scale before the UI orders them.</p></article>
+        <article><span>Direct Jev</span><h3>Social fit beats keyword overlap</h3><p>One structured TypeSafe request independently scores all 30 candidates. Full metadata lets Jev judge actors, target, tone, viewpoint, example, and near-miss instead of choosing the most familiar shared word.</p></article>
+        <article><span>Perspective mode</span><h3>Three lenses in one batch</h3><p>One request selects distinct candidates for my reaction, their side, and the situation. A second request rates the selected five on the same ordinal scale before the UI orders them.</p></article>
         <article><span>Failure policy</span><h3>No expensive fallback</h3><p>If Jev is rate-limited, the product shows five semantic-retrieval matches as low-confidence weak fits. It never turns a traffic spike into unplanned 70B inference spend.</p></article>
       </div>
     </section>
@@ -225,8 +225,8 @@
         <article class="speed-slow"><span>THREE PERSPECTIVES</span><strong>3.99s</strong><p>“My sibling ate the leftovers, then asked why I was upset.”</p></article>
       </div>
       <div class="speed-explanation">
-        <div><strong>The largest remaining slowdown</strong><p>Multi-person mode performs three perspective-specific classifier passes and one final ordinal rescore. Remote embedding, Vectorize, classifier networking, and D1 persistence add smaller fixed costs.</p></div>
-        <div><strong>The safe optimization order</strong><p>First lock owner-reviewed quality. Then test one structured batched perspective call, compact metadata, and production p50/p95 tracing against the same cases. Do not trade the recovered viewpoints away for a synthetic speed win.</p></div>
+        <div><strong>The largest remaining slowdown</strong><p>Multi-person mode needs one batched perspective selection and one final ordinal rescore. Remote embedding, Vectorize, Jev networking, and D1 persistence add the remaining fixed costs.</p></div>
+        <div><strong>The safe optimization order</strong><p>First lock owner-reviewed quality. Then measure production p50/p95, trim metadata only when the same cases still pass, and avoid trading the recovered viewpoints away for a synthetic speed win.</p></div>
       </div>
     </section>
 
@@ -236,7 +236,7 @@
           <p class="eyebrow">STORAGE, MEDIA, AND COST</p>
           <h2 id="boundaries-title">The catalogue is stored. The media stays with its source.</h2>
         </div>
-        <p>The build pipeline is mostly local, but the live runtime is not yet completely local or free: it currently uses Cloudflare Workers AI, Vectorize, D1, and classifier.dev.</p>
+        <p>The build pipeline is mostly local, but the live runtime is not completely local or free: it uses Cloudflare Workers AI, Vectorize, D1, and the direct TypeSafe Jev API.</p>
       </div>
       <div class="boundary-grid">
         <article><span>CATALOGUE</span><h3>Versioned JSON and generated modules</h3><p>Names, meanings, examples, near-misses, provenance, quality signals, and source URLs live with the project and generate the public collection.</p></article>

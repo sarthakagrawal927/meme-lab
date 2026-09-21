@@ -1,6 +1,8 @@
 import {rankRelevanceCandidates} from './candidate-signals.mjs';
 
 export const JEV_ENDPOINT='https://classifier.dev/v1/classify';
+export const TYPESAFE_ENDPOINT='https://api.typesafe.ai/v1/systemone';
+export const TYPESAFE_MODEL='jev-latest';
 
 export const FIT_LABELS=[
   {key:'wrong',label:'0 | wrong: unrelated, misleading, reverses the roles, or socially inappropriate'},
@@ -13,6 +15,7 @@ const FIT_INSTRUCTIONS='Judge each comment-and-candidate pair independently. Rat
 
 const HUMOUR_LABEL='meme-ready humour or a playful reaction belongs';
 const SERIOUS_LABEL='serious help, safety, care, grief, apology, factual guidance, or support where no meme belongs';
+const FIT_CRITERIA=FIT_LABELS.map(({label})=>label.replace(/^\d+ \| /,''));
 
 export const PERSPECTIVES=[
   {
@@ -84,6 +87,64 @@ async function classifyMany({inputs,labels,instructions,fetchImpl,timeoutMs}) {
   return results;
 }
 
+async function askJev({state,questions,apiKey,fetchImpl,timeoutMs}) {
+  const response=await fetchImpl(TYPESAFE_ENDPOINT,{
+    method:'POST',
+    headers:{
+      'authorization':`Bearer ${apiKey}`,
+      'content-type':'application/json'
+    },
+    signal:AbortSignal.timeout(timeoutMs),
+    body:JSON.stringify({state,model:TYPESAFE_MODEL,questions})
+  });
+  if(!response.ok) throw new Error(`TypeSafe returned HTTP ${response.status}.`);
+  const result=await response.json();
+  if(!result?.answers||typeof result.answers!=='object') throw new Error('TypeSafe returned an unexpected response.');
+  return result.answers;
+}
+
+function candidateDetails(record) {
+  return {
+    name:record.name,
+    meaning:record.message,
+    social_dynamic:record.relational_pattern,
+    example:record.example_context,
+    avoid_when:record.near_miss_context,
+    ...(record.perspective_label?{intended_viewpoint:record.perspective_label}:{})
+  };
+}
+
+function directCandidateState(comment,candidates) {
+  return {
+    task:FIT_INSTRUCTIONS,
+    comment,
+    candidates:Object.fromEntries(candidates.map((record,index)=>[`candidate_${index}`,candidateDetails(record)]))
+  };
+}
+
+function directOrdinalScore(answer) {
+  const score=Number(answer?.score);
+  const probabilities=FIT_CRITERIA.map((_,index)=>Number(answer?.probabilities?.[String(index)]));
+  if(answer?.type!=='score'||!Number.isFinite(score)||score<0||score>FIT_CRITERIA.length-1) throw new Error('TypeSafe returned an invalid ordinal score.');
+  if(probabilities.some(probability=>!Number.isFinite(probability)||probability<0||probability>1)) throw new Error('TypeSafe returned incomplete ordinal probabilities.');
+  const fitIndex=probabilities.indexOf(Math.max(...probabilities));
+  return {classifier_score:score/(FIT_CRITERIA.length-1),fit_label:FIT_LABELS[fitIndex].key};
+}
+
+async function scoreDirectCandidates(comment,candidates,{apiKey,fetchImpl,timeoutMs,instructions=FIT_INSTRUCTIONS}={}) {
+  const state=directCandidateState(comment,candidates);
+  state.task=instructions;
+  const questions=Object.fromEntries(candidates.map((_,index)=>[`fit_${index}`,{
+    type:'score',
+    instructions:`How naturally and accurately does \`candidate_${index}\` work as a sendable meme for the comment? Judge only this candidate and follow \`task\`.`,
+    criteria:FIT_CRITERIA
+  }]));
+  const answers=await askJev({state,questions,apiKey,fetchImpl,timeoutMs});
+  const scored=candidates.map((record,index)=>({...record,...directOrdinalScore(answers[`fit_${index}`]),retrieval_rank:index+1}));
+  if(scored.length>1&&scored.every(record=>record.classifier_score===scored[0].classifier_score)) throw new Error('TypeSafe returned flat ordinal scores.');
+  return scored;
+}
+
 function candidateInput(comment,record) {
   return `COMMENT: ${comment}\nCANDIDATE: ${record.name}. Meaning: ${record.message} Social dynamic: ${record.relational_pattern} Example: ${record.example_context} Avoid: ${record.near_miss_context}`;
 }
@@ -99,7 +160,8 @@ function ordinalScore(result) {
   };
 }
 
-async function scoreOrdinalCandidates(comment,candidates,{fetchImpl,timeoutMs,instructions=FIT_INSTRUCTIONS,inputFor=candidateInput}={}) {
+async function scoreOrdinalCandidates(comment,candidates,{fetchImpl,timeoutMs,instructions=FIT_INSTRUCTIONS,inputFor=candidateInput,apiKey}={}) {
+  if(apiKey) return scoreDirectCandidates(comment,candidates,{apiKey,fetchImpl,timeoutMs,instructions});
   const labels=FIT_LABELS.map(({label})=>label);
   const results=await classifyMany({inputs:candidates.map(record=>inputFor(comment,record)),labels,instructions,fetchImpl,timeoutMs});
   const scored=candidates.map((record,index)=>({...record,...ordinalScore(results[index]),retrieval_rank:index+1}));
@@ -114,7 +176,26 @@ function scoreCandidates(candidates,labels,result) {
   return candidates.map((record,index)=>({...record,classifier_score:scores[index],retrieval_rank:index+1}));
 }
 
-export async function humourBelongs(comment,{fetchImpl=fetch,timeoutMs=3000}={}) {
+export async function humourBelongs(comment,{fetchImpl=fetch,timeoutMs=3000,apiKey}={}) {
+  if(apiKey) {
+    const answers=await askJev({
+      state:{comment},
+      questions:{humour_belongs:{
+        type:'noul',
+        instructions:'Would sending a meme be socially appropriate here?',
+        criteria:{
+          true:HUMOUR_LABEL,
+          false:SERIOUS_LABEL
+        }
+      }},
+      apiKey,
+      fetchImpl,
+      timeoutMs
+    });
+    const probability=Number(answers.humour_belongs?.noul);
+    if(answers.humour_belongs?.type!=='noul'||!Number.isFinite(probability)||probability<0||probability>1) throw new Error('TypeSafe returned an invalid safety answer.');
+    return probability>=.5;
+  }
   const result=await classify({
     comment,
     labels:[HUMOUR_LABEL,SERIOUS_LABEL],
@@ -125,20 +206,39 @@ export async function humourBelongs(comment,{fetchImpl=fetch,timeoutMs=3000}={})
   return result.label===HUMOUR_LABEL;
 }
 
-export async function rankCandidates(comment,candidates,{fetchImpl=fetch,timeoutMs=5000,limit=3}={}) {
+export async function rankCandidates(comment,candidates,{fetchImpl=fetch,timeoutMs=5000,limit=3,apiKey}={}) {
   if(!Array.isArray(candidates)||candidates.length<limit) throw new Error('Classifier needs enough candidates to rank.');
-  const scored=await scoreOrdinalCandidates(comment,candidates,{fetchImpl,timeoutMs});
+  const scored=await scoreOrdinalCandidates(comment,candidates,{fetchImpl,timeoutMs,apiKey});
   return scored.sort((left,right)=>right.classifier_score-left.classifier_score||left.retrieval_rank-right.retrieval_rank||left.id.localeCompare(right.id)).slice(0,limit);
 }
 
-export async function rankCandidatesByPerspective(comment,candidates,{fetchImpl=fetch,timeoutMs=5000,limit=3}={}) {
+export async function rankCandidatesByPerspective(comment,candidates,{fetchImpl=fetch,timeoutMs=5000,limit=3,apiKey}={}) {
   if(!Array.isArray(candidates)||candidates.length<limit) throw new Error('Perspective ranking needs enough candidates to rank.');
   const labels=candidates.map(record=>`${record.id} | ${record.name}: ${record.message} Social dynamic: ${record.relational_pattern}`);
-  const results=await Promise.all(PERSPECTIVES.slice(0,limit).map(async perspective=>{
-    const result=await classify({comment,labels,instructions:perspective.instructions,fetchImpl,timeoutMs});
-    const scored=scoreCandidates(candidates,labels,result);
-    return {perspective,ranked:rankRelevanceCandidates(scored,{limit:candidates.length})};
-  }));
+  let results;
+  if(apiKey) {
+    const state={comment,candidates:Object.fromEntries(candidates.map((record,index)=>[`candidate_${index}`,candidateDetails(record)]))};
+    const criteria=Object.fromEntries(candidates.map((record,index)=>[`candidate_${index}`,`${record.name}: ${record.message} Social dynamic: ${record.relational_pattern}`]));
+    const questions=Object.fromEntries(PERSPECTIVES.slice(0,Math.min(3,limit)).map(perspective=>[perspective.key,{
+      type:'choice',
+      instructions:perspective.instructions,
+      criteria
+    }]));
+    const answers=await askJev({state,questions,apiKey,fetchImpl,timeoutMs});
+    results=PERSPECTIVES.slice(0,Math.min(3,limit)).map(perspective=>{
+      const answer=answers[perspective.key];
+      const scores=candidates.map((_,index)=>Number(answer?.probabilities?.[`candidate_${index}`]));
+      if(answer?.type!=='choice'||scores.some(score=>!Number.isFinite(score)||score<0||score>1)) throw new Error('TypeSafe returned incomplete perspective scores.');
+      const scored=candidates.map((record,index)=>({...record,classifier_score:scores[index],retrieval_rank:index+1}));
+      return {perspective,ranked:rankRelevanceCandidates(scored,{limit:candidates.length})};
+    });
+  } else {
+    results=await Promise.all(PERSPECTIVES.slice(0,Math.min(3,limit)).map(async perspective=>{
+      const result=await classify({comment,labels,instructions:perspective.instructions,fetchImpl,timeoutMs});
+      const scored=scoreCandidates(candidates,labels,result);
+      return {perspective,ranked:rankRelevanceCandidates(scored,{limit:candidates.length})};
+    }));
+  }
 
   let bestAssignment;
   const assign=(index,candidatesByLens,usedIds,total,participantSpecific)=>{
@@ -177,7 +277,7 @@ export async function rankCandidatesByPerspective(comment,candidates,{fetchImpl=
   }
   if(selected.length<limit) throw new Error('Perspective ranking could not produce distinct candidates.');
   const rescored=await scoreOrdinalCandidates(comment,selected.slice(0,limit),{
-    fetchImpl,timeoutMs,
+    fetchImpl,timeoutMs,apiKey,
     instructions:`${FIT_INSTRUCTIONS} The input declares the intended viewpoint. Judge the candidate only for that viewpoint; do not silently switch to another participant or to the event itself.`,
     inputFor:(text,record)=>`COMMENT: ${text}\nVIEWPOINT: ${record.perspective_label}\nCANDIDATE: ${record.name}. Meaning: ${record.message} Social dynamic: ${record.relational_pattern} Example: ${record.example_context} Avoid: ${record.near_miss_context}`
   });

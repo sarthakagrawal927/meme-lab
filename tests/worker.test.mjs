@@ -13,6 +13,12 @@ const assetResponse=new Response('<h1>ok</h1>',{headers:{'Content-Type':'text/ht
 const stored=[];
 const oneHot=(labels,index)=>({label:labels[index],scores:Object.fromEntries(labels.map((label,labelIndex)=>[label,labelIndex===index?1:0]))});
 const ordinalBatch=body=>({results:body.inputs.map((_,index)=>oneHot(body.labels,Math.max(1,4-index)))});
+const directScoreAnswer=(score=4)=>({
+  type:'score',
+  score,
+  confidence:1,
+  probabilities:Object.fromEntries(Array.from({length:5},(_,index)=>[String(index),index===Math.round(score)?1:0]))
+});
 const env={
   AI:{run:async(model,input)=>{
     if(model===EMBEDDING_MODEL) return {data:[[1,0,0]]};
@@ -53,21 +59,28 @@ test('public worker returns a validated known meme without exposing prompt data'
   assert.equal(stored.find(entry=>entry.sql.includes('INSERT INTO recommendations'))?.values[4],'classifier.dev/jev-fast');
 });
 
-test('configured classifier key is sent as a bearer token without entering the response',async()=>{
+test('configured TypeSafe key sends one authenticated direct Jev request without entering the response',async()=>{
   let authorization;
+  let endpoint;
+  let questionCount;
   const keyedEnv={
     ...env,
-    CLASSIFIER_API_KEY:'test-classifier-key',
-    CLASSIFIER_FETCH:async(_url,options)=>{
+    TYPESAFE_API_KEY:'test-typesafe-key',
+    CLASSIFIER_FETCH:async(url,options)=>{
+      endpoint=url;
       authorization=new Headers(options.headers).get('authorization');
       const body=JSON.parse(options.body);
-      return Response.json(ordinalBatch(body));
+      questionCount=Object.keys(body.questions).length;
+      return Response.json({model:'jev-test',answers:Object.fromEntries(Object.keys(body.questions).map((id,index)=>[id,directScoreAnswer(index===0?4:Math.max(0,3-index/20))]))});
     }
   };
   const response=await worker.fetch(new Request('https://example.test/api/recommend',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({comment:'I waited all day for a reply.'})}),keyedEnv);
   assert.equal(response.status,200);
-  assert.equal(authorization,'Bearer test-classifier-key');
-  assert.doesNotMatch(JSON.stringify(await response.json()),/test-classifier-key/);
+  assert.equal(endpoint,'https://api.typesafe.ai/v1/systemone');
+  assert.equal(questionCount,1);
+  assert.equal(authorization,'Bearer test-typesafe-key');
+  assert.doesNotMatch(JSON.stringify(await response.json()),/test-typesafe-key/);
+  assert.equal(stored.findLast(entry=>entry.sql.includes('INSERT INTO recommendations'))?.values[4],'typesafe/jev-latest');
 });
 
 test('static prior only breaks close calls after relevance chooses the eligible candidates',()=>{
@@ -423,6 +436,39 @@ test('perspective ranking can return three viewpoint winners plus two distinct b
     return Response.json({results:[{label:body.labels[scores.indexOf(Math.max(...scores))],scores:Object.fromEntries(body.labels.map((label,index)=>[label,scores[index]]))}]});
   };
   const ranked=await rankCandidatesByPerspective('My coworker did something and I reacted.',candidates,{fetchImpl,limit:5});
+  assert.equal(ranked.length,5);
+  assert.equal(new Set(ranked.map(candidate=>candidate.id)).size,5);
+  assert.deepEqual(new Set(ranked.map(candidate=>candidate.perspective)),new Set(['self','other','situation']));
+});
+
+test('direct Jev batches three perspective choices and the final fit scores into two requests',async()=>{
+  const candidates=[
+    {id:'self',name:'Self',message:'Self reaction.',relational_pattern:'Narrator reacts.'},
+    {id:'other',name:'Other',message:'Other reaction.',relational_pattern:'Other person reacts.'},
+    {id:'situation',name:'Situation',message:'Situation reaction.',relational_pattern:'The dynamic itself.'},
+    {id:'backup-one',name:'Backup One',message:'Another useful reaction.',relational_pattern:'A secondary angle.'},
+    {id:'backup-two',name:'Backup Two',message:'One more useful reaction.',relational_pattern:'Another secondary angle.'}
+  ];
+  const calls=[];
+  const fetchImpl=async(url,options)=>{
+    const body=JSON.parse(options.body);
+    calls.push({url,authorization:new Headers(options.headers).get('authorization'),body});
+    if(body.questions.self) {
+      const choice=(winner,scores)=>({type:'choice',choice:winner,confidence:.9,probabilities:Object.fromEntries(candidates.map((_,index)=>[`candidate_${index}`,scores[index]]))});
+      return Response.json({answers:{
+        self:choice('candidate_0',[.9,.02,.01,.04,.03]),
+        other:choice('candidate_1',[.02,.88,.03,.04,.03]),
+        situation:choice('candidate_2',[.02,.03,.86,.05,.04])
+      }});
+    }
+    return Response.json({answers:Object.fromEntries(Object.keys(body.questions).map((id,index)=>[id,directScoreAnswer(4-index*.5)]))});
+  };
+  const ranked=await rankCandidatesByPerspective('My coworker did something and I reacted.',candidates,{fetchImpl,apiKey:'direct-test-key',limit:5});
+  assert.equal(calls.length,2);
+  assert.deepEqual(Object.keys(calls[0].body.questions),['self','other','situation']);
+  assert.equal(Object.keys(calls[1].body.questions).length,5);
+  assert(calls.every(call=>call.url==='https://api.typesafe.ai/v1/systemone'));
+  assert(calls.every(call=>call.authorization==='Bearer direct-test-key'));
   assert.equal(ranked.length,5);
   assert.equal(new Set(ranked.map(candidate=>candidate.id)).size,5);
   assert.deepEqual(new Set(ranked.map(candidate=>candidate.perspective)),new Set(['self','other','situation']));

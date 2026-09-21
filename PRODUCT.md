@@ -13,7 +13,7 @@ The corrected catalogue contains 3,000 searchable references: 1,805 static meme 
 Runtime ranking is deliberately bounded:
 
 1. Two semantic searches retrieve 30 likely references.
-2. Jev independently rates all 30 candidates as wrong, weak, plausible, strong, or exact. Multi-person comments first select distinct candidates through three explicit lenses—**My reaction**, **Their side**, and **The situation**—then rate the selected five on the same ordinal scale.
+2. Direct TypeSafe Jev independently rates all 30 candidates as wrong, weak, plausible, strong, or exact in one structured request. Multi-person comments first select distinct candidates through three explicit lenses—**My reaction**, **Their side**, and **The situation**—in one batched request, then rate the selected five on the same ordinal scale.
 3. Static meme strength and image quality remain separate catalogue signals; they are not presented as contextual relevance.
 4. The primary result and four ranked backups remain visible even when some options are weak. The UI shows ordinal fit labels rather than presenting Jev's competitive score as a probability.
 5. Feedback records whether the recommendation landed or missed. There is no generated explanation or large-model fallback. If Jev is rate-limited, the product returns five semantic-retrieval candidates marked low confidence instead of creating surprise inference spend.

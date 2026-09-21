@@ -5,6 +5,7 @@ import {retrieveCandidates} from './retrieval.mjs';
 
 const allowedIds=new Set(catalogue.map(record=>record.id));
 const CLASSIFIER_MODEL='classifier.dev/jev-fast';
+const TYPESAFE_MODEL='typesafe/jev-latest';
 const RETRIEVAL_FALLBACK_MODEL='vector-retrieval-fallback';
 
 function json(data,status=200,extraHeaders={}) {
@@ -31,16 +32,6 @@ function retrievalFallback(shortlist,limit=MAX_RECOMMENDATIONS) {
     fit_label:'weak',
     retrieval_rank:index+1
   }));
-}
-
-function classifierFetchFor(env) {
-  const fetchImpl=typeof env.CLASSIFIER_FETCH==='function'?env.CLASSIFIER_FETCH:fetch;
-  if(typeof env.CLASSIFIER_API_KEY!=='string'||!env.CLASSIFIER_API_KEY) return fetchImpl;
-  return (url,options={})=>{
-    const headers=new Headers(options.headers);
-    headers.set('Authorization',`Bearer ${env.CLASSIFIER_API_KEY}`);
-    return fetchImpl(url,{...options,headers});
-  };
 }
 
 function validateComment(value) {
@@ -95,13 +86,15 @@ async function recommend(request,env) {
   const started=Date.now();
   try {
     const shortlist=await retrieveCandidates(env,comment,30);
-    const classifierFetch=classifierFetchFor(env);
+    const classifierFetch=typeof env.CLASSIFIER_FETCH==='function'?env.CLASSIFIER_FETCH:fetch;
+    const typesafeApiKey=typeof env.TYPESAFE_API_KEY==='string'&&env.TYPESAFE_API_KEY?env.TYPESAFE_API_KEY:undefined;
+    const classifierOptions={fetchImpl:classifierFetch,apiKey:typesafeApiKey};
     let classifier_gate='not_needed';
     const factualRequest=requiresFactualAnswer(comment);
     const seriousRequest=needsSeriousHandling(comment);
     if(factualRequest||seriousRequest) {
       try {
-        if(factualRequest||!await humourBelongs(comment,{fetchImpl:classifierFetch})) {
+        if(factualRequest||!await humourBelongs(comment,classifierOptions)) {
           classifier_gate='serious';
           const selection={decision:'none',confidence:'low',none_reason:'This calls for a serious response, not a meme.',candidates:[]};
           const recommendation=presentSelection(selection);
@@ -135,12 +128,12 @@ async function recommend(request,env) {
     }
     let ranked;
     let ranking_mode='general';
-    let ranking_model=CLASSIFIER_MODEL;
+    let ranking_model=typesafeApiKey?TYPESAFE_MODEL:CLASSIFIER_MODEL;
     const perspectiveEligible=hasMultiplePerspectives(comment);
     try {
       ranked=perspectiveEligible
-        ? await rankCandidatesByPerspective(comment,shortlist,{fetchImpl:classifierFetch,limit:Math.min(MAX_RECOMMENDATIONS,shortlist.length)})
-        : await rankCandidates(comment,shortlist,{fetchImpl:classifierFetch,limit:Math.min(MAX_RECOMMENDATIONS,shortlist.length)});
+        ? await rankCandidatesByPerspective(comment,shortlist,{...classifierOptions,limit:Math.min(MAX_RECOMMENDATIONS,shortlist.length)})
+        : await rankCandidates(comment,shortlist,{...classifierOptions,limit:Math.min(MAX_RECOMMENDATIONS,shortlist.length)});
       if(perspectiveEligible) ranking_mode='perspective';
     }
     catch(error) {
@@ -151,7 +144,7 @@ async function recommend(request,env) {
         ranking_model=RETRIEVAL_FALLBACK_MODEL;
       } else if(perspectiveEligible) {
         try {
-          ranked=await rankCandidates(comment,shortlist,{fetchImpl:classifierFetch,limit:Math.min(MAX_RECOMMENDATIONS,shortlist.length)});
+          ranked=await rankCandidates(comment,shortlist,{...classifierOptions,limit:Math.min(MAX_RECOMMENDATIONS,shortlist.length)});
           ranking_mode='general_fallback';
         }
         catch(fallbackError) {

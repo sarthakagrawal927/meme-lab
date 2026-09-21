@@ -8,6 +8,7 @@ const cases=(await readFile(resolve(root,'eval/canonical_gap_v1.jsonl'),'utf8'))
 const knownIds=new Set(catalogue.map(record=>record.id));
 const retrievalBase='https://meme-lab-catalogue-tool-stage-3000.sarthakagrawal927.workers.dev';
 const productBase='https://memes.significanthobbies.com';
+const retrievalOnly=process.argv.includes('--retrieval-only');
 
 for(const testCase of cases) {
   if(!/^canonical-gap-\d{3}$/.test(testCase.id)||typeof testCase.comment!=='string'||testCase.comment.length<20) throw new Error(`Invalid case ${testCase.id}.`);
@@ -21,31 +22,37 @@ async function evaluate(testCase) {
   if(!retrieved.ok) throw new Error(`${testCase.id} retrieval returned HTTP ${retrieved.status}.`);
   const retrievalBody=await retrieved.json();
   const retrievedIds=(retrievalBody.matches??[]).map(record=>record.id);
-  const recommended=await fetch(`${productBase}/api/recommend`,{
-    method:'POST',
-    headers:{'content-type':'application/json'},
-    body:JSON.stringify({comment:testCase.comment}),
-    signal:AbortSignal.timeout(15000)
-  });
-  if(!recommended.ok) throw new Error(`${testCase.id} recommendation returned HTTP ${recommended.status}.`);
-  const recommendationBody=await recommended.json();
-  const finalIds=(recommendationBody.candidates??[]).map(record=>record.id);
+  let recommendationBody=null;
+  let recommendationStatus=null;
+  if(!retrievalOnly) {
+    const recommended=await fetch(`${productBase}/api/recommend`,{
+      method:'POST',
+      headers:{'content-type':'application/json'},
+      body:JSON.stringify({comment:testCase.comment}),
+      signal:AbortSignal.timeout(15000)
+    });
+    recommendationStatus=recommended.status;
+    recommendationBody=await recommended.json().catch(()=>({error:'Invalid recommendation response.'}));
+  }
+  const finalIds=(recommendationBody?.candidates??[]).map(record=>record.id);
   const firstRank=(ids,expected)=>{
     const ranks=expected.map(id=>ids.indexOf(id)).filter(index=>index>=0);
     return ranks.length?Math.min(...ranks)+1:null;
   };
   const retrievalRank=firstRank(retrievedIds,testCase.acceptable_ids);
   const finalRank=firstRank(finalIds,testCase.acceptable_ids);
-  const safetyAbstention=recommendationBody.decision==='none'&&/serious response/i.test(recommendationBody.none_reason??'');
-  const diagnosis=presentIds.length===0?'data_gap':retrievalRank===null?'retrieval_gap':safetyAbstention?'safety_gap':finalRank===null?'ranking_gap':finalRank>1?'ordering_gap':'pass';
+  const safetyAbstention=recommendationBody?.decision==='none'&&/serious response/i.test(recommendationBody.none_reason??'');
+  const providerUnavailable=!retrievalOnly&&recommendationStatus!==200;
+  const diagnosis=presentIds.length===0?'data_gap':retrievalRank===null?'retrieval_gap':retrievalOnly?'retrieval_pass':providerUnavailable?'provider_gap':safetyAbstention?'safety_gap':finalRank===null?'ranking_gap':finalRank>1?'ordering_gap':'pass';
   return {
     ...testCase,
     present_ids:presentIds,
     retrieval_rank:retrievalRank,
     final_rank:finalRank,
     diagnosis,
-    decision:recommendationBody.decision,
-    none_reason:recommendationBody.none_reason,
+    recommendation_status:recommendationStatus,
+    decision:recommendationBody?.decision??null,
+    none_reason:recommendationBody?.none_reason??recommendationBody?.error??'',
     retrieved_ids:retrievedIds,
     final_ids:finalIds
   };
@@ -69,12 +76,13 @@ const report={
     pass:count('pass'),
     ordering_gap:count('ordering_gap'),
     ranking_gap:count('ranking_gap'),
+    provider_gap:count('provider_gap'),
     safety_gap:count('safety_gap'),
     retrieval_gap:count('retrieval_gap'),
     data_gap:count('data_gap'),
     retrieval_recall_at_30:rows.filter(row=>row.retrieval_rank!==null).length/rows.length,
-    final_recall_at_5:rows.filter(row=>row.final_rank!==null).length/rows.length,
-    top_one:rows.filter(row=>row.final_rank===1).length/rows.length
+    final_recall_at_5:retrievalOnly?null:rows.filter(row=>row.final_rank!==null).length/rows.length,
+    top_one:retrievalOnly?null:rows.filter(row=>row.final_rank===1).length/rows.length
   },
   rows
 };

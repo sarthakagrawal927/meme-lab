@@ -52,15 +52,15 @@
   "bad-luck-brian": {
     "message": "Use Bad Luck Brian when careful preparation or hopeful effort is ruined by a specifically unlucky and embarrassing twist.",
     "relational_pattern": "Someone does the sensible thing or expects an ordinary outcome, but improbable bad luck turns it into failure.",
-    "example_context": "I backed up my presentation twice, and both drives failed five minutes before the meeting.",
+    "example_context": "I studied all night, and the exam covered the one topic I skipped.",
     "near_miss_context": "Avoid when the failure was predictable, caused by obvious negligence, or merely disappointing without an unlucky reversal.",
-    "tags": ["bad-luck", "unlucky-twist", "effort-backfires", "embarrassing-failure", "irony", "misfortune"]
+    "tags": ["bad-luck", "unlucky-twist", "effort-backfires", "embarrassing-failure", "irony", "misfortune", "studied", "exam", "test", "skipped-topic"]
   },
   "original-bad-luck-brian": {
     "message": "Use Original Bad Luck Brian when reasonable preparation or hopeful effort is defeated by a specifically unlucky and embarrassing twist.",
     "relational_pattern": "Someone expects an ordinary outcome, but improbable bad luck turns the attempt into a memorable failure.",
-    "example_context": "I arrived early for the interview, and the building lost power only for the hour I was there.",
+    "example_context": "I prepared for every section except one, and that single skipped section became the entire test.",
     "near_miss_context": "Avoid when the failure was predictable, caused by obvious negligence, or lacks an unlucky reversal.",
-    "tags": ["bad-luck", "unlucky-twist", "effort-backfires", "embarrassing-failure", "irony", "misfortune"]
+    "tags": ["bad-luck", "unlucky-twist", "effort-backfires", "embarrassing-failure", "irony", "misfortune", "studied", "exam", "test", "skipped-topic"]
   }
 }

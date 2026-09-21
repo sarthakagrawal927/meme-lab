@@ -6,6 +6,7 @@ import {canonicalCoverage,catalogueIntegrity,normalizeMedia} from '../src/catalo
 import {parseJsonl,validateExpansionRecords,validateMeaningSpecificMetadata} from '../src/expansion.mjs';
 
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
+const semanticOverrides=JSON.parse(await readFile(resolve(root,'expansion/curated-semantic-overrides.json'),'utf8'));
 const [staticText,gifText,replacementGifText,exclusionText,coverageText,statusText,evalText,scoreText]=await Promise.all([
   readFile(resolve(root,'expansion/reviewed/stage-3000-static.jsonl'),'utf8'),
   readFile(resolve(root,'expansion/reviewed/stage-3000-reaction-gifs.jsonl'),'utf8'),
@@ -39,6 +40,7 @@ const publicFields=record=>normalizeMedia({
   example_context:record.example_context,
   near_miss_context:record.near_miss_context,
   tags:record.tags,
+  ...(semanticOverrides[record.id]??{}),
   image_url:record.media.url??record.media.image_url,
   media_type:record.media.type??'image',
   media_url:record.media.url??record.media.image_url,
@@ -54,7 +56,7 @@ const publicFields=record=>normalizeMedia({
 });
 const catalogue=[...filteredStage1000.map(record=>{
   const signal=scoresById.get(record.id);
-  return normalizeMedia({...record,meme_strength:signal?.meme_strength??50,asset_quality:signal?.asset_quality??50,uniqueness_score:signal?.uniqueness_score??100,availability:'live'});
+  return normalizeMedia({...record,...(semanticOverrides[record.id]??{}),meme_strength:signal?.meme_strength??50,asset_quality:signal?.asset_quality??50,uniqueness_score:signal?.uniqueness_score??100,availability:'live'});
 }),...additions.map(publicFields)];
 if(catalogue.length!==3000||new Set(catalogue.map(record=>record.id)).size!==3000) throw new Error('Verified stage-3,000 catalogue must contain exactly 3,000 unique records.');
 const integrity=catalogueIntegrity(catalogue,{excludedIds});

@@ -1,0 +1,66 @@
+{
+  "distracted-boyfriend": {
+    "message": "Use Distracted Boyfriend when someone who was satisfied with an existing choice suddenly notices a tempting new alternative.",
+    "relational_pattern": "A person shifts attention from a current commitment toward a more exciting option while the neglected choice looks on.",
+    "example_context": "I was perfectly happy with my current phone until I saw the shiny new model.",
+    "near_miss_context": "Avoid when someone is choosing between two options for the first time and has no existing commitment to neglect.",
+    "tags": [
+      "distraction",
+      "novelty",
+      "neglected-commitment",
+      "temptation",
+      "new-option",
+      "attention-shift"
+    ]
+  },
+  "success-kid": {
+    "message": "Use Success Kid to celebrate a small but satisfying victory, especially when the outcome beat expectations.",
+    "relational_pattern": "A person gets an unexpectedly favorable result and responds with a compact, triumphant fist-pump.",
+    "example_context": "I guessed on the final question and it was the one answer that pushed me over the passing grade.",
+    "near_miss_context": "Avoid when the achievement is solemn, routine, or belongs to someone who is disappointed by the result.",
+    "tags": ["success", "small-victory", "unexpected-win", "triumph", "fist-pump", "celebration"]
+  },
+  "success-kid-original": {
+    "message": "Use Success Kid Original to celebrate a small but satisfying victory that worked out better than expected.",
+    "relational_pattern": "A person gets an unexpectedly favorable result and answers it with a determined, triumphant fist-pump.",
+    "example_context": "I found the last open seat on the train just as the doors closed behind me.",
+    "near_miss_context": "Avoid when the result is routine, solemn, or disappointing rather than a compact personal win.",
+    "tags": ["success", "small-victory", "unexpected-win", "triumph", "fist-pump", "celebration"]
+  },
+  "disaster-girl": {
+    "message": "Use Disaster Girl when someone caused, anticipated, or quietly enjoys the chaos unfolding behind them.",
+    "relational_pattern": "A suspiciously calm observer watches the consequences of a disaster with a knowing, satisfied expression.",
+    "example_context": "I changed one production setting, watched every alert turn red, and tried not to look pleased with the chaos I caused.",
+    "near_miss_context": "Avoid when the person is frightened by the crisis, trying to stop it, or has no implied connection to the trouble.",
+    "tags": ["caused-chaos", "watching-consequences", "smug-satisfaction", "knowing-smile", "disaster", "mischief"]
+  },
+  "always-has-been": {
+    "message": "Use Always Has Been when someone discovers that a supposedly new truth, pattern, or problem was there all along.",
+    "relational_pattern": "One person voices a surprising realization, and another confirms that the hidden reality has always been true.",
+    "example_context": "I finally realized every urgent meeting is just the same status update with a different title.",
+    "near_miss_context": "Avoid when the situation genuinely changed recently rather than revealing a long-standing truth.",
+    "tags": ["discovery", "always-true", "revelation", "hidden-reality", "was-there-all-along", "astronaut"]
+  },
+  "255177692-astronaut-meme-always-has-been-template": {
+    "name": "Astronaut Always Has Been",
+    "message": "Use Astronaut Always Has Been when a supposedly new discovery reveals a truth or problem that existed all along.",
+    "relational_pattern": "One observer voices a shocking realization, and another confirms that the hidden reality was never new.",
+    "example_context": "I just noticed that every optional team event has quietly been mandatory the whole time.",
+    "near_miss_context": "Avoid when the situation truly began recently or the point is uncertainty rather than an established hidden truth.",
+    "tags": ["discovery", "always-true", "revelation", "hidden-reality", "was-there-all-along", "astronaut"]
+  },
+  "bad-luck-brian": {
+    "message": "Use Bad Luck Brian when careful preparation or hopeful effort is ruined by a specifically unlucky and embarrassing twist.",
+    "relational_pattern": "Someone does the sensible thing or expects an ordinary outcome, but improbable bad luck turns it into failure.",
+    "example_context": "I backed up my presentation twice, and both drives failed five minutes before the meeting.",
+    "near_miss_context": "Avoid when the failure was predictable, caused by obvious negligence, or merely disappointing without an unlucky reversal.",
+    "tags": ["bad-luck", "unlucky-twist", "effort-backfires", "embarrassing-failure", "irony", "misfortune"]
+  },
+  "original-bad-luck-brian": {
+    "message": "Use Original Bad Luck Brian when reasonable preparation or hopeful effort is defeated by a specifically unlucky and embarrassing twist.",
+    "relational_pattern": "Someone expects an ordinary outcome, but improbable bad luck turns the attempt into a memorable failure.",
+    "example_context": "I arrived early for the interview, and the building lost power only for the hour I was there.",
+    "near_miss_context": "Avoid when the failure was predictable, caused by obvious negligence, or lacks an unlucky reversal.",
+    "tags": ["bad-luck", "unlucky-twist", "effort-backfires", "embarrassing-failure", "irony", "misfortune"]
+  }
+}

@@ -10,9 +10,9 @@
     "gif": 1195
   },
   "canonical_coverage": {
-    "covered": 39,
+    "covered": 41,
     "total": 41,
-    "missing": 2
+    "missing": 0
   },
   "human_validated": false,
   "status": "live_assistant_reviewed_pending_owner_feedback",

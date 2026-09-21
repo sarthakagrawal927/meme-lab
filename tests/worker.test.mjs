@@ -4,7 +4,7 @@ import {readFileSync} from 'node:fs';
 import worker from '../worker/src/index.mjs';
 import {FIT_LABELS,hasMultiplePerspectives,humourBelongs,needsSeriousHandling,PERSPECTIVES,rankCandidates,rankCandidatesByPerspective,requiresFactualAnswer} from '../worker/src/classification.mjs';
 import {MINIMUM_VISIBLE_FIT,MINIMUM_VISIBLE_PERSPECTIVE_FIT,validateSelection,normalizeSelection,normalizeRankedSelection,validateRankedSelection,presentSelection,selectionFromRanking} from '../worker/src/recommendation.mjs';
-import {canonicalCandidateFor,CORE_RESERVE,EMBEDDING_MODEL,mergeWithReserve,retrieveCandidates} from '../worker/src/retrieval.mjs';
+import {CORE_RESERVE,EMBEDDING_MODEL,mergeWithReserve,retrieveCandidates} from '../worker/src/retrieval.mjs';
 import {reciprocalRankFuse} from '../worker/src/rank-fusion.mjs';
 import {rankRelevanceCandidates,staticCandidateSignals} from '../worker/src/candidate-signals.mjs';
 
@@ -142,26 +142,6 @@ test('production retrieval queries broad and core indexed views and returns uniq
   assert.deepEqual(records.map(record=>record.id),['this-is-fine','first-try','waiting-skeleton']);
 });
 
-test('saying I love you deterministically retrieves and pins I Love You 3000 first',async()=>{
-  const comment='When I want to say I love you';
-  assert.equal(canonicalCandidateFor(comment)?.id,'198936244-i-love-you-3000');
-  assert.equal(canonicalCandidateFor('They said I love you, but I do not feel the same.'),null);
-  const loveEnv={
-    ...env,
-    CLASSIFIER_FETCH:async(_url,options)=>{
-      const body=JSON.parse(options.body);
-      const results=body.inputs.map((input,index)=>oneHot(body.labels,input.includes('I Love You 3000')?1:index===1?4:2));
-      return Response.json({results});
-    }
-  };
-  const response=await worker.fetch(new Request('https://example.test/api/recommend',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({comment})}),loveEnv);
-  assert.equal(response.status,200);
-  const body=await response.json();
-  assert.equal(body.candidates[0].id,'198936244-i-love-you-3000');
-  assert.equal(body.candidates[0].fit_label,'exact');
-  assert.equal(body.candidates[0].score,96);
-});
-
 test('public worker saves one-tap feedback for an existing recommendation',async()=>{
   const requestId=crypto.randomUUID();
   const response=await worker.fetch(new Request('https://example.test/api/feedback',{method:'POST',headers:{'Content-Type':'application/json','Origin':'https://example.test'},body:JSON.stringify({request_id:requestId,verdict:'landed',candidate_id:'waiting-skeleton'})}),env);
@@ -282,6 +262,8 @@ test('classifier gate only runs for high-precision serious cues',async()=>{
   assert.equal(needsSeriousHandling('A colleague wants confidential reporting options for repeated harassment.'),true);
   assert.equal(needsSeriousHandling('I want to apologize without making excuses.'),true);
   assert.equal(needsSeriousHandling('The booking display died and delayed both presentations.'),false);
+  assert.equal(needsSeriousHandling('When I need to introduce myself by saying my name is Jeff.'),false);
+  assert.equal(needsSeriousHandling('I need help after a loss.'),true);
   assert.equal(requiresFactualAnswer('I need a plain factual explanation of these tax identification fields.'),true);
   assert.equal(requiresFactualAnswer('I need the current documents and expected processing time for a passport.'),true);
   assert.equal(requiresFactualAnswer('A student needs the confirmed scholarship deadline and official submission page.'),true);

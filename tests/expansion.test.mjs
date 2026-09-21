@@ -32,6 +32,7 @@ const catalogueIntegrity=JSON.parse(await readFile(new URL('../worker/public/cat
 const stage1000Cases=parseJsonl(await readFile(new URL('../eval/relevance_stage1000_v1.jsonl',import.meta.url),'utf8'));
 const cases=parseJsonl(await readFile(new URL('../eval/relevance_holdout_v1.jsonl',import.meta.url),'utf8'));
 const coverageCases=parseJsonl(await readFile(new URL('../eval/relevance_stage300_v1.jsonl',import.meta.url),'utf8'));
+const canonicalGapCases=parseJsonl(await readFile(new URL('../eval/canonical_gap_v1.jsonl',import.meta.url),'utf8'));
 const manifest=JSON.parse(await readFile(new URL('../expansion/stages.json',import.meta.url),'utf8'));
 const stageReport=JSON.parse(await readFile(new URL('../eval/stage-300-summary.json',import.meta.url),'utf8'));
 const coverageReport=JSON.parse(await readFile(new URL('../eval/stage-300-coverage-summary.json',import.meta.url),'utf8'));
@@ -56,10 +57,24 @@ test('public collection contains 3,000 actual meme and reaction records with exp
   assert.equal(publicCollection.filter(record=>record.media_type==='gif').length,1195);
   assert.equal(publicCollection.filter(record=>record.id.startsWith('nga-')).length,0);
   assert(publicCollection.some(record=>record.name==='My Name Is Jeff'&&record.media_type==='gif'));
+  assert(publicCollection.some(record=>record.id==='198936244-i-love-you-3000'&&record.name==='I Love You 3000'&&record.media_type==='image'));
+  assert(publicCollection.some(record=>record.id==='side-eyeing-chloe'&&record.name==='Side Eyeing Chloe'&&record.media_type==='image'));
+  assert(publicCollection.some(record=>record.id==='shaq-sleeping'&&record.name==='Sleeping Shaq'&&record.media_type==='image'));
   assert.deepEqual(catalogueIntegrity.media_types,{image:1805,gif:1195});
   assert.equal(nonReactionExclusions.records.length,6);
   assert(nonReactionExclusions.records.every(excluded=>!publicCollection.some(record=>record.id===excluded.id)));
   assert.equal(catalogueIntegrity.canonical_coverage.items.find(item=>item.id==='my-name-is-jeff')?.status,'covered');
+  assert.equal(catalogueIntegrity.canonical_coverage.missing,0);
+});
+
+test('canonical-gap diagnostic is a bounded, explicitly unvalidated regression set',()=>{
+  assert.equal(canonicalGapCases.length,22);
+  assert.equal(new Set(canonicalGapCases.map(record=>record.id)).size,22);
+  assert(canonicalGapCases.every(record=>/^canonical-gap-\d{3}$/.test(record.id)));
+  assert(canonicalGapCases.every(record=>record.comment.length>=20));
+  assert(canonicalGapCases.every(record=>record.acceptable_ids.length>0));
+  assert(canonicalGapCases.every(record=>record.human_validated===false));
+  assert(canonicalGapCases.every(record=>record.acceptable_ids.some(id=>publicCollection.some(meme=>meme.id===id))));
 });
 
 test('How It Works documents the complete 30-to-30000 journey and evidence boundaries',()=>{

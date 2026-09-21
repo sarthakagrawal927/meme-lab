@@ -6,14 +6,6 @@ export {reciprocalRankFuse} from './rank-fusion.mjs';
 export const EMBEDDING_MODEL='@cf/baai/bge-base-en-v1.5';
 export const CORE_RESERVE=10;
 const byId=new Map(catalogue.map(record=>[record.id,record]));
-const I_LOVE_YOU_3000_ID='198936244-i-love-you-3000';
-
-export function canonicalCandidateFor(comment) {
-  if(typeof comment!=='string') return null;
-  const explicitDeclaration=/^\s*i\s+love\s+you(?:\s+so\s+much)?[.!?]*\s*$/i.test(comment);
-  const declarationIntent=/\b(?:want|wanna|need|trying|going)\s+to\s+(?:say|tell)\b.{0,80}\b(?:i\s+love\s+you|love\s+(?:them|him|her))\b/i.test(comment);
-  return explicitDeclaration||declarationIntent?byId.get(I_LOVE_YOU_3000_ID)??null:null;
-}
 
 export function directRetriever(records) {
   return async()=>records;
@@ -77,8 +69,6 @@ export async function retrieveCandidates(env,comment,topK=30) {
     .map(match=>byId.get(match.catalogue_id))
     .filter(record=>record&&!seen.has(record.id)&&seen.add(record.id))
     .slice(0,topK);
-  const canonical=canonicalCandidateFor(comment);
-  const withCanonical=canonical?[canonical,...candidates.filter(record=>record.id!==canonical.id)].slice(0,topK):candidates;
-  if(withCanonical.length===0) throw new Error('Semantic retrieval returned no known memes.');
-  return withCanonical;
+  if(candidates.length===0) throw new Error('Semantic retrieval returned no known memes.');
+  return candidates;
 }

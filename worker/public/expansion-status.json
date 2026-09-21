@@ -190,8 +190,8 @@
     "excluded_non_reaction_records": 6,
     "providers": {
       "inherited meme catalogue": 998,
-      "JustMeme.wtf": 806,
-      "Imgflip": 1,
+      "JustMeme.wtf": 804,
+      "Imgflip": 3,
       "GIF Reply dataset / GIPHY": 1195
     },
     "media_types": {
@@ -202,9 +202,9 @@
       "not_established": 3000
     },
     "canonical_coverage": {
-      "covered": 39,
+      "covered": 41,
       "total": 41,
-      "missing": 2
+      "missing": 0
     },
     "human_validated": false
   },

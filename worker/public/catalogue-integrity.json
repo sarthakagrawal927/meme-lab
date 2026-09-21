@@ -2,8 +2,8 @@
   "records": 3000,
   "providers": {
     "inherited meme catalogue": 998,
-    "JustMeme.wtf": 806,
-    "Imgflip": 1,
+    "JustMeme.wtf": 804,
+    "Imgflip": 3,
     "GIF Reply dataset / GIPHY": 1195
   },
   "media_types": {
@@ -27,8 +27,8 @@
   "canonical_coverage": {
     "version": "canonical-meme-coverage-v1",
     "total": 41,
-    "covered": 39,
-    "missing": 2,
+    "covered": 41,
+    "missing": 0,
     "items": [
       {
         "id": "my-name-is-jeff",
@@ -319,8 +319,8 @@
         "aliases": [
           "side eye chloe"
         ],
-        "status": "missing",
-        "catalogue_id": null
+        "status": "covered",
+        "catalogue_id": "side-eyeing-chloe"
       },
       {
         "id": "arthur-fist",
@@ -392,8 +392,8 @@
         "aliases": [
           "shaq awake"
         ],
-        "status": "missing",
-        "catalogue_id": null
+        "status": "covered",
+        "catalogue_id": "shaq-sleeping"
       },
       {
         "id": "office-handshake",

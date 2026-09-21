@@ -53,6 +53,23 @@ test('public worker returns a validated known meme without exposing prompt data'
   assert.equal(stored.find(entry=>entry.sql.includes('INSERT INTO recommendations'))?.values[4],'classifier.dev/jev-fast');
 });
 
+test('configured classifier key is sent as a bearer token without entering the response',async()=>{
+  let authorization;
+  const keyedEnv={
+    ...env,
+    CLASSIFIER_API_KEY:'test-classifier-key',
+    CLASSIFIER_FETCH:async(_url,options)=>{
+      authorization=new Headers(options.headers).get('authorization');
+      const body=JSON.parse(options.body);
+      return Response.json(ordinalBatch(body));
+    }
+  };
+  const response=await worker.fetch(new Request('https://example.test/api/recommend',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({comment:'I waited all day for a reply.'})}),keyedEnv);
+  assert.equal(response.status,200);
+  assert.equal(authorization,'Bearer test-classifier-key');
+  assert.doesNotMatch(JSON.stringify(await response.json()),/test-classifier-key/);
+});
+
 test('static prior only breaks close calls after relevance chooses the eligible candidates',()=>{
   const ranked=rankRelevanceCandidates([
     {id:'relevance-first',name:'First',classifier_score:.9,retrieval_rank:1,meme_strength:10,asset_quality:10},

@@ -33,6 +33,16 @@ function retrievalFallback(shortlist,limit=MAX_RECOMMENDATIONS) {
   }));
 }
 
+function classifierFetchFor(env) {
+  const fetchImpl=typeof env.CLASSIFIER_FETCH==='function'?env.CLASSIFIER_FETCH:fetch;
+  if(typeof env.CLASSIFIER_API_KEY!=='string'||!env.CLASSIFIER_API_KEY) return fetchImpl;
+  return (url,options={})=>{
+    const headers=new Headers(options.headers);
+    headers.set('Authorization',`Bearer ${env.CLASSIFIER_API_KEY}`);
+    return fetchImpl(url,{...options,headers});
+  };
+}
+
 function validateComment(value) {
   if(typeof value!=='string') throw new Error('Paste a comment first.');
   const comment=value.trim();
@@ -85,7 +95,7 @@ async function recommend(request,env) {
   const started=Date.now();
   try {
     const shortlist=await retrieveCandidates(env,comment,30);
-    const classifierFetch=typeof env.CLASSIFIER_FETCH==='function'?env.CLASSIFIER_FETCH:fetch;
+    const classifierFetch=classifierFetchFor(env);
     let classifier_gate='not_needed';
     const factualRequest=requiresFactualAnswer(comment);
     const seriousRequest=needsSeriousHandling(comment);

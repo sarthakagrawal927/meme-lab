@@ -464,7 +464,7 @@ test('a failed perspective lens falls back to general ranking without invented p
   assert.deepEqual(body.candidates.map(candidate=>candidate.perspective),['best_match','best_match','best_match']);
 });
 
-test('classifier throttling returns 503 without invoking a text-generation fallback',async()=>{
+test('classifier throttling returns a low-confidence retrieval fallback without invoking text generation',async()=>{
   const aiModels=[];
   const noFallbackEnv={
     ...env,
@@ -476,10 +476,24 @@ test('classifier throttling returns 503 without invoking a text-generation fallb
     CLASSIFIER_FETCH:async()=>new Response('Rate limited.',{status:429})
   };
   const response=await worker.fetch(new Request('https://example.test/api/recommend',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({comment:'The tests failed again after I changed absolutely nothing.'})}),noFallbackEnv);
-  assert.equal(response.status,503);
-  assert.equal(response.headers.get('retry-after'),'60');
+  assert.equal(response.status,200);
   assert.deepEqual(aiModels,[EMBEDDING_MODEL]);
-  assert.deepEqual(await response.json(),{error:'Meme ranking is temporarily unavailable. Try again shortly.'});
+  const body=await response.json();
+  assert.equal(body.confidence,'low');
+  assert.deepEqual(body.candidates.map(candidate=>candidate.fit_label),['weak']);
+  assert.equal(stored.findLast(entry=>entry.sql.includes('INSERT INTO recommendations'))?.values[4],'vector-retrieval-fallback');
+});
+
+test('classifier throttling abstains when deterministic signals say the input may be serious',async()=>{
+  const throttledEnv={...env,CLASSIFIER_FETCH:async()=>new Response('Rate limited.',{status:429})};
+  const response=await worker.fetch(new Request('https://example.test/api/recommend',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({comment:'My friend lost a family member and asked me to help write a sincere condolence message.'})}),throttledEnv);
+  assert.equal(response.status,200);
+  const body=await response.json();
+  assert.equal(body.decision,'none');
+  assert.equal(body.confidence,'low');
+  assert.deepEqual(body.candidates,[]);
+  assert.match(body.none_reason,/safety check is temporarily unavailable/i);
+  assert.equal(stored.findLast(entry=>entry.sql.includes('INSERT INTO recommendations'))?.values[4],'safety-gate-throttled');
 });
 
 test('static responses receive security and no-index headers',async()=>{

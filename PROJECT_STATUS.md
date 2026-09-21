@@ -20,7 +20,7 @@
 - The catalogue now records `media_type`, full media URL, preview URL, MIME type, source provenance, evidence state, and rights state. GIFs animate in results while collection cards load lighter previews.
 - A checked-in 40-item canonical coverage manifest reports recognizable gaps directly instead of letting the raw count conceal them.
 - Local Qwen writes meaning-specific message, social-dynamic, example, near-miss, and tag metadata. These annotations remain assistant-authored pending owner feedback.
-- Production still uses bounded retrieval: two BGE embedding views return 30 candidates, with ten shortlist slots reserved for the original 1,000. Jev independently rates all 30 with five ordered fit levels and returns five distinct results. Multi-person comments use three parallel perspective lenses, fill remaining slots with the strongest unused matches, and receive one final ordinal rescore. The UI shows fit labels rather than probabilities. If Jev is unavailable or throttled, the API returns a retryable 503 and never invokes a large text-generation model.
+- Production still uses bounded retrieval: two BGE embedding views return 30 candidates, with ten shortlist slots reserved for the original 1,000. Jev independently rates all 30 with five ordered fit levels and returns five distinct results. Multi-person comments use three parallel perspective lenses, fill remaining slots with the strongest unused matches, and receive one final ordinal rescore. The UI shows fit labels rather than probabilities. If Jev is rate-limited, the Worker returns five semantic-retrieval matches marked low confidence and weak fit; it never invokes a large text-generation model.
 
 ## Evaluation
 

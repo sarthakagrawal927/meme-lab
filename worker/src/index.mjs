@@ -5,6 +5,7 @@ import {retrieveCandidates} from './retrieval.mjs';
 
 const allowedIds=new Set(catalogue.map(record=>record.id));
 const CLASSIFIER_MODEL='classifier.dev/jev-fast';
+const RETRIEVAL_FALLBACK_MODEL='vector-retrieval-fallback';
 
 function json(data,status=200,extraHeaders={}) {
   return Response.json(data,{status,headers:{
@@ -17,6 +18,19 @@ function json(data,status=200,extraHeaders={}) {
 
 function safeError(error) {
   return error instanceof Error?error.message:String(error);
+}
+
+function isClassifierThrottled(error) {
+  return /\bHTTP 429\b/.test(safeError(error));
+}
+
+function retrievalFallback(shortlist,limit=MAX_RECOMMENDATIONS) {
+  return shortlist.slice(0,limit).map((record,index)=>({
+    ...record,
+    classifier_score:Math.max(.25,.49-index*.04),
+    fit_label:'weak',
+    retrieval_rank:index+1
+  }));
 }
 
 function validateComment(value) {
@@ -74,7 +88,8 @@ async function recommend(request,env) {
     const classifierFetch=typeof env.CLASSIFIER_FETCH==='function'?env.CLASSIFIER_FETCH:fetch;
     let classifier_gate='not_needed';
     const factualRequest=requiresFactualAnswer(comment);
-    if(factualRequest||needsSeriousHandling(comment)) {
+    const seriousRequest=needsSeriousHandling(comment);
+    if(factualRequest||seriousRequest) {
       try {
         if(factualRequest||!await humourBelongs(comment,{fetchImpl:classifierFetch})) {
           classifier_gate='serious';
@@ -91,12 +106,26 @@ async function recommend(request,env) {
         }
         classifier_gate='humour';
       } catch(error) {
+        if(isClassifierThrottled(error)) {
+          classifier_gate='throttled_abstain';
+          const selection={decision:'none',confidence:'low',none_reason:'This may call for a serious response, and the safety check is temporarily unavailable.',candidates:[]};
+          const recommendation=presentSelection(selection);
+          let feedback_enabled=true;
+          try { await persistRecommendation(env,recommendation,comment,'safety-gate-throttled'); }
+          catch(storeError) {
+            feedback_enabled=false;
+            console.error(JSON.stringify({event:'recommendation_store',status:'error',error:safeError(storeError)}));
+          }
+          console.error(JSON.stringify({event:'classifier_gate',status:'throttled_abstain',error:safeError(error)}));
+          return json({...recommendation,feedback_enabled});
+        }
         classifier_gate='fallback';
         console.error(JSON.stringify({event:'classifier_gate',status:'fallback',error:safeError(error)}));
       }
     }
     let ranked;
     let ranking_mode='general';
+    let ranking_model=CLASSIFIER_MODEL;
     const perspectiveEligible=hasMultiplePerspectives(comment);
     try {
       ranked=perspectiveEligible
@@ -106,14 +135,22 @@ async function recommend(request,env) {
     }
     catch(error) {
       console.error(JSON.stringify({event:'classifier_rank',status:'fallback',mode:perspectiveEligible?'perspective':'general',error:safeError(error)}));
-      if(perspectiveEligible) {
+      if(isClassifierThrottled(error)) {
+        ranked=retrievalFallback(shortlist);
+        ranking_mode='retrieval_fallback';
+        ranking_model=RETRIEVAL_FALLBACK_MODEL;
+      } else if(perspectiveEligible) {
         try {
           ranked=await rankCandidates(comment,shortlist,{fetchImpl:classifierFetch,limit:Math.min(MAX_RECOMMENDATIONS,shortlist.length)});
           ranking_mode='general_fallback';
         }
         catch(fallbackError) {
           console.error(JSON.stringify({event:'classifier_rank',status:'fallback',mode:'general',error:safeError(fallbackError)}));
-          return json({error:'Meme ranking is temporarily unavailable. Try again shortly.'},503,{'Retry-After':'60'});
+          if(isClassifierThrottled(fallbackError)) {
+            ranked=retrievalFallback(shortlist);
+            ranking_mode='retrieval_fallback';
+            ranking_model=RETRIEVAL_FALLBACK_MODEL;
+          } else return json({error:'Meme ranking is temporarily unavailable. Try again shortly.'},503,{'Retry-After':'60'});
         }
       } else {
         return json({error:'Meme ranking is temporarily unavailable. Try again shortly.'},503,{'Retry-After':'60'});
@@ -124,7 +161,7 @@ async function recommend(request,env) {
     const perspectives=new Map((ranked??[]).filter(record=>record.perspective).map(record=>[record.id,{perspective:record.perspective,perspective_label:record.perspective_label}]));
     const recommendation=presentSelection(selection,{perspectives});
     let feedback_enabled=true;
-    try { await persistRecommendation(env,recommendation,comment); }
+    try { await persistRecommendation(env,recommendation,comment,ranking_model); }
     catch(error) {
       feedback_enabled=false;
       console.error(JSON.stringify({event:'recommendation_store',status:'error',error:safeError(error)}));

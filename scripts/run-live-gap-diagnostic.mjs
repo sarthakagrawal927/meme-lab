@@ -9,6 +9,7 @@ const knownIds=new Set(catalogue.map(record=>record.id));
 const retrievalBase='https://meme-lab-catalogue-tool-stage-3000.sarthakagrawal927.workers.dev';
 const productBase='https://memes.significanthobbies.com';
 const retrievalOnly=process.argv.includes('--retrieval-only');
+const batchSize=Math.max(1,Math.min(3,Number.parseInt(process.env.CANONICAL_GAP_BATCH_SIZE??'1',10)||1));
 
 for(const testCase of cases) {
   if(!/^canonical-gap-\d{3}$/.test(testCase.id)||typeof testCase.comment!=='string'||testCase.comment.length<20) throw new Error(`Invalid case ${testCase.id}.`);
@@ -59,8 +60,8 @@ async function evaluate(testCase) {
 }
 
 const rows=[];
-for(let start=0;start<cases.length;start+=3) {
-  const batch=await Promise.all(cases.slice(start,start+3).map(evaluate));
+for(let start=0;start<cases.length;start+=batchSize) {
+  const batch=await Promise.all(cases.slice(start,start+batchSize).map(evaluate));
   rows.push(...batch);
   for(const row of batch) console.log(`${row.id}\t${row.diagnosis}\tretrieval=${row.retrieval_rank??'-'}\tfinal=${row.final_rank??'-'}`);
 }

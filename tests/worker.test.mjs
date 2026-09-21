@@ -262,6 +262,7 @@ test('classifier gate only runs for high-precision serious cues',async()=>{
   assert.equal(needsSeriousHandling('A colleague wants confidential reporting options for repeated harassment.'),true);
   assert.equal(needsSeriousHandling('I want to apologize without making excuses.'),true);
   assert.equal(needsSeriousHandling('The booking display died and delayed both presentations.'),false);
+  assert.equal(needsSeriousHandling('When I want to say I love you.'),false);
   assert.equal(needsSeriousHandling('When I need to introduce myself by saying my name is Jeff.'),false);
   assert.equal(needsSeriousHandling('I need help after a loss.'),true);
   assert.equal(requiresFactualAnswer('I need a plain factual explanation of these tax identification fields.'),true);

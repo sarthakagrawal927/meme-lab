@@ -1,7 +1,7 @@
 import {catalogue} from './catalogue.stage3000.generated.mjs';
 import {hasMultiplePerspectives,humourBelongs,needsSeriousHandling,rankCandidates,rankCandidatesByPerspective,requiresFactualAnswer} from './classification.mjs';
 import {MAX_RECOMMENDATIONS,presentSelection,selectionFromRanking} from './recommendation.mjs';
-import {retrieveCandidates} from './retrieval.mjs';
+import {canonicalCandidateFor,retrieveCandidates} from './retrieval.mjs';
 
 const allowedIds=new Set(catalogue.map(record=>record.id));
 const CLASSIFIER_MODEL='classifier.dev/jev-fast';
@@ -32,6 +32,22 @@ function retrievalFallback(shortlist,limit=MAX_RECOMMENDATIONS) {
     fit_label:'weak',
     retrieval_rank:index+1
   }));
+}
+
+function pinCanonicalCandidate(comment,ranked,limit=MAX_RECOMMENDATIONS) {
+  const canonical=canonicalCandidateFor(comment);
+  if(!canonical) return ranked;
+  const scored=ranked.find(record=>record.id===canonical.id);
+  const pinned={
+    ...canonical,
+    ...scored,
+    classifier_score:Math.max(.96,scored?.classifier_score??0),
+    fit_label:'exact',
+    retrieval_rank:0,
+    perspective:'best_match',
+    perspective_label:'Best match'
+  };
+  return [pinned,...ranked.filter(record=>record.id!==canonical.id)].slice(0,limit);
 }
 
 function validateComment(value) {
@@ -90,8 +106,9 @@ async function recommend(request,env) {
     const typesafeApiKey=typeof env.TYPESAFE_API_KEY==='string'&&env.TYPESAFE_API_KEY?env.TYPESAFE_API_KEY:undefined;
     const classifierOptions={fetchImpl:classifierFetch,apiKey:typesafeApiKey};
     let classifier_gate='not_needed';
+    const canonicalCandidate=canonicalCandidateFor(comment);
     const factualRequest=requiresFactualAnswer(comment);
-    const seriousRequest=needsSeriousHandling(comment);
+    const seriousRequest=!canonicalCandidate&&needsSeriousHandling(comment);
     if(factualRequest||seriousRequest) {
       try {
         if(factualRequest||!await humourBelongs(comment,classifierOptions)) {
@@ -159,6 +176,7 @@ async function recommend(request,env) {
         return json({error:'Meme ranking is temporarily unavailable. Try again shortly.'},503,{'Retry-After':'60'});
       }
     }
+    ranked=pinCanonicalCandidate(comment,ranked);
     const selection=selectionFromRanking(ranked);
     console.log(JSON.stringify({event:'recommendation',status:'ok',duration_ms:Date.now()-started,decision:selection.decision,confidence:selection.confidence,candidate_count:selection.candidates.length,classifier_gate,classifier_ranked:true,ranking_mode}));
     const perspectives=new Map((ranked??[]).filter(record=>record.perspective).map(record=>[record.id,{perspective:record.perspective,perspective_label:record.perspective_label}]));

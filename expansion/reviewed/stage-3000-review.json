@@ -10,8 +10,8 @@
     "gif": 1195
   },
   "canonical_coverage": {
-    "covered": 38,
-    "total": 40,
+    "covered": 39,
+    "total": 41,
     "missing": 2
   },
   "human_validated": false,

@@ -2,7 +2,8 @@
   "records": 3000,
   "providers": {
     "inherited meme catalogue": 998,
-    "JustMeme.wtf": 807,
+    "JustMeme.wtf": 806,
+    "Imgflip": 1,
     "GIF Reply dataset / GIPHY": 1195
   },
   "media_types": {
@@ -25,8 +26,8 @@
   ],
   "canonical_coverage": {
     "version": "canonical-meme-coverage-v1",
-    "total": 40,
-    "covered": 38,
+    "total": 41,
+    "covered": 39,
     "missing": 2,
     "items": [
       {
@@ -38,6 +39,16 @@
         ],
         "status": "covered",
         "catalogue_id": "gif-s2e0eucjhwjr6x9pbw"
+      },
+      {
+        "id": "i-love-you-3000",
+        "name": "I Love You 3000",
+        "aliases": [
+          "love you 3000",
+          "tony stark morgan love"
+        ],
+        "status": "covered",
+        "catalogue_id": "198936244-i-love-you-3000"
       },
       {
         "id": "this-is-fine",

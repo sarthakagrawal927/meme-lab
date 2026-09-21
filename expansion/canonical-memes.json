@@ -3,6 +3,7 @@
   "description": "High-recognition memes that must be visible in coverage reporting even when a source is still missing.",
   "items": [
     {"id":"my-name-is-jeff","name":"My Name Is Jeff","aliases":["22 jump street","channing tatum jeff"]},
+    {"id":"i-love-you-3000","name":"I Love You 3000","aliases":["love you 3000","tony stark morgan love"]},
     {"id":"this-is-fine","name":"This Is Fine","aliases":["this is fine dog"]},
     {"id":"distracted-boyfriend","name":"Distracted Boyfriend","aliases":["distracted boyfriend"]},
     {"id":"drake-hotline-bling","name":"Drake Hotline Bling","aliases":["drakeposting","drake hotline"]},

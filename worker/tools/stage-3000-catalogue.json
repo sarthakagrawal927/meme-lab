@@ -27444,20 +27444,24 @@
     "core": false
   },
   {
-    "id": "samuel-l-jackson",
-    "name": "Samuel L Jackson",
-    "message": "Use Samuel L Jackson when you're a confident, no-nonsense individual.",
-    "relational_pattern": "Samuel L Jackson frames confident against authority, turning the contrast into a concise social reaction.",
-    "example_context": "For example, when you're the calm leader in a group discussion.",
-    "near_miss_context": "Avoid Samuel L Jackson when the situation lacks both confident and authority; the image would suggest the wrong relationship.",
+    "id": "198936244-i-love-you-3000",
+    "name": "I Love You 3000",
+    "message": "Use I Love You 3000 to express affection as deliberately enormous, heartfelt, or playfully Marvel-referential.",
+    "relational_pattern": "One person amplifies a sincere declaration of love with an iconic number that makes the affection feel bigger than an ordinary reply.",
+    "example_context": "For example, when you want to tell a partner, friend, or family member that you love them very much, send I Love You 3000.",
+    "near_miss_context": "Avoid I Love You 3000 when the comment is rejecting affection, describing unwanted attention, or needs a serious relationship conversation instead of a warm declaration.",
     "tags": [
-      "confident",
-      "authority",
-      "calm",
-      "leadership"
+      "i love you 3000",
+      "love you",
+      "affection",
+      "heartfelt",
+      "marvel",
+      "avengers endgame",
+      "tony stark",
+      "morgan stark"
     ],
-    "meme_strength": 58,
-    "asset_quality": 16,
+    "meme_strength": 90,
+    "asset_quality": 92,
     "uniqueness_score": 100,
     "core": false
   },

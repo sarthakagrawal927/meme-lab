@@ -38,7 +38,11 @@ function media(candidate,className) {
   image.decoding='async';
   image.onerror=()=>wrap.replaceChildren(Object.assign(document.createElement('span'),{className:'media-fallback',textContent:'Preview unavailable'}));
   image.src=mediaUrl;
-  wrap.append(image);
+  if(candidate.id) {
+    const link=Object.assign(document.createElement('a'),{className:'media-link',href:`/memes/${encodeURIComponent(candidate.id)}`,'aria-label':`Open ${displayText(candidate.name)} meme details`});
+    link.append(image);
+    wrap.append(link);
+  } else wrap.append(image);
   if(candidate.media_type==='gif') wrap.append(Object.assign(document.createElement('span'),{className:'media-kind',textContent:'GIF'}));
   return wrap;
 }
@@ -52,7 +56,8 @@ function renderBest(candidate) {
   const perspectiveAware=candidate.perspective&&candidate.perspective!=='best_match';
   const matchLabel=perspectiveAware?candidate.perspective_label.toUpperCase():'BEST MATCH';
   const rank=Object.assign(document.createElement('span'),{className:`rank${lowConfidence?' low-confidence':''}`,textContent:`${lowConfidence?'LOW CONFIDENCE · ':''}${matchLabel} · ${fitText(candidate)}`});
-  const title=Object.assign(document.createElement('h2'),{textContent:displayText(candidate.name)});
+  const title=document.createElement('h2');
+  title.append(Object.assign(document.createElement('a'),{href:`/memes/${encodeURIComponent(candidate.id)}`,textContent:displayText(candidate.name)}));
   const signals=Object.assign(document.createElement('p'),{className:'signal-note',textContent:candidate.signal_summary});
   const sourceText=candidate.license_url?'Open original · licensed source':candidate.media_status==='approved'?'Open approved source':'Open source preview · media rights not established';
   const source=document.createElement('p');
@@ -77,9 +82,11 @@ function renderAlternatives(candidates) {
     card.className='alternative';
     const copy=document.createElement('div');
     copy.className='alternative-copy';
+    const title=document.createElement('h3');
+    title.append(Object.assign(document.createElement('a'),{href:`/memes/${encodeURIComponent(candidate.id)}`,textContent:displayText(candidate.name)}));
     copy.append(
       Object.assign(document.createElement('span'),{textContent:`${candidate.perspective&&candidate.perspective!=='best_match'?candidate.perspective_label.toUpperCase():`#${candidate.rank}`} · ${fitText(candidate)}`}),
-      Object.assign(document.createElement('h3'),{textContent:displayText(candidate.name)}),
+      title,
       Object.assign(document.createElement('p'),{className:'signal-note',textContent:candidate.signal_summary})
     );
     card.append(media(candidate,'alternative-media'),copy);

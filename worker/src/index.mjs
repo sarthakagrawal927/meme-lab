@@ -4,17 +4,146 @@ import {MAX_RECOMMENDATIONS,presentSelection,selectionFromRanking} from './recom
 import {retrieveCandidates} from './retrieval.mjs';
 
 const allowedIds=new Set(catalogue.map(record=>record.id));
+const catalogueById=new Map(catalogue.map(record=>[record.id,record]));
 const CLASSIFIER_MODEL='classifier.dev/jev-fast';
 const TYPESAFE_MODEL='typesafe/jev-latest';
 const RETRIEVAL_FALLBACK_MODEL='vector-retrieval-fallback';
+const SITE_ORIGIN='https://memes.significanthobbies.com';
+const PUBLIC_ROUTES=['/','/collection','/how-it-works'];
 
 function json(data,status=200,extraHeaders={}) {
   return Response.json(data,{status,headers:{
     'Cache-Control':'no-store',
     'X-Content-Type-Options':'nosniff',
     'Referrer-Policy':'no-referrer',
+    'X-Robots-Tag':'noindex, nofollow',
     ...extraHeaders
   }});
+}
+
+function escapeHtml(value) {
+  return String(value??'')
+    .replaceAll('&','&amp;')
+    .replaceAll('<','&lt;')
+    .replaceAll('>','&gt;')
+    .replaceAll('"','&quot;')
+    .replaceAll("'",'&#39;');
+}
+
+function secureHeaders(headers=new Headers()) {
+  headers.set('X-Content-Type-Options','nosniff');
+  headers.set('Referrer-Policy','no-referrer');
+  headers.set('X-Frame-Options','DENY');
+  headers.set('Permissions-Policy','camera=(), microphone=(), geolocation=()');
+  headers.set('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https://i.imgflip.com https://api.memegen.link https://media.giphy.com; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'");
+  return headers;
+}
+
+function pageResponse(body,{status=200,indexable=true,cacheControl='public, max-age=3600'}={}) {
+  const headers=secureHeaders(new Headers({'Cache-Control':cacheControl,'Content-Type':'text/html; charset=utf-8'}));
+  if(!indexable) headers.set('X-Robots-Tag','noindex, nofollow');
+  return new Response(body,{status,headers});
+}
+
+function textResponse(body,{contentType='text/plain; charset=utf-8',cacheControl='public, max-age=21600'}={}) {
+  return new Response(body,{headers:secureHeaders(new Headers({'Cache-Control':cacheControl,'Content-Type':contentType}))});
+}
+
+function publicMemePath(record) {
+  return `/memes/${encodeURIComponent(record.id)}`;
+}
+
+function structuredData(value) {
+  return JSON.stringify(value).replaceAll('<','\\u003c');
+}
+
+function memePage(record) {
+  const path=publicMemePath(record);
+  const canonical=`${SITE_ORIGIN}${path}`;
+  const name=escapeHtml(record.name);
+  const description=escapeHtml(`${record.name} works when ${record.message.charAt(0).toLocaleLowerCase()}${record.message.slice(1)}`);
+  const mediaUrl=escapeHtml(record.media_url||record.image_url||'');
+  const previewUrl=escapeHtml(record.preview_url||record.media_url||record.image_url||'');
+  const tags=record.tags.map(tag=>`<li>${escapeHtml(tag)}</li>`).join('');
+  const sourceNote=record.media_status==='approved'?'Approved media source':'Source preview; redistribution rights are not established';
+  const schema={
+    '@context':'https://schema.org',
+    '@type':'CreativeWork',
+    name:`${record.name} meme`,
+    description:`${record.message} ${record.relational_pattern}`,
+    url:canonical,
+    image:record.preview_url||record.media_url||record.image_url,
+    keywords:record.tags.join(', '),
+    isPartOf:{'@type':'WebSite',name:'Meme Lab',url:SITE_ORIGIN}
+  };
+  return `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>${name} Meme Meaning, Examples &amp; When to Use It | Meme Lab</title>
+  <meta name="description" content="${description}">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="${canonical}">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Meme Lab">
+  <meta property="og:title" content="${name} Meme Meaning &amp; Examples">
+  <meta property="og:description" content="${description}">
+  <meta property="og:url" content="${canonical}">
+  ${previewUrl?`<meta property="og:image" content="${previewUrl}">`:''}
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">${structuredData(schema)}</script>
+  <link rel="stylesheet" href="/app.css">
+</head>
+<body class="page-meme">
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Meme Lab home"><span>meme</span>lab</a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="/">Try it</a>
+      <a href="/collection">Collection</a>
+      <a href="/how-it-works">How it works</a>
+    </nav>
+    <span class="beta">3,000 LIVE</span>
+  </header>
+  <main class="meme-detail-main">
+    <a class="back-link" href="/collection">&larr; Back to the collection</a>
+    <article class="meme-detail">
+      <div class="meme-detail-media">
+        ${mediaUrl?`<img src="${mediaUrl}" alt="${name} meme reference" referrerpolicy="no-referrer">`:'<span class="media-fallback">Preview unavailable</span>'}
+        ${record.media_type==='gif'?'<span class="media-kind">GIF</span>':''}
+      </div>
+      <div class="meme-detail-copy">
+        <p class="eyebrow">MEME REFERENCE</p>
+        <h1>${name}</h1>
+        <p class="meme-definition">${escapeHtml(record.message)}</p>
+        <dl class="meme-guide">
+          <div><dt>What it expresses</dt><dd>${escapeHtml(record.relational_pattern)}</dd></div>
+          <div><dt>Example</dt><dd>${escapeHtml(record.example_context)}</dd></div>
+          <div><dt>When not to use it</dt><dd>${escapeHtml(record.near_miss_context)}</dd></div>
+        </dl>
+        <ul class="tag-list meme-detail-tags" aria-label="Related moods">${tags}</ul>
+        <div class="meme-detail-actions">
+          <a class="primary" href="/">Find a meme for your situation <span aria-hidden="true">&rarr;</span></a>
+          ${record.image_url?`<a class="source-link" href="${escapeHtml(record.image_url)}" target="_blank" rel="noopener noreferrer">${sourceNote}</a>`:''}
+        </div>
+      </div>
+    </article>
+  </main>
+  <footer>
+    <a href="/collection">Browse all 3,000 meme references</a>
+    <span>Match the situation, then pick the perspective.</span>
+  </footer>
+</body>
+</html>`;
+}
+
+function notFoundPage() {
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow"><title>Meme not found | Meme Lab</title><link rel="stylesheet" href="/app.css"></head><body><main class="not-found"><p class="eyebrow">404</p><h1>That meme is not in the collection.</h1><p class="intro">Browse the live catalogue or try another situation.</p><a class="primary" href="/collection">Browse the collection <span aria-hidden="true">&rarr;</span></a></main></body></html>`;
+}
+
+function sitemap() {
+  const urls=[...PUBLIC_ROUTES,...catalogue.map(publicMemePath)];
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(path=>`  <url><loc>${SITE_ORIGIN}${path}</loc></url>`).join('\n')}\n</urlset>\n`;
 }
 
 function safeError(error) {
@@ -177,19 +306,25 @@ async function recommend(request,env) {
 }
 
 function secureAsset(response) {
-  const headers=new Headers(response.headers);
-  headers.set('X-Content-Type-Options','nosniff');
-  headers.set('Referrer-Policy','no-referrer');
-  headers.set('X-Frame-Options','DENY');
-  headers.set('Permissions-Policy','camera=(), microphone=(), geolocation=()');
-  headers.set('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https://i.imgflip.com https://api.memegen.link https://media.giphy.com; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'");
-  headers.set('X-Robots-Tag','noindex, nofollow');
+  const headers=secureHeaders(new Headers(response.headers));
   return new Response(response.body,{status:response.status,statusText:response.statusText,headers});
 }
 
 export default {
   async fetch(request,env) {
     const url=new URL(request.url);
+    if(request.method==='GET'&&url.pathname==='/robots.txt') return textResponse(`User-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: ${SITE_ORIGIN}/sitemap.xml\n`);
+    if(request.method==='GET'&&url.pathname==='/sitemap.xml') return textResponse(sitemap(),{contentType:'application/xml; charset=utf-8'});
+    if(request.method==='GET'&&url.pathname.startsWith('/memes/')) {
+      let id;
+      try { id=decodeURIComponent(url.pathname.slice('/memes/'.length).replace(/\/$/,'')); }
+      catch { return pageResponse(notFoundPage(),{status:404,indexable:false,cacheControl:'no-store'}); }
+      const record=catalogueById.get(id);
+      if(!record) return pageResponse(notFoundPage(),{status:404,indexable:false,cacheControl:'no-store'});
+      const canonicalPath=publicMemePath(record);
+      if(url.pathname!==canonicalPath) return Response.redirect(`${SITE_ORIGIN}${canonicalPath}`,301);
+      return pageResponse(memePage(record));
+    }
     if(url.pathname==='/api/health'&&request.method==='GET') return json({status:'ok',catalogue:catalogue.length});
     if(url.pathname==='/api/recommend'&&request.method==='POST') {
       const origin=request.headers.get('origin');

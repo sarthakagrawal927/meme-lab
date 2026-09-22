@@ -562,11 +562,37 @@ test('classifier throttling abstains when deterministic signals say the input ma
   assert.equal(stored.findLast(entry=>entry.sql.includes('INSERT INTO recommendations'))?.values[4],'safety-gate-throttled');
 });
 
-test('static responses receive security and no-index headers',async()=>{
+test('public pages are indexable while APIs remain no-indexed',async()=>{
   const response=await worker.fetch(new Request('https://example.test/'),env);
   assert.equal(response.headers.get('x-frame-options'),'DENY');
   assert.match(response.headers.get('content-security-policy'),/frame-ancestors 'none'/);
-  assert.equal(response.headers.get('x-robots-tag'),'noindex, nofollow');
+  assert.equal(response.headers.get('x-robots-tag'),null);
+  const api=await worker.fetch(new Request('https://example.test/api/health'),env);
+  assert.equal(api.headers.get('x-robots-tag'),'noindex, nofollow');
+});
+
+test('SEO routes expose robots, the full sitemap, and crawlable meme details',async()=>{
+  const robots=await worker.fetch(new Request('https://example.test/robots.txt'),env);
+  assert.equal(robots.status,200);
+  assert.match(await robots.text(),/Sitemap: https:\/\/memes\.significanthobbies\.com\/sitemap\.xml/);
+
+  const sitemap=await worker.fetch(new Request('https://example.test/sitemap.xml'),env);
+  assert.equal(sitemap.headers.get('content-type'),'application/xml; charset=utf-8');
+  const xml=await sitemap.text();
+  assert.equal((xml.match(/<loc>/g)??[]).length,3003);
+  assert.match(xml,/\/memes\/absolute-cinema<\/loc>/);
+
+  const detail=await worker.fetch(new Request('https://example.test/memes/absolute-cinema'),env);
+  assert.equal(detail.status,200);
+  assert.equal(detail.headers.get('x-robots-tag'),null);
+  const html=await detail.text();
+  assert.match(html,/<link rel="canonical" href="https:\/\/memes\.significanthobbies\.com\/memes\/absolute-cinema">/);
+  assert.match(html,/<script type="application\/ld\+json">/);
+  assert.match(html,/The underdog won after three improbable reversals/);
+
+  const missing=await worker.fetch(new Request('https://example.test/memes/not-in-the-catalogue'),env);
+  assert.equal(missing.status,404);
+  assert.equal(missing.headers.get('x-robots-tag'),'noindex, nofollow');
 });
 
 test('health reports the full live catalogue',async()=>{

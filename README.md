@@ -11,7 +11,7 @@ Paste one comment and get ranked meme options at **https://memes.significanthobb
 Requires **Node.js 22 or newer**. No dependency installation or build step.
 
 ```bash
-cd meme_lab
+cd /Users/sarthak/Desktop/fleet/meme-lab
 node server.mjs
 ```
 

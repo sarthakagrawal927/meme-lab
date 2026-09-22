@@ -1,7 +1,7 @@
 # Meme Lab project status
 
-**Updated:** 21 September 2026
-**Lifecycle:** Live personal meme picker with the corrected 3,000-item meme-and-GIF catalogue released.
+**Updated:** 22 September 2026
+**Lifecycle:** Live personal meme picker with the corrected 3,000-item meme-and-GIF catalogue and crawlable catalogue pages.
 
 ## Live product
 
@@ -11,6 +11,13 @@
 - See meme strength and image quality separately from contextual fit. Popularity and asset quality do not masquerade as relevance.
 - Serious help, safety, care, grief, apology, and factual-guidance requests are guarded before humour is considered.
 - One-tap feedback is retained for 30 days.
+
+## Search and discovery
+
+- The checkout now lives at the canonical Fleet path, `/Users/sarthak/Desktop/fleet/meme-lab`.
+- The SEO build provides a server-rendered page for every one of the 3,000 meme references, plus self-referencing canonical metadata, Open Graph metadata, JSON-LD, `robots.txt`, and a 3,003-URL sitemap.
+- Successful recommendations link the best match and all four backups to those stable catalogue pages. Raw submitted comments remain private 30-day feedback data and are never placed in public URLs, metadata, page source, or the sitemap.
+- API and 404 responses remain explicitly `noindex`; public product and meme pages are indexable.
 
 ## Correcting the 3,000 catalogue
 
@@ -40,4 +47,4 @@
 - Convert the focused canonical set into owner-labelled evaluation data and use feedback to resolve the five remaining ordering disagreements.
 - At 30,000, add movie-dialogue reactions as a separate corpus and route each input to meme, dialogue, or none before corpus-specific retrieval.
 
-Tracking: [public beta #1](https://github.com/sarthakagrawal927/meme-lab/issues/1), [catalogue expansion #2](https://github.com/sarthakagrawal927/meme-lab/issues/2), [verified meme and GIF rebuild #4](https://github.com/sarthakagrawal927/meme-lab/issues/4), [canonical retrieval gaps #5](https://github.com/sarthakagrawal927/meme-lab/issues/5).
+Tracking: [public beta #1](https://github.com/sarthakagrawal927/meme-lab/issues/1), [catalogue expansion #2](https://github.com/sarthakagrawal927/meme-lab/issues/2), [verified meme and GIF rebuild #4](https://github.com/sarthakagrawal927/meme-lab/issues/4), [canonical retrieval gaps #5](https://github.com/sarthakagrawal927/meme-lab/issues/5), [crawlable catalogue #6](https://github.com/sarthakagrawal927/meme-lab/issues/6).

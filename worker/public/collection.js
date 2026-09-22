@@ -26,7 +26,9 @@ function imageFor(meme,index) {
   image.referrerPolicy='no-referrer';
   image.onerror=()=>frame.replaceChildren(Object.assign(document.createElement('span'),{className:'media-fallback',textContent:'Preview unavailable'}));
   image.src=mediaUrl;
-  frame.append(image);
+  const link=Object.assign(document.createElement('a'),{className:'media-link',href:`/memes/${encodeURIComponent(meme.id)}`,'aria-label':`Open ${meme.name} meme details`});
+  link.append(image);
+  frame.append(link);
   if(meme.media_type==='gif') frame.append(Object.assign(document.createElement('span'),{className:'media-kind',textContent:'GIF'}));
   return frame;
 }
@@ -46,9 +48,11 @@ function render() {
     const tags=document.createElement('div');
     tags.className='tag-list';
     for(const tag of meme.tags.slice(0,3)) tags.append(Object.assign(document.createElement('span'),{textContent:tag}));
+    const title=document.createElement('h2');
+    title.append(Object.assign(document.createElement('a'),{href:`/memes/${encodeURIComponent(meme.id)}`,textContent:meme.name}));
     copy.append(
       Object.assign(document.createElement('span'),{className:`collection-state collection-state-${meme.availability}`,textContent:meme.availability==='live'?'Live now':'Experimental'}),
-      Object.assign(document.createElement('h2'),{textContent:meme.name}),
+      title,
       Object.assign(document.createElement('p'),{textContent:meme.message}),
       tags
     );

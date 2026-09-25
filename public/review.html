@@ -17,9 +17,9 @@
     <main class="review-main">
       <section class="review-intro">
         <div>
-          <p class="eyebrow">OWNER DATASET · BLIND REVIEW</p>
-          <h1>Does this meme fit?</h1>
-          <p>Judge the connection only. The model condition, rationale, and pre-label stay hidden.</p>
+          <p id="review-eyebrow" class="eyebrow">OWNER DATASET · BLIND REVIEW</p>
+          <h1 id="review-heading">Does this meme fit?</h1>
+          <p id="review-description">Judge the connection only. The model condition, rationale, and pre-label stay hidden.</p>
         </div>
         <div class="progress-copy">
           <strong id="progress-count">Loading…</strong>
@@ -27,7 +27,24 @@
         </div>
       </section>
 
+      <nav class="review-mode-switch" aria-label="Review dataset">
+        <button type="button" data-review-mode="meme" aria-pressed="true">Meme relevance</button>
+        <button type="button" data-review-mode="dialogue" aria-pressed="false">Movie dialogue</button>
+      </nav>
+
       <div class="progress-track" aria-hidden="true"><span id="progress-bar"></span></div>
+      <section id="calibration-card" class="calibration-card" hidden aria-live="polite">
+        <div>
+          <span>CALIBRATION CHECKPOINT</span>
+          <strong id="calibration-title">Loading checkpoint…</strong>
+        </div>
+        <p id="calibration-copy">The model stays hidden while you label the source lines.</p>
+        <dl id="calibration-metrics" hidden>
+          <div><dt>Precision</dt><dd id="calibration-precision">—</dd></div>
+          <div><dt>Recall</dt><dd id="calibration-recall">—</dd></div>
+          <div><dt>Accuracy</dt><dd id="calibration-accuracy">—</dd></div>
+        </dl>
+      </section>
       <div id="review-status" class="visually-hidden" role="status"></div>
 
       <section id="review-card" class="review-card" hidden>
@@ -36,23 +53,29 @@
           <span id="saved-state" class="saved-state">Unreviewed</span>
         </div>
 
-        <section class="situation-block" aria-labelledby="situation-title">
+        <section id="situation-block" class="situation-block" aria-labelledby="situation-title">
           <span id="situation-title">THE TEXT</span>
           <p id="situation-text"></p>
         </section>
 
         <section class="candidate-block" aria-labelledby="candidate-title">
-          <div class="candidate-copy">
+          <div id="meme-candidate-copy" class="candidate-copy">
             <span class="candidate-kicker">THE MEME</span>
             <h2 id="candidate-title"></h2>
             <p>Does this cultural reference meaningfully connect to the text above?</p>
+          </div>
+          <div id="dialogue-candidate-copy" class="candidate-copy dialogue-copy" hidden>
+            <span class="candidate-kicker">THE MOVIE LINE</span>
+            <blockquote id="dialogue-quote"></blockquote>
+            <p><strong id="dialogue-speaker"></strong> · <span id="dialogue-title"></span></p>
+            <a id="dialogue-source" href="#" target="_blank" rel="noreferrer">View source ↗</a>
           </div>
           <div id="candidate-media" class="review-media">
             <p>Loading preview…</p>
           </div>
         </section>
 
-        <fieldset class="verdicts">
+        <fieldset id="meme-verdicts" class="verdicts">
           <legend>Your judgment</legend>
           <button class="verdict relevant" data-verdict="relevant">
             <span class="shortcut">1</span>
@@ -71,27 +94,54 @@
           </button>
         </fieldset>
 
+        <section id="dialogue-verdicts" class="dialogue-verdicts" hidden>
+          <fieldset class="verdicts">
+            <legend>Would you keep this as a reaction?</legend>
+            <button class="verdict relevant" data-dialogue-field="sendability" data-value="sendable"><strong>Sendable</strong><small>I could genuinely use this.</small></button>
+            <button class="verdict unsure" data-dialogue-field="sendability" data-value="maybe"><strong>Maybe</strong><small>Useful in the right moment.</small></button>
+            <button class="verdict not-relevant" data-dialogue-field="sendability" data-value="reject"><strong>Reject</strong><small>Not useful as a reaction.</small></button>
+          </fieldset>
+          <div class="quality-grid">
+            <fieldset class="quality-choice">
+              <legend>On its own</legend>
+              <button data-dialogue-field="standalone" data-value="strong">Strong</button>
+              <button data-dialogue-field="standalone" data-value="usable">Usable</button>
+              <button data-dialogue-field="standalone" data-value="dependent">Needs context</button>
+            </fieldset>
+            <fieldset class="quality-choice">
+              <legend>Line strength</legend>
+              <button data-dialogue-field="strength" data-value="memorable">Memorable</button>
+              <button data-dialogue-field="strength" data-value="solid">Solid</button>
+              <button data-dialogue-field="strength" data-value="generic">Generic</button>
+            </fieldset>
+          </div>
+          <button id="save-dialogue-review" class="primary dialogue-save" type="button">Save and show next</button>
+        </section>
+
         <label class="review-note">Optional note
           <textarea id="review-note" maxlength="1000" placeholder="Wrong target, too generic, unfamiliar reference…"></textarea>
         </label>
 
         <div class="review-nav">
           <button id="previous-item" class="secondary">← Previous</button>
-          <span>Keys 1–3 save · arrows navigate</span>
+          <span id="keyboard-hint">Keys 1–3 save · arrows navigate</span>
           <button id="next-item" class="secondary">Skip / Next →</button>
         </div>
       </section>
 
       <section id="review-complete" class="review-complete" hidden>
         <span class="complete-mark">✓</span>
-        <h2>Dataset review complete</h2>
-        <p>Every candidate has a relevance judgment. You can still revisit and revise any item.</p>
+        <h2 id="complete-heading">Dataset review complete</h2>
+        <p id="complete-copy">Every candidate has a relevance judgment. You can still revisit and revise any item.</p>
         <button id="revisit-items" class="secondary">Review from the beginning</button>
+        <a id="dialogue-export" class="secondary export-link" href="/api/dialogue-review-export" hidden>Export labelled JSONL</a>
       </section>
 
-      <p class="review-footnote">“Relevant” is deliberately narrower than “I would send this.” Your relevance labels improve retrieval; sendability remains a separate taste judgment.</p>
+      <p id="review-footnote" class="review-footnote">“Relevant” is deliberately narrower than “I would send this.” Your relevance labels improve retrieval; sendability remains a separate taste judgment.</p>
     </main>
   </div>
   <script type="module" src="/review.js"></script>
+  <script src="https://sassmaker.com/project-strip.js" data-project="meme-lab" defer></script>
+  <script src="https://sassmaker.com/ai-chat-footer.js" data-name="Meme Lab" defer></script>
 </body>
 </html>

@@ -6,9 +6,15 @@
   <title>Meme Lab — blind reference experiments</title>
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/experiment.css">
+  <script>
+    if (location.hostname === "memes.significanthobbies.com") {
+      (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","ymdudyzrcs");
+      window.clarity("set","project_id","meme-lab");
+    }
+  </script>
 </head>
 <body>
-  <div class="app-shell">
+  <div id="root" class="app-shell" data-clarity-mask="true">
     <aside class="sidebar">
       <a class="brand" href="/" aria-label="Meme Lab home">
         <span>meme</span><strong>lab</strong>
@@ -167,7 +173,7 @@
             </div>
           </section>
 
-          <p class="privacy">Images contact their providers only when you explicitly load them. No analytics or automatic scraping.</p>
+          <p class="privacy">Images contact their providers only when you explicitly load them. The public Worker uses Microsoft Clarity with the application root masked; local development has no analytics. No automatic scraping.</p>
         </section>
 
         <section id="catalogue" class="panel">
@@ -239,5 +245,7 @@
   </div>
 
   <script type="module" src="/app.js"></script>
+  <script src="https://sassmaker.com/project-strip.js" data-project="meme-lab" defer></script>
+  <script src="https://sassmaker.com/ai-chat-footer.js" data-name="Meme Lab" defer></script>
 </body>
 </html>

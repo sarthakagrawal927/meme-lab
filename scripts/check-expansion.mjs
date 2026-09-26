@@ -40,6 +40,8 @@ const stage3000Catalogue=JSON.parse(await readFile(resolve(root,'worker/tools/st
 const reactionGifSource=parseJsonl(await readFile(resolve(root,'expansion/sources/stage-3000-reaction-gifs.jsonl'),'utf8'),'reaction GIF source');
 const reactionGifReport=JSON.parse(await readFile(resolve(root,'expansion/sources/stage-3000-reaction-gifs-report.json'),'utf8'));
 const replacementGifSource=parseJsonl(await readFile(resolve(root,'expansion/sources/stage-3000-reaction-gif-replacements.jsonl'),'utf8'),'replacement reaction GIF source');
+const qualityGifReplacements=parseJsonl(await readFile(resolve(root,'expansion/reviewed/high-quality-gif-replacements.jsonl'),'utf8'),'visually reviewed GIF replacements');
+const qualityReplacementManifest=JSON.parse(await readFile(resolve(root,'expansion/exclusions/low-quality-gif-replacements.json'),'utf8'));
 const nonReactionExclusions=JSON.parse(await readFile(resolve(root,'expansion/exclusions/non-reaction-assets.json'),'utf8'));
 const stage3000EvalDefinition=JSON.parse(await readFile(resolve(root,'eval/stage-3000-eval-definition.json'),'utf8'));
 const coverageInputHash=createHash('sha256').update(candidatesText).update(coverageCasesText).digest('hex');
@@ -67,6 +69,7 @@ if(stage1000Candidates.length!==700||stage1000Catalogue.length!==1000||new Set(s
 validateExpansionRecords(stage3000Candidates,{knownIds:stage1000Catalogue.map(record=>record.id)});
 validateMeaningSpecificMetadata(stage3000Candidates);
 if(stage3000Candidates.length!==2002||stage3000Catalogue.length!==3000||publicCollection.length!==3000) throw new Error('Stage-3000 generated catalogue has the wrong size.');
+if(qualityGifReplacements.length!==7||qualityReplacementManifest.replacements.length!==7||qualityGifReplacements.some(record=>!publicCollection.some(publicRecord=>publicRecord.id===record.id))||qualityReplacementManifest.replacements.some(record=>publicCollection.some(publicRecord=>publicRecord.id===record.old_id))) throw new Error('The visual-quality GIF replacements have not been applied to the public catalogue.');
 if(new Set(stage3000Catalogue.map(record=>record.id)).size!==3000||new Set(publicCollection.map(record=>record.id)).size!==3000) throw new Error('Stage-3000 generated catalogue has duplicate IDs.');
 const excludedIds=nonReactionExclusions.records.map(record=>record.id);
 const integrity=catalogueIntegrity(publicCollection,{excludedIds});

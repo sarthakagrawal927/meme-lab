@@ -7,6 +7,7 @@ import { catalogue, sources, datasetHash, promptHash, validateRequest, buildProm
 import { loadEnv, configFromEnv } from './src/config.mjs';
 import { Store } from './src/store.mjs';
 import { blindArm, experimentSeed, latestExperimentReviews, orderedRepresentations, summarizeExperiments } from './src/experiment.mjs';
+import {dialogueCalibrationCheckpoint,dialogueReviewSummary,evaluateDialogueCalibration,parseDialogueEvalCases,validateDialogueReview} from './src/dialogue-eval.mjs';
 
 export const ROOT=dirname(fileURLToPath(import.meta.url));
 const mime={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.md':'text/plain; charset=utf-8','.json':'application/json; charset=utf-8','.jsonl':'application/x-ndjson; charset=utf-8','.png':'image/png','.svg':'image/svg+xml','.sha256':'text/plain; charset=utf-8','.py':'text/plain; charset=utf-8'};
@@ -23,6 +24,16 @@ async function bodyJSON(req) {
   for await (const chunk of req) { size+=chunk.length; if(size>32000) throw Object.assign(new Error('Request too large.'),{status:413}); chunks.push(chunk); }
   try { return JSON.parse(Buffer.concat(chunks).toString('utf8')); }
   catch { throw new Error('Invalid JSON body.'); }
+}
+
+async function dialogueCases() {
+  return parseDialogueEvalCases(await readFile(resolve(ROOT,'eval/dialogue_quality_cases.jsonl'),'utf8'));
+}
+
+async function dialogueCalibration(events,cases) {
+  const evaluationCases=cases??await dialogueCases();
+  const screeningReviews=evaluationCases.map(row=>({id:row.dialogue_id,passes_quality_gate:row.structural_score>=75,quality_score:row.structural_score}));
+  return dialogueCalibrationCheckpoint(evaluateDialogueCalibration(evaluationCases,screeningReviews,events));
 }
 
 export function createApp(config, {storeDir=resolve(ROOT,'runs')}={}) {
@@ -98,6 +109,37 @@ export function createApp(config, {storeDir=resolve(ROOT,'runs')}={}) {
           }
           items.sort((a,b)=>createHash('sha256').update(a.item_id).digest('hex').localeCompare(createHash('sha256').update(b.item_id).digest('hex')));
           return json(res,200,{total:items.length,reviewed:items.filter(item=>item.review).length,remaining:items.filter(item=>!item.review).length,items});
+        }
+        if(path==='/api/dialogue-review-queue') {
+          const cases=await dialogueCases();
+          const events=await store.all();
+          const latest=new Map();
+          for(const event of events) if(event.event_type==='dialogue_review') latest.set(event.case_id,event);
+          const items=cases.map(row=>({
+            case_id:row.id,
+            quote:row.quote,
+            work_title:row.work_title,
+            speaker:row.speaker,
+            source_url:row.provenance.source_url,
+            review:latest.has(row.id)?Object.fromEntries(['sendability','standalone','strength','note','timestamp'].map(key=>[key,latest.get(row.id)[key]])):null
+          }));
+          return json(res,200,{...dialogueReviewSummary(cases,events),items});
+        }
+        if(path==='/api/dialogue-review-report') {
+          const cases=await dialogueCases();
+          return json(res,200,await dialogueCalibration(await store.all(),cases));
+        }
+        if(path==='/api/dialogue-review-export') {
+          const cases=await dialogueCases();
+          const events=await store.all();
+          const latest=new Map();
+          for(const event of events) if(event.event_type==='dialogue_review') latest.set(event.case_id,event);
+          const summary=dialogueReviewSummary(cases,events);
+          const rows=[{record_type:'dialogue_review_export',created_at:new Date().toISOString(),...summary,label_provenance:'local_owner_review'},...cases.map(row=>({record_type:'dialogue_case',...row,owner_review:latest.get(row.id)??null}))];
+          const text=rows.map(row=>JSON.stringify(row)).join('\n')+'\n';
+          commonHeaders(res);
+          res.writeHead(200,{'Content-Type':'application/x-ndjson; charset=utf-8','Content-Disposition':'attachment; filename="meme-lab-dialogue-review.jsonl"'});
+          return res.end(text);
         }
         const revealMatch=path.match(/^\/api\/experiments\/([a-f0-9-]{36})\/reveal$/);
         if(revealMatch) {
@@ -199,6 +241,12 @@ export function createApp(config, {storeDir=resolve(ROOT,'runs')}={}) {
         if(typeof(body.note??'')!=='string'||(body.note??'').length>1000) throw new Error('Keep notes within 1,000 characters.');
         const review=await store.save('candidate_review',{experiment_id:experiment.experiment_id,blind_id:arm.blind_id,run_id:run.id,candidate_id:body.candidate_id,verdict:body.verdict,note:body.note||'',label_provenance:'local_user_candidate_relevance_review'});
         return json(res,200,{review});
+      }
+      if(path==='/api/dialogue-review') {
+        const cases=await dialogueCases();
+        const input=validateDialogueReview(body,new Set(cases.map(row=>row.id)));
+        const review=await store.save('dialogue_review',{...input,label_provenance:'local_owner_dialogue_quality_review'});
+        return json(res,200,{review,calibration:await dialogueCalibration(await store.all(),cases)});
       }
       if(path==='/api/select') {
         const input=validateRequest(body); const started=performance.now();

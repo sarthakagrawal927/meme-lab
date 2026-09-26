@@ -1,37 +1,25 @@
 {
   "$schema": "fleet.design-review.v1",
   "version": 1,
-  "project": "meme_lab",
-  "target": "Meme Lab public playground professional redesign",
+  "project": "meme-lab",
+  "target": "Dialogue quality review mode",
   "surfaceMode": "operate",
-  "mode": "overhaul",
+  "mode": "preserve",
   "register": "product",
   "context": {
     "product": "PRODUCT.md",
     "design": "DESIGN.md"
   },
   "direction": {
-    "references": [
-      "Current live Clean Canvas surface",
-      "Professional media-selection tools",
-      "Editorial image contact sheets"
-    ],
-    "probes": [
-      {"id": "cutting-room", "path": "design-probes/professional-cutting-room.html"},
-      {"id": "reference-desk", "path": "design-probes/professional-reference-desk.html"},
-      {"id": "contact-sheet", "path": "design-probes/professional-contact-sheet.html"}
-    ],
-    "selected": "reference-desk",
-    "approval": "approved",
-    "before": "artifacts/design/after-doodles-1440.png",
+    "references": [],
+    "probes": [],
+    "selected": "existing-design",
+    "approval": "not-required",
+    "before": "artifacts/design/dialogue-review-before.png",
     "library": {
       "strategy": "upstream-first",
-      "primary": "preline",
-      "sources": [
-        "https://preline.co/docs/sidebar.html",
-        "https://preline.co/docs/textarea.html",
-        "https://preline.co/docs/card.html"
-      ],
+      "primary": "existing-project-system",
+      "sources": [],
       "runtime": "existing",
       "customReplacement": {
         "used": false,
@@ -40,36 +28,36 @@
       }
     },
     "contract": {
-      "purpose": "Turn one pasted comment or situation into a useful meme immediately without making the operating surface feel juvenile.",
-      "purposeSource": "PRODUCT.md",
+      "purpose": "Turn owner judgments into trustworthy quality labels before movie dialogue can enter Meme Lab retrieval.",
+      "purposeSource": "PRODUCT.md and GitHub issue #8",
       "canonicalPurpose": "Meme Lab turns one pasted comment or situation into a useful meme immediately.",
       "purposeAlignment": "match",
       "driftNote": "",
-      "audience": "The owner first, with a public playground for lightweight feedback.",
-      "job": "Describe one complete situation, inspect the best meme and four honest alternatives, and record whether the recommendation fits.",
-      "thesis": "A restrained reference workspace replaces doodles, candy-colored tiles, and oversized marketing composition while keeping the task immediate.",
-      "system": "Navy navigation, white working surfaces, cobalt actions, quiet semantic states, compact typography, modest corners, and uniform media fields cover all three public pages.",
-      "signature": "The ranked result behaves like a reference record: real meme media, fit label, perspective, catalogue signals, and four compact alternatives.",
-      "risk": "Professional restraint can drift toward generic software, so meme media remains visually dominant and perspective-aware ranking stays explicit."
+      "audience": "The owner, reviewing a bounded local dataset before dialogue expansion.",
+      "job": "Judge whether each exact movie line is sendable, understandable without its scene, and strong enough to keep.",
+      "thesis": "Extend the approved Reference Desk review surface with one explicit dataset switch, a focused three-part quality decision, and a bias-safe calibration checkpoint.",
+      "system": "Preserve navy, white, cobalt, quiet semantic colors, compact status labels, serif source language, modest corners, and existing responsive behavior.",
+      "signature": "The exact movie line is treated as a source record with speaker, film, provenance, three independent quality judgments, and a model checkpoint that unlocks only after sufficient labels.",
+      "risk": "Three judgments can slow review, so every dimension uses one-tap choices, keyboard support, automatic advance, resumable progress, and a visible 50-label milestone."
     }
   },
   "evidence": {
     "screenshots": [
       {
         "width": 390,
-        "path": "artifacts/design/after-390.png"
+        "path": "artifacts/design/dialogue-review-after-390.png"
       },
       {
         "width": 768,
-        "path": "artifacts/design/after-768.png"
+        "path": "artifacts/design/dialogue-review-after-768.png"
       },
       {
         "width": 1440,
-        "path": "artifacts/design/after-1440.png"
+        "path": "artifacts/design/dialogue-review-after-1440.png"
       }
     ],
     "projectCheck": {
-      "command": "npm test && npm run check && git diff --check && pnpm exec wrangler deploy --dry-run",
+      "command": "npm test && npm run check && git diff --check",
       "status": "pass"
     },
     "critique": {
@@ -86,10 +74,7 @@
     },
     "detector": {
       "posture": "advisory",
-      "findings": [],
-      "command": "node /Users/sarthak/Desktop/fleet/.agents/skills/impeccable/scripts/detect.mjs --json worker/public/index.html worker/public/collection.html worker/public/how-it-works.html worker/public/app.css",
-      "status": "pass",
-      "count": 0
+      "findings": []
     },
     "comprehension": {
       "status": "not-applicable",
@@ -116,6 +101,6 @@
   },
   "ownerFeedback": {
     "decision": "keep",
-    "note": "Owner asked to avoid overengineering and approved the recommended simple Reference Desk direction."
+    "note": "Preserve-mode extension of the owner-approved Reference Desk direction; no new visual direction was introduced."
   }
 }

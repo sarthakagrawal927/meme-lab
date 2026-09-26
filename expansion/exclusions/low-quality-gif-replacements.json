@@ -1,0 +1,14 @@
+{
+  "version": "low-quality-gif-replacements-v1",
+  "reviewed_on": "2026-09-23",
+  "reason": "These live records have unusable watermark or OCR-garbled names and misleading retrieval sentences. Each is replaced at the same catalogue index by a visually inspected, usage-backed reaction GIF.",
+  "replacements": [
+    {"old_id":"gif-50pzavri0flhu","new_id":"gif-3okipxuew6l9ox8vpw","catalogue_index":2668,"reason":"Watermark-only name and fabricated website use."},
+    {"old_id":"gif-vbeqcmafay8thnm4fx","new_id":"gif-3o7zetmu77ulpyer2w","catalogue_index":2666,"reason":"Unintelligible OCR name and unsupported VIP interpretation."},
+    {"old_id":"gif-xjm0sxa1ckqu9iiiwe","new_id":"gif-l4fggafcohmrlqxg0","catalogue_index":2692,"reason":"Unintelligible OCR name and generic fabricated meaning."},
+    {"old_id":"gif-zinrfer4ynrbe","new_id":"gif-ulmaf9yezwbxjbi8nk","catalogue_index":2716,"reason":"Watermark-only name and incorrect website promotion meaning."},
+    {"old_id":"gif-krsketynd1nhi","new_id":"gif-5b5ou7auekfdsaer5i","catalogue_index":2818,"reason":"Watermark-only name and invented GIF commentary meaning."},
+    {"old_id":"gif-tqiq7j9jogbii","new_id":"gif-3kc2jd2qcbosc","catalogue_index":2983,"reason":"OCR-garbled name and invented very-thin interpretation."},
+    {"old_id":"gif-6b5gnqh1mjwai","new_id":"gif-xt4uqeuxsb3s34kcm8","catalogue_index":2990,"reason":"OCR-garbled name and invented gaming interpretation."}
+  ]
+}

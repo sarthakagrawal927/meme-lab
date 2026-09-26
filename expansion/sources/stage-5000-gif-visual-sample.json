@@ -1,0 +1,41 @@
+{
+  "version": "stage-5000-gif-visual-sample-v1",
+  "observed_on": "2026-09-23",
+  "method": "Stratified direct-browser loads of original i.giphy.com GIF assets. Dimensions come from the browser image document title.",
+  "threshold": {
+    "rule": "The longer side must be at least 320 pixels and the shorter side at least 180 pixels.",
+    "minimum_long_side": 320,
+    "minimum_short_side": 180
+  },
+  "summary": {
+    "attempted_records": 64,
+    "measured_records": 63,
+    "failed_or_timed_out": 1,
+    "passed_release_resolution": 53,
+    "below_release_resolution": 10,
+    "below_release_resolution_rate": 0.1587
+  },
+  "below_release_resolution": [
+    {"selection_rank": 85, "source_id": "42YlR8u9gV5Cw", "width": 250, "height": 162},
+    {"selection_rank": 678, "source_id": "YVPwi7L2izTJS", "width": 300, "height": 167},
+    {"selection_rank": 933, "source_id": "11t9sYRP19MFd6", "width": 220, "height": 250},
+    {"selection_rank": 1526, "source_id": "le4iSscY6ZzTG", "width": 245, "height": 245},
+    {"selection_rank": 2203, "source_id": "SWd9mTHEMIxQ4", "width": 245, "height": 300},
+    {"selection_rank": 3135, "source_id": "w115RUWowJXgs", "width": 245, "height": 197},
+    {"selection_rank": 3500, "source_id": "SH2yqsbuh9FU4", "width": 245, "height": 166},
+    {"selection_rank": 3813, "source_id": "UQFDNcJRdlUGI", "width": 245, "height": 200},
+    {"selection_rank": 4322, "source_id": "353lWPZw3tFOU", "width": 319, "height": 240},
+    {"selection_rank": 4491, "source_id": "7gGXGl8sc4NLW", "width": 250, "height": 188}
+  ],
+  "failed_or_timed_out": [
+    {"selection_rank": 4067, "source_id": "3ohzdJAkmUorDDg3K0"}
+  ],
+  "manual_visual_checks": [
+    {"selection_rank": 2500, "source_id": "tXdJfpeBMmBjy", "width": 500, "height": 375, "assessment": "caution", "note": "Usable reaction animation, but a visible source watermark remains."},
+    {"selection_rank": 3500, "source_id": "SH2yqsbuh9FU4", "width": 245, "height": 166, "assessment": "reject", "note": "Relevant reaction GIF, but visibly too small for the primary result card."},
+    {"selection_rank": 4000, "source_id": "M7EQSsEXkGRvq", "width": 500, "height": 330, "assessment": "keep", "note": "Clear reaction, readable caption, and adequate source dimensions."},
+    {"selection_rank": 5000, "source_id": "8PdA6oDWZz0EjAyuXg", "width": 480, "height": 270, "assessment": "keep", "note": "Clear reaction, readable caption, and adequate source dimensions."}
+  ],
+  "verdict": "not_release_ready",
+  "uncertainty": "The sample estimates resolution risk but does not prove the remaining assets are free of watermarks, compression artifacts, mislabeled content, or near-visual duplicates."
+}

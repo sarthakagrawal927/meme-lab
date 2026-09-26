@@ -1,6 +1,6 @@
 # Meme Lab project status
 
-**Updated:** 22 September 2026
+**Updated:** 23 September 2026
 **Lifecycle:** Live personal meme picker with the corrected 3,000-item meme-and-GIF catalogue and crawlable catalogue pages.
 
 ## Live product
@@ -45,6 +45,9 @@
 
 - Continue owner review of the fresh 100-case stage-3,000 evaluation and use production feedback to improve the weakest GIF metadata.
 - Convert the focused canonical set into owner-labelled evaluation data and use feedback to resolve the five remaining ordering disagreements.
-- At 30,000, add movie-dialogue reactions as a separate corpus and route each input to meme, dialogue, or none before corpus-specific retrieval.
+- The next catalogue expansion is GIF-first, not a standalone movie-dialogue corpus. Cornell dialogue remains research/evaluation material and is not a production source.
+- A 5,000-GIF staging pool is now built from the full official GIF Reply exports. It contains 4,134 entries not present in the earlier 1,189-record source set, requires at least ten observed reply uses, has no exact record, media, or dataset-GIF-ID duplicates, and caps identical semantic buckets at eight.
+- The staging pool is deliberately not live yet. A browser-measured 63-GIF stratified sample found 10 assets (15.9%) below the 320-by-180-equivalent release floor, one timed-out asset, and both visible watermarks and genuinely strong tail entries. Every new record now has an unknown asset-quality score, a pending visual-quality status, and `production_eligible: false`; no record can enter production until measured. The 120-record review sample remains owner-unvalidated, and 4,134 net-new records still need meaning-specific full-sentence retrieval metadata before release qualification.
+- A focused curation pass visually inspected seven distinct candidates, checked their actual GIF dimensions and reaction meaning, and replaced seven live records whose names and retrieval descriptions were watermark text or broken OCR. The generated catalogue remains exactly 3,000 records. These seven changes are prepared locally; the public Worker and vector index still need a coordinated release before visitors can retrieve them.
 
 Tracking: [public beta #1](https://github.com/sarthakagrawal927/meme-lab/issues/1), [catalogue expansion #2](https://github.com/sarthakagrawal927/meme-lab/issues/2), [verified meme and GIF rebuild #4](https://github.com/sarthakagrawal927/meme-lab/issues/4), [canonical retrieval gaps #5](https://github.com/sarthakagrawal927/meme-lab/issues/5), [crawlable catalogue #6](https://github.com/sarthakagrawal927/meme-lab/issues/6).

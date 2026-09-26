@@ -1,0 +1,59 @@
+{
+  "version": "reaction-gif-expansion-audit-v1",
+  "input_records": 5000,
+  "baseline_records": 1189,
+  "retained_from_baseline": 866,
+  "net_new_vs_baseline": 4134,
+  "exact_duplicates": {
+    "proposed_id": 0,
+    "source_id": 0,
+    "dataset_gif_id": 0,
+    "media_url": 0
+  },
+  "semantic_diversity": {
+    "distinct_exact_buckets": 4810,
+    "largest_exact_bucket": 8,
+    "repeated_bucket_records": 306
+  },
+  "observed_conversation_uses": {
+    "minimum": 10,
+    "p25": 15,
+    "median": 27,
+    "p75": 67,
+    "maximum": 23747
+  },
+  "metadata_quality": {
+    "minimum": 22,
+    "p25": 43,
+    "median": 54,
+    "p75": 55,
+    "maximum": 100
+  },
+  "visual_quality": {
+    "status": "not_release_ready",
+    "measured_records": 63,
+    "failed_or_timed_out": 1,
+    "below_release_resolution": 10,
+    "below_release_resolution_rate": 0.1587,
+    "threshold": {
+      "rule": "The longer side must be at least 320 pixels and the shorter side at least 180 pixels.",
+      "minimum_long_side": 320,
+      "minimum_short_side": 180
+    },
+    "evidence_path": "expansion/sources/stage-5000-gif-visual-sample.json"
+  },
+  "media_delivery": {
+    "checked": false,
+    "reason": "Terminal network access is unavailable in the managed workspace; URLs remain staged until sampled or fully verified."
+  },
+  "near_visual_duplicates": {
+    "checked": false,
+    "reason": "Exact dataset GIF identifiers are unique; perceptual similarity across different identifiers still needs image-frame analysis."
+  },
+  "human_review": {
+    "sample_records": 120,
+    "status": "pending_owner_review",
+    "sample_path": "eval/reaction_gif_expansion_quality_sample.jsonl"
+  },
+  "release_status": "blocked_by_visual_quality"
+}

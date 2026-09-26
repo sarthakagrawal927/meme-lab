@@ -1,0 +1,2789 @@
+{
+  "version": "wikiquote-dialogue-pilot-v1",
+  "created_at": "2026-09-22T19:37:42.380Z",
+  "human_validated": false,
+  "production_eligible": false,
+  "source": {
+    "provider": "English Wikiquote",
+    "backend": "documented_mediawiki_api",
+    "api": "https://en.wikiquote.org/w/api.php",
+    "index_pages": [
+      "List of films (A–C)",
+      "List of films (D–F)",
+      "List of films (G–I)",
+      "List of films (J–L)",
+      "List of films (M–O)",
+      "List of films (P–S)",
+      "List of films (T–V)",
+      "List of films (W–Z)"
+    ],
+    "total_unique_index_links": 5664,
+    "sample_strategy": "proportional allocation across eight alphabetical indexes, evenly spaced within each index",
+    "title_sample_size": 700,
+    "existing_page_target": 500,
+    "group_sizes": [
+      1184,
+      620,
+      833,
+      588,
+      660,
+      1033,
+      420,
+      326
+    ],
+    "group_allocations": [
+      146,
+      77,
+      103,
+      73,
+      81,
+      128,
+      52,
+      40
+    ]
+  },
+  "requests": {
+    "index_requests": 8,
+    "page_batch_requests": 14,
+    "titles_attempted": 700,
+    "response_rows": 649,
+    "existing_pages_resolved": 500,
+    "redlinks_or_missing": 143,
+    "failed_batches": 0,
+    "failures": []
+  },
+  "extraction": {
+    "raw_candidate_lines": 35680,
+    "structurally_retained_before_deduplication": 29141,
+    "retained_unique": 28285,
+    "high_signal_heuristic": 21388,
+    "films_with_retained_dialogue": 490,
+    "films_without_retained_dialogue": 10,
+    "retained_per_film": 56.57,
+    "high_signal_per_film": 42.78,
+    "speaker_attribution_coverage": 1,
+    "rejection_reasons": {
+      "too_short": 4637,
+      "too_long": 1880,
+      "unbalanced_quotation_mark": 14,
+      "missing_speaker": 5,
+      "nested_list_or_cast_entry": 2,
+      "markup_residue": 1
+    }
+  },
+  "duplicates": {
+    "exact_duplicates": 856,
+    "near_duplicate_pairs": 159,
+    "exact_samples": [
+      {
+        "kept_id": "dialogue-a-better-tomorrow-90d07a738d18",
+        "duplicate_id": "dialogue-a-better-tomorrow-90d07a738d18",
+        "quote": "I don't know."
+      },
+      {
+        "kept_id": "dialogue-a-better-tomorrow-59c70751ceed",
+        "duplicate_id": "dialogue-a-better-tomorrow-59c70751ceed",
+        "quote": "United Taxi Company."
+      },
+      {
+        "kept_id": "dialogue-100-girls-ef82f4e4851b",
+        "duplicate_id": "dialogue-american-beauty-1999-film-608aa84d7a01",
+        "quote": "What do you mean?"
+      },
+      {
+        "kept_id": "dialogue-all-you-need-is-cash-fc3f1624b000",
+        "duplicate_id": "dialogue-american-beauty-1999-film-5501b74c5c72",
+        "quote": "What are you doing?!"
+      },
+      {
+        "kept_id": "dialogue-100-girls-ef82f4e4851b",
+        "duplicate_id": "dialogue-american-beauty-1999-film-02ac5cef6c47",
+        "quote": "What do you mean?"
+      },
+      {
+        "kept_id": "dialogue-analyze-this-46414cbcf2b0",
+        "duplicate_id": "dialogue-analyze-this-46414cbcf2b0",
+        "quote": "I don't know what you're talkin' about."
+      },
+      {
+        "kept_id": "dialogue-100-girls-ef82f4e4851b",
+        "duplicate_id": "dialogue-angels-with-dirty-faces-ed4101d64188",
+        "quote": "What do you mean?"
+      },
+      {
+        "kept_id": "dialogue-all-you-need-is-cash-fc3f1624b000",
+        "duplicate_id": "dialogue-apt-pupil-film-97ee52a2f154",
+        "quote": "What are you doing?"
+      },
+      {
+        "kept_id": "dialogue-all-you-need-is-cash-fc3f1624b000",
+        "duplicate_id": "dialogue-austin-powers-international-man-of-mystery-3e8051d3409f",
+        "quote": "What are you doing?"
+      },
+      {
+        "kept_id": "dialogue-100-girls-32dd5745d1b9",
+        "duplicate_id": "dialogue-austin-powers-international-man-of-mystery-273b4946ab2d",
+        "quote": "No, I'm not."
+      },
+      {
+        "kept_id": "dialogue-3-ninjas-knuckle-up-8204ce795624",
+        "duplicate_id": "dialogue-austin-powers-international-man-of-mystery-5e503ee1f9c1",
+        "quote": "Yes, you are."
+      },
+      {
+        "kept_id": "dialogue-austin-powers-international-man-of-mystery-5ac845d3a5b3",
+        "duplicate_id": "dialogue-austin-powers-international-man-of-mystery-5ac845d3a5b3",
+        "quote": "I've got you now, Dr. Evil."
+      },
+      {
+        "kept_id": "dialogue-austin-powers-international-man-of-mystery-217b3cc3015e",
+        "duplicate_id": "dialogue-austin-powers-international-man-of-mystery-217b3cc3015e",
+        "quote": "There's nothing more pathetic than an aging hipster."
+      },
+      {
+        "kept_id": "dialogue-batman-forever-d398a5e77881",
+        "duplicate_id": "dialogue-batman-forever-4592ebab0faa",
+        "quote": "Oh, my God, it's him! I am a winner, I am a winner, I am a winner! I am a winner."
+      },
+      {
+        "kept_id": "dialogue-batman-forever-45d692b8e5ef",
+        "duplicate_id": "dialogue-batman-forever-45d692b8e5ef",
+        "quote": "Back to work, Edward!"
+      },
+      {
+        "kept_id": "dialogue-batman-forever-897f86d72208",
+        "duplicate_id": "dialogue-batman-forever-5f808efa7f32",
+        "quote": "Ball up a fist!"
+      },
+      {
+        "kept_id": "dialogue-batman-forever-4491250ad56c",
+        "duplicate_id": "dialogue-batman-forever-04fe70450103",
+        "quote": "Reach way back!"
+      },
+      {
+        "kept_id": "dialogue-a-christmas-carol-1938-film-bab1744064d4",
+        "duplicate_id": "dialogue-batman-forever-e4c17d78561e",
+        "quote": "Yes, I do."
+      },
+      {
+        "kept_id": "dialogue-batman-forever-a35f2dbddd50",
+        "duplicate_id": "dialogue-batman-forever-c94055a6832e",
+        "quote": "Young men with a mind for revenge need little encouragement. They need guidance. You, above all, should know the consequences of the life you choose."
+      },
+      {
+        "kept_id": "dialogue-batman-forever-82058e868a79",
+        "duplicate_id": "dialogue-batman-forever-7638f3db7457",
+        "quote": "Riddle me this, riddle me that, who's afraid of the big, black bat?"
+      }
+    ],
+    "near_samples": [
+      {
+        "left_id": "dialogue-i-heart-huckabees-54fb4c647ea4",
+        "right_id": "dialogue-stand-by-me-film-b1c012de8ce6",
+        "similarity": 1,
+        "left_quote": "All right, get in.",
+        "right_quote": "All right, get him!"
+      },
+      {
+        "left_id": "dialogue-absolutely-fabulous-the-movie-d79b271c1514",
+        "right_id": "dialogue-airplane-7f446deccb85",
+        "similarity": 1,
+        "left_quote": "What did she say?",
+        "right_quote": "What did he say?"
+      },
+      {
+        "left_id": "dialogue-absolutely-fabulous-the-movie-d79b271c1514",
+        "right_id": "dialogue-dirty-harry-97d0b93384ec",
+        "similarity": 1,
+        "left_quote": "What did she say?",
+        "right_quote": "What? What did you say?"
+      },
+      {
+        "left_id": "dialogue-absolutely-fabulous-the-movie-d79b271c1514",
+        "right_id": "dialogue-dogma-film-970ca6574b92",
+        "similarity": 1,
+        "left_quote": "What did she say?",
+        "right_quote": "What did you say?"
+      },
+      {
+        "left_id": "dialogue-absolutely-fabulous-the-movie-d79b271c1514",
+        "right_id": "dialogue-the-exorcist-iii-be42fc645a9f",
+        "similarity": 1,
+        "left_quote": "What did she say?",
+        "right_quote": "What did you say to him?"
+      },
+      {
+        "left_id": "dialogue-absolutely-fabulous-the-movie-d79b271c1514",
+        "right_id": "dialogue-gamera-film-b66f1413afd1",
+        "similarity": 1,
+        "left_quote": "What did she say?",
+        "right_quote": "Oh, and what did he say?"
+      },
+      {
+        "left_id": "dialogue-absolutely-fabulous-the-movie-d79b271c1514",
+        "right_id": "dialogue-i-love-you-man-bf07a7543b40",
+        "similarity": 1,
+        "left_quote": "What did she say?",
+        "right_quote": "No, what did you say?"
+      },
+      {
+        "left_id": "dialogue-absolutely-fabulous-the-movie-d79b271c1514",
+        "right_id": "dialogue-the-ghost-writer-369a378bd54d",
+        "similarity": 1,
+        "left_quote": "What did she say?",
+        "right_quote": "And what did he say?"
+      },
+      {
+        "left_id": "dialogue-absolutely-fabulous-the-movie-d79b271c1514",
+        "right_id": "dialogue-the-holiday-a8b796271246",
+        "similarity": 1,
+        "left_quote": "What did she say?",
+        "right_quote": "And what did you say?"
+      },
+      {
+        "left_id": "dialogue-airplane-7f446deccb85",
+        "right_id": "dialogue-dirty-harry-97d0b93384ec",
+        "similarity": 1,
+        "left_quote": "What did he say?",
+        "right_quote": "What? What did you say?"
+      },
+      {
+        "left_id": "dialogue-airplane-7f446deccb85",
+        "right_id": "dialogue-dogma-film-970ca6574b92",
+        "similarity": 1,
+        "left_quote": "What did he say?",
+        "right_quote": "What did you say?"
+      },
+      {
+        "left_id": "dialogue-airplane-7f446deccb85",
+        "right_id": "dialogue-the-exorcist-iii-be42fc645a9f",
+        "similarity": 1,
+        "left_quote": "What did he say?",
+        "right_quote": "What did you say to him?"
+      },
+      {
+        "left_id": "dialogue-airplane-7f446deccb85",
+        "right_id": "dialogue-gamera-film-b66f1413afd1",
+        "similarity": 1,
+        "left_quote": "What did he say?",
+        "right_quote": "Oh, and what did he say?"
+      },
+      {
+        "left_id": "dialogue-airplane-7f446deccb85",
+        "right_id": "dialogue-i-love-you-man-bf07a7543b40",
+        "similarity": 1,
+        "left_quote": "What did he say?",
+        "right_quote": "No, what did you say?"
+      },
+      {
+        "left_id": "dialogue-airplane-7f446deccb85",
+        "right_id": "dialogue-the-ghost-writer-369a378bd54d",
+        "similarity": 1,
+        "left_quote": "What did he say?",
+        "right_quote": "And what did he say?"
+      },
+      {
+        "left_id": "dialogue-airplane-7f446deccb85",
+        "right_id": "dialogue-the-holiday-a8b796271246",
+        "similarity": 1,
+        "left_quote": "What did he say?",
+        "right_quote": "And what did you say?"
+      },
+      {
+        "left_id": "dialogue-dirty-harry-97d0b93384ec",
+        "right_id": "dialogue-dogma-film-970ca6574b92",
+        "similarity": 1,
+        "left_quote": "What? What did you say?",
+        "right_quote": "What did you say?"
+      },
+      {
+        "left_id": "dialogue-dirty-harry-97d0b93384ec",
+        "right_id": "dialogue-the-exorcist-iii-be42fc645a9f",
+        "similarity": 1,
+        "left_quote": "What? What did you say?",
+        "right_quote": "What did you say to him?"
+      },
+      {
+        "left_id": "dialogue-dirty-harry-97d0b93384ec",
+        "right_id": "dialogue-gamera-film-b66f1413afd1",
+        "similarity": 1,
+        "left_quote": "What? What did you say?",
+        "right_quote": "Oh, and what did he say?"
+      },
+      {
+        "left_id": "dialogue-dirty-harry-97d0b93384ec",
+        "right_id": "dialogue-i-love-you-man-bf07a7543b40",
+        "similarity": 1,
+        "left_quote": "What? What did you say?",
+        "right_quote": "No, what did you say?"
+      }
+    ]
+  },
+  "screening": {
+    "name": "deterministic structural screening; not a learned quality score",
+    "threshold_for_high_signal": 75,
+    "score_percentiles": {
+      "p10": 68,
+      "p50": 80,
+      "p90": 85
+    },
+    "projected_high_signal_at_current_index_size": 242283,
+    "projection_warning": "The projection is a directional yield estimate, not evidence that every projected line is relevant, memorable, lawful to republish, or production-ready."
+  },
+  "review_samples": {
+    "highest_screening": [
+      {
+        "id": "dialogue-100-girls-2d601eee3cf3",
+        "content_type": "movie_dialogue",
+        "quote": "You know, all you gotta do is find the matching bra to those panties and bam! Mystery solved!",
+        "speaker": "Rod",
+        "work_title": "100 Girls",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 18,
+          "unique_word_ratio": 0.944,
+          "starts_with_connector": false,
+          "dangling_fragment": false,
+          "terminal_punctuation": true,
+          "screening_score": 85,
+          "high_signal": true
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/100_Girls",
+          "page_title": "100 Girls",
+          "page_id": 314915,
+          "revision_id": 3999032,
+          "revision_timestamp": "2026-08-28T19:02:17Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-100-girls-6472bcfa7dd0",
+        "content_type": "movie_dialogue",
+        "quote": "Wait! The Coyote never caught the Roadrunner, man!",
+        "speaker": "Rod",
+        "work_title": "100 Girls",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 8,
+          "unique_word_ratio": 0.875,
+          "starts_with_connector": false,
+          "dangling_fragment": false,
+          "terminal_punctuation": true,
+          "screening_score": 85,
+          "high_signal": true
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/100_Girls",
+          "page_title": "100 Girls",
+          "page_id": 314915,
+          "revision_id": 3999032,
+          "revision_timestamp": "2026-08-28T19:02:17Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-100-girls-661741a7d7b0",
+        "content_type": "movie_dialogue",
+        "quote": "I don't know. You tell me, \"smart guy!\"",
+        "speaker": "Crick",
+        "work_title": "100 Girls",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 8,
+          "unique_word_ratio": 1,
+          "starts_with_connector": false,
+          "dangling_fragment": false,
+          "terminal_punctuation": true,
+          "screening_score": 85,
+          "high_signal": true
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/100_Girls",
+          "page_title": "100 Girls",
+          "page_id": 314915,
+          "revision_id": 3999032,
+          "revision_timestamp": "2026-08-28T19:02:17Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-100-girls-948134567ac9",
+        "content_type": "movie_dialogue",
+        "quote": "What are you? Coyote super genius or something?",
+        "speaker": "Rod",
+        "work_title": "100 Girls",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 8,
+          "unique_word_ratio": 1,
+          "starts_with_connector": false,
+          "dangling_fragment": false,
+          "terminal_punctuation": true,
+          "screening_score": 85,
+          "high_signal": true
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/100_Girls",
+          "page_title": "100 Girls",
+          "page_id": 314915,
+          "revision_id": 3999032,
+          "revision_timestamp": "2026-08-28T19:02:17Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-100-girls-a24872d3e63c",
+        "content_type": "movie_dialogue",
+        "quote": "Isn't American cheese appropriately named? You know, it's fake and processed, just like America.",
+        "speaker": "Matthew",
+        "work_title": "100 Girls",
+        "section": "Matthew",
+        "source_kind": "character_quote",
+        "screening": {
+          "word_count": 14,
+          "unique_word_ratio": 1,
+          "starts_with_connector": false,
+          "dangling_fragment": false,
+          "terminal_punctuation": true,
+          "screening_score": 85,
+          "high_signal": true
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/100_Girls",
+          "page_title": "100 Girls",
+          "page_id": 314915,
+          "revision_id": 3999032,
+          "revision_timestamp": "2026-08-28T19:02:17Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-100-girls-a6e4159c32cb",
+        "content_type": "movie_dialogue",
+        "quote": "Oh, sweet leaping Jesus!",
+        "speaker": "Patty",
+        "work_title": "100 Girls",
+        "section": "Patty",
+        "source_kind": "character_quote",
+        "screening": {
+          "word_count": 4,
+          "unique_word_ratio": 1,
+          "starts_with_connector": false,
+          "dangling_fragment": false,
+          "terminal_punctuation": true,
+          "screening_score": 85,
+          "high_signal": true
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/100_Girls",
+          "page_title": "100 Girls",
+          "page_id": 314915,
+          "revision_id": 3999032,
+          "revision_timestamp": "2026-08-28T19:02:17Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-100-girls-becd8c1e6770",
+        "content_type": "movie_dialogue",
+        "quote": "How do you mean?",
+        "speaker": "Wendy",
+        "work_title": "100 Girls",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 4,
+          "unique_word_ratio": 1,
+          "starts_with_connector": false,
+          "dangling_fragment": false,
+          "terminal_punctuation": true,
+          "screening_score": 85,
+          "high_signal": true
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/100_Girls",
+          "page_title": "100 Girls",
+          "page_id": 314915,
+          "revision_id": 3999032,
+          "revision_timestamp": "2026-08-28T19:02:17Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-100-girls-c363394e713a",
+        "content_type": "movie_dialogue",
+        "quote": "Maybe you wouldn't think that way if you had a little of my Penile Power, baby!",
+        "speaker": "Rod",
+        "work_title": "100 Girls",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 16,
+          "unique_word_ratio": 0.938,
+          "starts_with_connector": false,
+          "dangling_fragment": false,
+          "terminal_punctuation": true,
+          "screening_score": 85,
+          "high_signal": true
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/100_Girls",
+          "page_title": "100 Girls",
+          "page_id": 314915,
+          "revision_id": 3999032,
+          "revision_timestamp": "2026-08-28T19:02:17Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-100-girls-ca04bbd009a0",
+        "content_type": "movie_dialogue",
+        "quote": "What the hell is that?",
+        "speaker": "Matthew",
+        "work_title": "100 Girls",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 5,
+          "unique_word_ratio": 1,
+          "starts_with_connector": false,
+          "dangling_fragment": false,
+          "terminal_punctuation": true,
+          "screening_score": 85,
+          "high_signal": true
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/100_Girls",
+          "page_title": "100 Girls",
+          "page_id": 314915,
+          "revision_id": 3999032,
+          "revision_timestamp": "2026-08-28T19:02:17Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-100-girls-e030ea655fb0",
+        "content_type": "movie_dialogue",
+        "quote": "You don't know what you're talking about, guy!",
+        "speaker": "Crick",
+        "work_title": "100 Girls",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 8,
+          "unique_word_ratio": 1,
+          "starts_with_connector": false,
+          "dangling_fragment": false,
+          "terminal_punctuation": true,
+          "screening_score": 85,
+          "high_signal": true
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/100_Girls",
+          "page_title": "100 Girls",
+          "page_id": 314915,
+          "revision_id": 3999032,
+          "revision_timestamp": "2026-08-28T19:02:17Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-100-girls-eed09d532678",
+        "content_type": "movie_dialogue",
+        "quote": "You're never gonna get in the Virgin Vault, man. They don't let boys in the girls' side, alright?",
+        "speaker": "Rod",
+        "work_title": "100 Girls",
+        "section": "Rod",
+        "source_kind": "character_quote",
+        "screening": {
+          "word_count": 18,
+          "unique_word_ratio": 0.889,
+          "starts_with_connector": false,
+          "dangling_fragment": false,
+          "terminal_punctuation": true,
+          "screening_score": 85,
+          "high_signal": true
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/100_Girls",
+          "page_title": "100 Girls",
+          "page_id": 314915,
+          "revision_id": 3999032,
+          "revision_timestamp": "2026-08-28T19:02:17Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-100-girls-ef82f4e4851b",
+        "content_type": "movie_dialogue",
+        "quote": "What do you mean?",
+        "speaker": "Rod",
+        "work_title": "100 Girls",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 4,
+          "unique_word_ratio": 1,
+          "starts_with_connector": false,
+          "dangling_fragment": false,
+          "terminal_punctuation": true,
+          "screening_score": 85,
+          "high_signal": true
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/100_Girls",
+          "page_title": "100 Girls",
+          "page_id": 314915,
+          "revision_id": 3999032,
+          "revision_timestamp": "2026-08-28T19:02:17Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-100-girls-f17b595fa94d",
+        "content_type": "movie_dialogue",
+        "quote": "Hey, get that outta here! It freaks me out, ok?",
+        "speaker": "Rod",
+        "work_title": "100 Girls",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 10,
+          "unique_word_ratio": 1,
+          "starts_with_connector": false,
+          "dangling_fragment": false,
+          "terminal_punctuation": true,
+          "screening_score": 85,
+          "high_signal": true
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/100_Girls",
+          "page_title": "100 Girls",
+          "page_id": 314915,
+          "revision_id": 3999032,
+          "revision_timestamp": "2026-08-28T19:02:17Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-13-hours-the-secret-soldiers-of-benghazi-034bdd708942",
+        "content_type": "movie_dialogue",
+        "quote": "You gonna fight the Holy War in your shorts? Strong move.",
+        "speaker": "Dave 'Boon' Benton",
+        "work_title": "13 Hours: The Secret Soldiers of Benghazi",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 11,
+          "unique_word_ratio": 1,
+          "starts_with_connector": false,
+          "dangling_fragment": false,
+          "terminal_punctuation": true,
+          "screening_score": 85,
+          "high_signal": true
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/13_Hours%3A_The_Secret_Soldiers_of_Benghazi",
+          "page_title": "13 Hours: The Secret Soldiers of Benghazi",
+          "page_id": 190201,
+          "revision_id": 4004854,
+          "revision_timestamp": "2026-09-05T22:03:27Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-13-hours-the-secret-soldiers-of-benghazi-babc3a4f7939",
+        "content_type": "movie_dialogue",
+        "quote": "I need your eyes and ears - not your mouth!",
+        "speaker": "Mark 'Oz' Geist",
+        "work_title": "13 Hours: The Secret Soldiers of Benghazi",
+        "section": "Other",
+        "source_kind": "labelled_quote",
+        "screening": {
+          "word_count": 9,
+          "unique_word_ratio": 0.889,
+          "starts_with_connector": false,
+          "dangling_fragment": false,
+          "terminal_punctuation": true,
+          "screening_score": 85,
+          "high_signal": true
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/13_Hours%3A_The_Secret_Soldiers_of_Benghazi",
+          "page_title": "13 Hours: The Secret Soldiers of Benghazi",
+          "page_id": 190201,
+          "revision_id": 4004854,
+          "revision_timestamp": "2026-09-05T22:03:27Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-13-hours-the-secret-soldiers-of-benghazi-c0ad3a478740",
+        "content_type": "movie_dialogue",
+        "quote": "Stop! Stop shooting! 17 Feb says you're firing at them!",
+        "speaker": "The Chief",
+        "work_title": "13 Hours: The Secret Soldiers of Benghazi",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 10,
+          "unique_word_ratio": 0.9,
+          "starts_with_connector": false,
+          "dangling_fragment": false,
+          "terminal_punctuation": true,
+          "screening_score": 85,
+          "high_signal": true
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/13_Hours%3A_The_Secret_Soldiers_of_Benghazi",
+          "page_title": "13 Hours: The Secret Soldiers of Benghazi",
+          "page_id": 190201,
+          "revision_id": 4004854,
+          "revision_timestamp": "2026-09-05T22:03:27Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-13-hours-the-secret-soldiers-of-benghazi-d108735701d6",
+        "content_type": "movie_dialogue",
+        "quote": "Down time's the worst, isn't it?",
+        "speaker": "Jack Silva",
+        "work_title": "13 Hours: The Secret Soldiers of Benghazi",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 6,
+          "unique_word_ratio": 1,
+          "starts_with_connector": false,
+          "dangling_fragment": false,
+          "terminal_punctuation": true,
+          "screening_score": 85,
+          "high_signal": true
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/13_Hours%3A_The_Secret_Soldiers_of_Benghazi",
+          "page_title": "13 Hours: The Secret Soldiers of Benghazi",
+          "page_id": 190201,
+          "revision_id": 4004854,
+          "revision_timestamp": "2026-09-05T22:03:27Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-13-hours-the-secret-soldiers-of-benghazi-d3e6043ce033",
+        "content_type": "movie_dialogue",
+        "quote": "Well, why leave security to the professionals, right?",
+        "speaker": "Jack Silva",
+        "work_title": "13 Hours: The Secret Soldiers of Benghazi",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 8,
+          "unique_word_ratio": 1,
+          "starts_with_connector": false,
+          "dangling_fragment": false,
+          "terminal_punctuation": true,
+          "screening_score": 85,
+          "high_signal": true
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/13_Hours%3A_The_Secret_Soldiers_of_Benghazi",
+          "page_title": "13 Hours: The Secret Soldiers of Benghazi",
+          "page_id": 190201,
+          "revision_id": 4004854,
+          "revision_timestamp": "2026-09-05T22:03:27Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-13-hours-the-secret-soldiers-of-benghazi-f588e8b884cb",
+        "content_type": "movie_dialogue",
+        "quote": "Somebody started shooting at us first! And they're still fucking shooting at us!",
+        "speaker": "Kris 'Tanto' Paronto",
+        "work_title": "13 Hours: The Secret Soldiers of Benghazi",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 13,
+          "unique_word_ratio": 0.769,
+          "starts_with_connector": false,
+          "dangling_fragment": false,
+          "terminal_punctuation": true,
+          "screening_score": 85,
+          "high_signal": true
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/13_Hours%3A_The_Secret_Soldiers_of_Benghazi",
+          "page_title": "13 Hours: The Secret Soldiers of Benghazi",
+          "page_id": 190201,
+          "revision_id": 4004854,
+          "revision_timestamp": "2026-09-05T22:03:27Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-2046-film-9025806b71cb",
+        "content_type": "movie_dialogue",
+        "quote": "I have a secret to tell you. Will you leave with me?",
+        "speaker": "Chow Mo-wan",
+        "work_title": "2046 (film)",
+        "section": "Chow Mo-wan",
+        "source_kind": "character_quote",
+        "screening": {
+          "word_count": 12,
+          "unique_word_ratio": 0.917,
+          "starts_with_connector": false,
+          "dangling_fragment": false,
+          "terminal_punctuation": true,
+          "screening_score": 85,
+          "high_signal": true
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/2046_(film)",
+          "page_title": "2046 (film)",
+          "page_id": 141020,
+          "revision_id": 3956286,
+          "revision_timestamp": "2026-06-24T14:23:26Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-2046-film-9bd30734c4de",
+        "content_type": "movie_dialogue",
+        "quote": "When the Peony blooms, she stands tall. Does she mean no or yes?",
+        "speaker": "Chow Mo-wan",
+        "work_title": "2046 (film)",
+        "section": "Chow Mo-wan",
+        "source_kind": "character_quote",
+        "screening": {
+          "word_count": 13,
+          "unique_word_ratio": 0.923,
+          "starts_with_connector": false,
+          "dangling_fragment": false,
+          "terminal_punctuation": true,
+          "screening_score": 85,
+          "high_signal": true
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/2046_(film)",
+          "page_title": "2046 (film)",
+          "page_id": 141020,
+          "revision_id": 3956286,
+          "revision_timestamp": "2026-06-24T14:23:26Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-2046-film-d754717667ab",
+        "content_type": "movie_dialogue",
+        "quote": "Why can't it be like before? Please don't go. Stay with me tonight. Let me borrow you.",
+        "speaker": "Bai Ling",
+        "work_title": "2046 (film)",
+        "section": "Bai Ling",
+        "source_kind": "character_quote",
+        "screening": {
+          "word_count": 17,
+          "unique_word_ratio": 0.941,
+          "starts_with_connector": false,
+          "dangling_fragment": false,
+          "terminal_punctuation": true,
+          "screening_score": 85,
+          "high_signal": true
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/2046_(film)",
+          "page_title": "2046 (film)",
+          "page_id": 141020,
+          "revision_id": 3956286,
+          "revision_timestamp": "2026-06-24T14:23:26Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-3-ninjas-knuckle-up-3ab50f870d25",
+        "content_type": "movie_dialogue",
+        "quote": "People can't fly, but ninjas can!",
+        "speaker": "Mori \"Shintaro\" Tanaka",
+        "work_title": "3 Ninjas Knuckle Up",
+        "section": "Mori \"Shintaro\" Tanaka",
+        "source_kind": "character_quote",
+        "screening": {
+          "word_count": 6,
+          "unique_word_ratio": 1,
+          "starts_with_connector": false,
+          "dangling_fragment": false,
+          "terminal_punctuation": true,
+          "screening_score": 85,
+          "high_signal": true
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/3_Ninjas_Knuckle_Up",
+          "page_title": "3 Ninjas Knuckle Up",
+          "page_id": 294729,
+          "revision_id": 3798574,
+          "revision_timestamp": "2025-08-25T20:58:43Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-3-ninjas-knuckle-up-75269012a578",
+        "content_type": "movie_dialogue",
+        "quote": "They can't understand you, can they?",
+        "speaker": "Rocky",
+        "work_title": "3 Ninjas Knuckle Up",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 6,
+          "unique_word_ratio": 0.833,
+          "starts_with_connector": false,
+          "dangling_fragment": false,
+          "terminal_punctuation": true,
+          "screening_score": 85,
+          "high_signal": true
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/3_Ninjas_Knuckle_Up",
+          "page_title": "3 Ninjas Knuckle Up",
+          "page_id": 294729,
+          "revision_id": 3798574,
+          "revision_timestamp": "2025-08-25T20:58:43Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-3-ninjas-knuckle-up-b4d9a7019f5b",
+        "content_type": "movie_dialogue",
+        "quote": "Come on, you guys! Okay, okay, maybe I will.",
+        "speaker": "Colt",
+        "work_title": "3 Ninjas Knuckle Up",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 9,
+          "unique_word_ratio": 0.889,
+          "starts_with_connector": false,
+          "dangling_fragment": false,
+          "terminal_punctuation": true,
+          "screening_score": 85,
+          "high_signal": true
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/3_Ninjas_Knuckle_Up",
+          "page_title": "3 Ninjas Knuckle Up",
+          "page_id": 294729,
+          "revision_id": 3798574,
+          "revision_timestamp": "2025-08-25T20:58:43Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-3-ninjas-knuckle-up-d6cbe77b062c",
+        "content_type": "movie_dialogue",
+        "quote": "Do they ever say anything back to you?",
+        "speaker": "Rocky",
+        "work_title": "3 Ninjas Knuckle Up",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 8,
+          "unique_word_ratio": 1,
+          "starts_with_connector": false,
+          "dangling_fragment": false,
+          "terminal_punctuation": true,
+          "screening_score": 85,
+          "high_signal": true
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/3_Ninjas_Knuckle_Up",
+          "page_title": "3 Ninjas Knuckle Up",
+          "page_id": 294729,
+          "revision_id": 3798574,
+          "revision_timestamp": "2025-08-25T20:58:43Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-3-ninjas-knuckle-up-d9988bc32f44",
+        "content_type": "movie_dialogue",
+        "quote": "Oh. Why are you talking to them, though?",
+        "speaker": "Rocky",
+        "work_title": "3 Ninjas Knuckle Up",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 8,
+          "unique_word_ratio": 1,
+          "starts_with_connector": false,
+          "dangling_fragment": false,
+          "terminal_punctuation": true,
+          "screening_score": 85,
+          "high_signal": true
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/3_Ninjas_Knuckle_Up",
+          "page_title": "3 Ninjas Knuckle Up",
+          "page_id": 294729,
+          "revision_id": 3798574,
+          "revision_timestamp": "2025-08-25T20:58:43Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-40-days-and-40-nights-0bed9b352a9a",
+        "content_type": "movie_dialogue",
+        "quote": "Listen, isn't part of the priestly thing giving relationship advice?",
+        "speaker": "Matt",
+        "work_title": "40 Days and 40 Nights",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 10,
+          "unique_word_ratio": 1,
+          "starts_with_connector": false,
+          "dangling_fragment": false,
+          "terminal_punctuation": true,
+          "screening_score": 85,
+          "high_signal": true
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/40_Days_and_40_Nights",
+          "page_title": "40 Days and 40 Nights",
+          "page_id": 14161,
+          "revision_id": 3946629,
+          "revision_timestamp": "2026-05-29T16:44:48Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-40-days-and-40-nights-0ef5a0b86f8c",
+        "content_type": "movie_dialogue",
+        "quote": "If I told you, \"Don't think about the color red,\" what would you think about?",
+        "speaker": "Erica",
+        "work_title": "40 Days and 40 Nights",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 15,
+          "unique_word_ratio": 0.8,
+          "starts_with_connector": false,
+          "dangling_fragment": false,
+          "terminal_punctuation": true,
+          "screening_score": 85,
+          "high_signal": true
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/40_Days_and_40_Nights",
+          "page_title": "40 Days and 40 Nights",
+          "page_id": 14161,
+          "revision_id": 3946629,
+          "revision_timestamp": "2026-05-29T16:44:48Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-40-days-and-40-nights-1498db28e80b",
+        "content_type": "movie_dialogue",
+        "quote": "I'm not gonna light a candle so you can feel better about getting laid!",
+        "speaker": "John Sullivan",
+        "work_title": "40 Days and 40 Nights",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 14,
+          "unique_word_ratio": 1,
+          "starts_with_connector": false,
+          "dangling_fragment": false,
+          "terminal_punctuation": true,
+          "screening_score": 85,
+          "high_signal": true
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/40_Days_and_40_Nights",
+          "page_title": "40 Days and 40 Nights",
+          "page_id": 14161,
+          "revision_id": 3946629,
+          "revision_timestamp": "2026-05-29T16:44:48Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      }
+    ],
+    "lowest_retained": [
+      {
+        "id": "dialogue-an-extremely-goofy-movie-258f9889ae98",
+        "content_type": "movie_dialogue",
+        "quote": "But-- But you--",
+        "speaker": "Max",
+        "work_title": "An Extremely Goofy Movie",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 3,
+          "unique_word_ratio": 0.667,
+          "starts_with_connector": true,
+          "dangling_fragment": true,
+          "terminal_punctuation": false,
+          "screening_score": 22,
+          "high_signal": false
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/An_Extremely_Goofy_Movie",
+          "page_title": "An Extremely Goofy Movie",
+          "page_id": 60373,
+          "revision_id": 4001253,
+          "revision_timestamp": "2026-09-01T00:14:50Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-american-beauty-1999-film-1c7adb886608",
+        "content_type": "movie_dialogue",
+        "quote": "Sit down! I am sick and tired of being treated like I don't exist. You two do whatever you want to do, whenever you want to do it, and I don't complain. Now all I want is the same--",
+        "speaker": "Lester",
+        "work_title": "American Beauty (1999 film)",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 39,
+          "unique_word_ratio": 0.692,
+          "starts_with_connector": false,
+          "dangling_fragment": true,
+          "terminal_punctuation": false,
+          "screening_score": 36,
+          "high_signal": false
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/American_Beauty_(1999_film)",
+          "page_title": "American Beauty (1999 film)",
+          "page_id": 1531,
+          "revision_id": 3938159,
+          "revision_timestamp": "2026-05-08T13:06:48Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-scary-movie-3-cbc8c651cc3f",
+        "content_type": "movie_dialogue",
+        "quote": "The one where they do it on the boat and then in the car and then in the bathtub? And he's like, \"Hey, baby, I love you\" and she's like, \"Where are we?\" And did you see the size-",
+        "speaker": "Kate",
+        "work_title": "Scary Movie 3",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 39,
+          "unique_word_ratio": 0.667,
+          "starts_with_connector": false,
+          "dangling_fragment": true,
+          "terminal_punctuation": false,
+          "screening_score": 36,
+          "high_signal": false
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/Scary_Movie_3",
+          "page_title": "Scary Movie 3",
+          "page_id": 46412,
+          "revision_id": 3987520,
+          "revision_timestamp": "2026-08-13T13:43:23Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-13-hours-the-secret-soldiers-of-benghazi-5df37362179c",
+        "content_type": "movie_dialogue",
+        "quote": "No, no, hey...",
+        "speaker": "Tyrone 'Rone' Woods",
+        "work_title": "13 Hours: The Secret Soldiers of Benghazi",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 3,
+          "unique_word_ratio": 0.667,
+          "starts_with_connector": false,
+          "dangling_fragment": true,
+          "terminal_punctuation": true,
+          "screening_score": 40,
+          "high_signal": false
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/13_Hours%3A_The_Secret_Soldiers_of_Benghazi",
+          "page_title": "13 Hours: The Secret Soldiers of Benghazi",
+          "page_id": 190201,
+          "revision_id": 4004854,
+          "revision_timestamp": "2026-09-05T22:03:27Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-care-bears-movie-ii-a-new-generation-303d095487d3",
+        "content_type": "movie_dialogue",
+        "quote": "What are you-",
+        "speaker": "John",
+        "work_title": "Care Bears Movie II: A New Generation",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 3,
+          "unique_word_ratio": 1,
+          "starts_with_connector": false,
+          "dangling_fragment": true,
+          "terminal_punctuation": false,
+          "screening_score": 40,
+          "high_signal": false
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/Care_Bears_Movie_II%3A_A_New_Generation",
+          "page_title": "Care Bears Movie II: A New Generation",
+          "page_id": 15434,
+          "revision_id": 4010600,
+          "revision_timestamp": "2026-09-14T00:06:29Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-fantastic-mr-fox-film-dddbbb800501",
+        "content_type": "movie_dialogue",
+        "quote": "Uh, uh, uh...",
+        "speaker": "Boggis",
+        "work_title": "Fantastic Mr. Fox (film)",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 3,
+          "unique_word_ratio": 0.333,
+          "starts_with_connector": false,
+          "dangling_fragment": true,
+          "terminal_punctuation": true,
+          "screening_score": 40,
+          "high_signal": false
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/Fantastic_Mr._Fox_(film)",
+          "page_title": "Fantastic Mr. Fox (film)",
+          "page_id": 113424,
+          "revision_id": 4000030,
+          "revision_timestamp": "2026-08-30T12:37:34Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-ghosted-0fe037393df7",
+        "content_type": "movie_dialogue",
+        "quote": "Wait. You lo-",
+        "speaker": "Cole",
+        "work_title": "Ghosted",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 3,
+          "unique_word_ratio": 1,
+          "starts_with_connector": false,
+          "dangling_fragment": true,
+          "terminal_punctuation": false,
+          "screening_score": 40,
+          "high_signal": false
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/Ghosted",
+          "page_title": "Ghosted",
+          "page_id": 270795,
+          "revision_id": 3946679,
+          "revision_timestamp": "2026-05-29T16:44:58Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-halloween-5-the-revenge-of-michael-myers-a4e8f26bfd71",
+        "content_type": "movie_dialogue",
+        "quote": "Jamie, Jamie. Jamie,",
+        "speaker": "Dr. Max Hart",
+        "work_title": "Halloween 5: The Revenge of Michael Myers",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 3,
+          "unique_word_ratio": 0.333,
+          "starts_with_connector": false,
+          "dangling_fragment": true,
+          "terminal_punctuation": false,
+          "screening_score": 40,
+          "high_signal": false
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/Halloween_5%3A_The_Revenge_of_Michael_Myers",
+          "page_title": "Halloween 5: The Revenge of Michael Myers",
+          "page_id": 134404,
+          "revision_id": 3913634,
+          "revision_timestamp": "2026-03-18T09:53:55Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-hercules-1997-film-ce65d414ed4b",
+        "content_type": "movie_dialogue",
+        "quote": "If I say, \"sing\", you say, \"hey, name that tune\" If I say, \"I want Wonderboy's head on a platter\" you say-",
+        "speaker": "Hades",
+        "work_title": "Hercules (1997 film)",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 22,
+          "unique_word_ratio": 0.682,
+          "starts_with_connector": false,
+          "dangling_fragment": true,
+          "terminal_punctuation": false,
+          "screening_score": 40,
+          "high_signal": false
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/Hercules_(1997_film)",
+          "page_title": "Hercules (1997 film)",
+          "page_id": 12787,
+          "revision_id": 4001234,
+          "revision_timestamp": "2026-09-01T00:05:53Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-talladega-nights-the-ballad-of-ricky-bobby-4ec857f88ba1",
+        "content_type": "movie_dialogue",
+        "quote": "No, it doesn't--",
+        "speaker": "Mr. Dennit",
+        "work_title": "Talladega Nights: The Ballad of Ricky Bobby",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 3,
+          "unique_word_ratio": 1,
+          "starts_with_connector": false,
+          "dangling_fragment": true,
+          "terminal_punctuation": false,
+          "screening_score": 40,
+          "high_signal": false
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/Talladega_Nights%3A_The_Ballad_of_Ricky_Bobby",
+          "page_title": "Talladega Nights: The Ballad of Ricky Bobby",
+          "page_id": 29650,
+          "revision_id": 3994770,
+          "revision_timestamp": "2026-08-23T11:46:14Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-talladega-nights-the-ballad-of-ricky-bobby-d49271d1412c",
+        "content_type": "movie_dialogue",
+        "quote": "I close my--",
+        "speaker": "Jean",
+        "work_title": "Talladega Nights: The Ballad of Ricky Bobby",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 3,
+          "unique_word_ratio": 1,
+          "starts_with_connector": false,
+          "dangling_fragment": true,
+          "terminal_punctuation": false,
+          "screening_score": 40,
+          "high_signal": false
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/Talladega_Nights%3A_The_Ballad_of_Ricky_Bobby",
+          "page_title": "Talladega Nights: The Ballad of Ricky Bobby",
+          "page_id": 29650,
+          "revision_id": 3994770,
+          "revision_timestamp": "2026-08-23T11:46:14Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-the-muppet-christmas-carol-ac41e33c80d8",
+        "content_type": "movie_dialogue",
+        "quote": "Frank Oz as:",
+        "speaker": "Performers",
+        "work_title": "The Muppet Christmas Carol",
+        "section": "Performers",
+        "source_kind": "character_quote",
+        "screening": {
+          "word_count": 3,
+          "unique_word_ratio": 1,
+          "starts_with_connector": false,
+          "dangling_fragment": true,
+          "terminal_punctuation": false,
+          "screening_score": 40,
+          "high_signal": false
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/The_Muppet_Christmas_Carol",
+          "page_title": "The Muppet Christmas Carol",
+          "page_id": 135477,
+          "revision_id": 3987720,
+          "revision_timestamp": "2026-08-13T21:27:21Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-the-polar-express-a2bb09471fb1",
+        "content_type": "movie_dialogue",
+        "quote": "But-But-But I...",
+        "speaker": "Hero Boy",
+        "work_title": "The Polar Express",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 4,
+          "unique_word_ratio": 0.5,
+          "starts_with_connector": true,
+          "dangling_fragment": true,
+          "terminal_punctuation": true,
+          "screening_score": 40,
+          "high_signal": false
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/The_Polar_Express",
+          "page_title": "The Polar Express",
+          "page_id": 52203,
+          "revision_id": 4012065,
+          "revision_timestamp": "2026-09-16T05:42:14Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-thor-the-dark-world-3afa6ca047e5",
+        "content_type": "movie_dialogue",
+        "quote": "I am. Jane-",
+        "speaker": "Thor",
+        "work_title": "Thor: The Dark World",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 3,
+          "unique_word_ratio": 1,
+          "starts_with_connector": false,
+          "dangling_fragment": true,
+          "terminal_punctuation": false,
+          "screening_score": 40,
+          "high_signal": false
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/Thor%3A_The_Dark_World",
+          "page_title": "Thor: The Dark World",
+          "page_id": 153199,
+          "revision_id": 3978134,
+          "revision_timestamp": "2026-08-02T14:16:11Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-airplane-b01c5010c7df",
+        "content_type": "movie_dialogue",
+        "quote": "I know. I know. But it's his ship now, his command. He's in charge, he's the boss, the head man, the top dog, the big cheese, the head honcho, number one...",
+        "speaker": "Rex",
+        "work_title": "Airplane!",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 31,
+          "unique_word_ratio": 0.71,
+          "starts_with_connector": false,
+          "dangling_fragment": true,
+          "terminal_punctuation": true,
+          "screening_score": 41,
+          "high_signal": false
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/Airplane!",
+          "page_title": "Airplane!",
+          "page_id": 2294,
+          "revision_id": 3987485,
+          "revision_timestamp": "2026-08-13T13:43:15Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-barcelona-film-3a87cecde683",
+        "content_type": "movie_dialogue",
+        "quote": "No, I... I don't think you understand. I was reducing everything to ant scale, the... the U.S. included. An ant White House, an ant CIA, an ant Congress, an ant Pentagon...",
+        "speaker": "Ted",
+        "work_title": "Barcelona (film)",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 32,
+          "unique_word_ratio": 0.688,
+          "starts_with_connector": false,
+          "dangling_fragment": true,
+          "terminal_punctuation": true,
+          "screening_score": 41,
+          "high_signal": false
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/Barcelona_(film)",
+          "page_title": "Barcelona (film)",
+          "page_id": 44509,
+          "revision_id": 3909318,
+          "revision_timestamp": "2026-03-11T14:00:03Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-detective-pikachu-film-57d1ff76246f",
+        "content_type": "movie_dialogue",
+        "quote": "Harry was onto something big. Real big. And then all of a sudden, his car crashes over a bridge. I think not. Something's rotten and I'm gonna get to the bottom of it--",
+        "speaker": "Lucy Stevens",
+        "work_title": "Detective Pikachu (film)",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 33,
+          "unique_word_ratio": 0.879,
+          "starts_with_connector": false,
+          "dangling_fragment": true,
+          "terminal_punctuation": false,
+          "screening_score": 41,
+          "high_signal": false
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/Detective_Pikachu_(film)",
+          "page_title": "Detective Pikachu (film)",
+          "page_id": 240348,
+          "revision_id": 4012052,
+          "revision_timestamp": "2026-09-16T05:25:33Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-idiocracy-49e4851a84f0",
+        "content_type": "movie_dialogue",
+        "quote": "Unfortunately, Trevor passed away from a heart attack... while masturbating... to produce sperm for artificial insemination. But I have some eggs frozen... so just as soon as the right guy comes along, you know--",
+        "speaker": "Carol",
+        "work_title": "Idiocracy",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 34,
+          "unique_word_ratio": 0.971,
+          "starts_with_connector": false,
+          "dangling_fragment": true,
+          "terminal_punctuation": false,
+          "screening_score": 41,
+          "high_signal": false
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/Idiocracy",
+          "page_title": "Idiocracy",
+          "page_id": 49943,
+          "revision_id": 3961732,
+          "revision_timestamp": "2026-07-07T09:33:45Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-il-postino-the-postman-2263e52a6558",
+        "content_type": "movie_dialogue",
+        "quote": "No, this has nothing to do with me. I gave you my books but I didn't authorize you to steal my poems. If you think you gave Beatrice the poem I wrote for Matilde--",
+        "speaker": "Pablo Neruda",
+        "work_title": "Il Postino: The Postman",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 34,
+          "unique_word_ratio": 0.765,
+          "starts_with_connector": false,
+          "dangling_fragment": true,
+          "terminal_punctuation": false,
+          "screening_score": 41,
+          "high_signal": false
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/Il_Postino%3A_The_Postman",
+          "page_title": "Il Postino: The Postman",
+          "page_id": 125609,
+          "revision_id": 3901792,
+          "revision_timestamp": "2026-02-26T18:17:20Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-in-the-loop-film-1ce9c003c7bc",
+        "content_type": "movie_dialogue",
+        "quote": "Let me tell you what's going on where you are, sweetheart. A certain vinegar-faced manipulative cowbag is about to discover she's out of a fucking job. Fucking hang up, haven't you, you fucking hoity-toity fucking-",
+        "speaker": "Malcolm Tucker",
+        "work_title": "In the Loop (film)",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 37,
+          "unique_word_ratio": 0.811,
+          "starts_with_connector": false,
+          "dangling_fragment": true,
+          "terminal_punctuation": false,
+          "screening_score": 41,
+          "high_signal": false
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/In_the_Loop_(film)",
+          "page_title": "In the Loop (film)",
+          "page_id": 116140,
+          "revision_id": 3492507,
+          "revision_timestamp": "2024-04-02T01:03:28Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-isle-of-dogs-film-340311b2ddfb",
+        "content_type": "movie_dialogue",
+        "quote": "A rancid apple core, two worm-eaten banana peels, a moldy rice cake, a dried up pickle, a tin of sardine bones, a pile of broken egg shells, an old smushed-up rotten gizzard with maggots all over it-",
+        "speaker": "Rex",
+        "work_title": "Isle of Dogs (film)",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 39,
+          "unique_word_ratio": 0.846,
+          "starts_with_connector": false,
+          "dangling_fragment": true,
+          "terminal_punctuation": false,
+          "screening_score": 41,
+          "high_signal": false
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/Isle_of_Dogs_(film)",
+          "page_title": "Isle of Dogs (film)",
+          "page_id": 203061,
+          "revision_id": 3970747,
+          "revision_timestamp": "2026-07-23T18:46:58Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-mallrats-e9aa58c5c186",
+        "content_type": "movie_dialogue",
+        "quote": "You have my Punisher War Journal #6, my copy of \"Fletch\" and the remote control to my TV. Now, I know it's going to be hard to give this stuff up because of it's sentimental attachment--",
+        "speaker": "Brodie",
+        "work_title": "Mallrats",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 36,
+          "unique_word_ratio": 0.833,
+          "starts_with_connector": false,
+          "dangling_fragment": true,
+          "terminal_punctuation": false,
+          "screening_score": 41,
+          "high_signal": false
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/Mallrats",
+          "page_title": "Mallrats",
+          "page_id": 13054,
+          "revision_id": 3938231,
+          "revision_timestamp": "2026-05-08T13:07:52Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-megamind-6c137bbc357f",
+        "content_type": "movie_dialogue",
+        "quote": "You'd be the brains, so you get a little brain wearing glasses on your costume or something, and since I'm the cool one, I'd have, like, two tanks sword fighting-",
+        "speaker": "Hal",
+        "work_title": "Megamind",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 30,
+          "unique_word_ratio": 0.967,
+          "starts_with_connector": false,
+          "dangling_fragment": true,
+          "terminal_punctuation": false,
+          "screening_score": 41,
+          "high_signal": false
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/Megamind",
+          "page_title": "Megamind",
+          "page_id": 121679,
+          "revision_id": 4005651,
+          "revision_timestamp": "2026-09-07T04:41:55Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-scary-movie-3-f00d84bef3ff",
+        "content_type": "movie_dialogue",
+        "quote": "No. Not that tape. The one with all the scary images, and after you watch the tape, the phone rings and this really scary voice comes on and says you're gonna die in like-",
+        "speaker": "Becca",
+        "work_title": "Scary Movie 3",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 34,
+          "unique_word_ratio": 0.794,
+          "starts_with_connector": false,
+          "dangling_fragment": true,
+          "terminal_punctuation": false,
+          "screening_score": 41,
+          "high_signal": false
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/Scary_Movie_3",
+          "page_title": "Scary Movie 3",
+          "page_id": 46412,
+          "revision_id": 3987520,
+          "revision_timestamp": "2026-08-13T13:43:23Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-spider-man-homecoming-c78a35fc5905",
+        "content_type": "movie_dialogue",
+        "quote": "I was wondering if you could help me: I'm trying to figure out who the guys were under the bridge that night, but I can only kinda remember part of the license plate-",
+        "speaker": "Peter",
+        "work_title": "Spider-Man: Homecoming",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 33,
+          "unique_word_ratio": 0.909,
+          "starts_with_connector": false,
+          "dangling_fragment": true,
+          "terminal_punctuation": false,
+          "screening_score": 41,
+          "high_signal": false
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/Spider-Man%3A_Homecoming",
+          "page_title": "Spider-Man: Homecoming",
+          "page_id": 196787,
+          "revision_id": 4010400,
+          "revision_timestamp": "2026-09-13T16:09:36Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-talladega-nights-the-ballad-of-ricky-bobby-0c8d909b6735",
+        "content_type": "movie_dialogue",
+        "quote": "I give you one option, Monsieur \"Booby\". As a sign of humility, if you kiss me on the lips now, I will return to Paris and you will never see me again in NASCAR. I close my--",
+        "speaker": "Jean",
+        "work_title": "Talladega Nights: The Ballad of Ricky Bobby",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 37,
+          "unique_word_ratio": 0.838,
+          "starts_with_connector": false,
+          "dangling_fragment": true,
+          "terminal_punctuation": false,
+          "screening_score": 41,
+          "high_signal": false
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/Talladega_Nights%3A_The_Ballad_of_Ricky_Bobby",
+          "page_title": "Talladega Nights: The Ballad of Ricky Bobby",
+          "page_id": 29650,
+          "revision_id": 3994770,
+          "revision_timestamp": "2026-08-23T11:46:14Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-the-santa-clause-2-1175bb3ef104",
+        "content_type": "movie_dialogue",
+        "quote": "I'm struggling a little bit with the timing, 'cause it's-- I gotta be up here at the North Pole, and I've also gotta try to take care of Charlie, and--",
+        "speaker": "Scott",
+        "work_title": "The Santa Clause 2",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 30,
+          "unique_word_ratio": 0.9,
+          "starts_with_connector": false,
+          "dangling_fragment": true,
+          "terminal_punctuation": false,
+          "screening_score": 41,
+          "high_signal": false
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/The_Santa_Clause_2",
+          "page_title": "The Santa Clause 2",
+          "page_id": 123400,
+          "revision_id": 3910740,
+          "revision_timestamp": "2026-03-14T16:26:21Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-the-santa-clause-2-97059531e584",
+        "content_type": "movie_dialogue",
+        "quote": "Not only is it an affront to authority, but a blatant disrespect for property. My feeling is if this sort of thing continues, I'll have no other recourse than to suspend--",
+        "speaker": "Carol",
+        "work_title": "The Santa Clause 2",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 31,
+          "unique_word_ratio": 0.935,
+          "starts_with_connector": false,
+          "dangling_fragment": true,
+          "terminal_punctuation": false,
+          "screening_score": 41,
+          "high_signal": false
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/The_Santa_Clause_2",
+          "page_title": "The Santa Clause 2",
+          "page_id": 123400,
+          "revision_id": 3910740,
+          "revision_timestamp": "2026-03-14T16:26:21Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-a-shot-in-the-dark-1964-film-b8db2165f692",
+        "content_type": "movie_dialogue",
+        "quote": "But the facts...",
+        "speaker": "Hercule LaJoy",
+        "work_title": "A Shot in the Dark (1964 film)",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 3,
+          "unique_word_ratio": 1,
+          "starts_with_connector": true,
+          "dangling_fragment": true,
+          "terminal_punctuation": true,
+          "screening_score": 42,
+          "high_signal": false
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/A_Shot_in_the_Dark_(1964_film)",
+          "page_title": "A Shot in the Dark (1964 film)",
+          "page_id": 219222,
+          "revision_id": 3913717,
+          "revision_timestamp": "2026-03-18T09:55:39Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      },
+      {
+        "id": "dialogue-hercules-1997-film-f4d6f16717a3",
+        "content_type": "movie_dialogue",
+        "quote": "And I don't wanna hurt you, so... let's both do ourselves a favor and.. stop this... um.. before... we--",
+        "speaker": "Meg",
+        "work_title": "Hercules (1997 film)",
+        "section": "Dialogue",
+        "source_kind": "dialogue_turn",
+        "screening": {
+          "word_count": 19,
+          "unique_word_ratio": 0.947,
+          "starts_with_connector": true,
+          "dangling_fragment": true,
+          "terminal_punctuation": false,
+          "screening_score": 42,
+          "high_signal": false
+        },
+        "provenance": {
+          "provider": "English Wikiquote",
+          "source_url": "https://en.wikiquote.org/wiki/Hercules_(1997_film)",
+          "page_title": "Hercules (1997 film)",
+          "page_id": 12787,
+          "revision_id": 4001234,
+          "revision_timestamp": "2026-09-01T00:05:53Z",
+          "observed_on": "2026-09-22"
+        },
+        "rights_status": "underlying_quote_not_established",
+        "review_status": "pilot_needs_semantic_review",
+        "human_validated": false
+      }
+    ],
+    "rejected": [
+      {
+        "title": "...And Justice for All (film)",
+        "rejection": "too_long",
+        "quote": "Sorry, Your Honor. Let's get back to justice. What is justice? What is the intention of justice? The intention of justice is to see that the guilty people are proven guilty and that the innocent are freed. Simple, isn't it? Only it's not that simple. However, it is the defense counsel's duty to protect the rights of the individual, as it is the prosecution's duty to uphold and defend the laws of the State. Justice for all. Only we have a problem here. And you know what it is? Both sides wanna win. We wanna win. We wanna win regardless of the truth. And we wanna win regardless of justice, regardless of who's guilty or innocent. Winning is everything!",
+        "speaker": "Arthur Kirkland",
+        "section": "Arthur Kirkland"
+      },
+      {
+        "title": "...And Justice for All (film)",
+        "rejection": "too_long",
+        "quote": "Prison should be a frightening place. Let those criminals create their own hellhole....I tell you, Arthur, the idea of punishment to fit the crime doesn't work. We need unjust punishment. Hang somebody for armed robbery. Try it! We've got nothin' to lose. Do you understand what I'm sayin' to you, for God's sake? You don't, do you? Oh! You fellas with your fancy ideas of rehabilitation. I tell you that the concept of rehabilitation is a farce. Do you honestly think that, that bringing Johnny Cash into prisons to sing railroad songs is gonna rehabilitate anyone? Most people are sick and tired of mugging and crime in the streets... Arthur? Arthur?",
+        "speaker": "Judge Fleming",
+        "section": "Judge Fleming"
+      },
+      {
+        "title": "...And Justice for All (film)",
+        "rejection": "too_short",
+        "quote": "Why?",
+        "speaker": "Arthur",
+        "section": "Dialogue"
+      },
+      {
+        "title": "...And Justice for All (film)",
+        "rejection": "too_short",
+        "quote": "No, why?",
+        "speaker": "Arthur",
+        "section": "Dialogue"
+      },
+      {
+        "title": "...And Justice for All (film)",
+        "rejection": "too_long",
+        "quote": "You ought to try it. You might learn something. You know, I was skydiving once and my main chute didn't open. I pulled my reserve which didn't open either. There I was, plunging to the Earth. Just as I hit the tree tops, I discovered the meaning of life.",
+        "speaker": "Judge Rayford",
+        "section": "Dialogue"
+      },
+      {
+        "title": "...And Justice for All (film)",
+        "rejection": "too_short",
+        "quote": "Which is?",
+        "speaker": "Arthur",
+        "section": "Dialogue"
+      },
+      {
+        "title": "...And Justice for All (film)",
+        "rejection": "too_long",
+        "quote": "The one thing that bothered me, the one thing that stayed in my mind and I couldn't get rid of it, that haunted me, was 'why?' Why would she lie? What was her motive for lyin'? If my client is innocent, she's lying. Why? Was it blackmail? No. Was it jealousy? No. Yesterday, I found out why. She doesn't have a motive. You know why? Because she's not lying. And ladies and gentlemen of the jury, the prosecution is not gonna get that man today. No! Because I'm gonna get him! My client, the Honorable Henry T. Fleming, should go right to FUCKIN' JAIL! The son of a bitch is GUILTY! That man is guilty! That man, there, that man is a SLIME! He is a slime! If he's allowed to go free, then something really wrong is goin' on here!",
+        "speaker": "Arthur",
+        "section": "Dialogue"
+      },
+      {
+        "title": "...And Justice for All (film)",
+        "rejection": "too_long",
+        "quote": "You're OUT OF ORDER! YOU'RE OUT OF ORDER! The whole trial is out of order! They're out of order! That man, that sick, crazy, depraved man, raped and beat that woman there, and he'd like to do it again, he told me so! It's just a show! It's a show! It's \"Let's Make A Deal\"! \"Let's Make A Deal\"! Hey Frank, you wanna make a deal? I got an insane judge who likes to beat the shit out of women! Whaddya wanna gimme Frank, three weeks probation?",
+        "speaker": "Arthur",
+        "section": "Dialogue"
+      },
+      {
+        "title": "...And Justice for All (film)",
+        "rejection": "too_short",
+        "quote": "DAMN IT!",
+        "speaker": "Frank Bowers",
+        "section": "Dialogue"
+      },
+      {
+        "title": "100 Girls",
+        "rejection": "too_long",
+        "quote": "Without you, I'm as lonely as an abandoned dog on the side of a highway. I have gift anxiety, even through I don't know when your birthday is. We can spend perfect days shopping and cooking together. I swear, I'll never make wisecracks when you scrape your tires against the curb while parallel parking. If you consent to live with me, I'll clean the toilet every week. I'll do it with my tongue if you ask. I will strike the words \"hooters\" and \"love rockets\" from my vocabulary. I'll love you. Even if your name is Mimi and you want me to pronounce it \"May May\". I will only pass gas underneath the covers and only under the direst of circumstances. Hell, I'll go on a low cholesterol diet. And I won't buy one of those red sports cars when I hit my mid-life crisis. Your parents can come visit us every week, even if your mom is a big witch with a capital B. And your folks don't have to go to a retirement home because they can come live with us. I declare, I'll separate the whites from the colors, I'll learn the mysteries of hot and cold water washes. I'll never huff and puff while waiting for you to put on your makeup. If you're a cat person, I'll never point out the fact that a dog can save your life from drowning, but a cat can't. I will happily go see chick flicks with you, like \"Pride and Prejudice\". I'll make a point to trying new food like okra gumbo. I won't curl my nose at vegetables whose awful taste is disguised by having cheese on it. I pledge to always say \"yes\" when you ask, \"Is my hair looking okay tonight?\" I'm gonna bring a whole new meaning to the word \"cuddle\". I'll be thoughtful enough to read your horoscope every day. I'm gonna save every birthday card you send me! And I'll actually write you real letters when we're apart. I'm never gonna expect you to know where I left my car keys, and I'll never leave my socks on the floor. With me, you'll find the cap is always on the toothpaste. I'll start wearing those male bikini-style underwear if you like. My belly button will always be lint free. I want to full-on kiss your clitoris. It will be the most passionate, intimate experience you've ever had. I declare now, I will give my life for you. And if you fail to come to me, I know some part of me will surely die.",
+        "speaker": "Matthew",
+        "section": "Matthew"
+      },
+      {
+        "title": "100 Girls",
+        "rejection": "too_long",
+        "quote": "There are no clearly defined rules between men and women. So, each side thinks they're playing fair and each side thinks they're being cheated. Maybe, this is why men and women have the innate ability to bring out the poison in one another.",
+        "speaker": "Matthew",
+        "section": "Matthew"
+      },
+      {
+        "title": "100 Girls",
+        "rejection": "too_long",
+        "quote": "I had learned something from Rod's groinular fixation. His horror really was my horror too. It was *every* man's horror. Deny it we may, but we are all afraid of women. Every single one of them. Time had run out. Finals were in a week. Soon, everyone would be leaving the dorms. And next semester, some would relocate to off-campus housing. If I had any hope of finding my kismetic destiny, I had to face my greatest fear. I went to the Virgin Vault, and I declared my love in front of 100 girls. I explained everything I had done for my kismetic destiny. My speech must be my Sistine Chapel, my Ninth Symphony, my Citizen Kane. My words needed to be more inspirational than Martin Luther King's \"I Have A Dream\" speech. They had to be more miraculous than Mark McGuire's 70th home run. I used impressive words like \"soul mate,\" \"destiny,\" and \"yearn.\" It takes a big man to yearn. I poured my heart out.",
+        "speaker": "Matthew",
+        "section": "Matthew"
+      },
+      {
+        "title": "100 Girls",
+        "rejection": "too_long",
+        "quote": "How can a guy have a real conversation with a girl like this when we're made so helpless? In the animal kingdom, when two members of a pack stare at each other, it is a test of dominance. The first one to look away is considered the weaker. When this happens between a man and a woman, the cards are stacked against a man. 'Cause, let's face it, every time a guy meets a girl, he wants to check out her breasts. A man must summon all of his will not to look down at those golden orbs, whose wonderous tips are upturned, aimed right at his eyes. Once a man loses his test of nerves, a woman knows she has a great secret power over him, and she can get him do anything she wants. Like a sexual sorceress, Cynthia had several men under her spell.",
+        "speaker": "Matthew",
+        "section": "Matthew"
+      },
+      {
+        "title": "100 Girls",
+        "rejection": "too_long",
+        "quote": "There's a certain way a man stares at a woman he loves. The man looks like a boy on his birthday. And he treats the woman as if she were a gift that he's waited so long to open and now he can't wait to see what the treasure is inside.",
+        "speaker": "Patty",
+        "section": "Patty"
+      },
+      {
+        "title": "100 Girls",
+        "rejection": "too_long",
+        "quote": "But check it out, this penile power thing, it's going to help me you know, increase my libido, help me maintain a full, firm erection and it's gonna help me control my ejaculation baby, so I'm going to be going all night long.",
+        "speaker": "Rod",
+        "section": "Rod"
+      },
+      {
+        "title": "100 Girls",
+        "rejection": "too_long",
+        "quote": "I know what's in store for me. No one will ever have passion for me. People all around me will be falling in love, and making love, and getting married and having kids. The closest thing I'll ever have to that is someone inviting me to their Christmas dinner because they feel guilty I might be spending the holiday alone. Or if I'm lucky, my male counterpart, an obese man or guy with a harelip, will invite me to coffee; and we'll pretend to love each other and tie the knot because we're so desperately afraid of growing old alone.",
+        "speaker": "Dora, the Smart Girl",
+        "section": "Dora, the Smart Girl"
+      },
+      {
+        "title": "100 Girls",
+        "rejection": "too_long",
+        "quote": "It's penile power man. I got it out of an ad in a magazine. I mean, it's going to help me increase my length and girth, all just by hanging weights from my cock, man. Check it out man. I'm up to five pounds.",
+        "speaker": "Rod",
+        "section": "Dialogue"
+      },
+      {
+        "title": "100 Girls",
+        "rejection": "too_short",
+        "quote": "Yeah.",
+        "speaker": "Rod",
+        "section": "Dialogue"
+      },
+      {
+        "title": "100 Girls",
+        "rejection": "too_long",
+        "quote": "Hey, what are these? Are these... Are these stress balls? Like, you know to relieve tension, like uh... like Humphrey Bogart did in that old movie. What was it called? He was like, there are three ways to do things aboard my vessel. The right way, the wrong way and my way. If you do things my way, we'll get along just fine.",
+        "speaker": "Matthew",
+        "section": "Dialogue"
+      },
+      {
+        "title": "100 Girls",
+        "rejection": "too_short",
+        "quote": "What?",
+        "speaker": "Matthew",
+        "section": "Dialogue"
+      },
+      {
+        "title": "100 Girls",
+        "rejection": "too_short",
+        "quote": "Really?",
+        "speaker": "Matthew",
+        "section": "Dialogue"
+      },
+      {
+        "title": "100 Girls",
+        "rejection": "too_long",
+        "quote": "...like cleaning our ears with our car keys. I mean, we're grotesque to the core. I mean, look at the penis. The penis... it just looks like God had some left-over skin when he was making elbow, and He decided to slap it in our groin...",
+        "speaker": "Matthew",
+        "section": "Dialogue"
+      },
+      {
+        "title": "100 Girls",
+        "rejection": "too_long",
+        "quote": "Yeah. The next evolution of a jock. You traded in your letterman jacket for a manicured goatee and a Eurotrash ponytail. You're the worst kind of cool. You're the kind of guy who wears male make-up. A real fashion plate. You're proof that those boy-toy doofuses in those men's magazines are all rump rangers.",
+        "speaker": "Matthew",
+        "section": "Dialogue"
+      },
+      {
+        "title": "100 Girls",
+        "rejection": "too_long",
+        "quote": "When you're a guy talking to a girl like Cynthia, you're going for all the marbles. I mean, she's the Super Bowl of women! And you know that if you screw up, and she rejects you, then every other girl after Cynthia is gonna seem like a compromise. And you just know that you weren't good enough to get a girl like her. That's why I don't talk to girls in her league. I just don't want to know that I've crashed and burned and won't ever get the opportunity to put her Super Bowl ring around my eleventh finger.",
+        "speaker": "Matthew",
+        "section": "Dialogue"
+      },
+      {
+        "title": "100 Girls",
+        "rejection": "too_long",
+        "quote": "Cool? Oh, that's another thing that just bothers me. I was just reading that one in six people in the world think they're cool. What is that? Like, a BILLION people are cool? That just can't possibly be right! If everybody's cool, then really, nobody is cool.",
+        "speaker": "Matthew",
+        "section": "Dialogue"
+      },
+      {
+        "title": "100 Girls",
+        "rejection": "too_long",
+        "quote": "I'm not stupid. I know I got things easy 'cause guys will pretty much do anything for me because of the way I look. I know that. And if Sam saw me in this, I might lose my... edge with him.",
+        "speaker": "Cynthia",
+        "section": "Dialogue"
+      },
+      {
+        "title": "100 Girls",
+        "rejection": "too_short",
+        "quote": "Who?",
+        "speaker": "Cynthia",
+        "section": "Dialogue"
+      },
+      {
+        "title": "100 Girls",
+        "rejection": "unbalanced_quotation_mark",
+        "quote": "Yeah, I think it\"d be great if guys always wanted to do things for me.",
+        "speaker": "Matthew",
+        "section": "Dialogue"
+      },
+      {
+        "title": "100 Girls",
+        "rejection": "too_long",
+        "quote": "No. It's a curse. You see, nothing's a challenge for me. Everything's made easy. And if I actually do do something on my own, then everyone assumes that, you know, I got there because of the way I look. It sucks!",
+        "speaker": "Cynthia",
+        "section": "Dialogue"
+      },
+      {
+        "title": "13 Hours: The Secret Soldiers of Benghazi",
+        "rejection": "too_long",
+        "quote": "2012: The United States had 294 Diplomatic outposts worldwide. 12 were in places so dangerous the State Department deemed them threat level \"critical.\" Two were in Libya: Tripoli and Benghazi. October 2011: U.S., French, and British forces attacked Libya by air. As the air campaign continued, the Libyan people violently deposed dictator Muammar Gaddafi after 42 years of tyrannical rule. Warring militia gangs raided Gaddafi's massive armories. Violent turf wars broke out. Benghazi became one of the most dangerous places on Earth. Virtually every foreign embassy closed, except a U.S. Diplomatic outpost, and a covert CIA base. The CIA matched for lethal weapons before they spread to the global black market. The CIA base was protected: 6 elite ex-military operators. Code name: G.R.S. This is a true story.",
+        "speaker": "Title card",
+        "section": "Title card"
+      },
+      {
+        "title": "13 Hours: The Secret Soldiers of Benghazi",
+        "rejection": "too_long",
+        "quote": "I hate to piss on your party, ladies, but five dudes with M4s is not enough. The locals on your front gate are worthless, perimeter's soft, and this whole compound's a fucking sniper's paradise; any big element gets inside here, You guys are gonna fucking die.",
+        "speaker": "Kris 'Tanto' Paronto",
+        "section": "Kris 'Tanto' Paronto"
+      },
+      {
+        "title": "13 Hours: The Secret Soldiers of Benghazi",
+        "rejection": "too_long",
+        "quote": "I know you and Tyrone go way back, Sil. I'll be frank: the Company thinks you should be here. I don't. Truth is, there is no real threat here. We won the revolution for these people. The more guns there are here, the more likely there is to be a misunderstanding. This is my last station, before retiring. I don't need a misunderstanding. Is that clear?",
+        "speaker": "The Chief",
+        "section": "Dialogue"
+      },
+      {
+        "title": "13 Hours: The Secret Soldiers of Benghazi",
+        "rejection": "too_short",
+        "quote": "Loud and.",
+        "speaker": "Jack Silva",
+        "section": "Dialogue"
+      },
+      {
+        "title": "13 Hours: The Secret Soldiers of Benghazi",
+        "rejection": "too_long",
+        "quote": "These are your credentials, and two weeks' per diem. Better spend 'em quick; things change fast here in Benghazi. We have the brightest minds, from the Farm, educated at Harvard and Yale, doing the important work. Best thing for you to do, is stay out of their way.",
+        "speaker": "The Chief",
+        "section": "Dialogue"
+      },
+      {
+        "title": "13 Hours: The Secret Soldiers of Benghazi",
+        "rejection": "too_long",
+        "quote": "Those State guys. Whew! Dave up on C - You should see the look in his eyes. These guys are gonna relive this night for the rest of their lives. My whole mindset? Never feel that. You go down shooting, balls out, every time. How you doing, brother?",
+        "speaker": "Tyrone 'Rone' Woods",
+        "section": "Dialogue"
+      },
+      {
+        "title": "13 Hours: The Secret Soldiers of Benghazi",
+        "rejection": "too_short",
+        "quote": "Yeah.",
+        "speaker": "Tyrone 'Rone' Woods",
+        "section": "Dialogue"
+      },
+      {
+        "title": "13 Hours: The Secret Soldiers of Benghazi",
+        "rejection": "too_long",
+        "quote": "I haven't thought about my family once tonight. Thinking about them now... Up here in the middle of all this. I'm thinking about my girls, man. Thinking... What would they say about me? \"He died in a place he didn't need to be, in a battle over something he doesn't understand in a country that meant nothing to him.\" Every time I go home to Becky and those girls, I think this is it. I'm gonna stay. And then something happens and I end up back here. Why is that? Why can't I go home? Why can't I go home and just stay there?",
+        "speaker": "Jack Silva",
+        "section": "Dialogue"
+      },
+      {
+        "title": "13 Hours: The Secret Soldiers of Benghazi",
+        "rejection": "too_short",
+        "quote": "Becky's pregnant.",
+        "speaker": "Jack Silva",
+        "section": "Dialogue"
+      },
+      {
+        "title": "13 Hours: The Secret Soldiers of Benghazi",
+        "rejection": "too_long",
+        "quote": "No, man, no... It's alright. I get it. Okay? You go to them. I know what it's like to be in a place like this, let another man raise your children. When I was young, I was giving myself to something bigger. Jack, that something bigger's gone now.",
+        "speaker": "Tyrone 'Rone' Woods",
+        "section": "Dialogue"
+      },
+      {
+        "title": "13 Hours: The Secret Soldiers of Benghazi",
+        "rejection": "too_short",
+        "quote": "Yeah.",
+        "speaker": "Dave 'Boon' Benton",
+        "section": "Dialogue"
+      }
+    ]
+  },
+  "per_film": {
+    "lowest_yield": [
+      {
+        "title": "An Inconvenient Truth",
+        "retained": 0,
+        "high_signal": 0,
+        "rejected": 0
+      },
+      {
+        "title": "Labyrinth",
+        "retained": 0,
+        "high_signal": 0,
+        "rejected": 0
+      },
+      {
+        "title": "Leaving Neverland",
+        "retained": 0,
+        "high_signal": 0,
+        "rejected": 1
+      },
+      {
+        "title": "Life Is But a Dream (film)",
+        "retained": 0,
+        "high_signal": 0,
+        "rejected": 3
+      },
+      {
+        "title": "The Dark Side of the Moon (1990 film)",
+        "retained": 0,
+        "high_signal": 0,
+        "rejected": 0
+      },
+      {
+        "title": "The Last Warning",
+        "retained": 0,
+        "high_signal": 0,
+        "rejected": 0
+      },
+      {
+        "title": "Tomcats (film)",
+        "retained": 0,
+        "high_signal": 0,
+        "rejected": 0
+      },
+      {
+        "title": "Traffic",
+        "retained": 0,
+        "high_signal": 0,
+        "rejected": 0
+      },
+      {
+        "title": "Vacancy",
+        "retained": 0,
+        "high_signal": 0,
+        "rejected": 0
+      },
+      {
+        "title": "Valley Girl (2020 film)",
+        "retained": 0,
+        "high_signal": 0,
+        "rejected": 1
+      },
+      {
+        "title": "A Kiss Before Dying (1991 film)",
+        "retained": 1,
+        "high_signal": 0,
+        "rejected": 0
+      },
+      {
+        "title": "Ad Astra (film)",
+        "retained": 1,
+        "high_signal": 1,
+        "rejected": 0
+      },
+      {
+        "title": "Gigli",
+        "retained": 1,
+        "high_signal": 0,
+        "rejected": 2
+      },
+      {
+        "title": "Guess Who's Coming to Dinner",
+        "retained": 1,
+        "high_signal": 1,
+        "rejected": 6
+      },
+      {
+        "title": "Milk",
+        "retained": 1,
+        "high_signal": 0,
+        "rejected": 3
+      },
+      {
+        "title": "New Year's Eve (2011 film)",
+        "retained": 1,
+        "high_signal": 0,
+        "rejected": 2
+      },
+      {
+        "title": "Sugar Boxx",
+        "retained": 1,
+        "high_signal": 1,
+        "rejected": 0
+      },
+      {
+        "title": "The Kissing Booth 2",
+        "retained": 1,
+        "high_signal": 1,
+        "rejected": 0
+      },
+      {
+        "title": "The List (2023 film)",
+        "retained": 1,
+        "high_signal": 1,
+        "rejected": 0
+      },
+      {
+        "title": "The Vampire Bat",
+        "retained": 1,
+        "high_signal": 1,
+        "rejected": 0
+      },
+      {
+        "title": "American Threnody",
+        "retained": 2,
+        "high_signal": 0,
+        "rejected": 1
+      },
+      {
+        "title": "College Road Trip",
+        "retained": 2,
+        "high_signal": 2,
+        "rejected": 1
+      },
+      {
+        "title": "Ghost Rider: Spirit of Vengeance",
+        "retained": 2,
+        "high_signal": 1,
+        "rejected": 2
+      },
+      {
+        "title": "Mouse Trouble",
+        "retained": 2,
+        "high_signal": 2,
+        "rejected": 0
+      },
+      {
+        "title": "Queen of Glory",
+        "retained": 2,
+        "high_signal": 2,
+        "rejected": 0
+      },
+      {
+        "title": "The Oblong Box (film)",
+        "retained": 2,
+        "high_signal": 0,
+        "rejected": 0
+      },
+      {
+        "title": "Are We Done Yet?",
+        "retained": 3,
+        "high_signal": 3,
+        "rejected": 0
+      },
+      {
+        "title": "Queens of Drama (film)",
+        "retained": 3,
+        "high_signal": 3,
+        "rejected": 0
+      },
+      {
+        "title": "S Club 7: Back to the 50's",
+        "retained": 3,
+        "high_signal": 3,
+        "rejected": 0
+      },
+      {
+        "title": "Sharpay's Fabulous Adventure",
+        "retained": 3,
+        "high_signal": 3,
+        "rejected": 0
+      }
+    ],
+    "highest_yield": [
+      {
+        "title": "Hercules (1997 film)",
+        "retained": 664,
+        "high_signal": 457,
+        "rejected": 174
+      },
+      {
+        "title": "Ghosted",
+        "retained": 531,
+        "high_signal": 376,
+        "rejected": 129
+      },
+      {
+        "title": "The Jungle Book (1967 film)",
+        "retained": 523,
+        "high_signal": 412,
+        "rejected": 87
+      },
+      {
+        "title": "Joseph: King of Dreams",
+        "retained": 424,
+        "high_signal": 334,
+        "rejected": 134
+      },
+      {
+        "title": "Tinker Bell (film)",
+        "retained": 393,
+        "high_signal": 281,
+        "rejected": 92
+      },
+      {
+        "title": "Space Jam: A New Legacy",
+        "retained": 364,
+        "high_signal": 275,
+        "rejected": 110
+      },
+      {
+        "title": "The Ghost Writer",
+        "retained": 360,
+        "high_signal": 274,
+        "rejected": 84
+      },
+      {
+        "title": "Talladega Nights: The Ballad of Ricky Bobby",
+        "retained": 346,
+        "high_signal": 268,
+        "rejected": 57
+      },
+      {
+        "title": "Casino Royale (1967 film)",
+        "retained": 337,
+        "high_signal": 281,
+        "rejected": 64
+      },
+      {
+        "title": "Chicken Little (2005 film)",
+        "retained": 327,
+        "high_signal": 242,
+        "rejected": 131
+      },
+      {
+        "title": "Megamind",
+        "retained": 305,
+        "high_signal": 244,
+        "rejected": 59
+      },
+      {
+        "title": "The Santa Clause 2",
+        "retained": 267,
+        "high_signal": 217,
+        "rejected": 92
+      },
+      {
+        "title": "Ice Age: Dawn of the Dinosaurs",
+        "retained": 259,
+        "high_signal": 187,
+        "rejected": 70
+      },
+      {
+        "title": "Monsters vs. Aliens",
+        "retained": 251,
+        "high_signal": 198,
+        "rejected": 56
+      },
+      {
+        "title": "Indiana Jones and the Kingdom of the Crystal Skull",
+        "retained": 238,
+        "high_signal": 185,
+        "rejected": 43
+      },
+      {
+        "title": "Racing Stripes",
+        "retained": 224,
+        "high_signal": 150,
+        "rejected": 37
+      },
+      {
+        "title": "Coraline (film)",
+        "retained": 223,
+        "high_signal": 186,
+        "rejected": 30
+      },
+      {
+        "title": "American Beauty (1999 film)",
+        "retained": 220,
+        "high_signal": 159,
+        "rejected": 49
+      },
+      {
+        "title": "In the Loop (film)",
+        "retained": 216,
+        "high_signal": 158,
+        "rejected": 50
+      },
+      {
+        "title": "The Tale of Despereaux (film)",
+        "retained": 209,
+        "high_signal": 135,
+        "rejected": 67
+      },
+      {
+        "title": "Lock, Stock and Two Smoking Barrels",
+        "retained": 208,
+        "high_signal": 171,
+        "rejected": 44
+      },
+      {
+        "title": "Batman Forever",
+        "retained": 206,
+        "high_signal": 159,
+        "rejected": 43
+      },
+      {
+        "title": "Fantastic Mr. Fox (film)",
+        "retained": 205,
+        "high_signal": 155,
+        "rejected": 56
+      },
+      {
+        "title": "School of Rock",
+        "retained": 202,
+        "high_signal": 159,
+        "rejected": 55
+      },
+      {
+        "title": "Stand by Me (film)",
+        "retained": 199,
+        "high_signal": 166,
+        "rejected": 36
+      },
+      {
+        "title": "An Extremely Goofy Movie",
+        "retained": 193,
+        "high_signal": 151,
+        "rejected": 45
+      },
+      {
+        "title": "Kicking & Screaming (2005 film)",
+        "retained": 190,
+        "high_signal": 144,
+        "rejected": 53
+      },
+      {
+        "title": "Austin Powers: International Man of Mystery",
+        "retained": 187,
+        "high_signal": 139,
+        "rejected": 75
+      },
+      {
+        "title": "Planet 51",
+        "retained": 186,
+        "high_signal": 154,
+        "rejected": 55
+      },
+      {
+        "title": "Reservoir Dogs",
+        "retained": 186,
+        "high_signal": 135,
+        "rejected": 39
+      }
+    ]
+  },
+  "rights_boundary": "Wikiquote page contributions have reuse terms, but underlying film dialogue may remain copyrighted. Every record stays source-linked and rights-unestablished pending a separate release decision.",
+  "uncertainty": "Structural screening measures parseability, attribution and surface-level sendability signals. It does not establish cultural recognition, contextual independence, semantic usefulness, factual accuracy, copyright status or human preference."
+}

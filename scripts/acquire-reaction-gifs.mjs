@@ -3,6 +3,15 @@ import {mkdir,writeFile} from 'node:fs/promises';
 import {createInterface} from 'node:readline';
 import {dirname,resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {
+  cleanReactionGifOcr,
+  isUsefulReactionText,
+  gifMeetsReleaseResolution,
+  parseReactionGifTags,
+  parseGifDimensions,
+  rankReactionGifCandidates,
+  reactionGifSelectionPatterns
+} from '../src/reaction-gif-selection.mjs';
 
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const args=process.argv.slice(2);
@@ -16,6 +25,9 @@ const mappingPath=resolve(valueFor('--mapping',''));
 const outputPath=resolve(root,valueFor('--output','expansion/sources/stage-3000-reaction-gifs.jsonl'));
 const reportPath=resolve(root,valueFor('--report','expansion/sources/stage-3000-reaction-gifs-report.json'));
 const limit=Math.max(1,Number(valueFor('--limit','1189')));
+const maxPerSemanticKey=Math.max(1,Number(valueFor('--max-per-semantic-key',String(limit))));
+const minimumUses=Math.max(1,Number(valueFor('--minimum-uses','1')));
+const selectionMode=valueFor('--selection','popularity');
 const observedOn=valueFor('--observed-on',new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Kolkata'}).format(new Date()));
 const validateMedia=args.includes('--validate-media');
 
@@ -47,21 +59,8 @@ async function eachLine(path,callback) {
   }
 }
 
-function parseTags(value) {
-  const tags=[];
-  for(const match of value.matchAll(/'((?:\\'|[^'])*)'/g)) {
-    const tag=match[1].replaceAll("\\'",'\'').toLowerCase().replaceAll(/[^a-z0-9 -]+/g,' ').replaceAll(/\s+/g,' ').trim();
-    if(tag&&!tags.includes(tag)) tags.push(tag);
-  }
-  return tags;
-}
-
-function cleanOcr(value) {
-  return value.replaceAll('[INTER_FRAME_SEP]',' ').replaceAll(/\s+/g,' ').replaceAll(/^[-_.,:;]+|[-_.,:;]+$/g,'').trim().slice(0,400);
-}
-
-const unsafe=/\b(?:nsfw|porn|hentai|futanari|nude|nudity|boobs?|tits?|panties|facesit|sex(?:y|ual)?|fetish|xxx|onlyfans|cum|orgasm|rape|slur)\b/i;
-const usefulText=value=>value&&/[a-z]{3}/i.test(value)&&!unsafe.test(value);
+const {unsafe}=reactionGifSelectionPatterns;
+const usefulText=isUsefulReactionText;
 const titleCase=value=>value.replaceAll(/\b\w/g,character=>character.toUpperCase());
 const slug=value=>value.toLowerCase().replaceAll(/[^a-z0-9]+/g,'-').replaceAll(/^-|-$/g,'').slice(0,48);
 
@@ -87,8 +86,8 @@ await eachLine(metadataPath,line=>{
   const giphyId=giphyByGif.get(gifId);
   const usageCount=usageCounts.get(gifId)??0;
   if(!giphyId||usageCount===0) return;
-  const tags=parseTags(tagsRaw).filter(usefulText).slice(0,6);
-  const ocr=cleanOcr(ocrRaw);
+  const tags=parseReactionGifTags(tagsRaw).filter(usefulText).slice(0,6);
+  const ocr=cleanReactionGifOcr(ocrRaw);
   if((tags.length===0&&!usefulText(ocr))||unsafe.test(`${tags.join(' ')} ${ocr}`)) return;
   candidates.push({gifId,giphyId,usageCount,tags,ocr});
 });
@@ -102,22 +101,45 @@ const canonicalJeff={
   sourceUrl:'https://giphy.com/gifs/my-name-is-jeff-edwin-S2E0EucjhwJR6X9PBW/',
   evidence:{kind:'owner_requested_canonical',reference:'https://tenor.com/view/my-name-is-jeff-gif-22841539'}
 };
-const rankedPool=[canonicalJeff,...candidates.filter(candidate=>candidate.giphyId!==canonicalJeff.giphyId)];
+const sourcePool=candidates.filter(candidate=>candidate.giphyId!==canonicalJeff.giphyId);
+const qualityPoolLimit=validateMedia?Math.min(sourcePool.length,Math.max(limit*2,limit+250)):Math.max(limit-1,1);
+const qualitySelection=selectionMode==='quality'
+  ?rankReactionGifCandidates(sourcePool,{limit:qualityPoolLimit,maxPerSemanticKey,minimumUses})
+  :null;
+if(!['popularity','quality'].includes(selectionMode)) throw new Error(`Unknown selection mode: ${selectionMode}.`);
+const rankedPool=[canonicalJeff,...(qualitySelection?.selected??sourcePool)];
 let selected=rankedPool.slice(0,limit);
 let unavailableMedia=0;
+let lowResolutionMedia=0;
 if(validateMedia) {
   selected=[];
   for(let offset=0;offset<rankedPool.length&&selected.length<limit;offset+=25) {
     const batch=rankedPool.slice(offset,offset+25);
     const checked=await Promise.all(batch.map(async candidate=>{
-      const mediaUrl=`https://media.giphy.com/media/${candidate.giphyId}/giphy.gif`;
+      const mediaUrl=`https://i.giphy.com/media/${candidate.giphyId}/giphy.gif`;
       try {
-        const response=await fetch(mediaUrl,{method:'HEAD',signal:AbortSignal.timeout(10000)});
-        return response.ok&&response.headers.get('content-type')?.includes('image/gif')?candidate:null;
+        const response=await fetch(mediaUrl,{headers:{range:'bytes=0-9'},signal:AbortSignal.timeout(10000)});
+        if(!response.ok||!response.headers.get('content-type')?.includes('image/gif')||!response.body) return {status:'unavailable'};
+        const reader=response.body.getReader();
+        const prefix=new Uint8Array(10);
+        let received=0;
+        while(received<prefix.length) {
+          const chunk=await reader.read();
+          if(chunk.done) break;
+          const length=Math.min(chunk.value.length,prefix.length-received);
+          prefix.set(chunk.value.slice(0,length),received);
+          received+=length;
+        }
+        await reader.cancel();
+        const dimensions=parseGifDimensions(prefix.slice(0,received));
+        if(!dimensions) return {status:'unavailable'};
+        if(!gifMeetsReleaseResolution(dimensions)) return {status:'low_resolution'};
+        return {status:'ready',candidate:{...candidate,assetDimensions:dimensions}};
       } catch { return null; }
     }));
-    unavailableMedia+=checked.filter(candidate=>candidate===null).length;
-    selected.push(...checked.filter(Boolean).slice(0,limit-selected.length));
+    unavailableMedia+=checked.filter(result=>result===null||result.status==='unavailable').length;
+    lowResolutionMedia+=checked.filter(result=>result?.status==='low_resolution').length;
+    selected.push(...checked.filter(result=>result?.status==='ready').map(result=>result.candidate).slice(0,limit-selected.length));
   }
 }
 if(selected.length!==limit) throw new Error(`Reaction GIF acquisition produced ${selected.length} records; expected ${limit}.`);
@@ -131,12 +153,14 @@ const records=selected.map((candidate,index)=>{
   const mediaUrl=`https://media.giphy.com/media/${candidate.giphyId}/giphy.gif`;
   const previewUrl=`https://media.giphy.com/media/${candidate.giphyId}/giphy_s.gif`;
   const usageCount=candidate.usageCount??null;
-  const memeStrength=usageCount===null?95:usageCount>=5000?92:usageCount>=1000?86:usageCount>=500?82:usageCount>=250?78:72;
+  const memeStrength=usageCount===null?95:usageCount>=5000?92:usageCount>=1000?86:usageCount>=500?82:usageCount>=250?78:usageCount>=100?74:usageCount>=40?70:66;
+  const metadataQuality=candidate.metadataQuality?.score??null;
   return {
     proposed_id:`gif-${slug(candidate.giphyId)}`,
     name,
     provider:'GIF Reply dataset / GIPHY',
     source_id:candidate.giphyId,
+    dataset_gif_id:candidate.gifId??null,
     source_url:candidate.sourceUrl??`https://giphy.com/gifs/${candidate.giphyId}`,
     observed_on:observedOn,
     categories:['reaction-gif',...candidate.tags].slice(0,7),
@@ -150,7 +174,11 @@ const records=selected.map((candidate,index)=>{
     review_status:'needs_metadata_review',
     human_validated:false,
     meme_strength:memeStrength,
-    asset_quality:70,
+    asset_quality:candidate.assetDimensions?Math.min(100,Math.round(Math.min(candidate.assetDimensions.width,candidate.assetDimensions.height)/4)):selectionMode==='quality'?null:70,
+    visual_quality_status:candidate.assetDimensions?'release_resolution_passed':selectionMode==='quality'?'pending_asset_measurement':'legacy_default_score',
+    ...(candidate.assetDimensions?{asset_dimensions:candidate.assetDimensions}:{}),
+    asset_delivery_eligible:Boolean(candidate.assetDimensions),
+    production_eligible:false,
     uniqueness_score:100,
     usage_evidence:candidate.evidence??{
       kind:'observed_reaction_usage',
@@ -158,12 +186,19 @@ const records=selected.map((candidate,index)=>{
       dataset:'GIF Reply',
       paper:'https://aclanthology.org/2021.findings-emnlp.244/'
     },
+    ...(metadataQuality===null?{}:{selection_evidence:{
+      method:'usage_and_metadata_quality_v1',
+      score:Number(candidate.selectionScore.toFixed(2)),
+      usage_score:Number(candidate.usageScore.toFixed(2)),
+      metadata_quality:metadataQuality,
+      semantic_bucket:candidate.semanticKey
+    }}),
     selection_rank:index+1
   };
 });
 
 const report={
-  version:'stage-3000-reaction-gifs-v1',
+  version:selectionMode==='quality'?'reaction-gifs-quality-v1':'stage-3000-reaction-gifs-v1',
   observed_on:observedOn,
   source:{
     dataset:'GIF Reply',
@@ -175,8 +210,25 @@ const report={
   raw_unique_gifs:usageCounts.size,
   mapped_gifs:giphyByGif.size,
   safe_semantic_candidates:candidates.length,
+  selection:{
+    mode:selectionMode,
+    ...(qualitySelection?{
+      eligible_after_metadata_floor:qualitySelection.eligible,
+      minimum_observed_uses:minimumUses,
+      maximum_per_exact_semantic_bucket:maxPerSemanticKey,
+      diversity_cap_skips_while_filling_pool:qualitySelection.diversitySkips,
+      distinct_semantic_buckets:new Set(records.map(record=>record.selection_evidence?.semantic_bucket).filter(Boolean)).size
+    }:{})
+  },
   selected_records:records.length,
-  media_validation:validateMedia?{checked:true,unavailable_candidates_skipped:unavailableMedia}:{checked:false},
+  media_validation:validateMedia?{
+    checked:true,
+    method:'GIF header dimensions from original i.giphy.com asset',
+    minimum_long_side:320,
+    minimum_short_side:180,
+    unavailable_candidates_skipped:unavailableMedia,
+    low_resolution_candidates_skipped:lowResolutionMedia
+  }:{checked:false},
   minimum_observed_conversation_uses:Math.min(...records.map(record=>record.usage_evidence.conversation_uses).filter(Number.isFinite)),
   owner_requested_canonical_records:records.filter(record=>record.usage_evidence.kind==='owner_requested_canonical').length,
   media_types:{gif:records.length},

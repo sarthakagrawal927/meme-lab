@@ -27,6 +27,8 @@ const stage3000Candidates=parseJsonl(await readFile(new URL('../expansion/candid
 const reactionGifSource=parseJsonl(await readFile(new URL('../expansion/sources/stage-3000-reaction-gifs.jsonl',import.meta.url),'utf8'));
 const reactionGifReport=JSON.parse(await readFile(new URL('../expansion/sources/stage-3000-reaction-gifs-report.json',import.meta.url),'utf8'));
 const replacementGifSource=parseJsonl(await readFile(new URL('../expansion/sources/stage-3000-reaction-gif-replacements.jsonl',import.meta.url),'utf8'));
+const qualityGifReplacements=parseJsonl(await readFile(new URL('../expansion/reviewed/high-quality-gif-replacements.jsonl',import.meta.url),'utf8'));
+const qualityReplacementManifest=JSON.parse(await readFile(new URL('../expansion/exclusions/low-quality-gif-replacements.json',import.meta.url),'utf8'));
 const nonReactionExclusions=JSON.parse(await readFile(new URL('../expansion/exclusions/non-reaction-assets.json',import.meta.url),'utf8'));
 const catalogueIntegrity=JSON.parse(await readFile(new URL('../worker/public/catalogue-integrity.json',import.meta.url),'utf8'));
 const stage1000Cases=parseJsonl(await readFile(new URL('../eval/relevance_stage1000_v1.jsonl',import.meta.url),'utf8'));
@@ -61,6 +63,11 @@ test('public collection contains 3,000 actual meme and reaction records with exp
   assert(publicCollection.some(record=>record.id==='side-eyeing-chloe'&&record.name==='Side Eyeing Chloe'&&record.media_type==='image'));
   assert(publicCollection.some(record=>record.id==='shaq-sleeping'&&record.name==='Sleeping Shaq'&&record.media_type==='image'));
   assert.deepEqual(catalogueIntegrity.media_types,{image:1805,gif:1195});
+  assert.equal(qualityGifReplacements.length,7);
+  for(const replacement of qualityReplacementManifest.replacements) {
+    assert.equal(publicCollection[replacement.catalogue_index]?.id,replacement.new_id);
+    assert(!publicCollection.some(record=>record.id===replacement.old_id));
+  }
   assert.equal(nonReactionExclusions.records.length,6);
   assert(nonReactionExclusions.records.every(excluded=>!publicCollection.some(record=>record.id===excluded.id)));
   assert.equal(catalogueIntegrity.canonical_coverage.items.find(item=>item.id==='my-name-is-jeff')?.status,'covered');

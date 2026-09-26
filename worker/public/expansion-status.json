@@ -186,6 +186,7 @@
     "baseline_records": 998,
     "static_meme_additions": 807,
     "reaction_gif_additions": 1195,
+    "visually_verified_gif_replacements": 7,
     "excluded_artwork_records": 1189,
     "excluded_non_reaction_records": 6,
     "providers": {

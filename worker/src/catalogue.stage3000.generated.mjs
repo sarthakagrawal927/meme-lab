@@ -78547,38 +78547,45 @@ export const catalogue=[
     "availability": "live"
   },
   {
-    "id": "gif-vbeqcmafay8thnm4fx",
-    "name": "SIMEROCKVIP SIMEROCKVP SIMEROCKVIP SIMEROCKVIP",
-    "message": "Use SIMEROCKVIP SIMEROCKVP SIMEROCKVIP SIMEROCKVIP when someone is pretending to be a VIP.",
-    "relational_pattern": "A fabricated identity creates a false sense of authority in a social context.",
-    "example_context": "For example, a user might send this to appear more important in a group chat.",
-    "near_miss_context": "Avoid when someone is genuinely trying to express their status rather than pretending.",
+    "id": "gif-3o7zetmu77ulpyer2w",
+    "name": "Kylo Approves",
+    "message": "Use Kylo Approves when you give a proposal an emphatic, slightly theatrical thumbs up.",
+    "relational_pattern": "An exaggerated approval gesture turns an ordinary yes into playful, unmistakable endorsement.",
+    "example_context": "For example, your friend suggests ordering dessert before dinner and you immediately approve the plan.",
+    "near_miss_context": "Avoid Kylo Approves when you disagree or need to express reluctant, qualified consent.",
     "tags": [
-      "pretend",
-      "vip",
-      "status",
-      "fabricated",
-      "reaction-gif"
+      "approval",
+      "thumbs up",
+      "enthusiastic yes",
+      "star wars"
     ],
-    "image_url": "https://media.giphy.com/media/VbEQcmaFaY8tHnm4FX/giphy.gif",
+    "image_url": "https://media.giphy.com/media/3o7ZeTmU77UlPyeR2w/giphy.gif",
     "media_type": "gif",
-    "media_url": "https://media.giphy.com/media/VbEQcmaFaY8tHnm4FX/giphy.gif",
-    "preview_url": "https://media.giphy.com/media/VbEQcmaFaY8tHnm4FX/giphy_s.gif",
+    "media_url": "https://media.giphy.com/media/3o7ZeTmU77UlPyeR2w/giphy.gif",
+    "preview_url": "https://media.giphy.com/media/3o7ZeTmU77UlPyeR2w/giphy_s.gif",
     "mime_type": "image/gif",
     "media_status": "source-preview",
-    "meme_strength": 72,
-    "asset_quality": 70,
-    "uniqueness_score": 100,
+    "meme_strength": 80,
+    "asset_quality": 83,
+    "uniqueness_score": 95,
     "provenance": {
       "provider": "GIF Reply dataset / GIPHY",
-      "provider_id": "VbEQcmaFaY8tHnm4FX",
-      "source_url": "https://giphy.com/gifs/VbEQcmaFaY8tHnm4FX",
-      "observed_on": "2026-09-21",
+      "provider_id": "3o7ZeTmU77UlPyeR2w",
+      "source_url": "https://giphy.com/gifs/3o7ZeTmU77UlPyeR2w",
+      "observed_on": "2026-09-23",
       "usage_evidence": {
         "kind": "observed_reaction_usage",
-        "conversation_uses": 175,
+        "conversation_uses": 71,
         "dataset": "GIF Reply",
         "paper": "https://aclanthology.org/2021.findings-emnlp.244/"
+      },
+      "visual_review": {
+        "method": "assistant_browser_inspection",
+        "dimensions": {
+          "width": 480,
+          "height": 270
+        },
+        "caption_matches": true
       }
     },
     "availability": "live"
@@ -78622,38 +78629,45 @@ export const catalogue=[
     "availability": "live"
   },
   {
-    "id": "gif-50pzavri0flhu",
-    "name": "VAYAGIF.COM VAYAGIF.COM VAYAGIF.COM VAYAGIF.COM",
-    "message": "Use VAYAGIF.COM VAYAGIF.COM VAYAGIF.COM VAYAGIF.COM when someone is mocking a website.",
-    "relational_pattern": "Repetition of a website name implies mockery of its perceived uselessness.",
-    "example_context": "For example, a user might send this after encountering a broken website repeatedly.",
-    "near_miss_context": "Avoid when someone is genuinely trying to share a website link rather than mocking it.",
+    "id": "gif-3okipxuew6l9ox8vpw",
+    "name": "About to Ugly Cry",
+    "message": "Use About to Ugly Cry when a small emotional trigger has you on the verge of dramatic tears.",
+    "relational_pattern": "A person tries to hold it together while admitting an emotional reaction is about to break through.",
+    "example_context": "For example, your friend sends an unexpectedly kind message after a difficult week and you almost start crying.",
+    "near_miss_context": "Avoid About to Ugly Cry when someone needs sincere support for a serious loss or crisis.",
     "tags": [
-      "mock",
-      "website",
-      "repetition",
-      "vayagif",
-      "reaction-gif"
+      "almost crying",
+      "overwhelmed",
+      "touched",
+      "dramatic reaction"
     ],
-    "image_url": "https://media.giphy.com/media/50PZAvRi0fLhu/giphy.gif",
+    "image_url": "https://media.giphy.com/media/3oKIPxUEW6L9OX8vPW/giphy.gif",
     "media_type": "gif",
-    "media_url": "https://media.giphy.com/media/50PZAvRi0fLhu/giphy.gif",
-    "preview_url": "https://media.giphy.com/media/50PZAvRi0fLhu/giphy_s.gif",
+    "media_url": "https://media.giphy.com/media/3oKIPxUEW6L9OX8vPW/giphy.gif",
+    "preview_url": "https://media.giphy.com/media/3oKIPxUEW6L9OX8vPW/giphy_s.gif",
     "mime_type": "image/gif",
     "media_status": "source-preview",
-    "meme_strength": 72,
-    "asset_quality": 70,
-    "uniqueness_score": 100,
+    "meme_strength": 78,
+    "asset_quality": 82,
+    "uniqueness_score": 96,
     "provenance": {
       "provider": "GIF Reply dataset / GIPHY",
-      "provider_id": "50PZAvRi0fLhu",
-      "source_url": "https://giphy.com/gifs/50PZAvRi0fLhu",
-      "observed_on": "2026-09-21",
+      "provider_id": "3oKIPxUEW6L9OX8vPW",
+      "source_url": "https://giphy.com/gifs/3oKIPxUEW6L9OX8vPW",
+      "observed_on": "2026-09-23",
       "usage_evidence": {
         "kind": "observed_reaction_usage",
-        "conversation_uses": 174,
+        "conversation_uses": 99,
         "dataset": "GIF Reply",
         "paper": "https://aclanthology.org/2021.findings-emnlp.244/"
+      },
+      "visual_review": {
+        "method": "assistant_browser_inspection",
+        "dimensions": {
+          "width": 500,
+          "height": 281
+        },
+        "caption_matches": true
       }
     },
     "availability": "live"
@@ -79515,37 +79529,45 @@ export const catalogue=[
     "availability": "live"
   },
   {
-    "id": "gif-xjm0sxa1ckqu9iiiwe",
-    "name": "ONUNOC ONUNOC",
-    "message": "Use ONUNOC ONUNOC when someone is repeating a phrase for emphasis.",
-    "relational_pattern": "A person's intentional repetition to reinforce a message.",
-    "example_context": "For example, when a user repeats a phrase to emphasize their point.",
-    "near_miss_context": "Avoid when someone is using a phrase for casual conversation without emphasis.",
+    "id": "gif-l4fggafcohmrlqxg0",
+    "name": "Look How They Massacred My Boy",
+    "message": "Use Look How They Massacred My Boy when a beloved thing has been changed or ruined beyond recognition.",
+    "relational_pattern": "A mock tragic lament exaggerates the speaker's attachment to a damaged favorite.",
+    "example_context": "For example, the restaurant removes the one dish you loved and replaces it with a disappointing version.",
+    "near_miss_context": "Avoid Look How They Massacred My Boy when the harm is real and a joking lament would trivialize it.",
     "tags": [
-      "repetition",
-      "emphasis",
-      "phrase",
-      "reaction-gif"
+      "ruined favorite",
+      "dramatic grief",
+      "disappointed",
+      "the godfather"
     ],
-    "image_url": "https://media.giphy.com/media/XJM0SXa1CKQu9IIIWE/giphy.gif",
+    "image_url": "https://media.giphy.com/media/l4FGGafcOHmrlQxG0/giphy.gif",
     "media_type": "gif",
-    "media_url": "https://media.giphy.com/media/XJM0SXa1CKQu9IIIWE/giphy.gif",
-    "preview_url": "https://media.giphy.com/media/XJM0SXa1CKQu9IIIWE/giphy_s.gif",
+    "media_url": "https://media.giphy.com/media/l4FGGafcOHmrlQxG0/giphy.gif",
+    "preview_url": "https://media.giphy.com/media/l4FGGafcOHmrlQxG0/giphy_s.gif",
     "mime_type": "image/gif",
     "media_status": "source-preview",
-    "meme_strength": 72,
-    "asset_quality": 70,
-    "uniqueness_score": 100,
+    "meme_strength": 84,
+    "asset_quality": 81,
+    "uniqueness_score": 99,
     "provenance": {
       "provider": "GIF Reply dataset / GIPHY",
-      "provider_id": "XJM0SXa1CKQu9IIIWE",
-      "source_url": "https://giphy.com/gifs/XJM0SXa1CKQu9IIIWE",
-      "observed_on": "2026-09-21",
+      "provider_id": "l4FGGafcOHmrlQxG0",
+      "source_url": "https://giphy.com/gifs/l4FGGafcOHmrlQxG0",
+      "observed_on": "2026-09-23",
       "usage_evidence": {
         "kind": "observed_reaction_usage",
-        "conversation_uses": 169,
+        "conversation_uses": 77,
         "dataset": "GIF Reply",
         "paper": "https://aclanthology.org/2021.findings-emnlp.244/"
+      },
+      "visual_review": {
+        "method": "assistant_browser_inspection",
+        "dimensions": {
+          "width": 480,
+          "height": 265
+        },
+        "caption_matches": true
       }
     },
     "availability": "live"
@@ -80380,37 +80402,45 @@ export const catalogue=[
     "availability": "live"
   },
   {
-    "id": "gif-zinrfer4ynrbe",
-    "name": "MAKEGIFSATGIFSOUP.COM MAKEGIFSATGIFSOUP.COM MAKEGIFSATGIFSOUP.COM MAKEGIFSATGIFSOUP.COM",
-    "message": "Use MAKEGIFSATGIFSOUP.COM MAKEGIFSATGIFSOUP.COM MAKEGIFSATGIFSOUP.COM MAKEGIFSATGIFSOUP.COM when you're promoting the MAKEGIFSATGIFSOUP.COM website.",
-    "relational_pattern": "MAKEGIFSATGIFSOUP.COM MAKEGIFSATGIFSOUP.COM MAKEGIFSATGIFSOUP.COM MAKEGIFSATGIFSOUP.COM communicates make gifs in response to website, making the intended emotion clear.",
-    "example_context": "For example, when you're sharing links to MAKEGIFSATGIFSOUP.COM with friends.",
-    "near_miss_context": "Avoid when you're not promoting MAKEGIFSATGIFSOUP.COM but just using the website.",
+    "id": "gif-ulmaf9yezwbxjbi8nk",
+    "name": "I'm Here for It",
+    "message": "Use I'm Here for It when someone's bold idea or harmless drama has your enthusiastic support.",
+    "relational_pattern": "The speaker joins another person's momentum with open delight instead of standing back.",
+    "example_context": "For example, your friend announces a spontaneous weekend trip and you volunteer to come along immediately.",
+    "near_miss_context": "Avoid I'm Here for It when the plan could hurt someone or you are only pretending to agree.",
     "tags": [
-      "make gifs",
-      "website",
-      "promotion",
-      "reaction-gif"
+      "enthusiastic support",
+      "count me in",
+      "approval",
+      "schitts creek"
     ],
-    "image_url": "https://media.giphy.com/media/ziNRFeR4ynRBe/giphy.gif",
+    "image_url": "https://media.giphy.com/media/ulmAf9YezWbxJbi8NK/giphy.gif",
     "media_type": "gif",
-    "media_url": "https://media.giphy.com/media/ziNRFeR4ynRBe/giphy.gif",
-    "preview_url": "https://media.giphy.com/media/ziNRFeR4ynRBe/giphy_s.gif",
+    "media_url": "https://media.giphy.com/media/ulmAf9YezWbxJbi8NK/giphy.gif",
+    "preview_url": "https://media.giphy.com/media/ulmAf9YezWbxJbi8NK/giphy_s.gif",
     "mime_type": "image/gif",
     "media_status": "source-preview",
-    "meme_strength": 72,
-    "asset_quality": 70,
-    "uniqueness_score": 100,
+    "meme_strength": 79,
+    "asset_quality": 82,
+    "uniqueness_score": 94,
     "provenance": {
       "provider": "GIF Reply dataset / GIPHY",
-      "provider_id": "ziNRFeR4ynRBe",
-      "source_url": "https://giphy.com/gifs/ziNRFeR4ynRBe",
-      "observed_on": "2026-09-21",
+      "provider_id": "ulmAf9YezWbxJbi8NK",
+      "source_url": "https://giphy.com/gifs/ulmAf9YezWbxJbi8NK",
+      "observed_on": "2026-09-23",
       "usage_evidence": {
         "kind": "observed_reaction_usage",
-        "conversation_uses": 164,
+        "conversation_uses": 107,
         "dataset": "GIF Reply",
         "paper": "https://aclanthology.org/2021.findings-emnlp.244/"
+      },
+      "visual_review": {
+        "method": "assistant_browser_inspection",
+        "dimensions": {
+          "width": 480,
+          "height": 256
+        },
+        "caption_matches": true
       }
     },
     "availability": "live"
@@ -84117,37 +84147,46 @@ export const catalogue=[
     "availability": "live"
   },
   {
-    "id": "gif-krsketynd1nhi",
-    "name": "GIFWFIE.COM",
-    "message": "Use GIFWFIE.COM when someone is joking about the absurdity of GIFs in communication.",
-    "relational_pattern": "A humorous acknowledgment of the overuse of GIFs in digital interactions.",
-    "example_context": "For example, a friend joking about how many GIFs they've sent in a single conversation.",
-    "near_miss_context": "Avoid when the context is serious and not related to GIF humor.",
+    "id": "gif-5b5ou7auekfdsaer5i",
+    "name": "You Sure?",
+    "message": "Use You Sure? when someone's claim sounds questionable and you want to challenge it with a skeptical look.",
+    "relational_pattern": "A raised eyebrow asks for evidence without turning the exchange into a direct accusation.",
+    "example_context": "For example, your friend says they finished the entire project in five minutes and you doubt it.",
+    "near_miss_context": "Avoid You Sure? when someone is sharing a vulnerable experience that deserves trust and support.",
     "tags": [
-      "giphy",
-      "humor",
-      "absurdity",
-      "reaction-gif"
+      "skeptical",
+      "doubt",
+      "questionable claim",
+      "raised eyebrow"
     ],
-    "image_url": "https://media.giphy.com/media/kRsKetYNd1nHi/giphy.gif",
+    "image_url": "https://media.giphy.com/media/5b5OU7aUekfdSAER5I/giphy.gif",
     "media_type": "gif",
-    "media_url": "https://media.giphy.com/media/kRsKetYNd1nHi/giphy.gif",
-    "preview_url": "https://media.giphy.com/media/kRsKetYNd1nHi/giphy_s.gif",
+    "media_url": "https://media.giphy.com/media/5b5OU7aUekfdSAER5I/giphy.gif",
+    "preview_url": "https://media.giphy.com/media/5b5OU7aUekfdSAER5I/giphy_s.gif",
     "mime_type": "image/gif",
     "media_status": "source-preview",
-    "meme_strength": 72,
-    "asset_quality": 70,
-    "uniqueness_score": 100,
+    "meme_strength": 81,
+    "asset_quality": 84,
+    "uniqueness_score": 95,
     "provenance": {
       "provider": "GIF Reply dataset / GIPHY",
-      "provider_id": "kRsKetYNd1nHi",
-      "source_url": "https://giphy.com/gifs/kRsKetYNd1nHi",
-      "observed_on": "2026-09-21",
+      "provider_id": "5b5OU7aUekfdSAER5I",
+      "source_url": "https://giphy.com/gifs/5b5OU7aUekfdSAER5I",
+      "observed_on": "2026-09-23",
       "usage_evidence": {
         "kind": "observed_reaction_usage",
-        "conversation_uses": 137,
+        "conversation_uses": 75,
         "dataset": "GIF Reply",
         "paper": "https://aclanthology.org/2021.findings-emnlp.244/"
+      },
+      "visual_review": {
+        "method": "assistant_browser_inspection",
+        "dimensions": {
+          "width": 480,
+          "height": 388
+        },
+        "caption_matches": false,
+        "note": "The skeptical facial expression supports the source tags; the OCR caption was not visible in the inspected frame."
       }
     },
     "availability": "live"
@@ -90213,38 +90252,45 @@ export const catalogue=[
     "availability": "live"
   },
   {
-    "id": "gif-tqiq7j9jogbii",
-    "name": "LVERY THOON VERY THOON VERY",
-    "message": "Use LVERY THOON VERY THOON VERY when someone is trying to say 'very thin' but can't.",
-    "relational_pattern": "The reaction shows a person's attempt to communicate a simple phrase through mispronunciation.",
-    "example_context": "For example, a child trying to say 'very thin' but struggling with the words.",
-    "near_miss_context": "Avoid when someone is trying to say 'very thin' correctly.",
+    "id": "gif-3kc2jd2qcbosc",
+    "name": "It's Time to Party",
+    "message": "Use It's Time to Party when a celebration is finally starting and you want everyone to join in.",
+    "relational_pattern": "A group of dancing Minions turns the announcement into an invitation to celebrate together.",
+    "example_context": "For example, the last exam ends and your friends start making plans for the evening.",
+    "near_miss_context": "Avoid It's Time to Party when the occasion calls for quiet support or the celebration would be insensitive.",
     "tags": [
-      "mispronunciation",
-      "confusion",
-      "language",
-      "error",
-      "reaction-gif"
+      "party",
+      "celebration",
+      "group excitement",
+      "minions"
     ],
-    "image_url": "https://media.giphy.com/media/tQiq7j9jOgbII/giphy.gif",
+    "image_url": "https://media.giphy.com/media/3KC2jD2QcBOSc/giphy.gif",
     "media_type": "gif",
-    "media_url": "https://media.giphy.com/media/tQiq7j9jOgbII/giphy.gif",
-    "preview_url": "https://media.giphy.com/media/tQiq7j9jOgbII/giphy_s.gif",
+    "media_url": "https://media.giphy.com/media/3KC2jD2QcBOSc/giphy.gif",
+    "preview_url": "https://media.giphy.com/media/3KC2jD2QcBOSc/giphy_s.gif",
     "mime_type": "image/gif",
     "media_status": "source-preview",
-    "meme_strength": 72,
-    "asset_quality": 70,
-    "uniqueness_score": 100,
+    "meme_strength": 78,
+    "asset_quality": 82,
+    "uniqueness_score": 91,
     "provenance": {
       "provider": "GIF Reply dataset / GIPHY",
-      "provider_id": "tQiq7j9jOgbII",
-      "source_url": "https://giphy.com/gifs/tQiq7j9jOgbII",
-      "observed_on": "2026-09-21",
+      "provider_id": "3KC2jD2QcBOSc",
+      "source_url": "https://giphy.com/gifs/3KC2jD2QcBOSc",
+      "observed_on": "2026-09-23",
       "usage_evidence": {
         "kind": "observed_reaction_usage",
-        "conversation_uses": 112,
+        "conversation_uses": 66,
         "dataset": "GIF Reply",
         "paper": "https://aclanthology.org/2021.findings-emnlp.244/"
+      },
+      "visual_review": {
+        "method": "assistant_browser_inspection",
+        "dimensions": {
+          "width": 480,
+          "height": 262
+        },
+        "caption_matches": true
       }
     },
     "availability": "live"
@@ -90473,37 +90519,45 @@ export const catalogue=[
     "availability": "live"
   },
   {
-    "id": "gif-6b5gnqh1mjwai",
-    "name": "55 SFTINEES 55 55 55",
-    "message": "Use 55 SFTINEES 55 55 55 when you want to respond with gaming to a moment involving typo.",
-    "relational_pattern": "The reaction to a specific gaming typo that repeats the number 55.",
-    "example_context": "For example, a player correcting a teammate's repeated typo in a Discord channel.",
-    "near_miss_context": "Avoid when someone uses it to mean '55' as a numerical value in a different context.",
+    "id": "gif-xt4uqeuxsb3s34kcm8",
+    "name": "We've Got This",
+    "message": "Use We've Got This when a team faces a challenge and you want to reassure everyone that you can handle it.",
+    "relational_pattern": "An encouraging fist pump makes shared confidence the point of the reply.",
+    "example_context": "For example, your group has a tough presentation tomorrow and a teammate asks whether you are ready.",
+    "near_miss_context": "Avoid We've Got This when the group needs a concrete plan or honest help more than encouragement.",
     "tags": [
-      "gaming",
-      "typo",
-      "repetition",
-      "reaction-gif"
+      "team confidence",
+      "encouragement",
+      "reassurance",
+      "fist pump"
     ],
-    "image_url": "https://media.giphy.com/media/6b5gNQh1mjwaI/giphy.gif",
+    "image_url": "https://media.giphy.com/media/xT4uQEUXsB3s34kCM8/giphy.gif",
     "media_type": "gif",
-    "media_url": "https://media.giphy.com/media/6b5gNQh1mjwaI/giphy.gif",
-    "preview_url": "https://media.giphy.com/media/6b5gNQh1mjwaI/giphy_s.gif",
+    "media_url": "https://media.giphy.com/media/xT4uQEUXsB3s34kCM8/giphy.gif",
+    "preview_url": "https://media.giphy.com/media/xT4uQEUXsB3s34kCM8/giphy_s.gif",
     "mime_type": "image/gif",
     "media_status": "source-preview",
-    "meme_strength": 72,
-    "asset_quality": 70,
-    "uniqueness_score": 100,
+    "meme_strength": 79,
+    "asset_quality": 83,
+    "uniqueness_score": 96,
     "provenance": {
       "provider": "GIF Reply dataset / GIPHY",
-      "provider_id": "6b5gNQh1mjwaI",
-      "source_url": "https://giphy.com/gifs/6b5gNQh1mjwaI",
-      "observed_on": "2026-09-21",
+      "provider_id": "xT4uQEUXsB3s34kCM8",
+      "source_url": "https://giphy.com/gifs/xT4uQEUXsB3s34kCM8",
+      "observed_on": "2026-09-23",
       "usage_evidence": {
         "kind": "observed_reaction_usage",
-        "conversation_uses": 111,
+        "conversation_uses": 73,
         "dataset": "GIF Reply",
         "paper": "https://aclanthology.org/2021.findings-emnlp.244/"
+      },
+      "visual_review": {
+        "method": "assistant_browser_inspection",
+        "dimensions": {
+          "width": 500,
+          "height": 281
+        },
+        "caption_matches": true
       }
     },
     "availability": "live"

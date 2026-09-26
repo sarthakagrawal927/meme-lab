@@ -1,0 +1,121 @@
+{
+  "$schema": "fleet.design-review.v1",
+  "version": 1,
+  "project": "meme_lab",
+  "target": "Meme Lab public playground professional redesign",
+  "surfaceMode": "operate",
+  "mode": "overhaul",
+  "register": "product",
+  "context": {
+    "product": "PRODUCT.md",
+    "design": "DESIGN.md"
+  },
+  "direction": {
+    "references": [
+      "Current live Clean Canvas surface",
+      "Professional media-selection tools",
+      "Editorial image contact sheets"
+    ],
+    "probes": [
+      {"id": "cutting-room", "path": "design-probes/professional-cutting-room.html"},
+      {"id": "reference-desk", "path": "design-probes/professional-reference-desk.html"},
+      {"id": "contact-sheet", "path": "design-probes/professional-contact-sheet.html"}
+    ],
+    "selected": "reference-desk",
+    "approval": "approved",
+    "before": "artifacts/design/after-doodles-1440.png",
+    "library": {
+      "strategy": "upstream-first",
+      "primary": "preline",
+      "sources": [
+        "https://preline.co/docs/sidebar.html",
+        "https://preline.co/docs/textarea.html",
+        "https://preline.co/docs/card.html"
+      ],
+      "runtime": "existing",
+      "customReplacement": {
+        "used": false,
+        "authorization": "not-required",
+        "reason": ""
+      }
+    },
+    "contract": {
+      "purpose": "Turn one pasted comment or situation into a useful meme immediately without making the operating surface feel juvenile.",
+      "purposeSource": "PRODUCT.md",
+      "canonicalPurpose": "Meme Lab turns one pasted comment or situation into a useful meme immediately.",
+      "purposeAlignment": "match",
+      "driftNote": "",
+      "audience": "The owner first, with a public playground for lightweight feedback.",
+      "job": "Describe one complete situation, inspect the best meme and four honest alternatives, and record whether the recommendation fits.",
+      "thesis": "A restrained reference workspace replaces doodles, candy-colored tiles, and oversized marketing composition while keeping the task immediate.",
+      "system": "Navy navigation, white working surfaces, cobalt actions, quiet semantic states, compact typography, modest corners, and uniform media fields cover all three public pages.",
+      "signature": "The ranked result behaves like a reference record: real meme media, fit label, perspective, catalogue signals, and four compact alternatives.",
+      "risk": "Professional restraint can drift toward generic software, so meme media remains visually dominant and perspective-aware ranking stays explicit."
+    }
+  },
+  "evidence": {
+    "screenshots": [
+      {
+        "width": 390,
+        "path": "artifacts/design/after-390.png"
+      },
+      {
+        "width": 768,
+        "path": "artifacts/design/after-768.png"
+      },
+      {
+        "width": 1440,
+        "path": "artifacts/design/after-1440.png"
+      }
+    ],
+    "projectCheck": {
+      "command": "npm test && npm run check && git diff --check && pnpm exec wrangler deploy --dry-run",
+      "status": "pass"
+    },
+    "critique": {
+      "score": 36,
+      "maximum": 40
+    },
+    "audit": {
+      "score": 18,
+      "maximum": 20
+    },
+    "unresolved": {
+      "p0": 0,
+      "p1": 0
+    },
+    "detector": {
+      "posture": "advisory",
+      "findings": [],
+      "command": "node /Users/sarthak/Desktop/fleet/.agents/skills/impeccable/scripts/detect.mjs --json worker/public/index.html worker/public/collection.html worker/public/how-it-works.html worker/public/app.css",
+      "status": "pass",
+      "count": 0
+    },
+    "comprehension": {
+      "status": "not-applicable",
+      "reviewer": "",
+      "answers": {
+        "product": "",
+        "audience": "",
+        "value": "",
+        "mechanism": "",
+        "proof": "",
+        "nextAction": ""
+      },
+      "purposeScore": {
+        "product": 0,
+        "audience": 0,
+        "value": 0,
+        "mechanism": 0,
+        "proof": 0,
+        "nextAction": 0,
+        "total": 0
+      },
+      "mismatches": []
+    }
+  },
+  "ownerFeedback": {
+    "decision": "keep",
+    "note": "Owner asked to avoid overengineering and approved the recommended simple Reference Desk direction."
+  }
+}

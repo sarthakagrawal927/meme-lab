@@ -1,0 +1,34 @@
+{
+  "version": "cornell-movie-quotes-import-v1",
+  "created_at": "2026-09-22T19:59:17.893Z",
+  "source": {
+    "provider": "Cornell Movie-Quotes Corpus v1.0",
+    "landing_url": "https://www.cs.cornell.edu/~cristian/memorability.html",
+    "archive_url": "https://www.cs.cornell.edu/~cristian/memorability_files/cornell_movie_quotes_corpus.zip",
+    "paper_url": "https://www.cs.cornell.edu/~cristian/pdfs/memorability.pdf",
+    "archive_sha256": "08b7b5f75b0c767e02ab4d7723cb1ef008e03bffbfd58552ceae678777125c61",
+    "release": "2012-07"
+  },
+  "memorable_records": 6282,
+  "paired_eval_cases": 2197,
+  "reaction_candidates": 5204,
+  "reaction_candidate_movies": 783,
+  "distinct_movies": 813,
+  "unique_normalized_quotes": 6281,
+  "duplicate_normalized_quotes": 1,
+  "speaker_coverage": 0.9938,
+  "paired_speaker_coverage": 0.995,
+  "verified_same_speaker_pairs": 2197,
+  "unresolved_pair_speaker_checks": 0,
+  "requested_script_line_ids": 8479,
+  "resolved_script_line_ids": 8477,
+  "label_definition": "Memorable quotes were collected from IMDb Memorable Quotes pages. Pair negatives are nearby same-speaker, same-word-count lines absent from the IMDb memorable list.",
+  "validation": "The Cornell README reports high-precision automatic quote-to-script matching, but not every match was manually checked.",
+  "rights_boundary": "The README states no explicit reuse license. Underlying film dialogue may be copyrighted; all records remain research-only, source-linked, and production-ineligible.",
+  "raw_archive": "results/source-cache/cornell_movie_quotes_corpus.zip",
+  "outputs": {
+    "memorable": "expansion/sources/dialogue-cornell-memorable.jsonl",
+    "reaction_candidates": "expansion/candidates/dialogue-cornell-reaction-candidates.jsonl",
+    "paired_eval": "eval/dialogue_cornell_memorability_pairs.jsonl"
+  }
+}
